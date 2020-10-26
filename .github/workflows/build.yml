@@ -26,6 +26,7 @@ on:
 
 jobs:
     build-and-analyse:
+      # TODO: change only when Sonar Analyze is disabled for jhipster/jhipster
       if: github.repository == 'jhipster/jhipster'
       runs-on: ubuntu-latest
       steps:
