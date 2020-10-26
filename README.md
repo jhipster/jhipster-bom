@@ -16,13 +16,13 @@ If the current version is SNAPSHOT then to use this SNAPSHOT version:
 [maven-image]: https://maven-badges.herokuapp.com/maven-central/io.github.jhipster/jhipster-parent/badge.svg
 [maven-url]: https://maven-badges.herokuapp.com/maven-central/io.github.jhipster/jhipster-parent
 
-[azure-devops-image]: https://dev.azure.com/jhipster/jhipster/_apis/build/status/jhipster.jhipster?branchName=main
-[azure-devops-url-main]: https://dev.azure.com/jhipster/jhipster/_build
-[github-actions-angular-image]: https://github.com/jhipster/jhipster/workflows/Angular/badge.svg
-[github-actions-react-image]: https://github.com/jhipster/jhipster/workflows/React/badge.svg
-[github-actions-vue-image]: https://github.com/jhipster/jhipster/workflows/Vue/badge.svg
-[github-actions-webflux-image]: https://github.com/jhipster/jhipster/workflows/Webflux/badge.svg
-[github-actions-url]: https://github.com/jhipster/jhipster/actions
+[azure-devops-image]: https://dev.azure.com/jhipster/jhipster-bom/_apis/build/status/jhipster.jhipster-bom?branchName=main
+[azure-devops-url-main]: https://dev.azure.com/jhipster/jhipster-bom/_build
+[github-actions-angular-image]: https://github.com/jhipster/jhipster-bom/workflows/Angular/badge.svg
+[github-actions-react-image]: https://github.com/jhipster/jhipster-bom/workflows/React/badge.svg
+[github-actions-vue-image]: https://github.com/jhipster/jhipster-bom/workflows/Vue/badge.svg
+[github-actions-webflux-image]: https://github.com/jhipster/jhipster-bom/workflows/Webflux/badge.svg
+[github-actions-url]: https://github.com/jhipster/jhipster-bom/actions
 
 [jhipster-url]: https://www.jhipster.tech/
 
