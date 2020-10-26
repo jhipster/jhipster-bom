@@ -7,7 +7,7 @@ source $(dirname $0)/00-init-env.sh
 # Install JHipster Dependencies and Server-side library
 #-------------------------------------------------------------------------------
 cd "$HOME"
-if [[ "$JHI_REPO" == *"/jhipster" ]]; then
+if [[ "$JHI_REPO" == *"/jhipster-bom" ]]; then
     echo "*** jhipster: use local version at JHI_REPO=$JHI_REPO"
 
     cd "$JHI_CLONED"

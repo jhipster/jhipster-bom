@@ -31,7 +31,7 @@ env:
     JHI_JDK: 11
     # this version is used for testing with CICD
     JHI_VERSION: 0.0.0-CICD
-    JHI_LIB_REPO: https://github.com/jhipster/jhipster.git
+    JHI_LIB_REPO: https://github.com/jhipster/jhipster-bom.git
     JHI_LIB_BRANCH: main
     JHI_GEN_REPO: https://github.com/jhipster/generator-jhipster.git
     JHI_GEN_BRANCH: main
