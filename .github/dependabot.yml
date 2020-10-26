@@ -1,5 +1,12 @@
 version: 2
 updates:
+    # Dependencies for jhipster-parent
+    - package-ecosystem: 'maven'
+      directory: '/'
+      schedule:
+          interval: 'daily'
+      open-pull-requests-limit: 10
+
     # Dependencies for jhipster-dependencies
     - package-ecosystem: 'maven'
       directory: '/jhipster-dependencies'
