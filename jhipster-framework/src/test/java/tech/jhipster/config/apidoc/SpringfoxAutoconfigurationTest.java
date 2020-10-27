@@ -130,7 +130,7 @@ public class SpringfoxAutoconfigurationTest {
             .andExpect(jsonPath("$.schemes").value(hasItems("http", "https")));    }
 
     @SpringBootApplication(
-        scanBasePackages = "io.github.jhipster.config.apidoc",
+        scanBasePackages = "tech.jhipster.config.apidoc",
         exclude = {
             SecurityAutoConfiguration.class,
             ManagementWebSecurityAutoConfiguration.class,
