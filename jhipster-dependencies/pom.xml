@@ -13,12 +13,12 @@
     <packaging>pom</packaging>
     <name>JHipster server-side dependencies</name>
     <description>JHipster bill of materials, see https://www.jhipster.tech/ for more information on JHipster</description>
-    <url>https://github.com/jhipster/jhipster/</url>
+    <url>https://github.com/jhipster/jhipster-bom/</url>
 
     <licenses>
         <license>
             <name>Apache License, version 2.0</name>
-            <url>https://github.com/jhipster/jhipster/blob/main/LICENSE.txt</url>
+            <url>https://github.com/jhipster/jhipster-bom/blob/main/LICENSE.txt</url>
             <distribution>repo</distribution>
         </license>
     </licenses>
