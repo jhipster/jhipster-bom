@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>io.github.jhipster</groupId>
+        <groupId>tech.jhipster</groupId>
         <artifactId>jhipster-dependencies</artifactId>
         <version>1.0.0-SNAPSHOT</version>
         <relativePath>../jhipster-dependencies/pom.xml</relativePath>
@@ -13,12 +13,12 @@
     <packaging>jar</packaging>
     <name>JHipster server-side framework</name>
     <description>Server-side library used by applications created with the JHipster generator, see https://www.jhipster.tech/ for more information on JHipster</description>
-    <url>https://github.com/jhipster/jhipster/</url>
+    <url>https://github.com/jhipster/jhipster-bom/</url>
 
     <licenses>
         <license>
             <name>Apache License, version 2.0</name>
-            <url>https://github.com/jhipster/jhipster/blob/main/LICENSE.txt</url>
+            <url>https://github.com/jhipster/jhipster-bom/blob/main/LICENSE.txt</url>
             <distribution>repo</distribution>
         </license>
     </licenses>

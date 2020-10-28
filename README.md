@@ -13,8 +13,8 @@ If the current version is SNAPSHOT then to use this SNAPSHOT version:
 - clone this project
 - run `./mvnw clean install -Dgpg.skip=true`, on Windows run `.\mvnw.cmd clean install -D"gpg.skip=true"`
 
-[maven-image]: https://maven-badges.herokuapp.com/maven-central/io.github.jhipster/jhipster-parent/badge.svg
-[maven-url]: https://maven-badges.herokuapp.com/maven-central/io.github.jhipster/jhipster-parent
+[maven-image]: https://maven-badges.herokuapp.com/maven-central/tech.jhipster/jhipster-parent/badge.svg
+[maven-url]: https://maven-badges.herokuapp.com/maven-central/tech.jhipster/jhipster-parent
 
 [azure-devops-image]: https://dev.azure.com/jhipster/jhipster-bom/_apis/build/status/jhipster.jhipster-bom?branchName=main
 [azure-devops-url-main]: https://dev.azure.com/jhipster/jhipster-bom/_build
