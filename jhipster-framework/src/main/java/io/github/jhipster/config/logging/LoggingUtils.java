@@ -2,13 +2,10 @@ package io.github.jhipster.config.logging;
 
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.LoggerContext;
-import ch.qos.logback.classic.boolex.OnMarkerEvaluator;
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.classic.spi.LoggerContextListener;
 import ch.qos.logback.core.ConsoleAppender;
-import ch.qos.logback.core.filter.EvaluatorFilter;
 import ch.qos.logback.core.spi.ContextAwareBase;
-import ch.qos.logback.core.spi.FilterReply;
 import io.github.jhipster.config.JHipsterProperties;
 import net.logstash.logback.appender.LogstashTcpSocketAppender;
 import net.logstash.logback.composite.ContextJsonProvider;
@@ -30,7 +27,6 @@ public final class LoggingUtils {
     private static final Logger log = LoggerFactory.getLogger(LoggingUtils.class);
 
     private static final String CONSOLE_APPENDER_NAME = "CONSOLE";
-    private static final String LOGSTASH_APPENDER_NAME = "LOGSTASH";
     private static final String ASYNC_LOGSTASH_APPENDER_NAME = "ASYNC_LOGSTASH";
 
     private LoggingUtils () {
@@ -90,37 +86,6 @@ public final class LoggingUtils {
         LogbackLoggerContextListener loggerContextListener = new LogbackLoggerContextListener(properties, customFields);
         loggerContextListener.setContext(context);
         context.addListener(loggerContextListener);
-    }
-
-    /**
-     * Configure a log filter to remove "metrics" logs from all appenders except the "LOGSTASH" appender
-     *
-     * @param context the logger context
-     * @param useJsonFormat whether to use JSON format
-     */
-    public static void setMetricsMarkerLogbackFilter(LoggerContext context, boolean useJsonFormat) {
-        log.info("Filtering metrics logs from all appenders except the {} appender", LOGSTASH_APPENDER_NAME);
-        OnMarkerEvaluator onMarkerMetricsEvaluator = new OnMarkerEvaluator();
-        onMarkerMetricsEvaluator.setContext(context);
-        onMarkerMetricsEvaluator.addMarker("metrics");
-        onMarkerMetricsEvaluator.start();
-        EvaluatorFilter<ILoggingEvent> metricsFilter = new EvaluatorFilter<>();
-        metricsFilter.setContext(context);
-        metricsFilter.setEvaluator(onMarkerMetricsEvaluator);
-        metricsFilter.setOnMatch(FilterReply.DENY);
-        metricsFilter.start();
-
-        context.getLoggerList().forEach(logger ->
-            logger.iteratorForAppenders().forEachRemaining(appender -> {
-                if (!appender.getName().equals(ASYNC_LOGSTASH_APPENDER_NAME)
-                        && !(appender.getName().equals(CONSOLE_APPENDER_NAME) && useJsonFormat)) {
-                    log.debug("Filter metrics logs from the {} appender", appender.getName());
-                    appender.setContext(context);
-                    appender.addFilter(metricsFilter);
-                    appender.start();
-                }
-            })
-        );
     }
 
     private static LoggingEventCompositeJsonEncoder compositeJsonEncoder(LoggerContext context, String customFields) {
