@@ -48,7 +48,6 @@
         <cucumber-jvm.version>6.8.1</cucumber-jvm.version>
         <commons-io.version>2.8.0</commons-io.version>
         <de.flapdoodle.embed.mongo.version>2.2.0</de.flapdoodle.embed.mongo.version>
-        <dropwizard-metrics.version>4.1.14</dropwizard-metrics.version>
         <guava.version>30.0-jre</guava.version>
         <hazelcast.version>4.0.3</hazelcast.version>
         <hazelcast-hibernate5.version>2.1.1</hazelcast-hibernate5.version>
@@ -186,11 +185,6 @@
                 <artifactId>jjwt-jackson</artifactId>
                 <version>${jjwt.version}</version>
                 <scope>runtime</scope>
-            </dependency>
-            <dependency>
-                <groupId>io.dropwizard.metrics</groupId>
-                <artifactId>metrics-core</artifactId>
-                <version>${dropwizard-metrics.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.github.sabomichal</groupId>
