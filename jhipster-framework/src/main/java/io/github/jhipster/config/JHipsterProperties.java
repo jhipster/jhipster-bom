@@ -58,8 +58,6 @@ public class JHipsterProperties {
 
     private final ApiDocs apiDocs = new ApiDocs();
 
-    private final Metrics metrics = new Metrics();
-
     private final Logging logging = new Logging();
 
     private final CorsConfiguration cors = new CorsConfiguration();
@@ -144,15 +142,6 @@ public class JHipsterProperties {
      */
     public ApiDocs getApiDocs() {
         return apiDocs;
-    }
-
-    /**
-     * <p>Getter for the field <code>metrics</code>.</p>
-     *
-     * @return a {@link io.github.jhipster.config.JHipsterProperties.Metrics} object.
-     */
-    public Metrics getMetrics() {
-        return metrics;
     }
 
     /**
@@ -1083,38 +1072,6 @@ public class JHipsterProperties {
 
             public void setDescription(String description) {
                 this.description = description;
-            }
-        }
-    }
-
-    public static class Metrics {
-
-        private final Logs logs = new Logs();
-
-        public Logs getLogs() {
-            return logs;
-        }
-
-        public static class Logs {
-
-            private boolean enabled = JHipsterDefaults.Metrics.Logs.enabled;
-
-            private long reportFrequency = JHipsterDefaults.Metrics.Logs.reportFrequency;
-
-            public boolean isEnabled() {
-                return enabled;
-            }
-
-            public void setEnabled(boolean enabled) {
-                this.enabled = enabled;
-            }
-
-            public long getReportFrequency() {
-                return reportFrequency;
-            }
-
-            public void setReportFrequency(long reportFrequency) {
-                this.reportFrequency = reportFrequency;
             }
         }
     }

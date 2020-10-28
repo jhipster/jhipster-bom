@@ -722,26 +722,6 @@ public class JHipsterPropertiesTest {
     }
 
     @Test
-    public void testMetricsLogsEnabled() {
-        JHipsterProperties.Metrics.Logs obj = properties.getMetrics().getLogs();
-        boolean val = JHipsterDefaults.Metrics.Logs.enabled;
-        assertThat(obj.isEnabled()).isEqualTo(val);
-        val = !val;
-        obj.setEnabled(val);
-        assertThat(obj.isEnabled()).isEqualTo(val);
-    }
-
-    @Test
-    public void testMetricsLogsReportFrequency() {
-        JHipsterProperties.Metrics.Logs obj = properties.getMetrics().getLogs();
-        long val = JHipsterDefaults.Metrics.Logs.reportFrequency;
-        assertThat(obj.getReportFrequency()).isEqualTo(val);
-        val++;
-        obj.setReportFrequency(val);
-        assertThat(obj.getReportFrequency()).isEqualTo(val);
-    }
-
-    @Test
     public void testLoggingUseJsonFormat() {
         JHipsterProperties.Logging obj = properties.getLogging();
         boolean val = JHipsterDefaults.Logging.useJsonFormat;

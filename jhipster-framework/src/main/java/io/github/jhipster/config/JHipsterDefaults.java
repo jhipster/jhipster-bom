@@ -168,27 +168,6 @@ public interface JHipsterDefaults {
         boolean useDefaultResponseMessages = true;
     }
 
-    interface Metrics {
-
-        interface Jmx {
-
-            boolean enabled = false;
-        }
-
-        interface Logs {
-
-            boolean enabled = false;
-            long reportFrequency = 60;
-
-        }
-
-        interface Prometheus {
-
-            boolean enabled = false;
-            String endpoint = "/prometheusMetrics";
-        }
-    }
-
     interface Logging {
 
         boolean useJsonFormat = false;
