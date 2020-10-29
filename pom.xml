@@ -98,11 +98,11 @@
             <distributionManagement>
                 <snapshotRepository>
                     <id>github</id>
-                    <url>https://maven.pkg.github.com/jhipster/jhipster/</url>
+                    <url>https://maven.pkg.github.com/jhipster/jhipster-bom/</url>
                 </snapshotRepository>
                 <repository>
                     <id>github</id>
-                    <url>https://maven.pkg.github.com/jhipster/jhipster/</url>
+                    <url>https://maven.pkg.github.com/jhipster/jhipster-bom/</url>
                 </repository>
             </distributionManagement>
         </profile>
