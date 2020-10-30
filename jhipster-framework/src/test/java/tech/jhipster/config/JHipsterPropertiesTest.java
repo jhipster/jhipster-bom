@@ -23,11 +23,14 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.Method;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.util.Lists.newArrayList;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class JHipsterPropertiesTest {
 
@@ -679,24 +682,17 @@ public class JHipsterPropertiesTest {
     public void testApiDocsProtocols() {
         JHipsterProperties.ApiDocs obj = properties.getApiDocs();
         String[] def = JHipsterDefaults.ApiDocs.protocols;
-        ArrayList<String> val;
-        if (def != null) {
-            val = newArrayList(def);
-            assertThat(obj.getProtocols()).containsExactlyElementsOf(newArrayList(val));
-        } else {
-            assertThat(obj.getProtocols()).isNull();
-            def = new String[1];
-            val = new ArrayList<>(1);
-        }
+        List<String> val = new ArrayList<>(Arrays.asList(def));
+        assertThat(obj.getProtocols()).containsExactlyElementsOf(val);
         val.add("1");
         obj.setProtocols(val.toArray(def));
-        assertThat(obj.getProtocols()).containsExactlyElementsOf(newArrayList(val));
+        assertThat(obj.getProtocols()).containsExactlyElementsOf(val);
     }
 
     @Test
     public void testApiDocsServers() {
         JHipsterProperties.ApiDocs obj = properties.getApiDocs();
-        assertThat(obj.getServers().length).isEqualTo(0);
+        assertThat(obj.getServers()).isEmpty();
         JHipsterProperties.ApiDocs.Server server = new JHipsterProperties.ApiDocs.Server();
         server.setUrl("url");
         server.setDescription("description");
