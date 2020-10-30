@@ -19,10 +19,10 @@
 
 package tech.jhipster.service.filter;
 
-import com.google.common.collect.Lists;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -112,13 +112,13 @@ public class BooleanFilterTest {
         assertThat(filter2).isNotEqualTo(filter);
         filter2.setSpecified(false);
         assertThat(filter).isEqualTo(filter2);
-        filter.setIn(Lists.newArrayList(value, value));
+        filter.setIn(Arrays.asList(value, value));
         assertThat(filter2).isNotEqualTo(filter);
-        filter2.setIn(Lists.newArrayList(value, value));
+        filter2.setIn(Arrays.asList(value, value));
         assertThat(filter).isEqualTo(filter2);
-        filter.setNotIn(Lists.newArrayList(value, value));
+        filter.setNotIn(Arrays.asList(value, value));
         assertThat(filter2).isNotEqualTo(filter);
-        filter2.setNotIn(Lists.newArrayList(value, value));
+        filter2.setNotIn(Arrays.asList(value, value));
         assertThat(filter).isEqualTo(filter2);
         final BooleanFilter filter3 = new BooleanFilter();
         filter3.setEquals(value);
@@ -139,11 +139,11 @@ public class BooleanFilterTest {
         filter.setSpecified(false);
         filter2.setSpecified(false);
         assertThat(filter.hashCode()).isEqualTo(filter2.hashCode());
-        filter.setIn(Lists.newArrayList(value, value));
-        filter2.setIn(Lists.newArrayList(value, value));
+        filter.setIn(Arrays.asList(value, value));
+        filter2.setIn(Arrays.asList(value, value));
         assertThat(filter.hashCode()).isEqualTo(filter2.hashCode());
-        filter.setNotIn(Lists.newArrayList(value, value));
-        filter2.setNotIn(Lists.newArrayList(value, value));
+        filter.setNotIn(Arrays.asList(value, value));
+        filter2.setNotIn(Arrays.asList(value, value));
         assertThat(filter.hashCode()).isEqualTo(filter2.hashCode());
     }
 
