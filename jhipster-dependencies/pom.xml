@@ -48,7 +48,6 @@
         <cucumber-jvm.version>6.9.1</cucumber-jvm.version>
         <commons-io.version>2.8.0</commons-io.version>
         <de.flapdoodle.embed.mongo.version>2.2.0</de.flapdoodle.embed.mongo.version>
-        <infinispan.version>10.1.8.Final</infinispan.version>
         <infinispan-spring-boot-starter-embedded.version>2.2.4.Final</infinispan-spring-boot-starter-embedded.version>
         <jjwt.version>0.11.2</jjwt.version>
         <liquibase-mssql.version>1.6.4</liquibase-mssql.version>
@@ -699,14 +698,6 @@
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
                 <version>${spring-cloud.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-
-            <dependency>
-                <groupId>org.infinispan</groupId>
-                <artifactId>infinispan-bom</artifactId>
-                <version>${infinispan.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
