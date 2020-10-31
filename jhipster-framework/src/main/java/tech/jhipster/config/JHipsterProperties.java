@@ -320,64 +320,6 @@ public class JHipsterProperties {
 
             private int backupCount = JHipsterDefaults.Cache.Hazelcast.backupCount;
 
-            private final ManagementCenter managementCenter = new ManagementCenter();
-
-            /**
-             * In the Hazelcast v4.x, the cluster node doesn't expose
-             * configurations to connect to the management center. Setting up
-             * of this property doesn't provide any behavior and has been
-             * retained for the backward compatibility, and should be
-             * removed in the next major release of the JHipster
-             *
-             * @return a {@link JHipsterProperties.Cache.Hazelcast.ManagementCenter} object.
-             */
-            @Deprecated
-            public ManagementCenter getManagementCenter() {
-                return managementCenter;
-            }
-
-            /**
-             * In the Hazelcast v4.x, the cluster node doesn't expose
-             * configurations to connect to the management center. Setting up
-             * of this class properties don't provide any behavior and has
-             * been retained for the backward compatibility, and should be
-             * removed in the next major release of the JHipster
-             */
-            @Deprecated
-            public static class ManagementCenter {
-
-                private boolean enabled = JHipsterDefaults.Cache.Hazelcast.ManagementCenter.enabled;
-
-                private int updateInterval = JHipsterDefaults.Cache.Hazelcast.ManagementCenter.updateInterval;
-
-                private String url = JHipsterDefaults.Cache.Hazelcast.ManagementCenter.url;
-
-                public boolean isEnabled() {
-                    return enabled;
-                }
-
-                public void setEnabled(boolean enabled) {
-                    this.enabled = enabled;
-                }
-
-                public int getUpdateInterval() {
-                    return updateInterval;
-                }
-
-                public void setUpdateInterval(int updateInterval) {
-                    this.updateInterval = updateInterval;
-                }
-
-                public String getUrl() {
-                    return url;
-                }
-
-                public void setUrl(String url) {
-                    this.url = url;
-                }
-
-            }
-
             public int getTimeToLiveSeconds() {
                 return timeToLiveSeconds;
             }
