@@ -21,6 +21,7 @@ package tech.jhipster.security.jwt;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
+import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import tech.jhipster.config.JHipsterProperties;
@@ -29,7 +30,7 @@ import tech.jhipster.config.JHipsterProperties;
 @ConditionalOnClass(io.jsonwebtoken.Jwts.class)
 @ConditionalOnProperty(prefix = "jhipster.security.authentication.jwt", name = "enabled", havingValue = "true",
     matchIfMissing = true)
-public class TokenProviderAutoConfiguration {
+public class JWTAutoConfiguration {
 
     @Bean
     @ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)
@@ -41,5 +42,12 @@ public class TokenProviderAutoConfiguration {
     @ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.REACTIVE)
     public TokenProvider reactiveTokenProvider(JHipsterProperties jHipsterProperties) {
         return new ReactiveTokenProvider(jHipsterProperties);
+    }
+
+    @Bean
+    @ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.REACTIVE)
+    @ConditionalOnClass(GatewayFilter.class)
+    public JWTRelayGatewayFilterFactory jWTRelayGatewayFilterFactory(TokenProvider tokenProvider) {
+        return new JWTRelayGatewayFilterFactory(tokenProvider);
     }
 }
