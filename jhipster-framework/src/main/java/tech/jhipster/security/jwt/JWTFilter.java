@@ -60,7 +60,7 @@ public class JWTFilter extends GenericFilterBean {
         return null;
     }
 
-    void addAuthentication(String jwt) throws IOException, ServletException {
+    void addAuthentication(String jwt) {
         if (StringUtils.hasText(jwt) && this.tokenProvider.validateToken(jwt)) {
             Authentication authentication = this.tokenProvider.getAuthentication(jwt);
             SecurityContextHolder.getContext().setAuthentication(authentication);
