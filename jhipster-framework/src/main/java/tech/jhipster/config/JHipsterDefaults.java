@@ -138,6 +138,7 @@ public interface JHipsterDefaults {
 
             interface Jwt {
 
+                boolean enabled = true;
                 String secret = null;
                 String base64Secret = null;
                 long tokenValidityInSeconds = 1800; // 30 minutes

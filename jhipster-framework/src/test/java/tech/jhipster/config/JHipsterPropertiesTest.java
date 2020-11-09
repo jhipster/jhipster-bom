@@ -472,6 +472,16 @@ public class JHipsterPropertiesTest {
     }
 
     @Test
+    public void testSecurityAuthenticationJwtEnabled() {
+        JHipsterProperties.Security.Authentication.Jwt obj = properties.getSecurity().getAuthentication().getJwt();
+        boolean val = JHipsterDefaults.Security.Authentication.Jwt.enabled;
+        assertThat(obj.isEnabled()).isEqualTo(val);
+        val = !val;
+        obj.setEnabled(val);
+        assertThat(obj.isEnabled()).isEqualTo(val);
+    }
+
+    @Test
     public void testSecurityAuthenticationJwtSecret() {
         JHipsterProperties.Security.Authentication.Jwt obj = properties.getSecurity().getAuthentication().getJwt();
         String val = JHipsterDefaults.Security.Authentication.Jwt.secret;

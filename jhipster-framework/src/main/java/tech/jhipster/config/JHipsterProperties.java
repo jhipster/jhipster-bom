@@ -774,6 +774,8 @@ public class JHipsterProperties {
 
             public static class Jwt {
 
+                private boolean enabled = JHipsterDefaults.Security.Authentication.Jwt.enabled;
+
                 private String secret = JHipsterDefaults.Security.Authentication.Jwt.secret;
 
                 private String base64Secret = JHipsterDefaults.Security.Authentication.Jwt.base64Secret;
@@ -783,6 +785,14 @@ public class JHipsterProperties {
 
                 private long tokenValidityInSecondsForRememberMe = JHipsterDefaults.Security.Authentication.Jwt
                     .tokenValidityInSecondsForRememberMe;
+
+                public boolean isEnabled() {
+                    return enabled;
+                }
+
+                public void setEnabled(boolean enabled) {
+                    this.enabled = enabled;
+                }
 
                 public String getSecret() {
                     return secret;

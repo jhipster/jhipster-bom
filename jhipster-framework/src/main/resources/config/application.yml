@@ -1,0 +1,16 @@
+# ===================================================================
+# JHipster specific properties
+#
+# Full reference is available at: https://www.jhipster.tech/common-application-properties/
+# ===================================================================
+
+jhipster:
+  clientApp:
+    name: 'test'
+  security:
+    authentication:
+      jwt:
+        # This token must be encoded using Base64 (you can type `echo 'secret-key'|base64` on your command line)
+        base64-secret: NDRkZWNlNjViNTgzMjc4YzE3Y2ZmOThmYzI1OGZhODViMzA1MzY0MDMzNTEzY2Q3Y2RmYmIwYjY1NjU0MTc0YTQzNDBhYTlmMzgwNjViMThjMjdkM2FmMjY1YjVlYzUwOTU0MDY4MDQ3NDJkZjA1YTJmNjI0MDAwZDliY2QwNmE=
+        # Token is valid 24 hours
+        token-validity-in-seconds: 86400
