@@ -27,8 +27,7 @@ import tech.jhipster.config.JHipsterProperties;
 
 @Configuration
 @ConditionalOnClass(io.jsonwebtoken.Jwts.class)
-@ConditionalOnProperty(prefix = "jhipster.security.authentication.jwt", name = "enabled", havingValue = "true",
-    matchIfMissing = true)
+@ConditionalOnProperty(prefix = "jhipster.security.authentication.jwt", name = "enabled", havingValue = "true")
 public class TokenProviderAutoConfiguration {
 
     @Bean
