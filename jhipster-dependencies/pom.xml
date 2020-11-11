@@ -51,7 +51,7 @@
         <hazelcast.version>4.0.3</hazelcast.version>
         <hazelcast-hibernate5.version>2.1.1</hazelcast-hibernate5.version>
         <infinispan.version>10.1.8.Final</infinispan.version>
-        <infinispan-spring-boot-starter-embedded.version>2.2.4.Final</infinispan-spring-boot-starter-embedded.version>
+        <infinispan-spring-boot-starter-embedded.version>12.0.0.Dev06</infinispan-spring-boot-starter-embedded.version>
         <jjwt.version>0.11.2</jjwt.version>
         <liquibase-mssql.version>1.6.4</liquibase-mssql.version>
         <logstash-logback-encoder.version>6.4</logstash-logback-encoder.version>
