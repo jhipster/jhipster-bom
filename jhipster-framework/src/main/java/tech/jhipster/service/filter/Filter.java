@@ -42,6 +42,7 @@ public class Filter<FIELD_TYPE> implements Serializable {
     private FIELD_TYPE equals;
     private FIELD_TYPE notEquals;
     private Boolean specified;
+    private String like;
     private List<FIELD_TYPE> in;
     private List<FIELD_TYPE> notIn;
 
@@ -60,6 +61,7 @@ public class Filter<FIELD_TYPE> implements Serializable {
         this.equals = filter.equals;
         this.notEquals = filter.notEquals;
         this.specified = filter.specified;
+        this.like = filter.like == null ? null : filter.like;
         this.in = filter.in == null ? null : new ArrayList<>(filter.in);
         this.notIn = filter.notIn == null ? null : new ArrayList<>(filter.notIn);
     }
@@ -134,6 +136,26 @@ public class Filter<FIELD_TYPE> implements Serializable {
     }
 
     /**
+     * <p>Getter for the field <code>like</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
+    public String getLike() {
+        return like;
+    }
+
+    /**
+     * <p>Setter for the field <code>like</code>.</p>
+     *
+     * @param like a {@link java.lang.String} object.
+     * @return a {@link Filter} object.
+     */
+    public Filter<FIELD_TYPE> setLike(String like) {
+        this.like = like;
+        return this;
+    }
+
+    /**
      * <p>Getter for the field <code>in</code>.</p>
      *
      * @return a {@link java.util.List} object.
@@ -186,6 +208,7 @@ public class Filter<FIELD_TYPE> implements Serializable {
         return Objects.equals(equals, filter.equals) &&
                 Objects.equals(notEquals, filter.notEquals) &&
                 Objects.equals(specified, filter.specified) &&
+                Objects.equals(like, filter.like) &&
                 Objects.equals(in, filter.in) &&
                 Objects.equals(notIn, filter.notIn);
     }
@@ -193,7 +216,7 @@ public class Filter<FIELD_TYPE> implements Serializable {
     /** {@inheritDoc} */
     @Override
     public int hashCode() {
-        return Objects.hash(equals, notEquals, specified, in, notIn);
+        return Objects.hash(equals, notEquals, specified, like, in, notIn);
     }
 
     /** {@inheritDoc} */
@@ -203,6 +226,7 @@ public class Filter<FIELD_TYPE> implements Serializable {
                 + (getEquals() != null ? "equals=" + getEquals() + ", " : "")
                 + (getNotEquals() != null ? "notEquals=" + getNotEquals() + ", " : "")
                 + (getSpecified() != null ? "specified=" + getSpecified() + ", " : "")
+                + (getLike() != null ? "like=" + getLike() + ", " : "")
                 + (getIn() != null ? "in=" + getIn() + ", " : "")
                 + (getNotIn() != null ? "notIn=" + getNotIn() : "")
                 + "]";

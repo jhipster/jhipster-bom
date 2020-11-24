@@ -45,6 +45,7 @@ public class DurationFilterTest {
         assertThat(filter.getEquals()).isNull();
         assertThat(filter.getNotEquals()).isNull();
         assertThat(filter.getSpecified()).isNull();
+        assertThat(filter.getLike()).isNull();
         assertThat(filter.getIn()).isNull();
         assertThat(filter.getNotIn()).isNull();
         assertThat(filter.getGreaterThan()).isNull();
@@ -61,6 +62,7 @@ public class DurationFilterTest {
         assertThat(copy.getEquals()).isNull();
         assertThat(copy.getNotEquals()).isNull();
         assertThat(copy.getSpecified()).isNull();
+        assertThat(copy.getLike()).isNull();
         assertThat(copy.getIn()).isNull();
         assertThat(copy.getNotIn()).isNull();
         assertThat(copy.getGreaterThan()).isNull();
@@ -89,6 +91,13 @@ public class DurationFilterTest {
         Filter<Duration> chain = filter.setSpecified(true);
         assertThat(chain).isEqualTo(filter);
         assertThat(filter.getSpecified()).isEqualTo(true);
+    }
+
+    @Test
+    public void testSetLike() {
+        Filter<Duration> chain = filter.setLike("like");
+        assertThat(chain).isEqualTo(filter);
+        assertThat(filter.getLike()).isEqualTo("like");
     }
 
     @Test
@@ -149,6 +158,10 @@ public class DurationFilterTest {
         assertThat(filter2).isNotEqualTo(filter);
         filter2.setSpecified(false);
         assertThat(filter).isEqualTo(filter2);
+        filter.setLike("like");
+        assertThat(filter2).isNotEqualTo(filter);
+        filter2.setLike("like");
+        assertThat(filter).isEqualTo(filter2);
         filter.setIn(Arrays.asList(value, value));
         assertThat(filter2).isNotEqualTo(filter);
         filter2.setIn(Arrays.asList(value, value));
@@ -192,6 +205,9 @@ public class DurationFilterTest {
         filter.setSpecified(false);
         filter2.setSpecified(false);
         assertThat(filter.hashCode()).isEqualTo(filter2.hashCode());
+        filter.setLike("like");
+        filter2.setLike("like");
+        assertThat(filter.hashCode()).isEqualTo(filter2.hashCode());
         filter.setIn(Arrays.asList(value, value));
         filter2.setIn(Arrays.asList(value, value));
         assertThat(filter.hashCode()).isEqualTo(filter2.hashCode());
@@ -217,6 +233,7 @@ public class DurationFilterTest {
         filter.setEquals(value);
         filter.setNotEquals(value);
         filter.setSpecified(true);
+        filter.setLike("like");
         filter.setIn(new LinkedList<>());
         filter.setNotIn(new LinkedList<>());
         filter.setGreaterThan(value);
@@ -224,6 +241,6 @@ public class DurationFilterTest {
         filter.setGreaterThanOrEqual(value);
         filter.setLessThanOrEqual(value);
         String str = value.toString();
-        assertThat(filter.toString()).isEqualTo("DurationFilter [equals=" + str + ", notEquals=" + str + ", specified=true, in=[], notIn=[], greaterThan=" + str + ", lessThan=" + str + ", greaterThanOrEqual=" + str + ", lessThanOrEqual=" + str + "]");
+        assertThat(filter.toString()).isEqualTo("DurationFilter [equals=" + str + ", notEquals=" + str + ", specified=true, like=like, in=[], notIn=[], greaterThan=" + str + ", lessThan=" + str + ", greaterThanOrEqual=" + str + ", lessThanOrEqual=" + str + "]");
     }
 }

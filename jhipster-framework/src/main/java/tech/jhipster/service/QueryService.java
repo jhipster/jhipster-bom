@@ -71,6 +71,8 @@ public abstract class QueryService<ENTITY> {
             return equalsSpecification(metaclassFunction, filter.getEquals());
         } else if (filter.getIn() != null) {
             return valueIn(metaclassFunction, filter.getIn());
+        } else if (filter.getLike() != null) {
+            return likeUpperSpecification(metaclassFunction, filter.getLike());
         } else if (filter.getNotIn() != null) {
             return valueNotIn(metaclassFunction, filter.getNotIn());
         } else if (filter.getNotEquals() != null) {
@@ -107,10 +109,12 @@ public abstract class QueryService<ENTITY> {
             return equalsSpecification(metaclassFunction, filter.getEquals());
         } else if (filter.getIn() != null) {
             return valueIn(metaclassFunction, filter.getIn());
+        } else if (filter.getLike() != null) {
+            return likeUpperSpecification(metaclassFunction, filter.getLike());
         } else if (filter.getNotIn() != null) {
             return valueNotIn(metaclassFunction, filter.getNotIn());
         } else if (filter.getContains() != null) {
-            return likeUpperSpecification(metaclassFunction, filter.getContains());
+            return containSpecification(metaclassFunction, filter.getContains());
         } else if (filter.getDoesNotContain() != null) {
             return doesNotContainSpecification(metaclassFunction, filter.getDoesNotContain());
         } else if (filter.getNotEquals() != null) {
@@ -157,6 +161,9 @@ public abstract class QueryService<ENTITY> {
         Specification<ENTITY> result = Specification.where(null);
         if (filter.getSpecified() != null) {
             result = result.and(byFieldSpecified(metaclassFunction, filter.getSpecified()));
+        }
+        if (filter.getLike() != null) {
+            result = result.and(likeUpperSpecification(metaclassFunction, filter.getLike()));
         }
         if (filter.getNotEquals() != null) {
             result = result.and(notEqualsSpecification(metaclassFunction, filter.getNotEquals()));
@@ -328,6 +335,9 @@ public abstract class QueryService<ENTITY> {
             // Interestingly, 'functionToEntity' doesn't work, we need the longer lambda formula
             result = result.and(byFieldSpecified(root -> functionToEntity.apply(root), filter.getSpecified()));
         }
+        if (filter.getLike() != null) {
+            result = result.and(likeUpperSpecification(fused, filter.getLike()));
+        }
         if (filter.getNotEquals() != null) {
             result = result.and(notEqualsSpecification(fused, filter.getNotEquals()));
         }
@@ -380,7 +390,19 @@ public abstract class QueryService<ENTITY> {
      * @param value a {@link java.lang.String} object.
      * @return a {@link org.springframework.data.jpa.domain.Specification} object.
      */
-    protected Specification<ENTITY> likeUpperSpecification(Function<Root<ENTITY>, Expression<String>> metaclassFunction,
+    protected <X> Specification<ENTITY> likeUpperSpecification(Function<Root<ENTITY>, Expression<X>> metaclassFunction,
+                                                           final String value) {
+        return (root, query, builder) -> builder.like(builder.upper(metaclassFunction.apply(root).as(String.class)), value);
+    }
+
+    /**
+     * <p>containSpecification.</p>
+     *
+     * @param metaclassFunction a {@link java.util.function.Function} object.
+     * @param value a {@link java.lang.String} object.
+     * @return a {@link org.springframework.data.jpa.domain.Specification} object.
+     */
+    protected Specification<ENTITY> containSpecification(Function<Root<ENTITY>, Expression<String>> metaclassFunction,
                                                            final String value) {
         return (root, query, builder) -> builder.like(builder.upper(metaclassFunction.apply(root)), wrapLikeQuery(value));
     }

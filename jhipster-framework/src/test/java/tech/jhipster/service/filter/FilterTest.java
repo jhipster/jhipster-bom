@@ -49,6 +49,7 @@ public class FilterTest {
         assertThat(filter.getEquals()).isNull();
         assertThat(filter.getNotEquals()).isNull();
         assertThat(filter.getSpecified()).isNull();
+        assertThat(filter.getLike()).isNull();
         assertThat(filter.getIn()).isNull();
         assertThat(filter.getNotIn()).isNull();
         assertThat(filter.toString()).isEqualTo("Filter []");
@@ -61,6 +62,7 @@ public class FilterTest {
         assertThat(copy.getEquals()).isNull();
         assertThat(copy.getNotEquals()).isNull();
         assertThat(copy.getSpecified()).isNull();
+        assertThat(copy.getLike()).isNull();
         assertThat(copy.getIn()).isNull();
         assertThat(copy.getNotIn()).isNull();
         assertThat(copy.toString()).isEqualTo("Filter []");
@@ -85,6 +87,13 @@ public class FilterTest {
         Filter<Object> chain = filter.setSpecified(true);
         assertThat(chain).isEqualTo(filter);
         assertThat(filter.getSpecified()).isEqualTo(true);
+    }
+
+    @Test
+    public void testSetLike() {
+        Filter<Object> chain = filter.setLike("like");
+        assertThat(chain).isEqualTo(filter);
+        assertThat(filter.getLike()).isEqualTo("like");
     }
 
     @Test
@@ -119,6 +128,10 @@ public class FilterTest {
         assertThat(filter2).isNotEqualTo(filter);
         filter2.setSpecified(false);
         assertThat(filter).isEqualTo(filter2);
+        filter.setLike("like");
+        assertThat(filter2).isNotEqualTo(filter);
+        filter2.setLike("like");
+        assertThat(filter).isEqualTo(filter2);
         filter.setIn(Arrays.asList(value, value));
         assertThat(filter2).isNotEqualTo(filter);
         filter2.setIn(Arrays.asList(value, value));
@@ -146,6 +159,9 @@ public class FilterTest {
         filter.setSpecified(false);
         filter2.setSpecified(false);
         assertThat(filter.hashCode()).isEqualTo(filter2.hashCode());
+        filter.setLike("like");
+        filter2.setLike("like");
+        assertThat(filter.hashCode()).isEqualTo(filter2.hashCode());
         filter.setIn(Arrays.asList(value, value));
         filter2.setIn(Arrays.asList(value, value));
         assertThat(filter.hashCode()).isEqualTo(filter2.hashCode());
@@ -163,8 +179,9 @@ public class FilterTest {
         filter.setEquals(value);
         filter.setNotEquals(value);
         filter.setSpecified(true);
+        filter.setLike("like");
         filter.setIn(new LinkedList<>());
         filter.setNotIn(new LinkedList<>());
-        assertThat(filter.toString()).isEqualTo("Filter [equals={}, notEquals={}, specified=true, in=[], notIn=[]]");
+        assertThat(filter.toString()).isEqualTo("Filter [equals={}, notEquals={}, specified=true, like=like, in=[], notIn=[]]");
     }
 }

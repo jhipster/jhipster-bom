@@ -135,6 +135,7 @@ public class StringFilter extends Filter<String> {
             + (getEquals() != null ? "equals=" + getEquals() + ", " : "")
             + (getNotEquals() != null ? "notEquals=" + getNotEquals() + ", " : "")
             + (getSpecified() != null ? "specified=" + getSpecified() + ", " : "")
+            + (getLike() != null ? "like=" + getLike() + ", " : "")
             + (getIn() != null ? "in=" + getIn() + ", " : "")
             + (getNotIn() != null ? "notIn=" + getNotIn() + ", " : "")
             + (getContains() != null ? "contains=" + getContains() + ", " : "")

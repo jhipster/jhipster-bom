@@ -195,6 +195,7 @@ public class RangeFilter<FIELD_TYPE extends Comparable<? super FIELD_TYPE>> exte
             + (getEquals() != null ? "equals=" + getEquals() + ", " : "")
             + (getNotEquals() != null ? "notEquals=" + getNotEquals() + ", " : "")
             + (getSpecified() != null ? "specified=" + getSpecified() + ", " : "")
+            + (getLike() != null ? "like=" + getLike() + ", " : "")
             + (getIn() != null ? "in=" + getIn() + ", " : "")
             + (getNotIn() != null ? "notIn=" + getNotIn() + ", " : "")
             + (getGreaterThan() != null ? "greaterThan=" + getGreaterThan() + ", " : "")
