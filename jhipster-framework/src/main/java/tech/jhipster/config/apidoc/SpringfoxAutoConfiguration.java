@@ -139,7 +139,6 @@ public class SpringfoxAutoConfiguration {
      */
     @Bean
     @ConditionalOnClass(name = "org.springframework.boot.actuate.autoconfigure.web.server.ManagementServerProperties")
-    @ConditionalOnExpression("'${management.endpoints.web.base-path}'.length() > 0")
     @ConditionalOnMissingBean(name = "openAPISpringfoxManagementDocket")
     public Docket openAPISpringfoxManagementDocket(@Value("${spring.application.name:application}") String appName) {
 
