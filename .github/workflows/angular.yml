@@ -96,13 +96,13 @@ jobs:
                       testcontainers: 0
                     - app-type: ngx-mongodb-kafka-cucumber
                       entity: mongodb
-                      profile: dev,webpack
+                      profile: dev,webapp
                       war: 0
                       e2e: 1
                       testcontainers: 0
                     - app-type: ngx-h2mem-ws-nol2
                       entity: sql
-                      profile: dev,webpack
+                      profile: dev,webapp
                       war: 0 # TODO: need change to 1, when maven+war is fixed
                       e2e: 1
                       testcontainers: 0
@@ -120,7 +120,7 @@ jobs:
                       testcontainers: 1
                     - app-type: ngx-gradle-mariadb-oauth2-infinispan
                       entity: sql
-                      profile: dev,webpack
+                      profile: dev,webapp
                       war: 0
                       e2e: 1
                       testcontainers: 1
@@ -132,7 +132,7 @@ jobs:
                       testcontainers: 0
                     - app-type: ngx-gradle-h2disk-ws-nocache
                       entity: sql
-                      profile: dev,webpack
+                      profile: dev,webapp
                       war: 1
                       e2e: 1
                       testcontainers: 0
