@@ -93,17 +93,17 @@ jobs:
                       e2e: 1
                     - app-type: vue-gateway
                       entity: sql
-                      profile: dev,webpack
+                      profile: dev,webapp
                       war: 0
                       e2e: 1
                     - app-type: vue-gradle-session
                       entity: sql
-                      profile: dev,webpack
+                      profile: dev,webapp
                       war: 0
                       e2e: 1
                     - app-type: vue-ws-theme
                       entity: sql
-                      profile: dev,webpack
+                      profile: dev,webapp
                       war: 0
                       e2e: 1
                     - app-type: vue-oauth2
@@ -113,17 +113,17 @@ jobs:
                       e2e: 1
 #                    - app-type: vue-couchbase
 #                      entity: couchbase
-#                      profile: dev,webpack
+#                      profile: dev,webapp
 #                      war: 0
 #                      e2e: 1
                     - app-type: vue-mongodb-kafka-cucumber
                       entity: mongodb
-                      profile: dev,webpack
+                      profile: dev,webapp
                       war: 0
                       e2e: 1
                     - app-type: vue-session-cassandra-fr
                       entity: cassandra
-                      profile: dev,webpack
+                      profile: dev,webapp
                       war: 0
                       e2e: 1
         env:
