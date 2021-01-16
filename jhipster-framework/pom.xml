@@ -146,7 +146,6 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-ribbon</artifactId>
-            <version>${spring-cloud-starter-netflix-ribbon.version}</version>
             <optional>true</optional>
             <exclusions>
                 <exclusion>
