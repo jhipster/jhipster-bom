@@ -617,17 +617,17 @@
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
-                <version>${spring-cloud-neflix.version}</version>
+                <version>${spring-cloud-netflix.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-starter-netflix-ribbon</artifactId>
-                <version>${spring-cloud-neflix.version}</version>
+                <version>${spring-cloud-netflix.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-starter-netflix-zuul</artifactId>
-                <version>${spring-cloud-neflix.version}</version>
+                <version>${spring-cloud-netflix.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework.security</groupId>
