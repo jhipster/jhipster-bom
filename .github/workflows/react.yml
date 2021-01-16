@@ -1,5 +1,5 @@
 #
-# Copyright 2013-2020 the original author or authors from the JHipster project.
+# Copyright 2016-2021 the original author or authors from the JHipster project.
 #
 # This file is part of the JHipster project, see https://www.jhipster.tech/
 # for more information.
@@ -44,6 +44,11 @@ env:
     NG_CLI_ANALYTICS: 'false'
     JHI_GITHUB_CI: true
     FORCE_COLOR: 1
+    # https://github.com/actions/virtual-environments/issues/1499#issuecomment-689467080
+    MAVEN_OPTS: >-
+        -Dhttp.keepAlive=false
+        -Dmaven.wagon.http.pool=false
+        -Dmaven.wagon.httpconnectionManager.ttlSeconds=120
 jobs:
     applications:
         name: ${{ matrix.app-type }}
@@ -57,7 +62,7 @@ jobs:
         strategy:
             fail-fast: false
             matrix:
-                node_version: [12.18.3]
+                node_version: [14.15.0]
                 os: [ubuntu-20.04]
                 app-type:
                     - react-default
@@ -84,7 +89,7 @@ jobs:
                       testcontainers: 1
                     - app-type: react-maven-h2mem-memcached
                       entity: sql
-                      profile: dev,webpack
+                      profile: dev,webapp
                       war: 0 # TODO: need change to 1, when maven+war is fixed
                       e2e: 1
                       testcontainers: 0
@@ -108,7 +113,7 @@ jobs:
                       testcontainers: 0
                     - app-type: react-gradle-h2mem-memcached
                       entity: sql
-                      profile: dev,webpack
+                      profile: dev,webapp
                       war: 1
                       e2e: 1
                       testcontainers: 0
@@ -137,7 +142,7 @@ jobs:
             #----------------------------------------------------------------------
             - name: 'SETUP: Checkout jhipster'
               uses: actions/checkout@v2
-            - uses: actions/setup-node@v2.1.2
+            - uses: actions/setup-node@v2.1.4
               with:
                   node-version: ${{ matrix.node_version }}
             - uses: actions/setup-java@v1

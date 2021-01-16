@@ -1,5 +1,5 @@
 #
-# Copyright 2013-2020 the original author or authors from the JHipster project.
+# Copyright 2016-2021 the original author or authors from the JHipster project.
 #
 # This file is part of the JHipster project, see https://www.jhipster.tech/
 # for more information.
@@ -26,7 +26,7 @@ jobs:
       pool:
           vmImage: 'ubuntu-20.04'
       variables:
-          JHI_PROFILE: dev,webpack
+          JHI_PROFILE: dev,webapp
           JHI_RUN_APP: 1
           JHI_E2E: 0
           JHI_JDK: 11
@@ -46,6 +46,10 @@ jobs:
           JHI_SCRIPTS: $HOME/generator-jhipster/test-integration/scripts
           JHI_LIB_SCRIPTS: ./test-integration/scripts
           NG_CLI_ANALYTICS: false
+          # https://github.com/actions/virtual-environments/issues/1499#issuecomment-689467080
+          MAVEN_OPTS: '-Dhttp.keepAlive=false
+              -Dmaven.wagon.http.pool=false
+              -Dmaven.wagon.httpconnectionManager.ttlSeconds=120'
 
       strategy:
           matrix:
@@ -97,7 +101,7 @@ jobs:
           #----------------------------------------------------------------------
           - task: NodeTool@0
             inputs:
-                versionSpec: '12.18.3'
+                versionSpec: '14.15.0'
             displayName: 'TOOLS: install Node.js'
           - script: |
                 if [[ $JHI_JDK = '11' ]]; then
