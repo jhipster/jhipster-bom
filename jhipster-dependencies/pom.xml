@@ -39,40 +39,42 @@
 
     <properties>
         <!-- Dependency versions -->
-        <aws-java-sdk-bom.version>1.11.922</aws-java-sdk-bom.version>
+        <aws-java-sdk-bom.version>1.11.938</aws-java-sdk-bom.version>
         <azure-spring-cloud-client.version>2.3.0</azure-spring-cloud-client.version>
         <azure-applicationinsights-spring-boot-starter.version>2.6.2</azure-applicationinsights-spring-boot-starter.version>
-        <bucket4j.version>4.10.0</bucket4j.version>
+        <bucket4j.version>6.0.0</bucket4j.version>
         <cassandra-unit-spring.version>4.3.1.0</cassandra-unit-spring.version>
         <couchmove.version>3.1</couchmove.version>
         <cucumber-jvm.version>6.9.1</cucumber-jvm.version>
         <commons-io.version>2.8.0</commons-io.version>
         <de.flapdoodle.embed.mongo.version>2.2.0</de.flapdoodle.embed.mongo.version>
+        <hazelcast.version>4.1.1</hazelcast.version>
+        <hazelcast-hibernate5.version>2.2.0</hazelcast-hibernate5.version>
+        <infinispan.version>10.1.8.Final</infinispan.version>
         <infinispan-spring-boot-starter-embedded.version>2.2.4.Final</infinispan-spring-boot-starter-embedded.version>
         <jjwt.version>0.11.2</jjwt.version>
         <liquibase-mssql.version>1.6.4</liquibase-mssql.version>
-        <logstash-logback-encoder.version>6.5</logstash-logback-encoder.version>
+        <logstash-logback-encoder.version>6.6</logstash-logback-encoder.version>
         <lz4-java.version>1.7.1</lz4-java.version>
         <mapstruct.version>1.4.1.Final</mapstruct.version>
         <mongock.version>4.1.19</mongock.version>
         <mssql-jdbc.version>8.4.1.jre8</mssql-jdbc.version>
         <neo4j-migrations.version>0.0.13</neo4j-migrations.version>
         <mysql-jdbc.version>8.0.22</mysql-jdbc.version>
-        <oracle-jdbc.version>19.8.0.0</oracle-jdbc.version>
+        <oracle-jdbc.version>19.9.0.0</oracle-jdbc.version>
         <problem-spring.version>0.26.2</problem-spring.version>
         <problem-spring-web.version>${problem-spring.version}</problem-spring-web.version>
         <problem-spring-webflux.version>${problem-spring.version}</problem-spring-webflux.version>
         <prometheus-simpleclient.version>0.9.0</prometheus-simpleclient.version>
-        <redisson.version>3.14.0</redisson.version>
+        <redisson.version>3.14.1</redisson.version>
         <reflections.version>0.9.11</reflections.version>
         <spring-cloud.version>Hoxton.SR9</spring-cloud.version>
-        <spring-cloud-connectors.version>2.0.7.RELEASE</spring-cloud-connectors.version>
         <spring-data-neo4j-rx.version>1.1.1</spring-data-neo4j-rx.version>
         <spring-security-jwt.version>1.1.1.RELEASE</spring-security-jwt.version>
         <spring-security-oauth.version>2.5.0.RELEASE</spring-security-oauth.version>
         <springfox.version>3.0.0</springfox.version>
         <testcontainers.version>1.15.1</testcontainers.version>
-        <xmemcached.version>2.4.6</xmemcached.version>
+        <xmemcached.version>2.4.7</xmemcached.version>
         <xmemcached-provider.version>4.1.3</xmemcached-provider.version>
     </properties>
 
@@ -382,21 +384,6 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-cache</artifactId>
                 <version>${spring-boot.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-spring-service-connector</artifactId>
-                <version>${spring-cloud-connectors.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-heroku-connector</artifactId>
-                <version>${spring-cloud-connectors.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-localconfig-connector</artifactId>
-                <version>${spring-cloud-connectors.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
