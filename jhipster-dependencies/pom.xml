@@ -72,6 +72,8 @@
         <reflections.version>0.9.11</reflections.version>
         <spring-cloud.version>2020.0.0</spring-cloud.version>
         <spring-cloud-netflix.version>2.2.6.RELEASE</spring-cloud-netflix.version>
+        <!-- Spring Cloud Netflix pulls in an old version of Guava -->
+        <guava.version>30.0-jre</guava.version>
         <spring-cloud-security.version>2.2.4.RELEASE</spring-cloud-security.version>
         <spring-data-neo4j-rx.version>1.1.1</spring-data-neo4j-rx.version>
         <spring-security-jwt.version>1.1.1.RELEASE</spring-security-jwt.version>
@@ -631,6 +633,12 @@
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-starter-netflix-zuul</artifactId>
                 <version>${spring-cloud-netflix.version}</version>
+            </dependency>
+            <!-- Spring Cloud Netflix pulls in an old version of Guava -->
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework.security</groupId>
