@@ -2,7 +2,6 @@ org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
   tech.jhipster.config.apidoc.SpringfoxAutoConfiguration,\
   tech.jhipster.config.apidoc.SpringfoxPluginsAutoConfiguration,\
   tech.jhipster.config.JHipsterProperties,\
-  tech.jhipster.security.uaa.UaaAutoConfiguration,\
   tech.jhipster.config.info.JHipsterInfoContributorConfiguration,\
   tech.jhipster.config.metric.JHipsterMetricsEndpointConfiguration,\
   tech.jhipster.security.ssl.UndertowSSLConfiguration
