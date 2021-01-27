@@ -39,7 +39,7 @@
 
     <properties>
         <!-- Dependency versions -->
-        <aws-java-sdk-bom.version>1.11.942</aws-java-sdk-bom.version>
+        <aws-java-sdk-bom.version>1.11.943</aws-java-sdk-bom.version>
         <azure-spring-cloud-client.version>2.3.0</azure-spring-cloud-client.version>
         <azure-applicationinsights-spring-boot-starter.version>2.6.2</azure-applicationinsights-spring-boot-starter.version>
         <bucket4j.version>6.0.1</bucket4j.version>
@@ -67,7 +67,7 @@
         <problem-spring.version>0.26.2</problem-spring.version>
         <problem-spring-web.version>${problem-spring.version}</problem-spring-web.version>
         <problem-spring-webflux.version>${problem-spring.version}</problem-spring-webflux.version>
-        <prometheus-simpleclient.version>0.9.0</prometheus-simpleclient.version>
+        <prometheus-simpleclient.version>0.10.0</prometheus-simpleclient.version>
         <redisson.version>3.14.1</redisson.version>
         <reflections.version>0.9.11</reflections.version>
         <spring-cloud.version>2020.0.0</spring-cloud.version>
