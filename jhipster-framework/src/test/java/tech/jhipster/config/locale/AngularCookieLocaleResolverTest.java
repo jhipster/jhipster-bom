@@ -61,7 +61,6 @@ public class AngularCookieLocaleResolverTest {
 
     @BeforeEach
     public void setup() {
-
         MockitoAnnotations.openMocks(this);
 
         request = spy(new MockHttpServletRequest());
