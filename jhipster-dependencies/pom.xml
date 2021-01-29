@@ -66,7 +66,7 @@
         <problem-spring-web.version>${problem-spring.version}</problem-spring-web.version>
         <problem-spring-webflux.version>${problem-spring.version}</problem-spring-webflux.version>
         <prometheus-simpleclient.version>0.10.0</prometheus-simpleclient.version>
-        <redisson.version>3.14.1</redisson.version>
+        <redisson.version>3.15.0</redisson.version>
         <reflections.version>0.9.11</reflections.version>
         <spring-cloud.version>Hoxton.SR9</spring-cloud.version>
         <spring-data-neo4j-rx.version>1.1.1</spring-data-neo4j-rx.version>
