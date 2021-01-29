@@ -57,9 +57,11 @@
         <logstash-logback-encoder.version>6.6</logstash-logback-encoder.version>
         <lz4-java.version>1.7.1</lz4-java.version>
         <mapstruct.version>1.4.1.Final</mapstruct.version>
-        <mongock.version>4.1.19</mongock.version>
+        <mongock.version>4.2.8.BETA</mongock.version>
         <mssql-jdbc.version>8.4.1.jre8</mssql-jdbc.version>
-        <neo4j-migrations.version>0.0.13</neo4j-migrations.version>
+        <neo4j-migrations.version>0.1.1</neo4j-migrations.version>
+        <!-- Don't upgrade MySQL until this Liquibase issue is fixed -->
+        <!-- https://github.com/liquibase/liquibase/issues/1647 -->
         <mysql-jdbc.version>8.0.22</mysql-jdbc.version>
         <oracle-jdbc.version>21.1.0.0</oracle-jdbc.version>
         <problem-spring.version>0.26.2</problem-spring.version>
@@ -68,7 +70,14 @@
         <prometheus-simpleclient.version>0.10.0</prometheus-simpleclient.version>
         <redisson.version>3.15.0</redisson.version>
         <reflections.version>0.9.11</reflections.version>
-        <spring-cloud.version>Hoxton.SR9</spring-cloud.version>
+        <spring-cloud.version>2020.0.0</spring-cloud.version>
+        <!-- Upgrade Spring Cloud Config 3.0.1 to fix issues in 2020.0 (Spring Boot 2.4.2) -->
+        <!-- https://github.com/spring-cloud/spring-cloud-release/wiki/Spring-Cloud-2020.0-Release-Notes -->
+        <spring-cloud-config-dependencies.version>3.0.1</spring-cloud-config-dependencies.version>
+        <spring-cloud-netflix.version>2.2.6.RELEASE</spring-cloud-netflix.version>
+        <!-- Spring Cloud Netflix pulls in an old version of Guava -->
+        <guava.version>30.0-jre</guava.version>
+        <spring-cloud-security.version>2.2.4.RELEASE</spring-cloud-security.version>
         <spring-data-neo4j-rx.version>1.1.1</spring-data-neo4j-rx.version>
         <spring-security-jwt.version>1.1.1.RELEASE</spring-security-jwt.version>
         <spring-security-oauth.version>2.5.0.RELEASE</spring-security-oauth.version>
@@ -611,6 +620,29 @@
                 <artifactId>spring-boot-starter-web-services</artifactId>
                 <version>${spring-boot.version}</version>
             </dependency>
+            <!-- Spring Cloud Netflix dependencies are no longer managed by Spring Cloud's BOM -->
+            <!-- https://github.com/spring-cloud/spring-cloud-release/wiki/Spring-Cloud-2020.0-Release-Notes#breaking-changes -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
+                <version>${spring-cloud-netflix.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-netflix-ribbon</artifactId>
+                <version>${spring-cloud-netflix.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-netflix-zuul</artifactId>
+                <version>${spring-cloud-netflix.version}</version>
+            </dependency>
+            <!-- Spring Cloud Netflix pulls in an old version of Guava -->
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
+            </dependency>
             <dependency>
                 <groupId>org.springframework.security</groupId>
                 <artifactId>spring-security-jwt</artifactId>
@@ -671,27 +703,21 @@
                     </exclusion>
                 </exclusions>
             </dependency>
-            <dependency>
-                <groupId>com.hazelcast</groupId>
-                <artifactId>hazelcast</artifactId>
-                <version>${hazelcast.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.hazelcast</groupId>
-                <artifactId>hazelcast-spring</artifactId>
-                <version>${hazelcast.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.hazelcast</groupId>
-                <artifactId>hazelcast-hibernate53</artifactId>
-                <version>${hazelcast-hibernate5.version}</version>
-            </dependency>
 
             <!-- BOM imports last so we (could) selectively override dependencies above -->
             <dependency>
                 <groupId>com.amazonaws</groupId>
                 <artifactId>aws-java-sdk-bom</artifactId>
                 <version>${aws-java-sdk-bom.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- Upgrade to Spring Cloud Config 3.0.1 to support retry with spring.config.import -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-config-dependencies</artifactId>
+                <version>${spring-cloud-config-dependencies.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -705,17 +731,9 @@
             </dependency>
 
             <dependency>
-                <groupId>org.springframework.data</groupId>
-                <artifactId>spring-data-releasetrain</artifactId>
-                <version>${spring-data-releasetrain.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-
-            <dependency>
-                <groupId>org.infinispan</groupId>
-                <artifactId>infinispan-bom</artifactId>
-                <version>${infinispan.version}</version>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-security-dependencies</artifactId>
+                <version>${spring-cloud-security.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

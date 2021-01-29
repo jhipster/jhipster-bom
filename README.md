@@ -11,7 +11,7 @@ This project is used by the JHipster generator. This is the Bill of Materials an
 
 If the current version is SNAPSHOT then to use this SNAPSHOT version:
 - clone this project
-- run `./mvnw clean install -Dgpg.skip=true`, on Windows run `.\mvnw.cmd clean install -D"gpg.skip=true"`
+- run `./mvnw install -Dgpg.skip=true`, on Windows run `.\mvnw.cmd install -D"gpg.skip=true"`
 
 [maven-image]: https://maven-badges.herokuapp.com/maven-central/tech.jhipster/jhipster-parent/badge.svg
 [maven-url]: https://maven-badges.herokuapp.com/maven-central/tech.jhipster/jhipster-parent
