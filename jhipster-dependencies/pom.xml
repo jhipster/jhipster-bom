@@ -70,7 +70,7 @@
         <prometheus-simpleclient.version>0.10.0</prometheus-simpleclient.version>
         <redisson.version>3.15.0</redisson.version>
         <reflections.version>0.9.11</reflections.version>
-        <spring-cloud.version>2020.0.0</spring-cloud.version>
+        <spring-cloud.version>2020.0.1</spring-cloud.version>
         <!-- Upgrade Spring Cloud Config 3.0.1 to fix issues in 2020.0 (Spring Boot 2.4.2) -->
         <!-- https://github.com/spring-cloud/spring-cloud-release/wiki/Spring-Cloud-2020.0-Release-Notes -->
         <spring-cloud-config-dependencies.version>3.0.2</spring-cloud-config-dependencies.version>
