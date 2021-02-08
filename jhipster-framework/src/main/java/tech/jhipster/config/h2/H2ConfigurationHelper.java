@@ -77,6 +77,36 @@ public class H2ConfigurationHelper {
     }
 
     /**
+     * Init the H2 console via H2's webserver when no servletContext {@link javax.servlet.ServletContext}
+     * is available.
+     */
+    public static void initH2Console() {
+        initH2Console("src/main/resources");
+    }
+
+    /**
+     * Init the H2 console via H2's webserver when no servletContext {@link javax.servlet.ServletContext}
+     * is available.
+     *
+     * @param propertiesLocation the location where to find .h2.server.properties
+     */
+    static void initH2Console(String propertiesLocation) {
+        try {
+            // We don't want to include H2 when we are packaging for the "prod" profile and won't
+            // actually need it, so we have to load / invoke things at runtime through reflection.
+            ClassLoader loader = Thread.currentThread().getContextClassLoader();
+            Class<?> serverClass = Class.forName("org.h2.tools.Server", true, loader);
+            Method createWebServer = serverClass.getMethod("createWebServer", String[].class);
+            Method start = serverClass.getMethod("start");
+
+            Object server = createWebServer.invoke(null, new Object[]{new String[]{"-properties", propertiesLocation}});
+            start.invoke(server);
+        } catch (Exception  e) {
+          throw new RuntimeException("Failed to start h2 webserver console", e);
+        }
+    }
+
+    /**
      * <p>initH2Console.</p>
      *
      * @param servletContext a {@link javax.servlet.ServletContext} object.
