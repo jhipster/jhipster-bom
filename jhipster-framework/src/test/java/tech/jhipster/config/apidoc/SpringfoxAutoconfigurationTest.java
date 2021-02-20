@@ -11,7 +11,6 @@ import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfigurat
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.cloud.netflix.ribbon.RibbonAutoConfiguration;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -50,7 +49,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
     })
 @ActiveProfiles(SPRING_PROFILE_API_DOCS)
-@EnableAutoConfiguration(exclude = RibbonAutoConfiguration.class)
 @AutoConfigureMockMvc
 public class SpringfoxAutoconfigurationTest {
 
