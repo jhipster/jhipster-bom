@@ -50,8 +50,7 @@
         <de.flapdoodle.embed.mongo.version>2.2.0</de.flapdoodle.embed.mongo.version>
         <hazelcast.version>4.1.1</hazelcast.version>
         <hazelcast-hibernate5.version>2.2.0</hazelcast-hibernate5.version>
-        <infinispan.version>10.1.8.Final</infinispan.version>
-        <infinispan-spring-boot-starter-embedded.version>2.2.4.Final</infinispan-spring-boot-starter-embedded.version>
+        <infinispan.version>12.0.1.Final</infinispan.version>
         <jjwt.version>0.11.2</jjwt.version>
         <liquibase-mssql.version>1.6.4</liquibase-mssql.version>
         <logstash-logback-encoder.version>6.6</logstash-logback-encoder.version>
@@ -160,7 +159,7 @@
             <dependency>
                 <groupId>org.infinispan</groupId>
                 <artifactId>infinispan-spring-boot-starter-embedded</artifactId>
-                <version>${infinispan-spring-boot-starter-embedded.version}</version>
+                <version>${infinispan.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.jsonwebtoken</groupId>
@@ -726,6 +725,13 @@
                 <groupId>com.github.cloudyrock.mongock</groupId>
                 <artifactId>mongock-bom</artifactId>
                 <version>${mongock.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.infinispan</groupId>
+                <artifactId>infinispan-bom</artifactId>
+                <version>${infinispan.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
