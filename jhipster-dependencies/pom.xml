@@ -58,7 +58,7 @@
         <mapstruct.version>1.4.2.Final</mapstruct.version>
         <mongock.version>4.2.8.BETA</mongock.version>
         <mssql-jdbc.version>9.2.0.jre8</mssql-jdbc.version>
-        <neo4j-migrations.version>0.1.1</neo4j-migrations.version>
+        <neo4j-migrations.version>0.1.2</neo4j-migrations.version>
         <!-- Don't upgrade MySQL until this Liquibase issue is fixed -->
         <!-- https://github.com/liquibase/liquibase/issues/1647 -->
         <mysql-jdbc.version>8.0.22</mysql-jdbc.version>
