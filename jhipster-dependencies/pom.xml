@@ -39,7 +39,7 @@
 
     <properties>
         <!-- Dependency versions -->
-        <aws-java-sdk-bom.version>1.11.965</aws-java-sdk-bom.version>
+        <aws-java-sdk-bom.version>1.11.967</aws-java-sdk-bom.version>
         <azure-spring-cloud-client.version>2.3.0</azure-spring-cloud-client.version>
         <azure-applicationinsights-spring-boot-starter.version>2.6.2</azure-applicationinsights-spring-boot-starter.version>
         <bucket4j.version>6.0.1</bucket4j.version>
@@ -50,8 +50,7 @@
         <de.flapdoodle.embed.mongo.version>2.2.0</de.flapdoodle.embed.mongo.version>
         <hazelcast.version>4.1.1</hazelcast.version>
         <hazelcast-hibernate5.version>2.2.0</hazelcast-hibernate5.version>
-        <infinispan.version>11.0.9.Final</infinispan.version>
-        <infinispan-spring-boot-starter-embedded.version>2.3.6.Final</infinispan-spring-boot-starter-embedded.version>
+        <infinispan.version>12.0.1.Final</infinispan.version>
         <jjwt.version>0.11.2</jjwt.version>
         <liquibase-mssql.version>1.6.4</liquibase-mssql.version>
         <logstash-logback-encoder.version>6.6</logstash-logback-encoder.version>
@@ -68,7 +67,7 @@
         <problem-spring-web.version>${problem-spring.version}</problem-spring-web.version>
         <problem-spring-webflux.version>${problem-spring.version}</problem-spring-webflux.version>
         <prometheus-simpleclient.version>0.10.0</prometheus-simpleclient.version>
-        <redisson.version>3.15.0</redisson.version>
+        <redisson.version>3.15.1</redisson.version>
         <reflections.version>0.9.11</reflections.version>
         <spring-cloud.version>2020.0.1</spring-cloud.version>
         <spring-cloud-netflix.version>2.2.7.RELEASE</spring-cloud-netflix.version>
@@ -160,7 +159,7 @@
             <dependency>
                 <groupId>org.infinispan</groupId>
                 <artifactId>infinispan-spring-boot-starter-embedded</artifactId>
-                <version>${infinispan-spring-boot-starter-embedded.version}</version>
+                <version>${infinispan.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.jsonwebtoken</groupId>
@@ -726,6 +725,13 @@
                 <groupId>com.github.cloudyrock.mongock</groupId>
                 <artifactId>mongock-bom</artifactId>
                 <version>${mongock.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.infinispan</groupId>
+                <artifactId>infinispan-bom</artifactId>
+                <version>${infinispan.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
