@@ -867,6 +867,8 @@ public class JHipsterProperties {
 
         private String defaultIncludePattern = JHipsterDefaults.ApiDocs.defaultIncludePattern;
 
+        private String managementIncludePattern = JHipsterDefaults.ApiDocs.managementIncludePattern;
+
         private String host = JHipsterDefaults.ApiDocs.host;
 
         private String[] protocols = JHipsterDefaults.ApiDocs.protocols;
@@ -953,6 +955,14 @@ public class JHipsterProperties {
 
         public void setDefaultIncludePattern(String defaultIncludePattern) {
             this.defaultIncludePattern = defaultIncludePattern;
+        }
+
+        public String getManagementIncludePattern() {
+            return managementIncludePattern;
+        }
+
+        public void setManagementIncludePattern(String managementIncludePattern) {
+            this.managementIncludePattern = managementIncludePattern;
         }
 
         public String getHost() {
