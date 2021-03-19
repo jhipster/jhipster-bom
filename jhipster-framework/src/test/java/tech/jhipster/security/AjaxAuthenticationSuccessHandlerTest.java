@@ -21,8 +21,6 @@ package tech.jhipster.security;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.ArgumentCaptor;
-import org.mockito.Captor;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -36,12 +34,6 @@ public class AjaxAuthenticationSuccessHandlerTest {
 
     private HttpServletResponse response;
     private AjaxAuthenticationSuccessHandler handler;
-
-    @Captor
-    private ArgumentCaptor<Integer> intCaptor;
-
-    @Captor
-    private ArgumentCaptor<String> stringCaptor;
 
     @BeforeEach
     public void setup() {
