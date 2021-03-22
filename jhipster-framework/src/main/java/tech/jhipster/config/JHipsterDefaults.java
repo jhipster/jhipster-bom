@@ -26,6 +26,7 @@ import java.util.Map;
 /**
  * <p>JHipsterDefaults interface.</p>
  */
+@SuppressWarnings("java:S2386")
 public interface JHipsterDefaults {
 
     interface Async {
