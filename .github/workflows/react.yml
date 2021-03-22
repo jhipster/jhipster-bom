@@ -77,62 +77,62 @@ jobs:
                 include:
                     - app-type: react-default
                       entity: sql
-                      profile: prod
+                      environment: prod
                       war: 0
                       e2e: 1
                       testcontainers: 0
                     - app-type: react-maven-mysql-es-noi18n-mapsid
                       entity: sqlfull
-                      profile: prod
+                      environment: prod
                       war: 0
                       e2e: 1
                       testcontainers: 1
                     - app-type: react-maven-h2mem-memcached
                       entity: sql
-                      profile: dev,webapp
+                      environment: prod
                       war: 0 # TODO: need change to 1, when maven+war is fixed
                       e2e: 1
                       testcontainers: 0
                     - app-type: react-maven-cassandra-session-redis
                       entity: cassandra
-                      profile: prod
+                      environment: prod
                       war: 0
                       e2e: 1
-                      testcontainers: 0
+                      testcontainers: 1
 #                    - app-type: react-maven-couchbase-caffeine
 #                      entity: couchbase
-#                      profile: prod
+#                      environment: prod
 #                      war: 0
 #                      e2e: 0
 #                      testcontainers: 0
                     - app-type: react-gradle-mysql-es-noi18n-mapsid
                       entity: sqlfull
-                      profile: prod
+                      environment: prod
                       war: 0
                       e2e: 1
                       testcontainers: 0
                     - app-type: react-gradle-h2mem-memcached
                       entity: sql
-                      profile: dev,webapp
+                      environment: prod
                       war: 1
                       e2e: 1
                       testcontainers: 0
                     - app-type: react-gradle-cassandra-session-redis
                       entity: cassandra
-                      profile: prod
+                      environment: prod
                       war: 0
                       e2e: 1
-                      testcontainers: 0
+                      testcontainers: 1
 #                    - app-type: react-gradle-couchbase-caffeine
 #                      entity: couchbase
-#                      profile: prod
+#                      environment: prod
 #                      war: 0
 #                      e2e: 1
 #                      testcontainers: 0
         env:
             JHI_ENTITY: ${{ matrix.entity }}
             JHI_APP: ${{ matrix.app-type }}
-            JHI_PROFILE: ${{ matrix.profile }}
+            JHI_PROFILE: ${{ matrix.environment }}
             JHI_WAR: ${{ matrix.war }}
             JHI_E2E: ${{ matrix.e2e }}
             JHI_TESTCONTAINERS: ${{ matrix.testcontainers }}
