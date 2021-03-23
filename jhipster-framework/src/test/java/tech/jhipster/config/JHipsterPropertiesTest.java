@@ -820,4 +820,13 @@ public class JHipsterPropertiesTest {
         obj.setRetentionPeriod(val);
         assertThat(obj.getRetentionPeriod()).isEqualTo(val);
     }
+
+    @Test
+    void testSecurityContentSecurityPolicy() {
+        JHipsterProperties.Security obj = properties.getSecurity();
+        String val = JHipsterDefaults.Security.contentSecurityPolicy;
+        assertThat(obj.getContentSecurityPolicy()).isEqualTo(val);
+        obj.setContentSecurityPolicy("foobar");
+        assertThat(obj.getContentSecurityPolicy()).isEqualTo("foobar");
+    }
 }
