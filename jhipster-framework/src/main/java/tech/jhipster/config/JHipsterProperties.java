@@ -697,6 +697,8 @@ public class JHipsterProperties {
 
     public static class Security {
 
+        private String contentSecurityPolicy = JHipsterDefaults.Security.contentSecurityPolicy;
+
         private final ClientAuthorization clientAuthorization = new ClientAuthorization();
 
         private final Authentication authentication = new Authentication();
@@ -719,6 +721,14 @@ public class JHipsterProperties {
 
         public OAuth2 getOauth2() {
             return oauth2;
+        }
+
+        public String getContentSecurityPolicy() {
+            return contentSecurityPolicy;
+        }
+
+        public void setContentSecurityPolicy(String contentSecurityPolicy) {
+            this.contentSecurityPolicy = contentSecurityPolicy;
         }
 
         public static class ClientAuthorization {
