@@ -34,6 +34,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Profile;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.util.StopWatch;
 import org.springframework.util.StringUtils;
 import springfox.bean.validators.configuration.BeanValidatorPluginsConfiguration;
@@ -108,6 +109,7 @@ public class SpringfoxAutoConfiguration {
         watch.start();
 
         Docket docket = createDocket();
+        docket.ignoredParameterTypes(ServerHttpRequest.class);
 
         // Apply all OpenAPICustomizers orderly.
         springfoxCustomizers.forEach(customizer -> customizer.customize(docket));
