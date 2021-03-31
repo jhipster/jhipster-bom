@@ -67,7 +67,7 @@
         <problem-spring-web.version>${problem-spring.version}</problem-spring-web.version>
         <problem-spring-webflux.version>${problem-spring.version}</problem-spring-webflux.version>
         <prometheus-simpleclient.version>0.10.0</prometheus-simpleclient.version>
-        <redisson.version>3.15.2</redisson.version>
+        <redisson.version>3.15.3</redisson.version>
         <reflections.version>0.9.11</reflections.version>
         <spring-cloud.version>2020.0.2</spring-cloud.version>
         <spring-cloud-netflix.version>2.2.7.RELEASE</spring-cloud-netflix.version>
