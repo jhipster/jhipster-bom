@@ -19,6 +19,7 @@
 
 package tech.jhipster.config.apidoc.customizer;
 
+import org.springframework.http.server.reactive.ServerHttpRequest;
 import tech.jhipster.config.JHipsterProperties;
 import org.springframework.core.Ordered;
 import org.springframework.data.domain.Pageable;
@@ -92,6 +93,7 @@ public class JHipsterSpringfoxCustomizer implements SpringfoxCustomizer, Ordered
             .directModelSubstitute(ByteBuffer.class, String.class)
             .genericModelSubstitutes(ResponseEntity.class)
             .ignoredParameterTypes(Pageable.class)
+            .ignoredParameterTypes(ServerHttpRequest.class)
             .select()
             .paths(regex(properties.getDefaultIncludePattern()))
             .build();
