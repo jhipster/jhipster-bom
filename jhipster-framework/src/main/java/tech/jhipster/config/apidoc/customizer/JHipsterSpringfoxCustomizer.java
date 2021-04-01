@@ -19,11 +19,11 @@
 
 package tech.jhipster.config.apidoc.customizer;
 
-import org.springframework.http.server.reactive.ServerHttpRequest;
 import tech.jhipster.config.JHipsterProperties;
 import org.springframework.core.Ordered;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.server.reactive.ServerHttpRequest;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
 import springfox.documentation.service.Server;
