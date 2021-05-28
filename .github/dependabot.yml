@@ -6,6 +6,8 @@ updates:
       schedule:
           interval: 'daily'
       open-pull-requests-limit: 15
+      ignore:
+          - dependency-name: "aws-java-sdk-bom"
 
     # Dependencies for GitHub Actions
     - package-ecosystem: 'github-actions'
