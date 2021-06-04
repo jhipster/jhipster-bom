@@ -96,19 +96,19 @@ jobs:
                       testcontainers: 0
                     - app-type: vue-gateway
                       entity: sql
-                      environment: dev,webapp
+                      environment: dev
                       war: 0
                       e2e: 1
                       testcontainers: 0
                     - app-type: vue-gradle-session
                       entity: sql
-                      environment: dev,webapp
+                      environment: dev
                       war: 0
                       e2e: 1
                       testcontainers: 0
                     - app-type: vue-ws-theme
                       entity: sql
-                      environment: dev,webapp
+                      environment: dev
                       war: 0
                       e2e: 1
                       testcontainers: 0
@@ -120,19 +120,19 @@ jobs:
                       testcontainers: 0
 #                    - app-type: vue-couchbase
 #                      entity: couchbase
-#                      environment: dev,webapp
+#                      environment: dev
 #                      war: 0
 #                      e2e: 1
 #                      testcontainers: 0
                     - app-type: vue-mongodb-kafka-cucumber
                       entity: mongodb
-                      environment: dev,webapp
+                      environment: dev
                       war: 0
                       e2e: 1
                       testcontainers: 0
                     - app-type: vue-session-cassandra-fr
                       entity: cassandra
-                      environment: dev,webapp
+                      environment: dev
                       war: 0
                       e2e: 1
                       testcontainers: 1
