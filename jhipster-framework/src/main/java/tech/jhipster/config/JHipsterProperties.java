@@ -38,10 +38,6 @@ import java.util.Map;
  * files if they are found in the classpath.</p>
  */
 @ConfigurationProperties(prefix = "jhipster", ignoreUnknownFields = false)
-@PropertySources({
-    @PropertySource(value = "classpath:git.properties", ignoreResourceNotFound = true),
-    @PropertySource(value = "classpath:META-INF/build-info.properties", ignoreResourceNotFound = true)
-})
 public class JHipsterProperties {
 
     private final Async async = new Async();
