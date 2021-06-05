@@ -119,3 +119,10 @@ Desktop.ini
 # ESLint
 ######################
 .eslintcache
+
+######################
+# Node
+######################
+node_modules
+package-lock.json
+
