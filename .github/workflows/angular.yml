@@ -18,12 +18,17 @@
 #
 
 name: Angular
+concurrency:
+  # Group PRs by head_ref, push to main branch by commit id, and others branch by ref.
+  group: angular-${{ github.head_ref || (github.ref == 'refs/heads/main' && github.sha) || github.ref }}
+  cancel-in-progress: true
 on:
   push:
     branches-ignore:
       - 'dependabot/**'
       - 'skip_ci*'
   pull_request:
+    types: [closed, opened, synchronize, reopened]
     branches:
       - '*'
 env:
@@ -57,7 +62,8 @@ jobs:
       !contains(github.event.head_commit.message, '[ci skip]') &&
       !contains(github.event.head_commit.message, '[skip ci]') &&
       !contains(github.event.pull_request.title, '[skip ci]') &&
-      !contains(github.event.pull_request.title, '[ci skip]')
+      !contains(github.event.pull_request.title, '[ci skip]') &&
+      github.event.action != 'closed'
     timeout-minutes: 40
     strategy:
       fail-fast: false
