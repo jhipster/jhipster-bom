@@ -31,33 +31,13 @@ on:
     types: [closed, opened, synchronize, reopened]
     branches:
       - '*'
-env:
-  JHI_RUN_APP: 1
-  JHI_JDK: 11
-  # this version is used for testing with CICD
-  JHI_VERSION: 0.0.0-CICD
-  JHI_LIB_REPO: https://github.com/jhipster/jhipster-bom.git
-  JHI_LIB_BRANCH: main
-  JHI_GEN_REPO: https://github.com/jhipster/generator-jhipster.git
-  JHI_GEN_BRANCH: main
-  SPRING_OUTPUT_ANSI_ENABLED: ALWAYS
-  SPRING_JPA_SHOW_SQL: false
-  JHI_DISABLE_WEBPACK_LOGS: true
-  JHI_E2E_HEADLESS: true
-  JHI_SCRIPTS: /home/runner/generator-jhipster/test-integration/scripts
-  JHI_LIB_SCRIPTS: ./test-integration/scripts
-  NG_CLI_ANALYTICS: 'false'
-  JHI_GITHUB_CI: true
-  FORCE_COLOR: 1
-  # https://github.com/actions/virtual-environments/issues/1499#issuecomment-689467080
-  MAVEN_OPTS: >-
-    -Dhttp.keepAlive=false
-    -Dmaven.wagon.http.pool=false
-    -Dmaven.wagon.httpconnectionManager.ttlSeconds=120
 jobs:
   applications:
     name: ${{ matrix.app-type }}
     runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        working-directory: ${{ github.workspace }}/app
     if: >-
       !contains(github.event.head_commit.message, '[ci skip]') &&
       !contains(github.event.head_commit.message, '[skip ci]') &&
@@ -68,7 +48,6 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        node_version: [14.16.0]
         os: [ubuntu-20.04]
         app-type:
           - vue-default
@@ -142,39 +121,50 @@ jobs:
             war: 0
             e2e: 1
             testcontainers: 1
-    env:
-      JHI_ENTITY: ${{ matrix.entity }}
-      JHI_APP: ${{ matrix.app-type }}
-      JHI_PROFILE: ${{ matrix.environment }}
-      JHI_WAR: ${{ matrix.war }}
-      JHI_E2E: ${{ matrix.e2e }}
-      JHI_TESTCONTAINERS: ${{ matrix.testcontainers }}
     steps:
       #----------------------------------------------------------------------
       # Install all tools and check configuration
       #----------------------------------------------------------------------
       - name: 'SETUP: Checkout generator-jhipster'
         uses: actions/checkout@v2.3.4
+        with:
+          repository: 'jhipster/generator-jhipster'
+          path: generator-jhipster
+          # shows 5 commits at log
+          fetch-depth: 5
+          ref: main
+      - name: 'SETUP: Checkout jhipster'
+        uses: actions/checkout@v2.3.4
+        with:
+          path: jhipster-bom
+      - name: 'SETUP: environment'
+        id: setup
+        uses: ./generator-jhipster/.github/actions/setup
+        with:
+          entities-sample: ${{ matrix.entity }}
+          application-sample: ${{ matrix.app-type }}
+          application-environment: ${{ matrix.environment }}
+          application-packaging: ${{ (matrix.war == 1 && 'war') || 'jar' }}
+          enable-testcontainers: ${{ matrix.testcontainers == 1 }}
+          generator-jhipster-branch: local
       - uses: actions/setup-node@v2.1.5
         with:
-          node-version: ${{ matrix.node_version }}
+          node-version: ${{ steps.setup.outputs.node-version }}
       - uses: actions/setup-java@v2
         with:
           distribution: 'adopt'
-          java-version: '11.x'
-      - name: 'ENV: display variables'
-        run: $JHI_LIB_SCRIPTS/01-display-configuration.sh
+          java-version: ${{ steps.setup.outputs.java-version }}
       - name: 'TOOLS: configure tools installed by the system'
-        run: $JHI_LIB_SCRIPTS/03-system.sh
+        run: $JHI_SCRIPTS/03-system.sh
       - name: 'TOOLS: configure git'
-        run: $JHI_LIB_SCRIPTS/04-git-config.sh
+        run: $JHI_SCRIPTS/04-git-config.sh
       #----------------------------------------------------------------------
       # Install JHipster and generate project+entities
       #----------------------------------------------------------------------
       - name: 'GENERATION: install JHipster'
-        run: $JHI_LIB_SCRIPTS/10-install-jhipster-lib.sh
-      - name: 'GENERATION: entities'
-        run: $JHI_SCRIPTS/11-generate-entities.sh
+        run: $JHI_SCRIPTS/10-install-jhipster.sh
+      - name: 'GENERATION: config'
+        run: $JHI_SCRIPTS/11-generate-config.sh
       - name: 'GENERATION: project'
         run: $JHI_SCRIPTS/12-generate-project.sh
       - name: 'GENERATION: replace version in generated project'
@@ -185,22 +175,22 @@ jobs:
       # Launch tests
       #----------------------------------------------------------------------
       - name: 'TESTS: Start docker-compose containers'
-        run: $JHI_SCRIPTS/20-docker-compose.sh
+        run: npm run ci:e2e:prepare
       - name: 'TESTS: backend'
-        run: $JHI_SCRIPTS/21-tests-backend.sh
+        run: npm run ci:backend:test
       - name: 'TESTS: frontend'
-        run: $JHI_SCRIPTS/22-tests-frontend.sh
+        run: npm run ci:frontend:test
       - name: 'TESTS: packaging'
-        run: $JHI_SCRIPTS/23-package.sh
+        run: npm run ci:e2e:package
       - name: 'E2E: Run'
         id: e2e
-        run: $JHI_SCRIPTS/24-tests-e2e.sh
+        run: npm run ci:e2e:run --if-present
       - name: 'E2E: Store failure screenshots'
         uses: actions/upload-artifact@v2
         if: always() && steps.e2e.outcome == 'failure'
         with:
           name: screenshots-${{ matrix.app-type }}
-          path: /home/runner/app/target/cypress/screenshots
+          path: ${{ steps.setup.outputs.application-path }}/*/cypress/screenshots
       - name: 'ANALYSIS: Sonar analysis'
         run: $JHI_SCRIPTS/25-sonar-analyze.sh
         env:
