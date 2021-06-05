@@ -1,21 +1,21 @@
-JHipster BOM and server-side library
-----------------------------
+## JHipster BOM and server-side library
 
 [![Angular Build Status][github-actions-angular-image]][github-actions-url] [![React Build Status][github-actions-react-image]][github-actions-url] [![Vue Build Status][github-actions-vue-image]][github-actions-url] [![Webflux Build Status][github-actions-webflux-image]][github-actions-url] [![Azure DevOps Build Status][azure-devops-image]][azure-devops-url-main] [![Maven Central][maven-image]][maven-url]
 
 Full documentation and information is available on our website at [https://www.jhipster.tech/][jhipster-url]
 
 This project is used by the JHipster generator. This is the Bill of Materials and server-side library:
+
 - jhipster-dependencies
 - jhipster-framework
 
 If the current version is SNAPSHOT then to use this SNAPSHOT version:
+
 - clone this project
 - run `./mvnw install -Dgpg.skip=true`, on Windows run `.\mvnw.cmd install -D"gpg.skip=true"`
 
 [maven-image]: https://maven-badges.herokuapp.com/maven-central/tech.jhipster/jhipster-parent/badge.svg
 [maven-url]: https://maven-badges.herokuapp.com/maven-central/tech.jhipster/jhipster-parent
-
 [azure-devops-image]: https://dev.azure.com/jhipster/jhipster-bom/_apis/build/status/jhipster.jhipster-bom?branchName=main
 [azure-devops-url-main]: https://dev.azure.com/jhipster/jhipster-bom/_build
 [github-actions-angular-image]: https://github.com/jhipster/jhipster-bom/workflows/Angular/badge.svg
@@ -23,9 +23,7 @@ If the current version is SNAPSHOT then to use this SNAPSHOT version:
 [github-actions-vue-image]: https://github.com/jhipster/jhipster-bom/workflows/Vue/badge.svg
 [github-actions-webflux-image]: https://github.com/jhipster/jhipster-bom/workflows/Webflux/badge.svg
 [github-actions-url]: https://github.com/jhipster/jhipster-bom/actions
-
 [jhipster-url]: https://www.jhipster.tech/
-
 
 ## Analysis of the JHipster server-side parent POM project
 
