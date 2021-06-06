@@ -154,6 +154,19 @@ jobs:
         with:
           distribution: 'adopt'
           java-version: ${{ steps.setup.outputs.java-version }}
+      - name: 'SETUP: load cache'
+        uses: actions/cache@v2.1.6
+        with:
+          path: |
+            ~/.npm
+            ~/.cache/Cypress/
+            ~/.m2/repository
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-cache-${{ steps.setup.outputs.date }}-${{ hashFiles('pom.xml', '**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-cache-${{ steps.setup.outputs.date }}-
+            ${{ runner.os }}-cache-${{ steps.setup.outputs.date }}
       - name: 'TOOLS: configure tools installed by the system'
         run: $JHI_SCRIPTS/03-system.sh
       - name: 'TOOLS: configure git'
