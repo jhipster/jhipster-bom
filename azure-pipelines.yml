@@ -103,6 +103,8 @@ jobs:
       # Install JHipster and generate project+entities
       #----------------------------------------------------------------------
       - bash: $(JHI_SCRIPTS)/10-install-jhipster.sh
+        env:
+          JHI_GEN_BRANCH: local
         displayName: 'GENERATION: install JHipster'
       - bash: $(JHI_SCRIPTS)/11-generate-config.sh
         displayName: 'GENERATION: config'
