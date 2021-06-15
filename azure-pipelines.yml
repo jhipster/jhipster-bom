@@ -31,7 +31,8 @@ jobs:
       JHI_LIB_BRANCH: auto
       # if JHI_GEN_BRANCH value is release, use the release from NPM
       JHI_GEN_REPO: https://github.com/jhipster/generator-jhipster.git
-      JHI_GEN_BRANCH: main
+      JHI_GEN_BRANCH: local
+      JHI_GEN_LOCAL_BRANCH: main
       JHI_HOME: $(Pipeline.Workspace)/generator-jhipster
       JHI_SCRIPTS: $(JHI_HOME)/test-integration/scripts
 
@@ -77,7 +78,7 @@ jobs:
       #----------------------------------------------------------------------
       - checkout: self
         path: jhipster-bom
-      - script: git clone --branch "$JHI_GEN_BRANCH" --depth 5 "$JHI_GEN_REPO" "$JHI_HOME"
+      - script: git clone --branch "$JHI_GEN_LOCAL_BRANCH" --depth 5 "$JHI_GEN_REPO" "$JHI_HOME"
         displayName: 'CHECKOUT: generator-jhipster'
       #----------------------------------------------------------------------
       # Install all tools and check configuration
@@ -103,8 +104,6 @@ jobs:
       # Install JHipster and generate project+entities
       #----------------------------------------------------------------------
       - bash: $(JHI_SCRIPTS)/10-install-jhipster.sh
-        env:
-          JHI_GEN_BRANCH: local
         displayName: 'GENERATION: install JHipster'
       - bash: $(JHI_SCRIPTS)/11-generate-config.sh
         displayName: 'GENERATION: config'
