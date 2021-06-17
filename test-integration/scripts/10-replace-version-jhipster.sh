@@ -1,7 +1,9 @@
 #!/bin/bash
 
 set -e
-source "$JHI_SCRIPTS/00-init-env.sh"
+if [[ $JHI_SCRIPTS != '' ]]; then
+    source "$JHI_SCRIPTS/00-init-env.sh"
+fi
 
 if [[ $JHI_VERSION == '' ]]; then
     JHI_VERSION=0.0.0-CICD
