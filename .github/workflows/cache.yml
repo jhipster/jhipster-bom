@@ -50,6 +50,7 @@ jobs:
         with:
           jdl-sample: cache
           generator-jhipster-branch: local
+          jhipster-bom-branch: auto
       - uses: actions/setup-node@v2.1.5
         with:
           node-version: ${{ steps.setup.outputs.node-version }}
