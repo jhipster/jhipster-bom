@@ -128,11 +128,11 @@ jobs:
       - name: 'SETUP: Checkout generator-jhipster'
         uses: actions/checkout@v2.3.4
         with:
-          repository: 'jhipster/generator-jhipster'
+          repository: 'DanielFran/generator-jhipster'
           path: generator-jhipster
           # shows 5 commits at log
           fetch-depth: 5
-          ref: main
+          ref: spring-boot_2.5.1
       - name: 'SETUP: Checkout jhipster'
         uses: actions/checkout@v2.3.4
         with:
