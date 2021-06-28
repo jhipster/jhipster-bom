@@ -33,7 +33,7 @@ on:
       - '*'
 jobs:
   applications:
-    name: ${{ matrix.app-type }}
+    name: ${{ matrix.app-sample }}
     runs-on: ${{ matrix.os }}
     defaults:
       run:
@@ -49,71 +49,57 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-20.04]
-        app-type:
+        app-sample:
           - react-default
           - react-maven-mysql-es-noi18n-mapsid
           - react-maven-h2mem-memcached
           - react-maven-cassandra-session-redis
-          #                    - react-maven-couchbase-caffeine
           - react-gradle-mysql-es-noi18n-mapsid
           - react-gradle-h2mem-memcached
           - react-gradle-cassandra-session-redis
-        #                    - react-gradle-couchbase-caffeine
         include:
-          - app-type: react-default
+          - app-sample: react-default
             entity: sql
             environment: prod
             war: 0
             e2e: 1
             testcontainers: 0
-          - app-type: react-maven-mysql-es-noi18n-mapsid
+          - app-sample: react-maven-mysql-es-noi18n-mapsid
             entity: sqlfull
             environment: prod
             war: 0
             e2e: 1
             testcontainers: 1
-          - app-type: react-maven-h2mem-memcached
+          - app-sample: react-maven-h2mem-memcached
             entity: sql
             environment: prod
-            war: 0 # TODO: need change to 1, when maven+war is fixed
+            war: 0
             e2e: 1
             testcontainers: 0
-          - app-type: react-maven-cassandra-session-redis
+          - app-sample: react-maven-cassandra-session-redis
             entity: cassandra
             environment: prod
             war: 0
             e2e: 1
             testcontainers: 1
-          #                    - app-type: react-maven-couchbase-caffeine
-          #                      entity: couchbase
-          #                      environment: prod
-          #                      war: 0
-          #                      e2e: 0
-          #                      testcontainers: 0
-          - app-type: react-gradle-mysql-es-noi18n-mapsid
+          - app-sample: react-gradle-mysql-es-noi18n-mapsid
             entity: sqlfull
             environment: prod
             war: 0
             e2e: 1
             testcontainers: 0
-          - app-type: react-gradle-h2mem-memcached
+          - app-sample: react-gradle-h2mem-memcached
             entity: sql
             environment: prod
             war: 1
             e2e: 1
             testcontainers: 0
-          - app-type: react-gradle-cassandra-session-redis
+          - app-sample: react-gradle-cassandra-session-redis
             entity: cassandra
             environment: prod
             war: 0
             e2e: 1
             testcontainers: 1
-    #                    - app-type: react-gradle-couchbase-caffeine
-    #                      entity: couchbase
-    #                      environment: prod
-    #                      war: 0
-    #                      e2e: 1
-    #                      testcontainers: 0
     steps:
       #----------------------------------------------------------------------
       # Install all tools and check configuration
@@ -181,25 +167,27 @@ jobs:
       #----------------------------------------------------------------------
       # Launch tests
       #----------------------------------------------------------------------
-      - name: 'TESTS: Start docker-compose containers'
-        run: npm run ci:e2e:prepare
+      - name: 'TESTS: Start docker-compose containers for e2e and backend tests'
+        run: $JHI_SCRIPTS/20-docker-compose-npm.sh
       - name: 'TESTS: backend'
-        run: npm run ci:backend:test
+        id: backend
+        run: $JHI_SCRIPTS/21-tests-backend-npm.sh
       - name: 'TESTS: frontend'
-        run: npm run ci:frontend:test
+        run: $JHI_SCRIPTS/22-tests-frontend-npm.sh
       - name: 'TESTS: packaging'
-        run: npm run ci:e2e:package
-      - name: 'E2E: Run'
+        run: $JHI_SCRIPTS/23-package-npm.sh
+      - name: 'TESTS: End-to-End'
         id: e2e
-        run: npm run ci:e2e:run --if-present
+        run: $JHI_SCRIPTS/24-tests-e2e-npm.sh
+      - name: 'BACKEND: Store failure logs'
+        uses: actions/upload-artifact@v2
+        if: always() && steps.backend.outcome == 'failure'
+        with:
+          name: log-${{ matrix.app-sample }}
+          path: ${{ steps.setup.outputs.application-path }}/*/test-results/**/*.xml
       - name: 'E2E: Store failure screenshots'
         uses: actions/upload-artifact@v2
         if: always() && steps.e2e.outcome == 'failure'
         with:
-          name: screenshots-${{ matrix.app-type }}
+          name: screenshots-${{ matrix.app-sample }}
           path: ${{ steps.setup.outputs.application-path }}/*/cypress/screenshots
-      - name: 'ANALYSIS: Sonar analysis'
-        run: $JHI_SCRIPTS/25-sonar-analyze.sh
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

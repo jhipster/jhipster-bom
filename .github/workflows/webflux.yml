@@ -33,7 +33,7 @@ on:
       - '*'
 jobs:
   applications:
-    name: ${{ matrix.app-type }}
+    name: ${{ matrix.app-sample }}
     runs-on: ${{ matrix.os }}
     defaults:
       run:
@@ -49,73 +49,52 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-20.04]
-        app-type:
+        app-sample:
           - webflux-mongodb
           - webflux-mongodb-es-session
           - webflux-mongodb-oauth2
           - webflux-gateway-jwt
           - webflux-gateway-oauth2
-          #                    - webflux-couchbase
-          #                    - webflux-couchbase-es-oauth2
           - webflux-psql
-          #                    - webflux-mysql
           - webflux-mariadb-gradle
         include:
-          - app-type: webflux-mongodb
+          - app-sample: webflux-mongodb
             entity: mongodb
             environment: prod
             war: 0
             e2e: 1
             testcontainers: 1
-          - app-type: webflux-mongodb-es-session
+          - app-sample: webflux-mongodb-es-session
             entity: mongodb
             environment: prod
             war: 0
             e2e: 1
             testcontainers: 1
-          - app-type: webflux-mongodb-oauth2
+          - app-sample: webflux-mongodb-oauth2
             entity: mongodb
             environment: prod
             war: 0
             e2e: 1
             testcontainers: 1
-          - app-type: webflux-gateway-jwt
+          - app-sample: webflux-gateway-jwt
             entity: none
             environment: prod
             war: 0
             e2e: 1
             testcontainers: 0
-          - app-type: webflux-gateway-oauth2
+          - app-sample: webflux-gateway-oauth2
             entity: none
             environment: prod
             war: 0
             e2e: 1
             testcontainers: 1
-          #                    - app-type: webflux-couchbase
-          #                      entity: couchbase
-          #                      environment: prod
-          #                      war: 0
-          #                      e2e: 1
-          #                      testcontainers: 0
-          #                    - app-type: webflux-couchbase-es-oauth2
-          #                      entity: couchbase
-          #                      environment: prod
-          #                      war: 0
-          #                      e2e: 1
-          #                      testcontainers: 0
-          - app-type: webflux-psql
+          - app-sample: webflux-psql
             entity: sql
             environment: prod
             war: 0
             e2e: 1
             testcontainers: 0
-          #                    - app-type: webflux-mysql
-          #                      entity: sqllight
-          #                      environment: prod
-          #                      war: 0
-          #                      e2e: 1
-          #                      testcontainers: 1
-          - app-type: webflux-mariadb-gradle
+          - app-sample: webflux-mariadb-gradle
             entity: sqllight
             environment: prod
             war: 0
@@ -155,7 +134,7 @@ jobs:
         with:
           distribution: 'adopt'
           java-version: ${{ steps.setup.outputs.java-version }}
-      - name: 'SETUP: load npm cache'
+      - name: 'SETUP: load cache'
         uses: actions/cache@v2.1.6
         with:
           path: |
@@ -188,25 +167,27 @@ jobs:
       #----------------------------------------------------------------------
       # Launch tests
       #----------------------------------------------------------------------
-      - name: 'TESTS: Start docker-compose containers'
-        run: npm run ci:e2e:prepare
+      - name: 'TESTS: Start docker-compose containers for e2e and backend tests'
+        run: $JHI_SCRIPTS/20-docker-compose-npm.sh
       - name: 'TESTS: backend'
-        run: npm run ci:backend:test
+        id: backend
+        run: $JHI_SCRIPTS/21-tests-backend-npm.sh
       - name: 'TESTS: frontend'
-        run: npm run ci:frontend:test
+        run: $JHI_SCRIPTS/22-tests-frontend-npm.sh
       - name: 'TESTS: packaging'
-        run: npm run ci:e2e:package
-      - name: 'E2E: Run'
+        run: $JHI_SCRIPTS/23-package-npm.sh
+      - name: 'TESTS: End-to-End'
         id: e2e
-        run: npm run ci:e2e:run --if-present
+        run: $JHI_SCRIPTS/24-tests-e2e-npm.sh
+      - name: 'BACKEND: Store failure logs'
+        uses: actions/upload-artifact@v2
+        if: always() && steps.backend.outcome == 'failure'
+        with:
+          name: log-${{ matrix.app-sample }}
+          path: ${{ steps.setup.outputs.application-path }}/*/test-results/**/*.xml
       - name: 'E2E: Store failure screenshots'
         uses: actions/upload-artifact@v2
         if: always() && steps.e2e.outcome == 'failure'
         with:
-          name: screenshots-${{ matrix.app-type }}
+          name: screenshots-${{ matrix.app-sample }}
           path: ${{ steps.setup.outputs.application-path }}/*/cypress/screenshots
-      - name: 'ANALYSIS: Sonar analysis'
-        run: $JHI_SCRIPTS/25-sonar-analyze.sh
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
