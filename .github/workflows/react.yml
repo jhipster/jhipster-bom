@@ -111,11 +111,11 @@ jobs:
       - name: 'SETUP: Checkout generator-jhipster'
         uses: actions/checkout@v2.3.4
         with:
-          repository: 'jhipster/generator-jhipster'
+          repository: 'jdubois/generator-jhipster'
           path: generator-jhipster
           # shows 5 commits at log
           fetch-depth: 5
-          ref: main
+          ref: patch-spring-boot-2.5.2
       - name: 'SETUP: environment'
         id: setup
         uses: ./generator-jhipster/.github/actions/setup
