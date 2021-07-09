@@ -527,4 +527,17 @@ public abstract class QueryService<ENTITY> {
         return "%" + txt.toUpperCase() + '%';
     }
 
+    /**
+     * <p>distinct.</p>
+     *
+     * @param distinct a boolean.
+     * @return a {@link org.springframework.data.jpa.domain.Specification} object.
+     */
+    protected Specification<ENTITY> distinct(boolean distinct) {
+        return (root, query, cb) -> {
+            query.distinct(distinct);
+            return null;
+        };
+    }
+
 }
