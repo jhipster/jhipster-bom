@@ -22,7 +22,7 @@ on:
   workflow_dispatch:
     inputs:
       key:
-        description: 'Cache key'
+        description: 'Cache key'     
         required: false
         default: '-new'
   schedule:
@@ -42,7 +42,7 @@ jobs:
       - name: 'SETUP: Checkout generator-jhipster'
         uses: actions/checkout@v2
         with:
-          repository: 'jdubois/generator-jhipster'
+          repository: 'jhipster/generator-jhipster'
           path: generator-jhipster
       - name: 'SETUP: environment'
         id: setup

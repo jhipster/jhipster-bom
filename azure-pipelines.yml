@@ -30,9 +30,9 @@ jobs:
       JHI_LIB_REPO: https://github.com/jhipster/jhipster-bom.git
       JHI_LIB_BRANCH: auto
       # if JHI_GEN_BRANCH value is release, use the release from NPM
-      JHI_GEN_REPO: https://github.com/jdubois/generator-jhipster.git
+      JHI_GEN_REPO: https://github.com/jhipster/generator-jhipster.git
       JHI_GEN_BRANCH: local
-      JHI_GEN_LOCAL_BRANCH: patch-spring-boot-2.5.2
+      JHI_GEN_LOCAL_BRANCH: main
       JHI_HOME: $(Pipeline.Workspace)/generator-jhipster
       JHI_SCRIPTS: $(JHI_HOME)/test-integration/scripts
 
