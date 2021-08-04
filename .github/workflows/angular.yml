@@ -148,7 +148,7 @@ jobs:
           enable-testcontainers: ${{ matrix.testcontainers == 1 }}
           generator-jhipster-branch: local
           jhipster-bom-branch: auto
-      - uses: actions/setup-node@v2.3.0
+      - uses: actions/setup-node@v2.3.1
         with:
           node-version: ${{ steps.setup.outputs.node-version }}
       - uses: actions/setup-java@v2
