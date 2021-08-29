@@ -19,6 +19,7 @@
 
 package tech.jhipster.config.apidoc;
 
+import org.springframework.util.ClassUtils;
 import tech.jhipster.config.JHipsterProperties;
 import tech.jhipster.config.apidoc.customizer.JHipsterSpringfoxCustomizer;
 import tech.jhipster.config.apidoc.customizer.SpringfoxCustomizer;
@@ -32,7 +33,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Profile;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.StopWatch;
 import org.springframework.util.StringUtils;
@@ -160,7 +160,7 @@ public class SpringfoxAutoConfiguration {
                 Collections.emptyList(), Collections.emptyList()));
         }
 
-        return docket
+        docket = docket
             .apiInfo(apiInfo)
             .useDefaultResponseMessages(properties.isUseDefaultResponseMessages())
             .groupName(MANAGEMENT_GROUP_NAME)
@@ -168,8 +168,14 @@ public class SpringfoxAutoConfiguration {
             .protocols(new HashSet<>(Arrays.asList(properties.getProtocols())))
             .forCodeGeneration(true)
             .directModelSubstitute(ByteBuffer.class, String.class)
-            .genericModelSubstitutes(ResponseEntity.class)
-            .ignoredParameterTypes(Pageable.class)
+            .genericModelSubstitutes(ResponseEntity.class);
+
+        // ignore Pageable parameter only if the class is present
+        if (ClassUtils.isPresent("org.springframework.data.domain.Pageable", SpringfoxAutoConfiguration.class.getClassLoader())) {
+            docket = docket.ignoredParameterTypes(org.springframework.data.domain.Pageable.class);
+        }
+
+        return docket
             .select()
             .paths(regex(properties.getManagementIncludePattern()))
             .build();
