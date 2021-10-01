@@ -30,7 +30,7 @@ import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.*;
 
-public class ResponseUtilTest {
+class ResponseUtilTest {
 
     private static final String HEADER_NAME = "X-Test";
     private static final String HEADER_VALUE = "FooBar";
@@ -40,7 +40,7 @@ public class ResponseUtilTest {
     private HttpHeaders headers;
 
     @BeforeEach
-    public void setup() {
+    void setup() {
         optionalYes = Optional.of(42);
         optionalNo = Optional.empty();
         headers = new HttpHeaders();
@@ -48,7 +48,7 @@ public class ResponseUtilTest {
     }
 
     @Test
-    public void testOptionalYesWithoutHeaders() {
+    void testOptionalYesWithoutHeaders() {
         ResponseEntity<Integer> response = ResponseUtil.wrapOrNotFound(optionalYes);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(response.getBody()).isEqualTo(42);
@@ -56,12 +56,12 @@ public class ResponseUtilTest {
     }
 
     @Test
-    public void testOptionalNoWithoutHeaders() {
+    void testOptionalNoWithoutHeaders() {
         assertThatExceptionOfType(ResponseStatusException.class).isThrownBy(() -> ResponseUtil.wrapOrNotFound(optionalNo));
     }
 
     @Test
-    public void testOptionalYesWithHeaders() {
+    void testOptionalYesWithHeaders() {
         ResponseEntity<Integer> response = ResponseUtil.wrapOrNotFound(optionalYes, headers);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(response.getBody()).isEqualTo(42);
@@ -71,7 +71,7 @@ public class ResponseUtilTest {
     }
 
     @Test
-    public void testOptionalNoWithHeaders() {
+    void testOptionalNoWithHeaders() {
         assertThatExceptionOfType(ResponseStatusException.class).isThrownBy(() -> ResponseUtil.wrapOrNotFound(optionalNo, headers));
     }
 

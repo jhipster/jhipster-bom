@@ -44,7 +44,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 import static org.springframework.web.servlet.i18n.CookieLocaleResolver.*;
 
-public class AngularCookieLocaleResolverTest {
+class AngularCookieLocaleResolverTest {
 
     private static final Locale LOCALE_DEFAULT = Locale.UK;
     private static final Locale LOCALE_CUSTOM = Locale.FRANCE;
@@ -60,7 +60,7 @@ public class AngularCookieLocaleResolverTest {
     private ArgumentCaptor<Cookie> captor;
 
     @BeforeEach
-    public void setup() {
+    void setup() {
         MockitoAnnotations.openMocks(this);
 
         request = spy(new MockHttpServletRequest());
@@ -74,12 +74,12 @@ public class AngularCookieLocaleResolverTest {
     }
 
     @AfterEach
-    public void teardown() {
+    void teardown() {
         recorder.release();
     }
 
     @Test
-    public void testDefaults() {
+    void testDefaults() {
         when(request.getCookies()).thenReturn(new Cookie[]{});
 
         LocaleContext context = resolver.resolveLocaleContext(request);
@@ -94,7 +94,7 @@ public class AngularCookieLocaleResolverTest {
     }
 
     @Test
-    public void testPresets() {
+    void testPresets() {
         when(request.getAttribute(LOCALE_REQUEST_ATTRIBUTE_NAME)).thenReturn(LOCALE_DEFAULT);
         when(request.getAttribute(TIME_ZONE_REQUEST_ATTRIBUTE_NAME)).thenReturn(TIMEZONE_DEFAULT);
 
@@ -114,7 +114,7 @@ public class AngularCookieLocaleResolverTest {
     }
 
     @Test
-    public void testLocale() {
+    void testLocale() {
         String value = LOCALE_CUSTOM.toString();
         Cookie cookie = new Cookie(DEFAULT_COOKIE_NAME, value);
         when(request.getCookies()).thenReturn(new Cookie[]{cookie});
@@ -129,7 +129,7 @@ public class AngularCookieLocaleResolverTest {
     }
 
     @Test
-    public void testCookieLocaleWithQuotes() {
+    void testCookieLocaleWithQuotes() {
         String value = resolver.quote(LOCALE_CUSTOM.toString());
         Cookie cookie = new Cookie(DEFAULT_COOKIE_NAME, value);
         when(request.getCookies()).thenReturn(new Cookie[]{cookie});
@@ -144,7 +144,7 @@ public class AngularCookieLocaleResolverTest {
     }
 
     @Test
-    public void testTimeZone() {
+    void testTimeZone() {
         String value = "- " + TIMEZONE_CUSTOM.getID();
         Cookie cookie = new Cookie(DEFAULT_COOKIE_NAME, value);
         when(request.getCookies()).thenReturn(new Cookie[]{cookie});
@@ -163,7 +163,7 @@ public class AngularCookieLocaleResolverTest {
     }
 
     @Test
-    public void testTimeZoneWithQuotes() {
+    void testTimeZoneWithQuotes() {
         String value = resolver.quote("- " + TIMEZONE_CUSTOM.getID());
         Cookie cookie = new Cookie(DEFAULT_COOKIE_NAME, value);
         when(request.getCookies()).thenReturn(new Cookie[]{cookie});
@@ -182,7 +182,7 @@ public class AngularCookieLocaleResolverTest {
     }
 
     @Test
-    public void testLocaleAndTimeZone() {
+    void testLocaleAndTimeZone() {
         String value = LOCALE_CUSTOM + " " + TIMEZONE_CUSTOM.getID();
         Cookie cookie = new Cookie(DEFAULT_COOKIE_NAME, value);
         when(request.getCookies()).thenReturn(new Cookie[]{cookie});
@@ -201,7 +201,7 @@ public class AngularCookieLocaleResolverTest {
     }
 
     @Test
-    public void testLocaleAndTimeZoneWithQuotes() {
+    void testLocaleAndTimeZoneWithQuotes() {
         String value = resolver.quote(LOCALE_CUSTOM.toString() + " " + TIMEZONE_CUSTOM.getID());
         Cookie cookie = new Cookie(DEFAULT_COOKIE_NAME, value);
         when(request.getCookies()).thenReturn(new Cookie[]{cookie});
@@ -220,7 +220,7 @@ public class AngularCookieLocaleResolverTest {
     }
 
     @Test
-    public void testCookieWithQuotes() {
+    void testCookieWithQuotes() {
         recorder.release();
         recorder.capture("TRACE");
 
@@ -244,7 +244,7 @@ public class AngularCookieLocaleResolverTest {
     }
 
     @Test
-    public void testTraceLogLocale() {
+    void testTraceLogLocale() {
         recorder.release();
         recorder.capture("TRACE");
 
@@ -264,7 +264,7 @@ public class AngularCookieLocaleResolverTest {
     }
 
     @Test
-    public void testTraceLogLocaleAndTimeZone() {
+    void testTraceLogLocaleAndTimeZone() {
         recorder.release();
         recorder.capture("TRACE");
 

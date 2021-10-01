@@ -37,7 +37,7 @@ import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class FixedPostgreSQL10DialectTest {
+class FixedPostgreSQL10DialectTest {
 
     private final List<LogbackRecorder> recorders = new LinkedList<>();
 
@@ -46,7 +46,7 @@ public class FixedPostgreSQL10DialectTest {
     private FixedPostgreSQL10Dialect dialect;
 
     @BeforeEach
-    public void setup() {
+    void setup() {
         recorders.add(LogbackRecorder.forName("org.jboss.logging").reset().capture("ALL"));
         recorders.add(LogbackRecorder.forClass(Dialect.class).reset().capture("ALL"));
 
@@ -62,25 +62,25 @@ public class FixedPostgreSQL10DialectTest {
     }
 
     @AfterEach
-    public void teardown() {
+    void teardown() {
         recorders.forEach(LogbackRecorder::release);
         recorders.clear();
         registered.clear();
     }
 
     @Test
-    public void testBlobTypeRegister() {
+    void testBlobTypeRegister() {
         assertThat(registered.get(Types.BLOB)).isEqualTo("bytea");
     }
 
     @Test
-    public void testBlobTypeRemap() {
+    void testBlobTypeRemap() {
         SqlTypeDescriptor descriptor = dialect.remapSqlTypeDescriptor(BlobTypeDescriptor.DEFAULT);
         assertThat(descriptor).isEqualTo(BinaryTypeDescriptor.INSTANCE);
     }
 
     @Test
-    public void testOtherTypeRemap() {
+    void testOtherTypeRemap() {
         SqlTypeDescriptor descriptor = dialect.remapSqlTypeDescriptor(BooleanTypeDescriptor.INSTANCE);
         assertThat(descriptor).isEqualTo(BooleanTypeDescriptor.INSTANCE);
     }

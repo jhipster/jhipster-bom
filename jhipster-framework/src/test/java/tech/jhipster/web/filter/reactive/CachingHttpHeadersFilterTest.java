@@ -30,13 +30,13 @@ import java.util.concurrent.TimeUnit;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class CachingHttpHeadersFilterTest {
+class CachingHttpHeadersFilterTest {
 
     private long ttl = TimeUnit.DAYS.toMillis(2);
     private CachingHttpHeadersFilter filter = new CachingHttpHeadersFilter(ttl);
 
     @Test
-    public void cacheHeadersSetWhenPathMatches() {
+    void cacheHeadersSetWhenPathMatches() {
         long now = System.currentTimeMillis();
         WebFilterChain filterChain = (filterExchange) -> {
             try {
@@ -56,12 +56,12 @@ public class CachingHttpHeadersFilterTest {
     }
 
     @Test
-    public void cacheHeadersNotSetWhenPathDoesntMatch() {
+    void cacheHeadersNotSetWhenPathDoesntMatch() {
         WebFilterChain filterChain = (filterExchange) -> {
             try {
                 HttpHeaders headers = filterExchange.getResponse().getHeaders();
                 assertThat(headers.getPragma()).isNull();
-                assertThat(headers.getCacheControl()).isNull();;
+                assertThat(headers.getCacheControl()).isNull();
                 assertThat(headers.getExpires()).isEqualTo(-1);
             } catch (AssertionError ex) {
                 return Mono.error(ex);

@@ -5,10 +5,10 @@ import org.springframework.http.HttpHeaders;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class HeaderUtilTest {
+class HeaderUtilTest {
 
     @Test
-    public void createAlert() {
+    void createAlert() {
         String message = "any.message";
         String param = "24";
 
@@ -18,56 +18,56 @@ public class HeaderUtilTest {
     }
 
     @Test
-    public void createEntityCreationAlertWithTranslation() {
+    void createEntityCreationAlertWithTranslation() {
         HttpHeaders headers = HeaderUtil.createEntityCreationAlert("myApp", true, "User", "2");
         assertThat(headers.getFirst("X-myApp-alert")).isEqualTo("myApp.User.created");
         assertThat(headers.getFirst("X-myApp-params")).isEqualTo("2");
     }
 
     @Test
-    public void createEntityCreationAlertNoTranslation() {
+    void createEntityCreationAlertNoTranslation() {
         HttpHeaders headers = HeaderUtil.createEntityCreationAlert("myApp", false, "User", "2");
         assertThat(headers.getFirst("X-myApp-alert")).isEqualTo("A new User is created with identifier 2");
         assertThat(headers.getFirst("X-myApp-params")).isEqualTo("2");
     }
 
     @Test
-    public void createEntityUpdateAlertWithTranslation() {
+    void createEntityUpdateAlertWithTranslation() {
         HttpHeaders headers = HeaderUtil.createEntityUpdateAlert("myApp", true, "User", "2");
         assertThat(headers.getFirst("X-myApp-alert")).isEqualTo("myApp.User.updated");
         assertThat(headers.getFirst("X-myApp-params")).isEqualTo("2");
     }
 
     @Test
-    public void createEntityUpdateAlertNoTranslation() {
+    void createEntityUpdateAlertNoTranslation() {
         HttpHeaders headers = HeaderUtil.createEntityUpdateAlert("myApp", false, "User", "2");
         assertThat(headers.getFirst("X-myApp-alert")).isEqualTo("A User is updated with identifier 2");
         assertThat(headers.getFirst("X-myApp-params")).isEqualTo("2");
     }
 
     @Test
-    public void createEntityDeletionAlertWithTranslation() {
+    void createEntityDeletionAlertWithTranslation() {
         HttpHeaders headers = HeaderUtil.createEntityDeletionAlert("myApp", true, "User", "2");
         assertThat(headers.getFirst("X-myApp-alert")).isEqualTo("myApp.User.deleted");
         assertThat(headers.getFirst("X-myApp-params")).isEqualTo("2");
     }
 
     @Test
-    public void createEntityDeletionAlertNoTranslation() {
+    void createEntityDeletionAlertNoTranslation() {
         HttpHeaders headers = HeaderUtil.createEntityDeletionAlert("myApp", false, "User", "2");
         assertThat(headers.getFirst("X-myApp-alert")).isEqualTo("A User is deleted with identifier 2");
         assertThat(headers.getFirst("X-myApp-params")).isEqualTo("2");
     }
 
     @Test
-    public void createFailureAlertWithTranslation() {
+    void createFailureAlertWithTranslation() {
         HttpHeaders headers = HeaderUtil.createFailureAlert("myApp", true, "User", "404", "Failed to find user");
         assertThat(headers.getFirst("X-myApp-error")).isEqualTo("error.404");
         assertThat(headers.getFirst("X-myApp-params")).isEqualTo("User");
     }
 
     @Test
-    public void createFailureAlertNoTranslation() {
+    void createFailureAlertNoTranslation() {
         HttpHeaders headers = HeaderUtil.createFailureAlert("myApp", false, "User", "404", "Failed to find user");
         assertThat(headers.getFirst("X-myApp-error")).isEqualTo("Failed to find user");
         assertThat(headers.getFirst("X-myApp-params")).isEqualTo("User");

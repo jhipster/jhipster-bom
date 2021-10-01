@@ -11,7 +11,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class PageUtilTest {
+class PageUtilTest {
 
     private static final int PAGE_SIZE = 20;
     private static final int TOTAL_ELEMENTS_OF_3 = 3;
@@ -22,12 +22,12 @@ public class PageUtilTest {
     private List<Integer> content;
 
     @BeforeEach
-    public void setup() {
+    void setup() {
         content = new ArrayList<>();
     }
 
     @Test
-    public void generatePageFromListTestShouldCreatePage() {
+    void generatePageFromListTestShouldCreatePage() {
         content.add(1);
         content.add(2);
         content.add(3);
@@ -41,7 +41,7 @@ public class PageUtilTest {
     }
 
     @Test
-    public void generatePageFromListShouldCreatePageWithTwoTotalPages() {
+    void generatePageFromListShouldCreatePageWithTwoTotalPages() {
         for (int i = 0; i < TOTAL_ELEMENTS_OF_40; i++) {
             content.add(i);
         }
@@ -55,7 +55,7 @@ public class PageUtilTest {
     }
 
     @Test
-    public void generatePageFromListShouldThrowIllegalArgumentExceptionIfListNull() {
+    void generatePageFromListShouldThrowIllegalArgumentExceptionIfListNull() {
         assertThatThrownBy(() -> PageUtil.createPageFromList(null, PageRequest.of(0, PAGE_SIZE)))
             .isInstanceOf(IllegalArgumentException.class);
     }

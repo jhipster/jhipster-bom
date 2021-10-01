@@ -24,22 +24,22 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
 
-public class PersistentTokenCacheTest {
+class PersistentTokenCacheTest {
 
     @Test
-    public void testConstructorThrows() {
+    void testConstructorThrows() {
         Throwable caught = catchThrowable(() -> new PersistentTokenCache<String>(-1l));
         assertThat(caught).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
-    public void testAbsent() {
+    void testAbsent() {
         PersistentTokenCache<String> cache = new PersistentTokenCache<>(100l);
         assertThat(cache.get("key")).isNull();
     }
 
     @Test
-    public void testAccess() {
+    void testAccess() {
         PersistentTokenCache<String> cache = new PersistentTokenCache<>(100l);
         cache.put("key", "val");
         assertThat(cache.size()).isEqualTo(1);
@@ -47,7 +47,7 @@ public class PersistentTokenCacheTest {
     }
 
     @Test
-    public void testReplace() {
+    void testReplace() {
         PersistentTokenCache<String> cache = new PersistentTokenCache<>(100l);
         cache.put("key", "val");
         cache.put("key", "foo");
@@ -55,7 +55,7 @@ public class PersistentTokenCacheTest {
     }
 
     @Test
-    public void testExpires() {
+    void testExpires() {
         PersistentTokenCache<String> cache = new PersistentTokenCache<>(1l);
         cache.put("key", "val");
         try {
@@ -68,7 +68,7 @@ public class PersistentTokenCacheTest {
     }
 
     @Test
-    public void testPurge() {
+    void testPurge() {
         PersistentTokenCache<String> cache = new PersistentTokenCache<>(1l);
         cache.put("key", "val");
         try {

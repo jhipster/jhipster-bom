@@ -8,10 +8,10 @@ import java.util.Properties;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class PrefixedKeyGeneratorTest {
+class PrefixedKeyGeneratorTest {
 
     @Test
-    public void generatePrefixFromShortCommitId() {
+    void generatePrefixFromShortCommitId() {
 
         Properties gitProperties = new Properties();
         gitProperties.put("commit.id.abbrev", "1234");
@@ -22,7 +22,7 @@ public class PrefixedKeyGeneratorTest {
     }
 
     @Test
-    public void generatePrefixFromCommitId() {
+    void generatePrefixFromCommitId() {
 
         Properties gitProperties = new Properties();
         gitProperties.put("commit.id", "1234567");
@@ -33,7 +33,7 @@ public class PrefixedKeyGeneratorTest {
     }
 
     @Test
-    public void generatePrefixFromBuildVersion() {
+    void generatePrefixFromBuildVersion() {
 
         Properties buildProperties = new Properties();
         buildProperties.put("version", "1.0.0");
@@ -44,7 +44,7 @@ public class PrefixedKeyGeneratorTest {
     }
 
     @Test
-    public void generatePrefixFromBuildTime() {
+    void generatePrefixFromBuildTime() {
 
         Properties buildProperties = new Properties();
         buildProperties.put("time", "1583955265");
@@ -55,7 +55,7 @@ public class PrefixedKeyGeneratorTest {
     }
 
     @Test
-    public void generatesRandomPrefix() {
+    void generatesRandomPrefix() {
 
         PrefixedKeyGenerator prefixedKeyGenerator = new PrefixedKeyGenerator(null, null);
 

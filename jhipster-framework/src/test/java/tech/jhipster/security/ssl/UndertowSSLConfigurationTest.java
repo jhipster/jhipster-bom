@@ -28,10 +28,10 @@ import org.xnio.OptionMap;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class UndertowSSLConfigurationTest {
+class UndertowSSLConfigurationTest {
 
     @Test
-    public void testUndertowSSLConfigurationOK() {
+    void testUndertowSSLConfigurationOK() {
         //Prepare
         UndertowServletWebServerFactory undertowServletWebServerFactory = new UndertowServletWebServerFactory();
 

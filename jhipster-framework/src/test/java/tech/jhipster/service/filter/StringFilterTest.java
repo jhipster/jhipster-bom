@@ -28,19 +28,19 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class StringFilterTest {
+class StringFilterTest {
 
     private StringFilter filter;
 
     private String value = "foo";
 
     @BeforeEach
-    public void setup() {
+    void setup() {
         filter = new StringFilter();
     }
 
     @Test
-    public void testConstructor() {
+    void testConstructor() {
         assertThat(filter.getEquals()).isNull();
         assertThat(filter.getNotEquals()).isNull();
         assertThat(filter.getSpecified()).isNull();
@@ -52,7 +52,7 @@ public class StringFilterTest {
     }
 
     @Test
-    public void testCopy() {
+    void testCopy() {
         final StringFilter copy = filter.copy();
         assertThat(copy).isNotSameAs(filter);
         assertThat(copy.getEquals()).isNull();
@@ -66,28 +66,28 @@ public class StringFilterTest {
     }
 
     @Test
-    public void testSetEquals() {
+    void testSetEquals() {
         Filter<String> chain = filter.setEquals(value);
         assertThat(chain).isEqualTo(filter);
         assertThat(filter.getEquals()).isEqualTo(value);
     }
 
     @Test
-    public void testSetNotEquals() {
+    void testSetNotEquals() {
         Filter<String> chain = filter.setNotEquals(value);
         assertThat(chain).isEqualTo(filter);
         assertThat(filter.getNotEquals()).isEqualTo(value);
     }
 
     @Test
-    public void testSetSpecified() {
+    void testSetSpecified() {
         Filter<String> chain = filter.setSpecified(true);
         assertThat(chain).isEqualTo(filter);
         assertThat(filter.getSpecified()).isEqualTo(true);
     }
 
     @Test
-    public void testSetIn() {
+    void testSetIn() {
         List<String> list = new LinkedList<>();
         Filter<String> chain = filter.setIn(list);
         assertThat(chain).isEqualTo(filter);
@@ -95,7 +95,7 @@ public class StringFilterTest {
     }
 
     @Test
-    public void testSetNotIn() {
+    void testSetNotIn() {
         List<String> list = new LinkedList<>();
         Filter<String> chain = filter.setNotIn(list);
         assertThat(chain).isEqualTo(filter);
@@ -103,21 +103,21 @@ public class StringFilterTest {
     }
 
     @Test
-    public void testSetContains() {
+    void testSetContains() {
         Filter<String> chain = filter.setContains(value);
         assertThat(chain).isEqualTo(filter);
         assertThat(filter.getContains()).isEqualTo(value);
     }
 
     @Test
-    public void testSetDoesNotContain() {
+    void testSetDoesNotContain() {
         Filter<String> chain = filter.setDoesNotContain(value);
         assertThat(chain).isEqualTo(filter);
         assertThat(filter.getDoesNotContain()).isEqualTo(value);
     }
 
     @Test
-    public void testEquals() {
+    void testEquals() {
         final StringFilter filter2 = new StringFilter();
         assertThat(filter).isEqualTo(filter2);
         filter.setEquals(value);
@@ -155,7 +155,7 @@ public class StringFilterTest {
     }
 
     @Test
-    public void testHashCode() {
+    void testHashCode() {
         final StringFilter filter2 = new StringFilter();
         assertThat(filter.hashCode()).isEqualTo(filter2.hashCode());
         filter.setEquals(value);
@@ -186,7 +186,7 @@ public class StringFilterTest {
     }
 
     @Test
-    public void testToString() {
+    void testToString() {
         filter.setEquals(value);
         filter.setNotEquals(value);
         filter.setSpecified(true);

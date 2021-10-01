@@ -33,7 +33,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.mockito.Mockito.mock;
 
-public class LogbackRecorderTest {
+class LogbackRecorderTest {
 
     private static final String[] TEST_MESSAGES = {"error", "warn", "info", "debug", "trace"};
     private static final Object[] TEST_ARGUMENTS = {null, true, 1, 2D, 3F};
@@ -46,12 +46,12 @@ public class LogbackRecorderTest {
     private LogbackRecorder recorder = LogbackRecorder.forLogger(log);
 
     @BeforeEach
-    public void setup() {
+    void setup() {
         recorder.reset();
     }
 
     @Test
-    public void testTrace() {
+    void testTrace() {
         recorder.capture("TRACE");
 
         write();
@@ -72,7 +72,7 @@ public class LogbackRecorderTest {
     }
 
     @Test
-    public void testTraceWithException() {
+    void testTraceWithException() {
         recorder.capture("TRACE");
 
         writeWithException();
@@ -93,7 +93,7 @@ public class LogbackRecorderTest {
     }
 
     @Test
-    public void testDebug() {
+    void testDebug() {
         recorder.capture("DEBUG");
 
         write();
@@ -114,7 +114,7 @@ public class LogbackRecorderTest {
     }
 
     @Test
-    public void testDebugWithException() {
+    void testDebugWithException() {
         recorder.capture("DEBUG");
 
         writeWithException();
@@ -135,7 +135,7 @@ public class LogbackRecorderTest {
     }
 
     @Test
-    public void testInfo() {
+    void testInfo() {
         recorder.capture("INFO");
 
         write();
@@ -156,7 +156,7 @@ public class LogbackRecorderTest {
     }
 
     @Test
-    public void testInfoWithException() {
+    void testInfoWithException() {
         recorder.capture("INFO");
 
         writeWithException();
@@ -177,7 +177,7 @@ public class LogbackRecorderTest {
     }
 
     @Test
-    public void testWarn() {
+    void testWarn() {
         recorder.capture("WARN");
 
         write();
@@ -198,7 +198,7 @@ public class LogbackRecorderTest {
     }
 
     @Test
-    public void testWarnWithException() {
+    void testWarnWithException() {
         recorder.capture("WARN");
 
         writeWithException();
@@ -219,7 +219,7 @@ public class LogbackRecorderTest {
     }
 
     @Test
-    public void testError() {
+    void testError() {
         recorder.capture("ERROR");
 
         write();
@@ -238,7 +238,7 @@ public class LogbackRecorderTest {
     }
 
     @Test
-    public void testErrorWithException() {
+    void testErrorWithException() {
         recorder.capture("ERROR");
 
         writeWithException();
@@ -257,7 +257,7 @@ public class LogbackRecorderTest {
     }
 
     @Test
-    public void testOff() {
+    void testOff() {
         recorder.capture("OFF");
 
         write();
@@ -269,7 +269,7 @@ public class LogbackRecorderTest {
     }
 
     @Test
-    public void testOffWithException() {
+    void testOffWithException() {
         recorder.capture("OFF");
 
         writeWithException();
@@ -281,7 +281,7 @@ public class LogbackRecorderTest {
     }
 
     @Test
-    public void testLogbackException() {
+    void testLogbackException() {
         Throwable caught = catchThrowable(() -> {
             LogbackRecorder.forLogger(mock(Logger.class));
         });
@@ -290,7 +290,7 @@ public class LogbackRecorderTest {
     }
 
     @Test
-    public void testCaptureException() {
+    void testCaptureException() {
         recorder.capture("ALL");
         Throwable caught = catchThrowable(() -> recorder.capture("ALL"));
         assertThat(caught).isInstanceOf(IllegalStateException.class);
@@ -299,14 +299,14 @@ public class LogbackRecorderTest {
     }
 
     @Test
-    public void testReleaseException() {
+    void testReleaseException() {
         Throwable caught = catchThrowable(() -> recorder.release());
         assertThat(caught).isInstanceOf(IllegalStateException.class);
         assertThat(caught).hasMessage(LogbackRecorder.RELEASE_EXCEPTION_MESSAGE);
     }
 
     @Test
-    public void testClear() {
+    void testClear() {
         recorder.capture("TRACE");
 
         write();

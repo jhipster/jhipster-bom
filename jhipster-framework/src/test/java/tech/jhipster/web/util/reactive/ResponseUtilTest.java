@@ -21,7 +21,7 @@ class ResponseUtilTest {
     private HttpHeaders headers;
 
     @BeforeEach
-    public void setup() {
+    void setup() {
         monoYes = Mono.just(42);
         monoNo = Mono.empty();
         headers = new HttpHeaders();
@@ -29,7 +29,7 @@ class ResponseUtilTest {
     }
 
     @Test
-    public void testMonoYesWithoutHeaders() {
+    void testMonoYesWithoutHeaders() {
         ResponseEntity<Integer> response = ResponseUtil.wrapOrNotFound(monoYes).block();
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(response.getBody()).isEqualTo(42);
@@ -37,13 +37,13 @@ class ResponseUtilTest {
     }
 
     @Test
-    public void testMonoNoWithoutHeaders() {
+    void testMonoNoWithoutHeaders() {
         Mono<ResponseEntity<Integer>> response = ResponseUtil.wrapOrNotFound(monoNo);
         assertThatExceptionOfType(ResponseStatusException.class).isThrownBy(response::block);
     }
 
     @Test
-    public void testMonoYesWithHeaders() {
+    void testMonoYesWithHeaders() {
         ResponseEntity<Integer> response = ResponseUtil.wrapOrNotFound(monoYes, headers).block();
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(response.getBody()).isEqualTo(42);
@@ -53,7 +53,7 @@ class ResponseUtilTest {
     }
 
     @Test
-    public void testMonoNoWithHeaders() {
+    void testMonoNoWithHeaders() {
         Mono<ResponseEntity<Integer>> response = ResponseUtil.wrapOrNotFound(monoNo, headers);
         assertThatExceptionOfType(ResponseStatusException.class).isThrownBy(response::block);
     }

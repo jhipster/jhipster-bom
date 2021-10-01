@@ -32,10 +32,10 @@ import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class FixedH2DialectTest {
+class FixedH2DialectTest {
 
     @Test
-    public void test() {
+    void test() {
         List<LogbackRecorder> recorders = new LinkedList<>();
         recorders.add(LogbackRecorder.forName("org.jboss.logging").reset().capture("ALL"));
         recorders.add(LogbackRecorder.forClass(Dialect.class).reset().capture("ALL"));

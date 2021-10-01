@@ -36,19 +36,19 @@ import static org.assertj.core.api.Assertions.assertThat;
  *
  * @see PaginationUtil
  */
-public class PaginationUtilUnitTest {
+class PaginationUtilUnitTest {
 
     private static final String BASE_URL = "/api/_search/example";
 
     private UriComponentsBuilder uriBuilder;
 
     @BeforeEach
-    public void init() {
+    void init() {
         uriBuilder = UriComponentsBuilder.fromUriString(BASE_URL);
     }
 
     @Test
-    public void generatePaginationHttpHeadersTest() {
+    void generatePaginationHttpHeadersTest() {
         Page<String> page = new PageImpl<>(new ArrayList<>(), PageRequest.of(6, 50), 400L);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(uriBuilder, page);
         List<String> strHeaders = headers.get(HttpHeaders.LINK);
@@ -67,7 +67,7 @@ public class PaginationUtilUnitTest {
     }
 
     @Test
-    public void commaTest() {
+    void commaTest() {
         uriBuilder.queryParam("query", "Test1, test2");
         List<String> content = new ArrayList<>();
         Page<String> page = new PageImpl<>(content);
@@ -86,7 +86,7 @@ public class PaginationUtilUnitTest {
     }
 
     @Test
-    public void multiplePagesTest() {
+    void multiplePagesTest() {
         uriBuilder.queryParam("query", "Test1, test2");
         List<String> content = new ArrayList<>();
 
@@ -137,7 +137,7 @@ public class PaginationUtilUnitTest {
             "</api/_search/example?query=Test1%2C%20test2&page=5&size=50>; rel=\"prev\"," +
             "</api/_search/example?query=Test1%2C%20test2&page=7&size=50>; rel=\"last\"," +
             "</api/_search/example?query=Test1%2C%20test2&page=0&size=50>; rel=\"first\"";
-       assertThat(headerData).isEqualTo(expectedData);
+        assertThat(headerData).isEqualTo(expectedData);
         xTotalCountHeaders = headers.get("X-Total-Count");
         assertThat(xTotalCountHeaders).hasSize(1);
         assertThat((long) Long.valueOf(xTotalCountHeaders.get(0))).isEqualTo(400L);
@@ -158,7 +158,7 @@ public class PaginationUtilUnitTest {
     }
 
     @Test
-    public void greaterSemicolonTest() {
+    void greaterSemicolonTest() {
         uriBuilder.queryParam("query", "Test>;test");
         Page<String> page = new PageImpl<>(new ArrayList<>());
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(uriBuilder, page);
