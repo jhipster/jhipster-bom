@@ -36,13 +36,7 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: 11
-      - name: Cache Maven archetypes
-        uses: actions/cache@v2.1.6
-        with:
-          path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-          restore-keys: |
-            ${{ runner.os }}-maven-
+          cache: 'maven'
       - name: Test with Maven
         run: mvn test --batch-mode
       - name: Run Sonar analysis
