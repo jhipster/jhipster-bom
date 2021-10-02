@@ -42,7 +42,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.mockito.Mockito.*;
 
-public class AsyncSpringLiquibaseTest {
+class AsyncSpringLiquibaseTest {
 
     private LiquibaseException exception = new LiquibaseException("Eek");
 
@@ -52,7 +52,7 @@ public class AsyncSpringLiquibaseTest {
     private LogbackRecorder recorder;
 
     @BeforeEach
-    public void setup() {
+    void setup() {
         executor = new SimpleAsyncTaskExecutor();
         recorder = LogbackRecorder.forClass(MockEnvironment.class).reset().capture("ALL");
         environment = new MockEnvironment();
@@ -62,12 +62,12 @@ public class AsyncSpringLiquibaseTest {
     }
 
     @AfterEach
-    public void teardown() {
+    void teardown() {
         recorder.release();
     }
 
     @Test
-    public void testProfileNoLiquibase() {
+    void testProfileNoLiquibase() {
         environment.setActiveProfiles(SPRING_PROFILE_NO_LIQUIBASE);
 
         Throwable caught;
@@ -92,7 +92,7 @@ public class AsyncSpringLiquibaseTest {
     }
 
     @Test
-    public void testProfileProduction() {
+    void testProfileProduction() {
         environment.setActiveProfiles(SPRING_PROFILE_PRODUCTION);
 
         Throwable caught;
@@ -120,7 +120,7 @@ public class AsyncSpringLiquibaseTest {
     }
 
     @Test
-    public void testProfileDevelopment() {
+    void testProfileDevelopment() {
         environment.setActiveProfiles(SPRING_PROFILE_DEVELOPMENT);
 
         Throwable caught;
@@ -148,7 +148,7 @@ public class AsyncSpringLiquibaseTest {
     }
 
     @Test
-    public void testProfileHeroku() {
+    void testProfileHeroku() {
         environment.setActiveProfiles(SPRING_PROFILE_HEROKU);
 
         Throwable caught;
@@ -176,7 +176,7 @@ public class AsyncSpringLiquibaseTest {
     }
 
     @Test
-    public void testSlow() {
+    void testSlow() {
         environment.setActiveProfiles(SPRING_PROFILE_DEVELOPMENT, SPRING_PROFILE_HEROKU);
         doReturn(AsyncSpringLiquibase.SLOWNESS_THRESHOLD * 1000L + 100L).when(config).getSleep();
         Throwable caught;
@@ -209,7 +209,7 @@ public class AsyncSpringLiquibaseTest {
     }
 
     @Test
-    public void testException() {
+    void testException() {
         environment.setActiveProfiles(SPRING_PROFILE_DEVELOPMENT, SPRING_PROFILE_HEROKU);
 
         Throwable caught = catchThrowable(() -> doThrow(exception).when(config).initDb());

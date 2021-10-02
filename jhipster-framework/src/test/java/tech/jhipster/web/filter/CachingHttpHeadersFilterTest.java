@@ -37,7 +37,7 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
-public class CachingHttpHeadersFilterTest {
+class CachingHttpHeadersFilterTest {
 
     private MockHttpServletRequest request;
     private MockHttpServletResponse response;
@@ -46,7 +46,7 @@ public class CachingHttpHeadersFilterTest {
     private CachingHttpHeadersFilter filter;
 
     @BeforeEach
-    public void setup() {
+    void setup() {
         request = new MockHttpServletRequest();
         response = spy(new MockHttpServletResponse());
         chain = spy(new MockFilterChain());
@@ -55,12 +55,12 @@ public class CachingHttpHeadersFilterTest {
     }
 
     @AfterEach
-    public void teardown() {
+    void teardown() {
         filter.destroy();
     }
 
     @Test
-    public void testWithoutInit() {
+    void testWithoutInit() {
         int daysToLive = CachingHttpHeadersFilter.DEFAULT_DAYS_TO_LIVE;
         long secsToLive = TimeUnit.DAYS.toMillis(daysToLive);
 
@@ -83,7 +83,7 @@ public class CachingHttpHeadersFilterTest {
     }
 
     @Test
-    public void testWithInit() {
+    void testWithInit() {
         int daysToLive = CachingHttpHeadersFilter.DEFAULT_DAYS_TO_LIVE >>> 2;
         long secsToLive = TimeUnit.DAYS.toMillis(daysToLive);
         properties.getHttp().getCache().setTimeToLiveInDays(daysToLive);

@@ -50,7 +50,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
     })
 @ActiveProfiles(SPRING_PROFILE_API_DOCS)
 @AutoConfigureMockMvc
-public class SpringfoxAutoconfigurationTest {
+class SpringfoxAutoconfigurationTest {
 
     @Autowired
     private MockMvc mockMvc;

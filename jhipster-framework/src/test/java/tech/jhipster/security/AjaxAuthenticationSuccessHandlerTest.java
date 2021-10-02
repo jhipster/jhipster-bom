@@ -30,19 +30,19 @@ import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
-public class AjaxAuthenticationSuccessHandlerTest {
+class AjaxAuthenticationSuccessHandlerTest {
 
     private HttpServletResponse response;
     private AjaxAuthenticationSuccessHandler handler;
 
     @BeforeEach
-    public void setup() {
+    void setup() {
         response = spy(HttpServletResponse.class);
         handler = new AjaxAuthenticationSuccessHandler();
     }
 
     @Test
-    public void testOnAuthenticationSuccess() {
+    void testOnAuthenticationSuccess() {
         Throwable caughtException = catchThrowable(() -> {
             handler.onAuthenticationSuccess(null, response, null);
             verify(response).setStatus(SC_OK);

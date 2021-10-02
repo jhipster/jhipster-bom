@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 class PrefixedSimpleKeyTest {
 
     @Test
-    public void sameMethodSamePrefixSameParametersShouldBeSame() {
+    void sameMethodSamePrefixSameParametersShouldBeSame() {
 
         PrefixedSimpleKey prefixedSimpleKey = new PrefixedSimpleKey("prefix", "setX", "x", "y");
         PrefixedSimpleKey prefixedSimpleKey2 = new PrefixedSimpleKey("prefix", "setX", "x", "y");
@@ -16,7 +16,7 @@ class PrefixedSimpleKeyTest {
     }
 
     @Test
-    public void sameMethodSamePrefixSameParameterShouldBeSame() {
+    void sameMethodSamePrefixSameParameterShouldBeSame() {
 
         PrefixedSimpleKey prefixedSimpleKey = new PrefixedSimpleKey("prefix", "setX", "x");
         PrefixedSimpleKey prefixedSimpleKey2 = new PrefixedSimpleKey("prefix", "setX", "x");
@@ -26,7 +26,7 @@ class PrefixedSimpleKeyTest {
     }
 
     @Test
-    public void sameMethodDifferentPrefixShouldBeDifferent() {
+    void sameMethodDifferentPrefixShouldBeDifferent() {
 
         PrefixedSimpleKey prefixedSimpleKey = new PrefixedSimpleKey("prefix", "setX", "x");
         PrefixedSimpleKey prefixedSimpleKey2 = new PrefixedSimpleKey("prefix2", "setX", "x");
@@ -36,7 +36,7 @@ class PrefixedSimpleKeyTest {
     }
 
     @Test
-    public void sameMethodDifferentParametersShouldBeDifferent() {
+    void sameMethodDifferentParametersShouldBeDifferent() {
 
         PrefixedSimpleKey prefixedSimpleKey = new PrefixedSimpleKey("prefix", "setX", "x");
         PrefixedSimpleKey prefixedSimpleKey2 = new PrefixedSimpleKey("prefix", "setX", "y");

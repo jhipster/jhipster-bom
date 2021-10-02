@@ -28,19 +28,19 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class IntegerFilterTest {
+class IntegerFilterTest {
 
     private IntegerFilter filter;
 
     private Integer value = 42;
 
     @BeforeEach
-    public void setup() {
+    void setup() {
         filter = new IntegerFilter();
     }
 
     @Test
-    public void testConstructor() {
+    void testConstructor() {
         assertThat(filter.getEquals()).isNull();
         assertThat(filter.getNotEquals()).isNull();
         assertThat(filter.getSpecified()).isNull();
@@ -54,7 +54,7 @@ public class IntegerFilterTest {
     }
 
     @Test
-    public void testCopy() {
+    void testCopy() {
         final IntegerFilter copy = filter.copy();
         assertThat(copy).isNotSameAs(filter);
         assertThat(copy.getEquals()).isNull();
@@ -70,28 +70,28 @@ public class IntegerFilterTest {
     }
 
     @Test
-    public void testSetEquals() {
+    void testSetEquals() {
         Filter<Integer> chain = filter.setEquals(value);
         assertThat(chain).isEqualTo(filter);
         assertThat(filter.getEquals()).isEqualTo(value);
     }
 
     @Test
-    public void testSetNotEquals() {
+    void testSetNotEquals() {
         Filter<Integer> chain = filter.setNotEquals(value);
         assertThat(chain).isEqualTo(filter);
         assertThat(filter.getNotEquals()).isEqualTo(value);
     }
 
     @Test
-    public void testSetSpecified() {
+    void testSetSpecified() {
         Filter<Integer> chain = filter.setSpecified(true);
         assertThat(chain).isEqualTo(filter);
         assertThat(filter.getSpecified()).isEqualTo(true);
     }
 
     @Test
-    public void testSetIn() {
+    void testSetIn() {
         List<Integer> list = new LinkedList<>();
         Filter<Integer> chain = filter.setIn(list);
         assertThat(chain).isEqualTo(filter);
@@ -99,7 +99,7 @@ public class IntegerFilterTest {
     }
 
     @Test
-    public void testSetNotIn() {
+    void testSetNotIn() {
         List<Integer> list = new LinkedList<>();
         Filter<Integer> chain = filter.setNotIn(list);
         assertThat(chain).isEqualTo(filter);
@@ -107,35 +107,35 @@ public class IntegerFilterTest {
     }
 
     @Test
-    public void testSetGreaterThan() {
+    void testSetGreaterThan() {
         Filter<Integer> chain = filter.setGreaterThan(value);
         assertThat(chain).isEqualTo(filter);
         assertThat(filter.getGreaterThan()).isEqualTo(value);
     }
 
     @Test
-    public void testSetLessThan() {
+    void testSetLessThan() {
         Filter<Integer> chain = filter.setLessThan(value);
         assertThat(chain).isEqualTo(filter);
         assertThat(filter.getLessThan()).isEqualTo(value);
     }
 
     @Test
-    public void testSetGreaterThanOrEqual() {
+    void testSetGreaterThanOrEqual() {
         Filter<Integer> chain = filter.setGreaterThanOrEqual(value);
         assertThat(chain).isEqualTo(filter);
         assertThat(filter.getGreaterThanOrEqual()).isEqualTo(value);
     }
 
     @Test
-    public void testSetLessThanOrEqual() {
+    void testSetLessThanOrEqual() {
         Filter<Integer> chain = filter.setLessThanOrEqual(value);
         assertThat(chain).isEqualTo(filter);
         assertThat(filter.getLessThanOrEqual()).isEqualTo(value);
     }
 
     @Test
-    public void testEquals() {
+    void testEquals() {
         final IntegerFilter filter2 = new IntegerFilter();
         assertThat(filter).isEqualTo(filter2);
         filter.setEquals(value);
@@ -179,7 +179,7 @@ public class IntegerFilterTest {
     }
 
     @Test
-    public void testHashCode() {
+    void testHashCode() {
         final IntegerFilter filter2 = new IntegerFilter();
         assertThat(filter.hashCode()).isEqualTo(filter2.hashCode());
         filter.setEquals(value);
@@ -212,7 +212,7 @@ public class IntegerFilterTest {
     }
 
     @Test
-    public void testToString() {
+    void testToString() {
         filter.setEquals(value);
         filter.setNotEquals(value);
         filter.setSpecified(true);

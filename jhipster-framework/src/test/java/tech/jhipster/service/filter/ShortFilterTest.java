@@ -28,19 +28,19 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ShortFilterTest {
+class ShortFilterTest {
 
     private ShortFilter filter;
 
     private Short value = 42;
 
     @BeforeEach
-    public void setup() {
+    void setup() {
         filter = new ShortFilter();
     }
 
     @Test
-    public void testConstructor() {
+    void testConstructor() {
         assertThat(filter.getEquals()).isNull();
         assertThat(filter.getNotEquals()).isNull();
         assertThat(filter.getSpecified()).isNull();
@@ -54,7 +54,7 @@ public class ShortFilterTest {
     }
 
     @Test
-    public void testCopy() {
+    void testCopy() {
         final ShortFilter copy = filter.copy();
         assertThat(copy).isNotSameAs(filter);
         assertThat(copy.getEquals()).isNull();
@@ -70,28 +70,28 @@ public class ShortFilterTest {
     }
 
     @Test
-    public void testSetEquals() {
+    void testSetEquals() {
         Filter<Short> chain = filter.setEquals(value);
         assertThat(chain).isEqualTo(filter);
         assertThat(filter.getEquals()).isEqualTo(value);
     }
 
     @Test
-    public void testSetNotEquals() {
+    void testSetNotEquals() {
         Filter<Short> chain = filter.setNotEquals(value);
         assertThat(chain).isEqualTo(filter);
         assertThat(filter.getNotEquals()).isEqualTo(value);
     }
 
     @Test
-    public void testSetSpecified() {
+    void testSetSpecified() {
         Filter<Short> chain = filter.setSpecified(true);
         assertThat(chain).isEqualTo(filter);
         assertThat(filter.getSpecified()).isEqualTo(true);
     }
 
     @Test
-    public void testSetIn() {
+    void testSetIn() {
         List<Short> list = new LinkedList<>();
         Filter<Short> chain = filter.setIn(list);
         assertThat(chain).isEqualTo(filter);
@@ -99,7 +99,7 @@ public class ShortFilterTest {
     }
 
     @Test
-    public void testSetNotIn() {
+    void testSetNotIn() {
         List<Short> list = new LinkedList<>();
         Filter<Short> chain = filter.setNotIn(list);
         assertThat(chain).isEqualTo(filter);
@@ -107,35 +107,35 @@ public class ShortFilterTest {
     }
 
     @Test
-    public void testSetGreaterThan() {
+    void testSetGreaterThan() {
         Filter<Short> chain = filter.setGreaterThan(value);
         assertThat(chain).isEqualTo(filter);
         assertThat(filter.getGreaterThan()).isEqualTo(value);
     }
 
     @Test
-    public void testSetLessThan() {
+    void testSetLessThan() {
         Filter<Short> chain = filter.setLessThan(value);
         assertThat(chain).isEqualTo(filter);
         assertThat(filter.getLessThan()).isEqualTo(value);
     }
 
     @Test
-    public void testSetGreaterThanOrEqual() {
+    void testSetGreaterThanOrEqual() {
         Filter<Short> chain = filter.setGreaterThanOrEqual(value);
         assertThat(chain).isEqualTo(filter);
         assertThat(filter.getGreaterThanOrEqual()).isEqualTo(value);
     }
 
     @Test
-    public void testSetLessThanOrEqual() {
+    void testSetLessThanOrEqual() {
         Filter<Short> chain = filter.setLessThanOrEqual(value);
         assertThat(chain).isEqualTo(filter);
         assertThat(filter.getLessThanOrEqual()).isEqualTo(value);
     }
 
     @Test
-    public void testEquals() {
+    void testEquals() {
         final ShortFilter filter2 = new ShortFilter();
         assertThat(filter).isEqualTo(filter2);
         filter.setEquals(value);
@@ -179,7 +179,7 @@ public class ShortFilterTest {
     }
 
     @Test
-    public void testHashCode() {
+    void testHashCode() {
         final ShortFilter filter2 = new ShortFilter();
         assertThat(filter.hashCode()).isEqualTo(filter2.hashCode());
         filter.setEquals(value);
@@ -212,7 +212,7 @@ public class ShortFilterTest {
     }
 
     @Test
-    public void testToString() {
+    void testToString() {
         filter.setEquals(value);
         filter.setNotEquals(value);
         filter.setSpecified(true);

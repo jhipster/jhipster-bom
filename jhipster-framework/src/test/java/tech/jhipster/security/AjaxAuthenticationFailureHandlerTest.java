@@ -32,19 +32,19 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 
-public class AjaxAuthenticationFailureHandlerTest {
+class AjaxAuthenticationFailureHandlerTest {
 
     private HttpServletResponse response;
     private AjaxAuthenticationFailureHandler handler;
 
     @BeforeEach
-    public void setup() {
+    void setup() {
         response = spy(HttpServletResponse.class);
         handler = new AjaxAuthenticationFailureHandler();
     }
 
     @Test
-    public void testOnAuthenticationFailure() {
+    void testOnAuthenticationFailure() {
         Throwable caught = catchThrowable(() -> {
             handler.onAuthenticationFailure(null, response, null);
             verify(response).sendError(SC_UNAUTHORIZED, AjaxAuthenticationFailureHandler.UNAUTHORIZED_MESSAGE);
@@ -53,7 +53,7 @@ public class AjaxAuthenticationFailureHandlerTest {
     }
 
     @Test
-    public void testOnAuthenticationFailureWithException() {
+    void testOnAuthenticationFailureWithException() {
         IOException exception = new IOException("Eek");
         Throwable caught = catchThrowable(() -> {
             doThrow(exception).when(response).sendError(anyInt(), anyString());

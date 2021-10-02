@@ -29,19 +29,19 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class BigDecimalFilterTest {
+class BigDecimalFilterTest {
 
     private BigDecimalFilter filter;
 
     private BigDecimal value = new BigDecimal(42L);
 
     @BeforeEach
-    public void setup() {
+    void setup() {
         filter = new BigDecimalFilter();
     }
 
     @Test
-    public void testConstructor() {
+    void testConstructor() {
         assertThat(filter.getEquals()).isNull();
         assertThat(filter.getNotEquals()).isNull();
         assertThat(filter.getSpecified()).isNull();
@@ -55,7 +55,7 @@ public class BigDecimalFilterTest {
     }
 
     @Test
-    public void testCopy() {
+    void testCopy() {
         final BigDecimalFilter copy = filter.copy();
         assertThat(copy).isNotSameAs(filter);
         assertThat(copy.getEquals()).isNull();
@@ -71,28 +71,28 @@ public class BigDecimalFilterTest {
     }
 
     @Test
-    public void testSetEquals() {
+    void testSetEquals() {
         Filter<BigDecimal> chain = filter.setEquals(value);
         assertThat(chain).isEqualTo(filter);
         assertThat(filter.getEquals()).isEqualTo(value);
     }
 
     @Test
-    public void testSetNotEquals() {
+    void testSetNotEquals() {
         Filter<BigDecimal> chain = filter.setNotEquals(value);
         assertThat(chain).isEqualTo(filter);
         assertThat(filter.getNotEquals()).isEqualTo(value);
     }
 
     @Test
-    public void testSetSpecified() {
+    void testSetSpecified() {
         Filter<BigDecimal> chain = filter.setSpecified(true);
         assertThat(chain).isEqualTo(filter);
         assertThat(filter.getSpecified()).isEqualTo(true);
     }
 
     @Test
-    public void testSetIn() {
+    void testSetIn() {
         List<BigDecimal> list = new LinkedList<>();
         Filter<BigDecimal> chain = filter.setIn(list);
         assertThat(chain).isEqualTo(filter);
@@ -100,7 +100,7 @@ public class BigDecimalFilterTest {
     }
 
     @Test
-    public void testSetNotIn() {
+    void testSetNotIn() {
         List<BigDecimal> list = new LinkedList<>();
         Filter<BigDecimal> chain = filter.setNotIn(list);
         assertThat(chain).isEqualTo(filter);
@@ -108,35 +108,35 @@ public class BigDecimalFilterTest {
     }
 
     @Test
-    public void testSetGreaterThan() {
+    void testSetGreaterThan() {
         Filter<BigDecimal> chain = filter.setGreaterThan(value);
         assertThat(chain).isEqualTo(filter);
         assertThat(filter.getGreaterThan()).isEqualTo(value);
     }
 
     @Test
-    public void testSetLessThan() {
+    void testSetLessThan() {
         Filter<BigDecimal> chain = filter.setLessThan(value);
         assertThat(chain).isEqualTo(filter);
         assertThat(filter.getLessThan()).isEqualTo(value);
     }
 
     @Test
-    public void testSetGreaterThanOrEqual() {
+    void testSetGreaterThanOrEqual() {
         Filter<BigDecimal> chain = filter.setGreaterThanOrEqual(value);
         assertThat(chain).isEqualTo(filter);
         assertThat(filter.getGreaterThanOrEqual()).isEqualTo(value);
     }
 
     @Test
-    public void testSetLessThanOrEqual() {
+    void testSetLessThanOrEqual() {
         Filter<BigDecimal> chain = filter.setLessThanOrEqual(value);
         assertThat(chain).isEqualTo(filter);
         assertThat(filter.getLessThanOrEqual()).isEqualTo(value);
     }
 
     @Test
-    public void testEquals() {
+    void testEquals() {
         final BigDecimalFilter filter2 = new BigDecimalFilter();
         assertThat(filter).isEqualTo(filter2);
         filter.setEquals(value);
@@ -180,7 +180,7 @@ public class BigDecimalFilterTest {
     }
 
     @Test
-    public void testHashCode() {
+    void testHashCode() {
         final BigDecimalFilter filter2 = new BigDecimalFilter();
         assertThat(filter.hashCode()).isEqualTo(filter2.hashCode());
         filter.setEquals(value);
@@ -213,7 +213,7 @@ public class BigDecimalFilterTest {
     }
 
     @Test
-    public void testToString() {
+    void testToString() {
         filter.setEquals(value);
         filter.setNotEquals(value);
         filter.setSpecified(true);

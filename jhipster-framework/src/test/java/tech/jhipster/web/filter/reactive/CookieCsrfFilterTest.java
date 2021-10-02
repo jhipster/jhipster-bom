@@ -33,7 +33,7 @@ import java.time.Duration;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class CookieCsrfFilterTest {
+class CookieCsrfFilterTest {
 
     private static final String CSRF_COOKIE_NAME = "XSRF-TOKEN";
     private static final String TEST_URL = "http://domain1.com/test.html";
@@ -41,7 +41,7 @@ public class CookieCsrfFilterTest {
     private CookieCsrfFilter filter = new CookieCsrfFilter();
 
     @Test
-    public void cookieSetInResponse() {
+    void cookieSetInResponse() {
         final String token = "test_token";
         WebFilterChain filterChain = (filterExchange) -> {
             try {
@@ -66,7 +66,7 @@ public class CookieCsrfFilterTest {
     }
 
     @Test
-    public void cookieNotSetIfTokenInRequest() {
+    void cookieNotSetIfTokenInRequest() {
         WebFilterChain filterChain = (filterExchange) -> {
             try {
                 assertThat(filterExchange.getResponse().getCookies().getFirst(CSRF_COOKIE_NAME)).isNull();
@@ -85,10 +85,10 @@ public class CookieCsrfFilterTest {
     }
 
     @Test
-    public void cookieNotSetIfNotInAttributes() {
+    void cookieNotSetIfNotInAttributes() {
         WebFilterChain filterChain = (filterExchange) -> {
             try {
-                assertThat(filterExchange.getResponse().getCookies().getFirst(CSRF_COOKIE_NAME)).isNull();;
+                assertThat(filterExchange.getResponse().getCookies().getFirst(CSRF_COOKIE_NAME)).isNull();
             } catch (AssertionError ex) {
                 return Mono.error(ex);
             }

@@ -29,19 +29,19 @@ import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
-public class AjaxLogoutSuccessHandlerTest {
+class AjaxLogoutSuccessHandlerTest {
 
     private HttpServletResponse response;
     private AjaxLogoutSuccessHandler handler;
 
     @BeforeEach
-    public void setup() {
+    void setup() {
         response = spy(HttpServletResponse.class);
         handler = new AjaxLogoutSuccessHandler();
     }
 
     @Test
-    public void testOnAuthenticationSuccess() {
+    void testOnAuthenticationSuccess() {
         Throwable caughtException = catchThrowable(() -> {
             handler.onLogoutSuccess(null, response, null);
             verify(response).setStatus(HttpServletResponse.SC_OK);

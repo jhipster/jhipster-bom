@@ -38,7 +38,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.mockito.Mockito.*;
 
-public class ExceptionHandlingAsyncTaskExecutorTest {
+class ExceptionHandlingAsyncTaskExecutorTest {
 
     private static final RuntimeException exception = new RuntimeException("Eek");
     private static final int testResult = 42;
@@ -50,7 +50,7 @@ public class ExceptionHandlingAsyncTaskExecutorTest {
     private LogbackRecorder recorder;
 
     @BeforeEach
-    public void setup() {
+    void setup() {
         done = false;
         handled = null;
         task = spy(new MockAsyncTaskExecutor());
@@ -59,12 +59,12 @@ public class ExceptionHandlingAsyncTaskExecutorTest {
     }
 
     @AfterEach
-    public void teardown() {
+    void teardown() {
         recorder.release();
     }
 
     @Test
-    public void testExecuteWithoutException() {
+    void testExecuteWithoutException() {
         Runnable runnable = spy(new MockRunnableWithoutException());
         Throwable caught = null;
         try {
@@ -88,7 +88,7 @@ public class ExceptionHandlingAsyncTaskExecutorTest {
     }
 
     @Test
-    public void testExecuteWithException() {
+    void testExecuteWithException() {
         Runnable runnable = spy(new MockRunnableWithException());
         Throwable caught = null;
         try {
@@ -116,7 +116,7 @@ public class ExceptionHandlingAsyncTaskExecutorTest {
     }
 
     @Test
-    public void testSubmitRunnableWithoutException() {
+    void testSubmitRunnableWithoutException() {
         Runnable runnable = spy(new MockRunnableWithoutException());
         Future<?> future = executor.submit(runnable);
         Throwable caught = catchThrowable(() -> future.get());
@@ -130,7 +130,7 @@ public class ExceptionHandlingAsyncTaskExecutorTest {
     }
 
     @Test
-    public void testSubmitRunnableWithException() {
+    void testSubmitRunnableWithException() {
         Runnable runnable = spy(new MockRunnableWithException());
         Future<?> future = executor.submit(runnable);
         Throwable caught = catchThrowable(() -> future.get());
@@ -148,7 +148,7 @@ public class ExceptionHandlingAsyncTaskExecutorTest {
     }
 
     @Test
-    public void testSubmitCallableWithoutException() {
+    void testSubmitCallableWithoutException() {
         Callable<Integer> callable = spy(new MockCallableWithoutException());
         Future<Integer> future = executor.submit(callable);
         Throwable caught = catchThrowable(() -> assertThat(future.get()).isEqualTo(42));
@@ -161,7 +161,7 @@ public class ExceptionHandlingAsyncTaskExecutorTest {
     }
 
     @Test
-    public void testSubmitCallableWithException() {
+    void testSubmitCallableWithException() {
         Callable<Integer> callable = spy(new MockCallableWithException());
         Future<Integer> future = executor.submit(callable);
         Throwable caught = catchThrowable(() -> future.get());
@@ -179,7 +179,7 @@ public class ExceptionHandlingAsyncTaskExecutorTest {
     }
 
     @Test
-    public void testInitializingExecutor() {
+    void testInitializingExecutor() {
         task = spy(new MockAsyncInitializingTaskExecutor());
         executor = new TestExceptionHandlingAsyncTaskExecutor(task);
         Throwable caught = catchThrowable(() -> {
@@ -190,7 +190,7 @@ public class ExceptionHandlingAsyncTaskExecutorTest {
     }
 
     @Test
-    public void testNonInitializingExecutor() {
+    void testNonInitializingExecutor() {
         Throwable caught = catchThrowable(() -> {
             executor.afterPropertiesSet();
             verify(task, never()).afterPropertiesSet();
@@ -199,7 +199,7 @@ public class ExceptionHandlingAsyncTaskExecutorTest {
     }
 
     @Test
-    public void testDisposableExecutor() {
+    void testDisposableExecutor() {
         task = spy(new MockAsyncDisposableTaskExecutor());
         executor = new TestExceptionHandlingAsyncTaskExecutor(task);
         Throwable caught = catchThrowable(() -> {
@@ -210,7 +210,7 @@ public class ExceptionHandlingAsyncTaskExecutorTest {
     }
 
     @Test
-    public void testNonDisposableExecutor() {
+    void testNonDisposableExecutor() {
         Throwable caught = catchThrowable(() -> {
             executor.destroy();
             verify(task, never()).destroy();

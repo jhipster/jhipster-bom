@@ -30,10 +30,10 @@ import org.springframework.boot.jdbc.DataSourceBuilder;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.InstanceOfAssertFactories.type;
 
-public class SpringLiquibaseUtilTest {
+class SpringLiquibaseUtilTest {
 
     @Test
-    public void createSpringLiquibaseFromLiquibaseDataSource() {
+    void createSpringLiquibaseFromLiquibaseDataSource() {
         DataSource liquibaseDatasource = DataSourceBuilder.create().url("jdbc:h2:mem:liquibase").username("sa").build();
         LiquibaseProperties liquibaseProperties = null;
         DataSource normalDataSource = null;
@@ -49,7 +49,7 @@ public class SpringLiquibaseUtilTest {
     }
 
     @Test
-    public void createSpringLiquibaseFromNormalDataSource() {
+    void createSpringLiquibaseFromNormalDataSource() {
         DataSource liquibaseDatasource = null;
         LiquibaseProperties liquibaseProperties = new LiquibaseProperties();
         DataSource normalDataSource = DataSourceBuilder.create().url("jdbc:h2:mem:normal").username("sa").build();
@@ -65,7 +65,7 @@ public class SpringLiquibaseUtilTest {
     }
 
     @Test
-    public void createSpringLiquibaseFromLiquibaseProperties() {
+    void createSpringLiquibaseFromLiquibaseProperties() {
         DataSource liquibaseDatasource = null;
         LiquibaseProperties liquibaseProperties = new LiquibaseProperties();
         liquibaseProperties.setUrl("jdbc:h2:mem:liquibase");
@@ -85,7 +85,7 @@ public class SpringLiquibaseUtilTest {
     }
 
     @Test
-    public void createAsyncSpringLiquibaseFromLiquibaseDataSource() {
+    void createAsyncSpringLiquibaseFromLiquibaseDataSource() {
         DataSource liquibaseDatasource = DataSourceBuilder.create().url("jdbc:h2:mem:liquibase").username("sa").build();
         LiquibaseProperties liquibaseProperties = null;
         DataSource normalDataSource = null;
@@ -100,7 +100,7 @@ public class SpringLiquibaseUtilTest {
     }
 
     @Test
-    public void createAsyncSpringLiquibaseFromNormalDataSource() {
+    void createAsyncSpringLiquibaseFromNormalDataSource() {
         DataSource liquibaseDatasource = null;
         LiquibaseProperties liquibaseProperties = new LiquibaseProperties();
         DataSource normalDataSource = DataSourceBuilder.create().url("jdbc:h2:mem:normal").username("sa").build();
@@ -115,7 +115,7 @@ public class SpringLiquibaseUtilTest {
     }
 
     @Test
-    public void createAsyncSpringLiquibaseFromLiquibaseProperties() {
+    void createAsyncSpringLiquibaseFromLiquibaseProperties() {
         DataSource liquibaseDatasource = null;
         LiquibaseProperties liquibaseProperties = new LiquibaseProperties();
         liquibaseProperties.setUrl("jdbc:h2:mem:liquibase");
