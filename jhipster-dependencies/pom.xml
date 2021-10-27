@@ -39,7 +39,7 @@
 
     <properties>
         <!-- Dependency versions -->
-        <aws-java-sdk-bom.version>1.12.94</aws-java-sdk-bom.version>
+        <aws-java-sdk-bom.version>1.12.96</aws-java-sdk-bom.version>
         <azure-spring-cloud-client.version>2.4.0</azure-spring-cloud-client.version>
         <azure-applicationinsights-spring-boot-starter.version>2.6.3</azure-applicationinsights-spring-boot-starter.version>
         <bucket4j.version>6.3.0</bucket4j.version>
