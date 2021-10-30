@@ -47,7 +47,7 @@
         <couchmove.version>3.1.1</couchmove.version>
         <cucumber-jvm.version>7.0.0</cucumber-jvm.version>
         <commons-io.version>2.11.0</commons-io.version>
-        <de.flapdoodle.embed.mongo.version>3.0.0</de.flapdoodle.embed.mongo.version>
+        <de.flapdoodle.embed.mongo.version>3.1.4</de.flapdoodle.embed.mongo.version>
         <feign-reactor-bom.version>3.1.1</feign-reactor-bom.version>
         <hazelcast.version>4.1.5</hazelcast.version>
         <hazelcast-hibernate5.version>2.2.1</hazelcast-hibernate5.version>
