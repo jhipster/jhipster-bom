@@ -42,7 +42,7 @@
         <aws-java-sdk-bom.version>1.12.109</aws-java-sdk-bom.version>
         <azure-spring-cloud-client.version>2.4.0</azure-spring-cloud-client.version>
         <azure-applicationinsights-spring-boot-starter.version>2.6.3</azure-applicationinsights-spring-boot-starter.version>
-        <bucket4j.version>6.3.0</bucket4j.version>
+        <bucket4j.version>6.4.0</bucket4j.version>
         <cassandra-unit-spring.version>4.3.1.0</cassandra-unit-spring.version>
         <couchmove.version>3.1.1</couchmove.version>
         <cucumber-jvm.version>7.0.0</cucumber-jvm.version>
