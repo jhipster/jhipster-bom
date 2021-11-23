@@ -156,7 +156,7 @@ jobs:
           distribution: 'temurin'
           java-version: ${{ steps.setup.outputs.java-version }}
       - name: 'SETUP: load cache'
-        uses: actions/cache@v2.1.6
+        uses: actions/cache@v2.1.7
         with:
           path: |
             ~/.npm
