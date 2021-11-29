@@ -45,7 +45,7 @@
         <bucket4j.version>6.4.1</bucket4j.version>
         <cassandra-unit-spring.version>4.3.1.0</cassandra-unit-spring.version>
         <couchmove.version>3.1.1</couchmove.version>
-        <cucumber-jvm.version>7.0.0</cucumber-jvm.version>
+        <cucumber-jvm.version>7.1.0</cucumber-jvm.version>
         <commons-io.version>2.11.0</commons-io.version>
         <de.flapdoodle.embed.mongo.version>3.0.0</de.flapdoodle.embed.mongo.version>
         <feign-reactor-bom.version>3.1.1</feign-reactor-bom.version>
