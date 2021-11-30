@@ -1004,6 +1004,7 @@ public class JHipsterProperties {
         }
 
         public static class Server {
+            @Deprecated
             private String name;
             private String url;
             private String description;
