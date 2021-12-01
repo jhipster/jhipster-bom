@@ -49,6 +49,8 @@ import static tech.jhipster.config.JHipsterConstants.SPRING_PROFILE_API_DOCS;
 @Import({
     org.springdoc.core.SpringDocConfigProperties.class,
     org.springdoc.core.SpringDocConfiguration.class,
+    JHipsterSpringDocMvcConfiguration.class,
+    JHipsterSpringDocWebFluxConfiguration.class,
     JHipsterSpringDocGroupsConfiguration.class
 })
 public class JHipsterSpringDocAutoConfiguration {}

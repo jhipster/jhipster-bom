@@ -19,42 +19,29 @@
 
 package tech.jhipster.config.apidoc;
 
-import tech.jhipster.config.JHipsterProperties;
-import tech.jhipster.config.apidoc.customizer.JHipsterOpenApiCustomizer;
+import static org.springdoc.core.Constants.DEFAULT_GROUP_NAME;
+import static org.springdoc.core.Constants.SPRINGDOC_SHOW_ACTUATOR;
+import static org.springdoc.core.SpringDocUtils.getConfig;
+
+import java.nio.ByteBuffer;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springdoc.core.AbstractRequestService;
-import org.springdoc.core.ActuatorProvider;
-import org.springdoc.core.GenericResponseService;
 import org.springdoc.core.GroupedOpenApi;
-import org.springdoc.core.OpenAPIService;
-import org.springdoc.core.OperationService;
-import org.springdoc.core.RepositoryRestResourceProvider;
-import org.springdoc.core.SecurityOAuth2Provider;
-import org.springdoc.core.SpringDocConfigProperties;
 import org.springdoc.core.converters.PageableOpenAPIConverter;
 import org.springdoc.core.converters.models.Pageable;
-import org.springdoc.webmvc.api.MultipleOpenApiWebMvcResource;
-import org.springdoc.webmvc.core.RouterFunctionProvider;
-import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.condition.*;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
 
 import io.swagger.v3.oas.models.info.Info;
-
-import static org.springdoc.core.Constants.SPRINGDOC_SHOW_ACTUATOR;
-import static org.springdoc.core.Constants.DEFAULT_GROUP_NAME;
-
-import static org.springdoc.core.SpringDocUtils.getConfig;
-
-import java.nio.ByteBuffer;
-import java.util.List;
-import java.util.Optional;
+import tech.jhipster.config.JHipsterProperties;
+import tech.jhipster.config.apidoc.customizer.JHipsterOpenApiCustomizer;
 
 /**
  * OpenApi Groups configuration.
@@ -100,31 +87,6 @@ public class JHipsterSpringDocGroupsConfiguration {
     @Lazy(false)
     PageableOpenAPIConverter pageableOpenAPIConverter() {
         return new PageableOpenAPIConverter();
-    }
-
-    /** 
-     * Instanticate MultipleOpenApiWebMvcResource for multiples groups
-     */
-    @Bean
-    @Lazy(false)
-    @ConditionalOnClass({
-    	MultipleOpenApiWebMvcResource.class,
-    })
-    MultipleOpenApiWebMvcResource multipleOpenApiResource(List<GroupedOpenApi> groupedOpenApis,
-            ObjectFactory<OpenAPIService> defaultOpenAPIBuilder, AbstractRequestService requestBuilder,
-            GenericResponseService responseBuilder, OperationService operationParser,
-            Optional<ActuatorProvider> actuatorProvider,
-            SpringDocConfigProperties springDocConfigProperties,
-            Optional<SecurityOAuth2Provider> springSecurityOAuth2Provider,
-            Optional<RouterFunctionProvider> routerFunctionProvider,
-            Optional<RepositoryRestResourceProvider> repositoryRestResourceProvider) {
-        return new MultipleOpenApiWebMvcResource(groupedOpenApis,
-                defaultOpenAPIBuilder, requestBuilder,
-                responseBuilder, operationParser,
-                actuatorProvider,
-                springDocConfigProperties,
-                springSecurityOAuth2Provider,
-                routerFunctionProvider, repositoryRestResourceProvider);
     }
 
     /**
