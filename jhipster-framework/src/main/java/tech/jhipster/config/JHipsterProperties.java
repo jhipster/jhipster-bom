@@ -20,8 +20,6 @@
 package tech.jhipster.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.context.annotation.PropertySources;
 import org.springframework.web.cors.CorsConfiguration;
 
 import javax.validation.constraints.NotNull;
@@ -875,8 +873,10 @@ public class JHipsterProperties {
 
         private String managementIncludePattern = JHipsterDefaults.ApiDocs.managementIncludePattern;
 
+        @Deprecated
         private String host = JHipsterDefaults.ApiDocs.host;
 
+        @Deprecated
         private String[] protocols = JHipsterDefaults.ApiDocs.protocols;
 
         private Server[] servers = {};
@@ -1003,8 +1003,8 @@ public class JHipsterProperties {
             this.useDefaultResponseMessages = useDefaultResponseMessages;
         }
 
+        @Deprecated
         public static class Server {
-            @Deprecated
             private String name;
             private String url;
             private String description;
