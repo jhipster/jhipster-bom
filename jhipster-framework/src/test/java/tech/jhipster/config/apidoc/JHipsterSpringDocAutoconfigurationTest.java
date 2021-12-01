@@ -76,7 +76,7 @@ class JHipsterSpringDocAutoconfigurationTest {
             .andExpect(jsonPath("$.info.contact.email").value("test contact email"))
             .andExpect(jsonPath("$.info.license.name").value("test license name"))
             .andExpect(jsonPath("$.info.license.url").value("test license url"))
-            // .andExpect(jsonPath("$.paths./scanned/test").exists())
+            .andExpect(jsonPath("$.paths./scanned/test").exists())
             .andExpect(jsonPath("$.paths./not-scanned/test").doesNotExist())
             // TODO: fix bug in Springfox
             //.andExpect(jsonPath("$.servers.[*].url").value(hasItem("test server url")))
@@ -111,7 +111,7 @@ class JHipsterSpringDocAutoconfigurationTest {
             .andExpect(jsonPath("$.info.termsOfService").doesNotExist())
             .andExpect(jsonPath("$.info.contact").doesNotExist())
             .andExpect(jsonPath("$.info.license").doesNotExist())
-            .andExpect(jsonPath("$.paths./management/health/**").exists())
+            .andExpect(jsonPath("$.paths./management/health").exists())
             .andExpect(jsonPath("$.paths./scanned/test").doesNotExist())
             // TODO: fix bug in Springfox
             //.andExpect(jsonPath("$.servers.[*].url").value(hasItem("test server url")))
