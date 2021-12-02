@@ -21,6 +21,7 @@ package tech.jhipster.config.apidoc;
 
 import io.swagger.v3.oas.models.OpenAPI;
 import org.springdoc.core.SpringDocConfiguration;
+import org.springdoc.data.rest.SpringDocDataRestConfiguration;
 
 import tech.jhipster.config.JHipsterProperties;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
@@ -42,6 +43,8 @@ import static tech.jhipster.config.JHipsterConstants.SPRING_PROFILE_API_DOCS;
 @ConditionalOnWebApplication
 @ConditionalOnClass({
     OpenAPI.class,
+    SpringDocConfiguration.class,
+    SpringDocDataRestConfiguration.class,
 })
 @Profile(SPRING_PROFILE_API_DOCS)
 @AutoConfigureAfter(JHipsterProperties.class)
@@ -49,6 +52,7 @@ import static tech.jhipster.config.JHipsterConstants.SPRING_PROFILE_API_DOCS;
 @Import({
     org.springdoc.core.SpringDocConfigProperties.class,
     org.springdoc.core.SpringDocConfiguration.class,
+    org.springdoc.data.rest.SpringDocDataRestConfiguration.class,
     JHipsterSpringDocMvcConfiguration.class,
     JHipsterSpringDocWebFluxConfiguration.class,
     JHipsterSpringDocGroupsConfiguration.class
