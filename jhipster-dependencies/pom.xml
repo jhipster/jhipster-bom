@@ -648,6 +648,13 @@
                 <groupId>org.springdoc</groupId>
                 <artifactId>springdoc-openapi-data-rest</artifactId>
                 <version>${springdocs.version}</version>
+                <!-- https://github.com/springdoc/springdoc-openapi/issues/1357 -->
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.springdoc</groupId>
+                        <artifactId>springdoc-openapi-webmvc-core</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             <dependency>
                 <groupId>org.springdoc</groupId>
