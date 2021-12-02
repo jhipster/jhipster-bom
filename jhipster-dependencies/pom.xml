@@ -649,6 +649,11 @@
                 <artifactId>springdoc-openapi-data-rest</artifactId>
                 <version>${springdocs.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-security</artifactId>
+                <version>${springdocs.version}</version>
+            </dependency>
             <!-- BOM imports last so we (could) selectively override dependencies above -->
             <dependency>
                 <groupId>com.amazonaws</groupId>

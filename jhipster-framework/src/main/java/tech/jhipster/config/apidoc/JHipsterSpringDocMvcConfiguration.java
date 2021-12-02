@@ -31,7 +31,7 @@ public class JHipsterSpringDocMvcConfiguration {
     @Bean
     @Lazy(false)
     @ConditionalOnClass({
-    	MultipleOpenApiWebMvcResource.class,
+        MultipleOpenApiWebMvcResource.class,
     })
     MultipleOpenApiWebMvcResource multipleOpenApiResource(List<GroupedOpenApi> groupedOpenApis,
             ObjectFactory<OpenAPIService> defaultOpenAPIBuilder, AbstractRequestService requestBuilder,

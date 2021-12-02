@@ -28,17 +28,17 @@ public class JHipsterSpringDocWebFluxConfiguration {
     @Bean
     @Lazy(false)
     @ConditionalOnClass({
-    	MultipleOpenApiWebFluxResource.class,
+        MultipleOpenApiWebFluxResource.class,
     })
-	MultipleOpenApiWebFluxResource multipleOpenApiResource(List<GroupedOpenApi> groupedOpenApis,
-			ObjectFactory<OpenAPIService> defaultOpenAPIBuilder, AbstractRequestService requestBuilder,
-			GenericResponseService responseBuilder, OperationService operationParser,
-			SpringDocConfigProperties springDocConfigProperties,
-			Optional<ActuatorProvider> actuatorProvider) {
-		return new MultipleOpenApiWebFluxResource(groupedOpenApis,
-				defaultOpenAPIBuilder, requestBuilder,
-				responseBuilder, operationParser,
-				springDocConfigProperties,
-				actuatorProvider);
-	}
+    MultipleOpenApiWebFluxResource multipleOpenApiResource(List<GroupedOpenApi> groupedOpenApis,
+            ObjectFactory<OpenAPIService> defaultOpenAPIBuilder, AbstractRequestService requestBuilder,
+            GenericResponseService responseBuilder, OperationService operationParser,
+            SpringDocConfigProperties springDocConfigProperties,
+            Optional<ActuatorProvider> actuatorProvider) {
+        return new MultipleOpenApiWebFluxResource(groupedOpenApis,
+                defaultOpenAPIBuilder, requestBuilder,
+                responseBuilder, operationParser,
+                springDocConfigProperties,
+                actuatorProvider);
+    }
 }

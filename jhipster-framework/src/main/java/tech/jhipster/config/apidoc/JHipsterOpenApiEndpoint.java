@@ -45,10 +45,10 @@ public class JHipsterOpenApiEndpoint {
     }
 
     private Map<String, String> createGroupMap(GroupConfig group) {
-    	Map<String, String> map = new HashMap<String, String>();
-    	String groupName = group.getGroup();
-    	map.put("group", groupName);
-    	String description = this.appName + " (" + (groupName == DEFAULT_GROUP_NAME ? "default" : groupName) + ")";
+        Map<String, String> map = new HashMap<String, String>();
+        String groupName = group.getGroup();
+        map.put("group", groupName);
+        String description = this.appName + " (" + (groupName == DEFAULT_GROUP_NAME ? "default" : groupName) + ")";
         map.put("description", description);
         return map;
     }
