@@ -33,6 +33,8 @@ import org.slf4j.LoggerFactory;
 import org.springdoc.core.GroupedOpenApi;
 import org.springdoc.core.GroupedOpenApi.Builder;
 import org.springdoc.core.SpringDocConfigProperties;
+import org.springdoc.core.converters.PageableOpenAPIConverter;
+import org.springdoc.core.converters.models.Pageable;
 import org.springdoc.core.customizers.ActuatorOpenApiCustomizer;
 import org.springdoc.core.customizers.ActuatorOperationCustomizer;
 import org.springdoc.core.customizers.OpenApiCustomiser;
@@ -44,6 +46,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
 
 import io.swagger.v3.oas.models.info.Info;
 import tech.jhipster.config.JHipsterProperties;
@@ -61,7 +64,12 @@ public class JHipsterSpringDocGroupsConfiguration {
     public static final String MANAGEMENT_GROUP_NAME = "management";
 
     static {
-        getConfig().replaceWithClass(ByteBuffer.class, String.class);
+        /** 
+         * Add support to `@ParamObject Pageable`
+         */
+        getConfig().replaceParameterObjectWithClass(org.springframework.data.domain.Pageable.class, Pageable.class)
+            .replaceParameterObjectWithClass(org.springframework.data.domain.PageRequest.class, Pageable.class)
+            .replaceWithClass(ByteBuffer.class, String.class);
     }
 
     static final String MANAGEMENT_TITLE_SUFFIX = "Management API";
@@ -78,6 +86,16 @@ public class JHipsterSpringDocGroupsConfiguration {
      */
     public JHipsterSpringDocGroupsConfiguration(JHipsterProperties jHipsterProperties) {
         this.properties = jHipsterProperties.getApiDocs();
+    }
+
+    /** 
+     * Add support to `@PageableAsQueryParam`
+     */
+    @Bean
+    @ConditionalOnMissingBean
+    @Lazy(false)
+    PageableOpenAPIConverter pageableOpenAPIConverter() {
+        return new PageableOpenAPIConverter();
     }
 
     /**
