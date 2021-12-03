@@ -5,7 +5,7 @@
     <parent>
         <groupId>tech.jhipster</groupId>
         <artifactId>jhipster-parent</artifactId>
-        <version>7.4.1-SNAPSHOT</version>
+        <version>7.4.2-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
@@ -39,7 +39,7 @@
 
     <properties>
         <!-- Dependency versions -->
-        <aws-java-sdk-bom.version>1.12.120</aws-java-sdk-bom.version>
+        <aws-java-sdk-bom.version>1.12.124</aws-java-sdk-bom.version>
         <azure-spring-cloud-client.version>2.4.0</azure-spring-cloud-client.version>
         <azure-applicationinsights-spring-boot-starter.version>2.6.3</azure-applicationinsights-spring-boot-starter.version>
         <bucket4j.version>6.4.1</bucket4j.version>
@@ -48,7 +48,7 @@
         <cucumber-jvm.version>7.1.0</cucumber-jvm.version>
         <commons-io.version>2.11.0</commons-io.version>
         <de.flapdoodle.embed.mongo.version>3.0.0</de.flapdoodle.embed.mongo.version>
-        <feign-reactor-bom.version>3.1.2</feign-reactor-bom.version>
+        <feign-reactor-bom.version>3.1.5</feign-reactor-bom.version>
         <hazelcast.version>4.1.5</hazelcast.version>
         <hazelcast-hibernate5.version>2.2.1</hazelcast-hibernate5.version>
         <infinispan.version>13.0.2.Final</infinispan.version>
@@ -65,7 +65,7 @@
         <problem-spring-web.version>${problem-spring.version}</problem-spring-web.version>
         <problem-spring-webflux.version>${problem-spring.version}</problem-spring-webflux.version>
         <prometheus-simpleclient.version>0.12.0</prometheus-simpleclient.version>
-        <redisson.version>3.16.4</redisson.version>
+        <redisson.version>3.16.5</redisson.version>
         <reflections.version>0.10.1</reflections.version>
         <spring-cloud.version>2020.0.4</spring-cloud.version>
         <spring-cloud-netflix.version>2.2.10.RELEASE</spring-cloud-netflix.version>
