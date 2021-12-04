@@ -40,17 +40,9 @@ import static tech.jhipster.config.JHipsterConstants.SPRING_PROFILE_API_DOCS;
  */
 @Configuration
 @ConditionalOnWebApplication
-@ConditionalOnClass({
-    OpenAPI.class,
-})
+@ConditionalOnClass(OpenAPI.class)
 @Profile(SPRING_PROFILE_API_DOCS)
-@AutoConfigureAfter(JHipsterProperties.class)
 @AutoConfigureBefore(SpringDocConfiguration.class)
-@Import({
-    org.springdoc.core.SpringDocConfigProperties.class,
-    org.springdoc.core.SpringDocConfiguration.class,
-    JHipsterSpringDocMvcConfiguration.class,
-    JHipsterSpringDocWebFluxConfiguration.class,
-    JHipsterSpringDocGroupsConfiguration.class
-})
+@AutoConfigureAfter(JHipsterProperties.class)
+@Import(JHipsterSpringDocGroupsConfiguration.class)
 public class JHipsterSpringDocAutoConfiguration {}
