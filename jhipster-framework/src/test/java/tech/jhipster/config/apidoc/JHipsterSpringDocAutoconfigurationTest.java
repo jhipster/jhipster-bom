@@ -38,8 +38,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
         "spring.liquibase.enabled=false",
         "security.basic.enabled=false",
         "jhipster.api-docs.default-include-pattern=/scanned/**",
-        "jhipster.api-docs.host=test.jhipster.com",
-        "jhipster.api-docs.protocols=http,https",
         "jhipster.api-docs.title=test title",
         "jhipster.api-docs.description=test description",
         "jhipster.api-docs.version=test version",

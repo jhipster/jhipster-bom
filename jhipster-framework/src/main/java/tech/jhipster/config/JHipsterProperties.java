@@ -873,15 +873,7 @@ public class JHipsterProperties {
 
         private String managementIncludePattern = JHipsterDefaults.ApiDocs.managementIncludePattern;
 
-        @Deprecated
-        private String host = JHipsterDefaults.ApiDocs.host;
-
-        @Deprecated
-        private String[] protocols = JHipsterDefaults.ApiDocs.protocols;
-
         private Server[] servers = {};
-
-        private boolean useDefaultResponseMessages = JHipsterDefaults.ApiDocs.useDefaultResponseMessages;
 
         public String getTitle() {
             return title;
@@ -971,22 +963,6 @@ public class JHipsterProperties {
             this.managementIncludePattern = managementIncludePattern;
         }
 
-        public String getHost() {
-            return host;
-        }
-
-        public void setHost(final String host) {
-            this.host = host;
-        }
-
-        public String[] getProtocols() {
-            return protocols;
-        }
-
-        public void setProtocols(final String[] protocols) {
-            this.protocols = protocols;
-        }
-
         public Server[] getServers() {
             return servers;
         }
@@ -995,27 +971,9 @@ public class JHipsterProperties {
             this.servers = servers;
         }
 
-        public boolean isUseDefaultResponseMessages() {
-            return useDefaultResponseMessages;
-        }
-
-        public void setUseDefaultResponseMessages(final boolean useDefaultResponseMessages) {
-            this.useDefaultResponseMessages = useDefaultResponseMessages;
-        }
-
-        @Deprecated
         public static class Server {
-            private String name;
             private String url;
             private String description;
-
-            public String getName() {
-                return name;
-            }
-
-            public void setName(String name) {
-                this.name = name;
-            }
 
             public String getUrl() {
                 return url;
