@@ -1,6 +1,6 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  tech.jhipster.config.apidoc.SpringfoxAutoConfiguration,\
-  tech.jhipster.config.apidoc.SpringfoxPluginsAutoConfiguration,\
+  tech.jhipster.config.apidoc.JHipsterSpringDocAutoConfiguration,\
+  tech.jhipster.config.apidoc.JHipsterOpenApiEndpointConfiguration,\
   tech.jhipster.config.JHipsterConfiguration,\
   tech.jhipster.config.info.JHipsterInfoContributorConfiguration,\
   tech.jhipster.config.metric.JHipsterMetricsEndpointConfiguration,\

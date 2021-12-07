@@ -643,52 +643,19 @@ class JHipsterPropertiesTest {
     }
 
     @Test
-    void testApiDocsHost() {
-        JHipsterProperties.ApiDocs obj = properties.getApiDocs();
-        String val = JHipsterDefaults.ApiDocs.host;
-        assertThat(obj.getHost()).isEqualTo(val);
-        val = "1" + val;
-        obj.setHost(val);
-        assertThat(obj.getHost()).isEqualTo(val);
-    }
-
-    @Test
-    void testApiDocsProtocols() {
-        JHipsterProperties.ApiDocs obj = properties.getApiDocs();
-        String[] def = JHipsterDefaults.ApiDocs.protocols;
-        List<String> val = new ArrayList<>(Arrays.asList(def));
-        assertThat(obj.getProtocols()).containsExactlyElementsOf(val);
-        val.add("1");
-        obj.setProtocols(val.toArray(def));
-        assertThat(obj.getProtocols()).containsExactlyElementsOf(val);
-    }
-
-    @Test
     void testApiDocsServers() {
         JHipsterProperties.ApiDocs obj = properties.getApiDocs();
         assertThat(obj.getServers()).isEmpty();
         JHipsterProperties.ApiDocs.Server server = new JHipsterProperties.ApiDocs.Server();
         server.setUrl("url");
         server.setDescription("description");
-        server.setName("name");
 
         JHipsterProperties.ApiDocs.Server[] val = new JHipsterProperties.ApiDocs.Server[]{server};
 
         obj.setServers(val);
         assertThat(obj.getServers().length).isEqualTo(1);
-        assertThat(obj.getServers()[0].getName()).isEqualTo(server.getName());
         assertThat(obj.getServers()[0].getUrl()).isEqualTo(server.getUrl());
         assertThat(obj.getServers()[0].getDescription()).isEqualTo(server.getDescription());
-    }
-
-    @Test
-    void testApiDocsUseDefaultResponseMessages() {
-        JHipsterProperties.ApiDocs obj = properties.getApiDocs();
-        boolean val = JHipsterDefaults.ApiDocs.useDefaultResponseMessages;
-        assertThat(obj.isUseDefaultResponseMessages()).isEqualTo(val);
-        val = false;
-        obj.setUseDefaultResponseMessages(val);
-        assertThat(obj.isUseDefaultResponseMessages()).isEqualTo(val);
     }
 
     @Test
