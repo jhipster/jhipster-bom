@@ -126,11 +126,11 @@ jobs:
       # Install all tools and check configuration
       #----------------------------------------------------------------------
       - name: 'SETUP: Checkout jhipster-bom'
-        uses: actions/checkout@v2.3.5
+        uses: actions/checkout@v2.4.0
         with:
           path: jhipster-bom
       - name: 'SETUP: Checkout generator-jhipster'
-        uses: actions/checkout@v2.3.5
+        uses: actions/checkout@v2.4.0
         with:
           repository: 'jhipster/generator-jhipster'
           path: generator-jhipster
@@ -148,7 +148,7 @@ jobs:
           enable-testcontainers: ${{ matrix.testcontainers == 1 }}
           generator-jhipster-branch: local
           jhipster-bom-branch: auto
-      - uses: actions/setup-node@v2.4.1
+      - uses: actions/setup-node@v2.5.0
         with:
           node-version: ${{ steps.setup.outputs.node-version }}
       - uses: actions/setup-java@v2
@@ -156,7 +156,7 @@ jobs:
           distribution: 'temurin'
           java-version: ${{ steps.setup.outputs.java-version }}
       - name: 'SETUP: load cache'
-        uses: actions/cache@v2.1.6
+        uses: actions/cache@v2.1.7
         with:
           path: |
             ~/.npm

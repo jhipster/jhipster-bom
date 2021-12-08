@@ -19,34 +19,38 @@
 
 package tech.jhipster.config.apidoc;
 
-import com.fasterxml.classmate.TypeResolver;
+import org.springdoc.core.SpringDocConfigProperties;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.actuate.autoconfigure.endpoint.condition.ConditionalOnAvailableEndpoint;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.domain.Pageable;
-import springfox.documentation.spring.web.plugins.Docket;
 
 /**
- * Register Springfox plugins.
+ * <p>JHipsterOpenApiEndpointConfiguration class.</p>
  */
 @Configuration
-@ConditionalOnWebApplication
-@ConditionalOnBean(Docket.class)
-@AutoConfigureAfter(SpringfoxAutoConfiguration.class)
-public class SpringfoxPluginsAutoConfiguration {
+@ConditionalOnClass(SpringDocConfigProperties.class)
+@AutoConfigureAfter(JHipsterSpringDocAutoConfiguration.class)
+public class JHipsterOpenApiEndpointConfiguration {
 
-    @Configuration
-    @ConditionalOnClass(Pageable.class)
-    public static class SpringPagePluginConfiguration {
-
-        @Bean
-        @ConditionalOnMissingBean
-        public PageableParameterBuilderPlugin pageableParameterBuilderPlugin(TypeResolver typeResolver) {
-            return new PageableParameterBuilderPlugin(typeResolver);
-        }
+    /**
+     * <p>jHipsterOpenApiEndpoint.</p>
+     *
+     * @param springDocConfigProperties a {@link org.springdoc.core.SpringDocConfigProperties} object.
+     * @return a {@link JHipsterOpenApiEndpoint} object.
+     */
+    @Bean
+    @ConditionalOnBean({SpringDocConfigProperties.class})
+    @ConditionalOnMissingBean
+    @ConditionalOnAvailableEndpoint
+    public JHipsterOpenApiEndpoint jHipsterOpenApiEndpoint(
+            SpringDocConfigProperties springDocConfigProperties,
+            @Value("${spring.application.name:application}") String appName
+            ) {
+        return new JHipsterOpenApiEndpoint(springDocConfigProperties, appName);
     }
 }
