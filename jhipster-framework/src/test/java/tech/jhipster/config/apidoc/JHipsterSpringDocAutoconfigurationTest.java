@@ -32,6 +32,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import static org.springdoc.core.Constants.DEFAULT_GROUP_NAME;
+
 @SpringBootTest(
     classes = JHipsterSpringDocAutoconfigurationTest.TestApp.class,
     properties = {
@@ -76,8 +78,6 @@ class JHipsterSpringDocAutoconfigurationTest {
             .andExpect(jsonPath("$.info.license.url").value("test license url"))
             .andExpect(jsonPath("$.paths./scanned/test").exists())
             .andExpect(jsonPath("$.paths./not-scanned/test").doesNotExist())
-            // TODO: fix bug in Springfox
-            //.andExpect(jsonPath("$.servers.[*].url").value(hasItem("test server url")))
             .andExpect(jsonPath("$.servers.[*].url").value(hasItem("http://localhost")));
     }
 
@@ -99,6 +99,25 @@ class JHipsterSpringDocAutoconfigurationTest {
     }
 
     @Test
+    void generatesOASAtDefaultGroupName() throws Exception {
+        mockMvc.perform(get("/v3/api-docs/" + DEFAULT_GROUP_NAME))
+            .andExpect((status().isOk()))
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+            .andExpect(jsonPath("$.info.title").value("test title"))
+            .andExpect(jsonPath("$.info.description").value("test description"))
+            .andExpect(jsonPath("$.info.version").value("test version"))
+            .andExpect(jsonPath("$.info.termsOfService").value("test tos url"))
+            .andExpect(jsonPath("$.info.contact.name").value("test contact name"))
+            .andExpect(jsonPath("$.info.contact.url").value("test contact url"))
+            .andExpect(jsonPath("$.info.contact.email").value("test contact email"))
+            .andExpect(jsonPath("$.info.license.name").value("test license name"))
+            .andExpect(jsonPath("$.info.license.url").value("test license url"))
+            .andExpect(jsonPath("$.paths./scanned/test").exists())
+            .andExpect(jsonPath("$.paths./not-scanned/test").doesNotExist())
+            .andExpect(jsonPath("$.servers.[*].url").value(hasItem("http://localhost")));
+    }
+
+    @Test
     void generatesManagementOAS() throws Exception {
         mockMvc.perform(get("/v3/api-docs/management"))
             .andExpect((status().isOk()))
@@ -111,8 +130,6 @@ class JHipsterSpringDocAutoconfigurationTest {
             .andExpect(jsonPath("$.info.license").doesNotExist())
             .andExpect(jsonPath("$.paths./management/health").exists())
             .andExpect(jsonPath("$.paths./scanned/test").doesNotExist())
-            // TODO: fix bug in Springfox
-            //.andExpect(jsonPath("$.servers.[*].url").value(hasItem("test server url")))
             .andExpect(jsonPath("$.servers.[*].url").value(hasItem("http://localhost")));
     }
 
