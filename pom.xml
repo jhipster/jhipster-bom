@@ -16,16 +16,6 @@
     <name>JHipster server-side parent POM</name>
     <url>https://github.com/jhipster/jhipster-bom/</url>
 
-    <repositories>
-        <repository>
-            <id>ossrh-snapshots</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-        </repository>
-    </repositories>
-
     <licenses>
         <license>
             <name>Apache License, version 2.0</name>
