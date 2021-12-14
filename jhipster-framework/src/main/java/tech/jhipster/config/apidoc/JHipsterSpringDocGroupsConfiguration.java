@@ -127,10 +127,10 @@ public class JHipsterSpringDocGroupsConfiguration {
             .group(DEFAULT_GROUP_NAME)
             .pathsToMatch(properties.getDefaultIncludePattern());
         openApiCustomisers.stream()
-            .filter(customiser -> !(customiser instanceof ActuatorOperationCustomizer))
+            .filter(customiser -> !(customiser instanceof ActuatorOpenApiCustomizer))
             .forEach(builder::addOpenApiCustomiser);
         operationCustomizers.stream()
-            .filter(customiser -> !(customiser instanceof ActuatorOpenApiCustomizer))
+            .filter(customiser -> !(customiser instanceof ActuatorOperationCustomizer))
             .forEach(builder::addOperationCustomizer);
         apiFirstGroupedOpenAPI.ifPresent(apiFirst -> {
             if (apiFirst.getPackagesToScan() != null) {
