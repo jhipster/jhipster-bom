@@ -51,7 +51,7 @@
         <feign-reactor-bom.version>3.1.5</feign-reactor-bom.version>
         <hazelcast.version>4.1.5</hazelcast.version>
         <hazelcast-hibernate5.version>2.2.1</hazelcast-hibernate5.version>
-        <infinispan.version>13.0.2.Final</infinispan.version>
+        <infinispan.version>13.0.5.Final</infinispan.version>
         <jjwt.version>0.11.2</jjwt.version>
         <logstash-logback-encoder.version>7.0.1</logstash-logback-encoder.version>
         <lz4-java.version>1.8.0</lz4-java.version>
