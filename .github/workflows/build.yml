@@ -22,12 +22,13 @@ name: Test, Sonar and deploy.
 on:
   workflow_dispatch:
   push:
+  pull_request:
+    types: [opened, synchronize, reopened]
     branches:
-      - main
+      - '*'
 
 jobs:
   build-and-analyse:
-    if: github.repository == 'jhipster/jhipster-bom'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2.4.0
@@ -40,10 +41,12 @@ jobs:
       - name: Test with Maven
         run: mvn test --batch-mode
       - name: Run Sonar analysis
+        if: github.repository == 'jhipster/jhipster-bom' && github.event == 'push'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: mvn -ntp --batch-mode initialize org.jacoco:jacoco-maven-plugin:prepare-agent sonar:sonar -Dsonar.host.url=https://sonarcloud.io -Dsonar.projectKey=jhipster-framework -Dsonar.organization=jhipster -Dsonar.login=${{ secrets.SONAR_TOKEN }}
       - name: Deploy to github packages
+        if: github.repository == 'jhipster/jhipster-bom' && github.event == 'push'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: mvn deploy -Dgpg.skip -Dgithub

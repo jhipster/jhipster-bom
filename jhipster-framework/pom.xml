@@ -58,8 +58,8 @@
             <optional>true</optional>
         </dependency>
         <dependency>
-            <groupId>org.springdoc</groupId>
-            <artifactId>springdoc-openapi-data-rest</artifactId>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-commons</artifactId>
             <optional>true</optional>
         </dependency>
         <dependency>
