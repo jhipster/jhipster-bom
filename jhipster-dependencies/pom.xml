@@ -77,6 +77,8 @@
         <testcontainers.version>1.16.2</testcontainers.version>
         <xmemcached.version>2.4.7</xmemcached.version>
         <xmemcached-provider.version>4.1.3</xmemcached-provider.version>
+        <junit-platform>1.8.2</junit-platform>
+        <testng.version>7.4.0</testng.version>
     </properties>
 
     <dependencyManagement>
@@ -119,7 +121,7 @@
             </dependency>
             <dependency>
                 <groupId>io.cucumber</groupId>
-                <artifactId>cucumber-junit</artifactId>
+                <artifactId>cucumber-junit-platform-engine</artifactId>
                 <version>${cucumber-jvm.version}</version>
             </dependency>
             <dependency>
@@ -133,6 +135,7 @@
                 <artifactId>cucumber-spring</artifactId>
                 <version>${cucumber-jvm.version}</version>
             </dependency>
+
             <dependency>
                 <groupId>com.google.code.simple-spring-memcached</groupId>
                 <artifactId>spring-cache</artifactId>
@@ -254,6 +257,12 @@
                 <groupId>org.hibernate</groupId>
                 <artifactId>hibernate-jpamodelgen</artifactId>
                 <version>${hibernate.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.junit.platform</groupId>
+                <artifactId>junit-platform-console</artifactId>
+                <version>${junit-platform}</version>
+                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>org.mapstruct</groupId>
@@ -607,6 +616,12 @@
                 <artifactId>spring-boot-starter-web-services</artifactId>
                 <version>${spring-boot.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.testng</groupId>
+                <artifactId>testng</artifactId>
+                <version>${testng.version}</version>
+                <scope>test</scope>
+            </dependency>
             <!-- Spring Cloud Netflix dependencies are no longer managed by Spring Cloud's BOM -->
             <!-- https://github.com/spring-cloud/spring-cloud-release/wiki/Spring-Cloud-2020.0-Release-Notes#breaking-changes -->
             <dependency>
@@ -726,7 +741,7 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-            
+
             <dependency>
                 <groupId>com.playtika.reactivefeign</groupId>
                 <artifactId>feign-reactor-bom</artifactId>
