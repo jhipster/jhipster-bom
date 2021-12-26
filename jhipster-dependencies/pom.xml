@@ -47,7 +47,6 @@
         <couchmove.version>3.1.1</couchmove.version>
         <cucumber-jvm.version>7.1.0</cucumber-jvm.version>
         <commons-io.version>2.11.0</commons-io.version>
-        <de.flapdoodle.embed.mongo.version>3.2.4</de.flapdoodle.embed.mongo.version>
         <feign-reactor-bom.version>3.1.5</feign-reactor-bom.version>
         <hazelcast.version>4.2.4</hazelcast.version>
         <hazelcast-hibernate5.version>2.2.1</hazelcast-hibernate5.version>
@@ -198,12 +197,6 @@
                 <groupId>org.lz4</groupId>
                 <artifactId>lz4-java</artifactId>
                 <version>${lz4-java.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>de.flapdoodle.embed</groupId>
-                <artifactId>de.flapdoodle.embed.mongo</artifactId>
-                <version>${de.flapdoodle.embed.mongo.version}</version>
-                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>com.github.differentway</groupId>
