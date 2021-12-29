@@ -78,6 +78,7 @@
         <xmemcached-provider.version>4.1.3</xmemcached-provider.version>
         <junit-platform>1.8.2</junit-platform>
         <testng.version>7.4.0</testng.version>
+        <mongrock.version>5.0.34</mongrock.version>
     </properties>
 
     <dependencyManagement>
@@ -690,6 +691,14 @@
                 <groupId>com.amazonaws</groupId>
                 <artifactId>aws-java-sdk-bom</artifactId>
                 <version>${aws-java-sdk-bom.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>io.mongock</groupId>
+                <artifactId>mongock-bom</artifactId>
+                <version>${mongrock.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

@@ -79,6 +79,7 @@
     <modules>
         <module>jhipster-dependencies</module>
         <module>jhipster-framework</module>
+        <module>../generated-project-parent/webflux-mongodb-es-session</module>
     </modules>
 
     <profiles>
