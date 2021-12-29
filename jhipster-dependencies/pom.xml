@@ -78,7 +78,7 @@
         <xmemcached-provider.version>4.1.3</xmemcached-provider.version>
         <junit-platform>1.8.2</junit-platform>
         <testng.version>7.4.0</testng.version>
-        <mongrock.version>5.0.34</mongrock.version>
+        <mongock-bom.version>5.0.34</mongock-bom.version>
     </properties>
 
     <dependencyManagement>
@@ -728,9 +728,9 @@
             </dependency>
 
             <dependency>
-                <groupId>com.github.cloudyrock.mongock</groupId>
+                <groupId>io.mongock</groupId>
                 <artifactId>mongock-bom</artifactId>
-                <version>${mongock.version}</version>
+                <version>${mongock-bom.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
