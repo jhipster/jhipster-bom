@@ -39,7 +39,7 @@
 
     <properties>
         <!-- Dependency versions -->
-        <aws-java-sdk-bom.version>1.12.129</aws-java-sdk-bom.version>
+        <aws-java-sdk-bom.version>1.12.131</aws-java-sdk-bom.version>
         <azure-spring-cloud-client.version>2.4.0</azure-spring-cloud-client.version>
         <azure-applicationinsights-spring-boot-starter.version>2.6.4</azure-applicationinsights-spring-boot-starter.version>
         <bucket4j.version>7.0.0</bucket4j.version>
@@ -64,7 +64,7 @@
         <problem-spring-web.version>${problem-spring.version}</problem-spring-web.version>
         <problem-spring-webflux.version>${problem-spring.version}</problem-spring-webflux.version>
         <prometheus-simpleclient.version>0.14.1</prometheus-simpleclient.version>
-        <redisson.version>3.16.6</redisson.version>
+        <redisson.version>3.16.7</redisson.version>
         <reflections.version>0.10.1</reflections.version>
         <spring-cloud.version>2021.0.0</spring-cloud.version>
         <spring-cloud-netflix.version>2.2.10.RELEASE</spring-cloud-netflix.version>
@@ -76,6 +76,8 @@
         <testcontainers.version>1.16.2</testcontainers.version>
         <xmemcached.version>2.4.7</xmemcached.version>
         <xmemcached-provider.version>4.1.3</xmemcached-provider.version>
+        <junit-platform>1.8.2</junit-platform>
+        <testng.version>7.4.0</testng.version>
     </properties>
 
     <dependencyManagement>
@@ -118,7 +120,7 @@
             </dependency>
             <dependency>
                 <groupId>io.cucumber</groupId>
-                <artifactId>cucumber-junit</artifactId>
+                <artifactId>cucumber-junit-platform-engine</artifactId>
                 <version>${cucumber-jvm.version}</version>
             </dependency>
             <dependency>
@@ -132,6 +134,7 @@
                 <artifactId>cucumber-spring</artifactId>
                 <version>${cucumber-jvm.version}</version>
             </dependency>
+
             <dependency>
                 <groupId>com.google.code.simple-spring-memcached</groupId>
                 <artifactId>spring-cache</artifactId>
@@ -247,6 +250,12 @@
                 <groupId>org.hibernate</groupId>
                 <artifactId>hibernate-jpamodelgen</artifactId>
                 <version>${hibernate.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.junit.platform</groupId>
+                <artifactId>junit-platform-console</artifactId>
+                <version>${junit-platform}</version>
+                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>org.mapstruct</groupId>
@@ -599,6 +608,12 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-web-services</artifactId>
                 <version>${spring-boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.testng</groupId>
+                <artifactId>testng</artifactId>
+                <version>${testng.version}</version>
+                <scope>test</scope>
             </dependency>
             <!-- Spring Cloud Netflix dependencies are no longer managed by Spring Cloud's BOM -->
             <!-- https://github.com/spring-cloud/spring-cloud-release/wiki/Spring-Cloud-2020.0-Release-Notes#breaking-changes -->
