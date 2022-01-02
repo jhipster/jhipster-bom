@@ -162,7 +162,7 @@ public class JHipsterMetricsEndpoint {
                 long count = httpTimersStream.stream().map(Timer::count).reduce((x, y) -> x + y).orElse(0L);
 
                 if (count != 0) {
-                    double max = httpTimersStream.stream().map(x -> x.max(TimeUnit.MILLISECONDS)).reduce((x, y) -> x > y ? x : y).orElse((double) 0);
+                    double max = httpTimersStream.stream().map(x -> x.totalTime(TimeUnit.MILLISECONDS)).reduce((x, y) -> x > y ? x : y).orElse((double) 0);
                     double totalTime = httpTimersStream.stream().map(x -> x.totalTime(TimeUnit.MILLISECONDS)).reduce((x, y) -> (x + y)).orElse((double) 0);
 
                     resultsPerUriPerCrudOperation.put("count", count);
