@@ -1,5 +1,5 @@
 #
-# Copyright 2016-2021 the original author or authors from the JHipster project.
+# Copyright 2016-2022 the original author or authors from the JHipster project.
 #
 # This file is part of the JHipster project, see https://www.jhipster.tech/
 # for more information.
@@ -27,7 +27,7 @@ on:
   pull_request:
     types: [opened, synchronize, reopened]
     branches:
-      - '*'
+      - main
 
 jobs:
   build-and-analyse:
@@ -43,12 +43,12 @@ jobs:
       - name: Test with Maven
         run: mvn test --batch-mode
       - name: Run Sonar analysis
-        if: github.repository == 'jhipster/jhipster-bom' && github.event == 'push'
+        if: github.repository == 'jhipster/jhipster-bom' && github.event_name == 'push'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: mvn -ntp --batch-mode initialize org.jacoco:jacoco-maven-plugin:prepare-agent sonar:sonar -Dsonar.host.url=https://sonarcloud.io -Dsonar.projectKey=jhipster-framework -Dsonar.organization=jhipster -Dsonar.login=${{ secrets.SONAR_TOKEN }}
       - name: Deploy to github packages
-        if: github.repository == 'jhipster/jhipster-bom' && github.event == 'push'
+        if: github.repository == 'jhipster/jhipster-bom' && github.event_name == 'push'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: mvn deploy -Dgpg.skip -Dgithub
