@@ -55,7 +55,7 @@
         <logstash-logback-encoder.version>7.0.1</logstash-logback-encoder.version>
         <lz4-java.version>1.8.0</lz4-java.version>
         <mapstruct.version>1.4.2.Final</mapstruct.version>
-        <mongock.version>5.0.35</mongock.version>
+        <mongock.version>5.0.36</mongock.version>
         <mongodb.version>4.2.3</mongodb.version>
         <mssql-jdbc.version>10.2.0.jre8</mssql-jdbc.version>
         <neo4j-migrations.version>1.3.1</neo4j-migrations.version>
