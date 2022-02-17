@@ -259,12 +259,23 @@ public class JHipsterProperties {
 
             private String bucketName;
 
+            private String scopeName;
+
             public String getBucketName() {
                 return bucketName;
             }
 
             public Couchbase setBucketName(String bucketName) {
                 this.bucketName = bucketName;
+                return this;
+            }
+
+            public String getScopeName() {
+                return scopeName;
+            }
+
+            public Couchbase setScopeName(String scopeName) {
+                this.scopeName = scopeName;
                 return this;
             }
         }
