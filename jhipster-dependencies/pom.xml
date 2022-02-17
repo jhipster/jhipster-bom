@@ -44,7 +44,8 @@
         <azure-applicationinsights-spring-boot-starter.version>2.6.4</azure-applicationinsights-spring-boot-starter.version>
         <bucket4j.version>7.2.0</bucket4j.version>
         <cassandra-unit-spring.version>4.3.1.0</cassandra-unit-spring.version>
-        <couchmove.version>3.1.1</couchmove.version>
+        <couchbase-client.version>3.2.5</couchbase-client.version>
+        <couchmove.version>3.2</couchmove.version>
         <cucumber-jvm.version>7.2.3</cucumber-jvm.version>
         <commons-io.version>2.11.0</commons-io.version>
         <feign-reactor-bom.version>3.1.5</feign-reactor-bom.version>
@@ -200,6 +201,11 @@
                 <groupId>org.lz4</groupId>
                 <artifactId>lz4-java</artifactId>
                 <version>${lz4-java.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.couchbase.client</groupId>
+                <artifactId>java-client</artifactId>
+                <version>${couchbase-client.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.github.differentway</groupId>
@@ -713,7 +719,7 @@
                 <artifactId>springdoc-openapi-security</artifactId>
                 <version>${springdocs.version}</version>
             </dependency>
-            
+
             <!-- BOM imports last so we (could) selectively override dependencies above -->
             <dependency>
                 <groupId>com.amazonaws</groupId>
