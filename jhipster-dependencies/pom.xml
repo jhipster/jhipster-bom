@@ -44,7 +44,7 @@
         <azure-applicationinsights-spring-boot-starter.version>2.6.4</azure-applicationinsights-spring-boot-starter.version>
         <bucket4j.version>7.2.0</bucket4j.version>
         <cassandra-unit-spring.version>4.3.1.0</cassandra-unit-spring.version>
-        <couchmove.version>3.1.1</couchmove.version>
+        <couchmove.version>3.2</couchmove.version>
         <cucumber-jvm.version>7.2.3</cucumber-jvm.version>
         <commons-io.version>2.11.0</commons-io.version>
         <feign-reactor-bom.version>3.1.5</feign-reactor-bom.version>
