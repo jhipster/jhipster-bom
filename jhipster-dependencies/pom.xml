@@ -48,7 +48,7 @@
         <couchmove.version>3.2</couchmove.version>
         <cucumber-jvm.version>7.2.3</cucumber-jvm.version>
         <commons-io.version>2.11.0</commons-io.version>
-        <feign-reactor-bom.version>3.1.5</feign-reactor-bom.version>
+        <feign-reactor-bom.version>3.1.6</feign-reactor-bom.version>
         <hazelcast.version>4.2.4</hazelcast.version>
         <hazelcast-hibernate5.version>2.2.1</hazelcast-hibernate5.version>
         <infinispan.version>13.0.6.Final</infinispan.version>
