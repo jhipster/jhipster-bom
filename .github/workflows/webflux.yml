@@ -51,20 +51,13 @@ jobs:
         os: [ubuntu-20.04]
         app-sample:
           - webflux-mongodb
-          - webflux-mongodb-es-session
           - webflux-mongodb-oauth2
-          - webflux-gateway-jwt
-          - webflux-gateway-oauth2
           - webflux-psql
-          - webflux-mariadb-gradle
+          - webflux-psql-additional
+          - webflux-gradle-session-mariadb-es
+          - webflux-couchbase
         include:
           - app-sample: webflux-mongodb
-            entity: mongodb
-            environment: prod
-            war: 0
-            e2e: 1
-            testcontainers: 1
-          - app-sample: webflux-mongodb-es-session
             entity: mongodb
             environment: prod
             war: 0
@@ -76,30 +69,24 @@ jobs:
             war: 0
             e2e: 1
             testcontainers: 1
-          - app-sample: webflux-gateway-jwt
-            entity: none
-            environment: prod
-            war: 0
-            e2e: 1
-            testcontainers: 0
-          - app-sample: webflux-gateway-oauth2
-            entity: none
-            environment: prod
-            war: 0
-            e2e: 1
-            testcontainers: 1
           - app-sample: webflux-psql
             entity: sql
             environment: prod
             war: 0
             e2e: 1
             testcontainers: 0
-          - app-sample: webflux-mariadb-gradle
+          - app-sample: webflux-gradle-session-mariadb-es
             entity: sqllight
             environment: prod
             war: 0
             e2e: 1
             testcontainers: 0
+          - app-sample: webflux-couchbase
+            entity: couchbase
+            environment: prod
+            war: 0
+            e2e: 1
+            testcontainers: 1
     steps:
       #----------------------------------------------------------------------
       # Install all tools and check configuration
