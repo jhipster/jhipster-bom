@@ -34,7 +34,6 @@ public class FixedPostgreSQL95Dialect extends PostgreSQL95Dialect {
      * <p>Constructor for FixedPostgreSQL95Dialect.</p>
      */
     public FixedPostgreSQL95Dialect() {
-        super();
         registerColumnType(Types.BLOB, "bytea");
     }
 
