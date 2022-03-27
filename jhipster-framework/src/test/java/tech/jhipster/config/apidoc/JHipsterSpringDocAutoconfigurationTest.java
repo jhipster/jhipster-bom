@@ -148,7 +148,7 @@ class JHipsterSpringDocAutoconfigurationTest {
             .andExpect(content().contentType("application/vnd.spring-boot.actuator.v3+json"))
             .andExpect(jsonPath("$.[*].group").value(hasItem(JHipsterSpringDocGroupsConfiguration.MANAGEMENT_GROUP_NAME)))
             .andExpect(jsonPath("$.[*].description").value(hasItem(containsString("(" + JHipsterSpringDocGroupsConfiguration.MANAGEMENT_GROUP_NAME + ")"))))
-            .andExpect(jsonPath("$.[*].group").value(hasItem(org.springdoc.core.Constants.DEFAULT_GROUP_NAME)))
+            .andExpect(jsonPath("$.[*].group").value(hasItem(DEFAULT_GROUP_NAME)))
             .andExpect(jsonPath("$.[*].description").value(hasItem(containsString("(default)"))));
     }
 
