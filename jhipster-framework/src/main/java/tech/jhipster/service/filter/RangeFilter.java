@@ -71,10 +71,10 @@ public class RangeFilter<FIELD_TYPE extends Comparable<? super FIELD_TYPE>> exte
      */
     public RangeFilter(RangeFilter<FIELD_TYPE> filter) {
         super(filter);
-        this.greaterThan = filter.greaterThan;
-        this.lessThan = filter.lessThan;
-        this.greaterThanOrEqual = filter.greaterThanOrEqual;
-        this.lessThanOrEqual = filter.lessThanOrEqual;
+        greaterThan = filter.greaterThan;
+        lessThan = filter.lessThan;
+        greaterThanOrEqual = filter.greaterThanOrEqual;
+        lessThanOrEqual = filter.lessThanOrEqual;
     }
 
     /** {@inheritDoc} */

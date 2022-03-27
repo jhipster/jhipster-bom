@@ -52,7 +52,7 @@ class CachingHttpHeadersFilterTest {
         MockServerWebExchange exchange = MockServerWebExchange.from(
             MockServerHttpRequest.get("/app/foo")
         );
-        this.filter.filter(exchange, filterChain).block();
+        filter.filter(exchange, filterChain).block();
     }
 
     @Test
@@ -71,7 +71,7 @@ class CachingHttpHeadersFilterTest {
         MockServerWebExchange exchange = MockServerWebExchange.from(
             MockServerHttpRequest.get("/foo/foo")
         );
-        this.filter.filter(exchange, filterChain).block();
+        filter.filter(exchange, filterChain).block();
     }
 
 }

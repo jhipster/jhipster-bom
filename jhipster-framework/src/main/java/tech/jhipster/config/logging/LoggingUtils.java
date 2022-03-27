@@ -172,20 +172,20 @@ public final class LoggingUtils {
 
         @Override
         public void onStart(LoggerContext context) {
-            if (this.loggingProperties.isUseJsonFormat()) {
+            if (loggingProperties.isUseJsonFormat()) {
                 addJsonConsoleAppender(context, customFields);
             }
-            if (this.loggingProperties.getLogstash().isEnabled()) {
+            if (loggingProperties.getLogstash().isEnabled()) {
                 addLogstashTcpSocketAppender(context, customFields, loggingProperties.getLogstash());
             }
         }
 
         @Override
         public void onReset(LoggerContext context) {
-            if (this.loggingProperties.isUseJsonFormat()) {
+            if (loggingProperties.isUseJsonFormat()) {
                 addJsonConsoleAppender(context, customFields);
             }
-            if (this.loggingProperties.getLogstash().isEnabled()) {
+            if (loggingProperties.getLogstash().isEnabled()) {
                 addLogstashTcpSocketAppender(context, customFields, loggingProperties.getLogstash());
             }
         }

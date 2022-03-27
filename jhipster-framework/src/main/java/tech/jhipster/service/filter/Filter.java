@@ -57,11 +57,11 @@ public class Filter<FIELD_TYPE> implements Serializable {
      * @param filter a {@link Filter} object.
      */
     public Filter(Filter<FIELD_TYPE> filter) {
-        this.equals = filter.equals;
-        this.notEquals = filter.notEquals;
-        this.specified = filter.specified;
-        this.in = filter.in == null ? null : new ArrayList<>(filter.in);
-        this.notIn = filter.notIn == null ? null : new ArrayList<>(filter.notIn);
+        equals = filter.equals;
+        notEquals = filter.notEquals;
+        specified = filter.specified;
+        in = filter.in == null ? null : new ArrayList<>(filter.in);
+        notIn = filter.notIn == null ? null : new ArrayList<>(filter.notIn);
     }
 
     /**
@@ -214,6 +214,6 @@ public class Filter<FIELD_TYPE> implements Serializable {
      * @return a {@link java.lang.String} object.
      */
     protected String getFilterName() {
-        return this.getClass().getSimpleName();
+        return getClass().getSimpleName();
     }
 }

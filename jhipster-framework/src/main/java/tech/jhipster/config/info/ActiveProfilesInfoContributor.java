@@ -40,13 +40,13 @@ public class ActiveProfilesInfoContributor implements InfoContributor {
      * @param environment a {@link org.springframework.core.env.ConfigurableEnvironment} object.
      */
     public ActiveProfilesInfoContributor(ConfigurableEnvironment environment) {
-        this.profiles = Arrays.asList(environment.getActiveProfiles().length == 0 ? environment.getDefaultProfiles()
+        profiles = Arrays.asList(environment.getActiveProfiles().length == 0 ? environment.getDefaultProfiles()
             : environment.getActiveProfiles());
     }
 
     /** {@inheritDoc} */
     @Override
     public void contribute(Info.Builder builder) {
-        builder.withDetail(ACTIVE_PROFILES, this.profiles);
+        builder.withDetail(ACTIVE_PROFILES, profiles);
     }
 }

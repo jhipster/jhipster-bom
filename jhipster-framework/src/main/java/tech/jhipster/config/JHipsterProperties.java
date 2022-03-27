@@ -1115,7 +1115,7 @@ public class JHipsterProperties {
             }
 
             public long getLimit() {
-                return this.limit;
+                return limit;
             }
 
             public void setLimit(long limit) {

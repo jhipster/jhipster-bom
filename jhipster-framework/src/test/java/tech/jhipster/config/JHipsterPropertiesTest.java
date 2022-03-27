@@ -47,7 +47,7 @@ class JHipsterPropertiesTest {
         Set<String> set = new LinkedHashSet<>(64, 1F);
         reflect(properties, set, "test");
         for (String name : set) {
-            assertThat(this.getClass().getDeclaredMethod(name)).isNotNull();
+            assertThat(getClass().getDeclaredMethod(name)).isNotNull();
         }
     }
 

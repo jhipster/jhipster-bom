@@ -55,8 +55,8 @@ public class StringFilter extends Filter<String> {
      */
     public StringFilter(StringFilter filter) {
         super(filter);
-        this.contains = filter.contains;
-        this.doesNotContain = filter.doesNotContain;
+        contains = filter.contains;
+        doesNotContain = filter.doesNotContain;
     }
 
     /** {@inheritDoc} */

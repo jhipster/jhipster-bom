@@ -119,8 +119,8 @@ public class LogbackRecorder {
 
     private LogbackRecorder(Logger logger) {
         this.logger = logger;
-        this.events = new ArrayList<>();
-        this.appender = new AppenderBase<ILoggingEvent>() {
+        events = new ArrayList<>();
+        appender = new AppenderBase<ILoggingEvent>() {
             @Override
             protected synchronized void append(ILoggingEvent event) {
                 events.add(new Event(event));
@@ -134,7 +134,7 @@ public class LogbackRecorder {
      * @return this
      */
     public synchronized LogbackRecorder reset() {
-        this.events.clear();
+        events.clear();
         return this;
     }
 
@@ -146,16 +146,16 @@ public class LogbackRecorder {
      */
     public LogbackRecorder capture(String level) {
         synchronized (lock) {
-            if (this.active) {
+            if (active) {
                 throw new IllegalStateException(CAPTURE_EXCEPTION_MESSAGE);
             }
-            this.active = true;
-            this.additive = logger.isAdditive();
-            this.logger.setAdditive(false);
+            active = true;
+            additive = logger.isAdditive();
+            logger.setAdditive(false);
             this.level = logger.getLevel();
-            this.logger.setLevel(Level.valueOf(level.toUpperCase()));
-            this.logger.addAppender(this.appender);
-            this.appender.start();
+            logger.setLevel(Level.valueOf(level.toUpperCase()));
+            logger.addAppender(appender);
+            appender.start();
         }
         return this;
     }
@@ -167,15 +167,15 @@ public class LogbackRecorder {
      */
     public synchronized LogbackRecorder release() {
         synchronized (lock) {
-            if (!this.active) {
+            if (!active) {
                 throw new IllegalStateException(RELEASE_EXCEPTION_MESSAGE);
             }
-            this.appender.stop();
-            this.logger.detachAppender(this.appender);
-            this.logger.setLevel(this.level);
-            this.logger.setAdditive(this.additive);
+            appender.stop();
+            logger.detachAppender(appender);
+            logger.setLevel(level);
+            logger.setAdditive(additive);
         }
-        this.active = false;
+        active = false;
         return this;
     }
 
@@ -185,7 +185,7 @@ public class LogbackRecorder {
      * @return all recorded events so far
      */
     public List<Event> play() {
-        return new ArrayList<>(this.events);
+        return new ArrayList<>(events);
     }
 
     /**
@@ -200,12 +200,12 @@ public class LogbackRecorder {
         private final String thrown;
 
         Event(ILoggingEvent event) {
-            this.marker = event.getMarker();
-            this.level = event.getLevel().toString();
-            this.message = event.getMessage();
-            this.arguments = event.getArgumentArray();
+            marker = event.getMarker();
+            level = event.getLevel().toString();
+            message = event.getMessage();
+            arguments = event.getArgumentArray();
             IThrowableProxy proxy = event.getThrowableProxy();
-            this.thrown = proxy == null ? null : proxy.getClassName() + ": " + proxy.getMessage();
+            thrown = proxy == null ? null : proxy.getClassName() + ": " + proxy.getMessage();
         }
 
         /**
@@ -214,7 +214,7 @@ public class LogbackRecorder {
          * @return the marker
          */
         public Marker getMarker() {
-            return this.marker;
+            return marker;
         }
 
         /**
@@ -223,7 +223,7 @@ public class LogbackRecorder {
          * @return the level
          */
         public String getLevel() {
-            return this.level;
+            return level;
         }
 
         /**
@@ -232,7 +232,7 @@ public class LogbackRecorder {
          * @return the logged message
          */
         public String getMessage() {
-            return this.message;
+            return message;
         }
 
         /**
@@ -241,7 +241,7 @@ public class LogbackRecorder {
          * @return the parameters passed to the logger
          */
         public Object[] getArguments() {
-            return this.arguments;
+            return arguments;
         }
 
         /**
@@ -250,7 +250,7 @@ public class LogbackRecorder {
          * @return the logged exception as {@code exception.getClass().getName() + ": " + exception.getMessage()}
          */
         public String getThrown() {
-            return this.thrown;
+            return thrown;
         }
     }
 }

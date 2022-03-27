@@ -77,7 +77,7 @@ public class JHipsterSpringDocGroupsConfiguration {
      * @param jHipsterProperties a {@link JHipsterProperties} object.
      */
     public JHipsterSpringDocGroupsConfiguration(JHipsterProperties jHipsterProperties) {
-        this.properties = jHipsterProperties.getApiDocs();
+        properties = jHipsterProperties.getApiDocs();
     }
 
     /**

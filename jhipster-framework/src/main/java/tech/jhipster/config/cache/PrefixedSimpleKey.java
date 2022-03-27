@@ -28,31 +28,32 @@ public class PrefixedSimpleKey implements Serializable {
         Assert.notNull(elements, "Elements must not be null");
         this.prefix = prefix;
         this.methodName = methodName;
-        this.params = new Object[elements.length];
-        System.arraycopy(elements, 0, this.params, 0, elements.length);
-        this.hashCode = prefix.hashCode();
-        this.hashCode = 31 * this.hashCode + methodName.hashCode();
-        this.hashCode = 31 * this.hashCode + Arrays.deepHashCode(this.params);
+        params = new Object[elements.length];
+        System.arraycopy(elements, 0, params, 0, elements.length);
+        hashCode = prefix.hashCode();
+        hashCode = 31 * hashCode + methodName.hashCode();
+        hashCode = 31 * hashCode + Arrays.deepHashCode(params);
     }
 
     /** {@inheritDoc} */
     @Override
     public boolean equals(Object other) {
         return (this == other ||
-            (other instanceof PrefixedSimpleKey && this.prefix.equals(((PrefixedSimpleKey) other).prefix) &&
-                this.methodName.equals(((PrefixedSimpleKey) other).methodName) &&
-                Arrays.deepEquals(this.params, ((PrefixedSimpleKey) other).params)));
+            (other instanceof PrefixedSimpleKey && prefix.equals(((PrefixedSimpleKey) other).prefix) &&
+                methodName.equals(((PrefixedSimpleKey) other).methodName) &&
+                Arrays.deepEquals(params, ((PrefixedSimpleKey) other).params)));
     }
 
     /** {@inheritDoc} */
     @Override
     public final int hashCode() {
-        return this.hashCode;
+        return hashCode;
     }
 
     /** {@inheritDoc} */
     @Override
     public String toString() {
-        return this.prefix + " " + getClass().getSimpleName() + this.methodName + " [" + StringUtils.arrayToCommaDelimitedString(this.params) + "]";
+        return prefix + " " + getClass().getSimpleName() + methodName + " [" + StringUtils.arrayToCommaDelimitedString(
+            params) + "]";
     }
 }
