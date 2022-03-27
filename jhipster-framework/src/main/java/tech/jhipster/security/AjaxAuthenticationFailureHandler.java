@@ -38,7 +38,7 @@ public class AjaxAuthenticationFailureHandler extends SimpleUrlAuthenticationFai
     /** {@inheritDoc} */
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
-                                        AuthenticationException exception) throws IOException, ServletException {
+                                        AuthenticationException exception) throws IOException {
         response.sendError(HttpServletResponse.SC_UNAUTHORIZED, UNAUTHORIZED_MESSAGE);
     }
 }

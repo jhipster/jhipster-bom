@@ -51,7 +51,7 @@ public class CachingHttpHeadersFilter implements Filter {
 
     /** {@inheritDoc} */
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
+    public void init(FilterConfig filterConfig) {
         cacheTimeToLive = TimeUnit.DAYS.toMillis(jHipsterProperties.getHttp().getCache().getTimeToLiveInDays());
     }
 
