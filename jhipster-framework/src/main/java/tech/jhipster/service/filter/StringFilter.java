@@ -53,7 +53,7 @@ public class StringFilter extends Filter<String> {
      *
      * @param filter a {@link StringFilter} object.
      */
-    public StringFilter(final StringFilter filter) {
+    public StringFilter(StringFilter filter) {
         super(filter);
         this.contains = filter.contains;
         this.doesNotContain = filter.doesNotContain;
@@ -107,7 +107,7 @@ public class StringFilter extends Filter<String> {
 
     /** {@inheritDoc} */
     @Override
-    public boolean equals(final Object o) {
+    public boolean equals(Object o) {
         if (this == o) {
             return true;
         }
@@ -117,7 +117,7 @@ public class StringFilter extends Filter<String> {
         if (!super.equals(o)) {
             return false;
         }
-        final StringFilter that = (StringFilter) o;
+        StringFilter that = (StringFilter) o;
         return Objects.equals(contains, that.contains) &&
             Objects.equals(doesNotContain, that.doesNotContain);
     }

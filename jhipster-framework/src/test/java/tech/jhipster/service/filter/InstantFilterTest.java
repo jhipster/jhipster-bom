@@ -56,7 +56,7 @@ class InstantFilterTest {
 
     @Test
     void testCopy() {
-        final InstantFilter copy = filter.copy();
+        InstantFilter copy = filter.copy();
         assertThat(copy).isNotSameAs(filter);
         assertThat(copy.getEquals()).isNull();
         assertThat(copy.getNotEquals()).isNull();
@@ -137,7 +137,7 @@ class InstantFilterTest {
 
     @Test
     void testEquals() {
-        final InstantFilter filter2 = new InstantFilter();
+        InstantFilter filter2 = new InstantFilter();
         assertThat(filter).isEqualTo(filter2);
         filter.setEquals(value);
         filter2.setEquals(value);
@@ -173,7 +173,7 @@ class InstantFilterTest {
         assertThat(filter).isNotEqualTo(filter2);
         filter2.setLessThanOrEqual(value);
         assertThat(filter).isEqualTo(filter2);
-        final InstantFilter filter3 = new InstantFilter();
+        InstantFilter filter3 = new InstantFilter();
         filter3.setEquals(value);
         assertThat(filter3).isNotEqualTo(filter);
         assertThat(filter3).isNotEqualTo(filter2);
@@ -181,7 +181,7 @@ class InstantFilterTest {
 
     @Test
     void testHashCode() {
-        final InstantFilter filter2 = new InstantFilter();
+        InstantFilter filter2 = new InstantFilter();
         assertThat(filter.hashCode()).isEqualTo(filter2.hashCode());
         filter.setEquals(value);
         filter2.setEquals(value);

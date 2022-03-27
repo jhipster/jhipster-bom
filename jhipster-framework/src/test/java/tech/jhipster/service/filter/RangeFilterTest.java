@@ -55,7 +55,7 @@ class RangeFilterTest {
 
     @Test
     void testCopy() {
-        final RangeFilter<Short> copy = filter.copy();
+        RangeFilter<Short> copy = filter.copy();
         assertThat(copy).isNotSameAs(filter);
         assertThat(copy.getEquals()).isNull();
         assertThat(copy.getNotEquals()).isNull();
@@ -136,7 +136,7 @@ class RangeFilterTest {
 
     @Test
     void testEquals() {
-        final RangeFilter<Short> filter2 = new RangeFilter<>();
+        RangeFilter<Short> filter2 = new RangeFilter<>();
         assertThat(filter).isEqualTo(filter2);
         filter.setEquals(value);
         filter2.setEquals(value);
@@ -172,7 +172,7 @@ class RangeFilterTest {
         assertThat(filter).isNotEqualTo(filter2);
         filter2.setLessThanOrEqual(value);
         assertThat(filter).isEqualTo(filter2);
-        final RangeFilter<Short> filter3 = new RangeFilter<>();
+        RangeFilter<Short> filter3 = new RangeFilter<>();
         filter3.setEquals(value);
         assertThat(filter3).isNotEqualTo(filter);
         assertThat(filter3).isNotEqualTo(filter2);
@@ -180,7 +180,7 @@ class RangeFilterTest {
 
     @Test
     void testHashCode() {
-        final RangeFilter<Short> filter2 = new RangeFilter<>();
+        RangeFilter<Short> filter2 = new RangeFilter<>();
         assertThat(filter.hashCode()).isEqualTo(filter2.hashCode());
         filter.setEquals(value);
         filter2.setEquals(value);

@@ -45,7 +45,7 @@ public class ZonedDateTimeFilter extends RangeFilter<ZonedDateTime> {
      *
      * @param filter a {@link ZonedDateTimeFilter} object.
      */
-    public ZonedDateTimeFilter(final ZonedDateTimeFilter filter) {
+    public ZonedDateTimeFilter(ZonedDateTimeFilter filter) {
         super(filter);
     }
 

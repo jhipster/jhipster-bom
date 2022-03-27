@@ -56,7 +56,7 @@ class FilterTest {
 
     @Test
     void testCopy() {
-        final Filter<Object> copy = filter.copy();
+        Filter<Object> copy = filter.copy();
         assertThat(copy).isNotSameAs(filter);
         assertThat(copy.getEquals()).isNull();
         assertThat(copy.getNotEquals()).isNull();
@@ -105,7 +105,7 @@ class FilterTest {
 
     @Test
     void testEquals() {
-        final Filter<Object> filter2 = new Filter<>();
+        Filter<Object> filter2 = new Filter<>();
         assertThat(filter).isEqualTo(filter2);
         filter.setEquals(value);
         assertThat(filter2).isNotEqualTo(filter);
@@ -127,7 +127,7 @@ class FilterTest {
         assertThat(filter2).isNotEqualTo(filter);
         filter2.setNotIn(Arrays.asList(value, value));
         assertThat(filter).isEqualTo(filter2);
-        final Filter<Object> filter3 = new Filter<>();
+        Filter<Object> filter3 = new Filter<>();
         filter3.setEquals(value);
         assertThat(filter3).isNotEqualTo(filter);
         assertThat(filter3).isNotEqualTo(filter2);
@@ -135,7 +135,7 @@ class FilterTest {
 
     @Test
     void testHashCode() {
-        final Filter<Object> filter2 = new Filter<>();
+        Filter<Object> filter2 = new Filter<>();
         assertThat(filter.hashCode()).isEqualTo(filter2.hashCode());
         filter.setEquals(value);
         filter2.setEquals(value);
@@ -152,7 +152,7 @@ class FilterTest {
         filter.setNotIn(Arrays.asList(value, value));
         filter2.setNotIn(Arrays.asList(value, value));
         assertThat(filter.hashCode()).isEqualTo(filter2.hashCode());
-        final Filter<Object> filter3 = new Filter<>();
+        Filter<Object> filter3 = new Filter<>();
         filter3.setEquals(value);
         assertThat(filter3.hashCode()).isNotEqualTo(filter.hashCode());
         assertThat(filter3.hashCode()).isNotEqualTo(filter2.hashCode());

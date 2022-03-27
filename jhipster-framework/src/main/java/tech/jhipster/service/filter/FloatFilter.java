@@ -38,7 +38,7 @@ public class FloatFilter extends RangeFilter<Float> {
      *
      * @param filter a {@link FloatFilter} object.
      */
-    public FloatFilter(final FloatFilter filter) {
+    public FloatFilter(FloatFilter filter) {
         super(filter);
     }
 

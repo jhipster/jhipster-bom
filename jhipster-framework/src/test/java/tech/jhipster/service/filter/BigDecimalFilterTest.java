@@ -56,7 +56,7 @@ class BigDecimalFilterTest {
 
     @Test
     void testCopy() {
-        final BigDecimalFilter copy = filter.copy();
+        BigDecimalFilter copy = filter.copy();
         assertThat(copy).isNotSameAs(filter);
         assertThat(copy.getEquals()).isNull();
         assertThat(copy.getNotEquals()).isNull();
@@ -137,7 +137,7 @@ class BigDecimalFilterTest {
 
     @Test
     void testEquals() {
-        final BigDecimalFilter filter2 = new BigDecimalFilter();
+        BigDecimalFilter filter2 = new BigDecimalFilter();
         assertThat(filter).isEqualTo(filter2);
         filter.setEquals(value);
         filter2.setEquals(value);
@@ -173,7 +173,7 @@ class BigDecimalFilterTest {
         assertThat(filter).isNotEqualTo(filter2);
         filter2.setLessThanOrEqual(value);
         assertThat(filter).isEqualTo(filter2);
-        final BigDecimalFilter filter3 = new BigDecimalFilter();
+        BigDecimalFilter filter3 = new BigDecimalFilter();
         filter3.setEquals(value);
         assertThat(filter3).isNotEqualTo(filter);
         assertThat(filter3).isNotEqualTo(filter2);
@@ -181,7 +181,7 @@ class BigDecimalFilterTest {
 
     @Test
     void testHashCode() {
-        final BigDecimalFilter filter2 = new BigDecimalFilter();
+        BigDecimalFilter filter2 = new BigDecimalFilter();
         assertThat(filter.hashCode()).isEqualTo(filter2.hashCode());
         filter.setEquals(value);
         filter2.setEquals(value);

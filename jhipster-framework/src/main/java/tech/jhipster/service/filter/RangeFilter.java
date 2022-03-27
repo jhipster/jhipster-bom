@@ -69,7 +69,7 @@ public class RangeFilter<FIELD_TYPE extends Comparable<? super FIELD_TYPE>> exte
      *
      * @param filter a {@link RangeFilter} object.
      */
-    public RangeFilter(final RangeFilter<FIELD_TYPE> filter) {
+    public RangeFilter(RangeFilter<FIELD_TYPE> filter) {
         super(filter);
         this.greaterThan = filter.greaterThan;
         this.lessThan = filter.lessThan;
@@ -165,7 +165,7 @@ public class RangeFilter<FIELD_TYPE extends Comparable<? super FIELD_TYPE>> exte
 
     /** {@inheritDoc} */
     @Override
-    public boolean equals(final Object o) {
+    public boolean equals(Object o) {
         if (this == o) {
             return true;
         }
@@ -175,7 +175,7 @@ public class RangeFilter<FIELD_TYPE extends Comparable<? super FIELD_TYPE>> exte
         if (!super.equals(o)) {
             return false;
         }
-        final RangeFilter<?> that = (RangeFilter<?>) o;
+        RangeFilter<?> that = (RangeFilter<?>) o;
         return Objects.equals(greaterThan, that.greaterThan) &&
             Objects.equals(lessThan, that.lessThan) &&
             Objects.equals(greaterThanOrEqual, that.greaterThanOrEqual) &&

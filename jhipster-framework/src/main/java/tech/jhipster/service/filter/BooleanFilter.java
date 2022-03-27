@@ -45,7 +45,7 @@ public class BooleanFilter extends Filter<Boolean> {
      *
      * @param filter a {@link BooleanFilter} object.
      */
-    public BooleanFilter(final BooleanFilter filter) {
+    public BooleanFilter(BooleanFilter filter) {
         super(filter);
     }
 

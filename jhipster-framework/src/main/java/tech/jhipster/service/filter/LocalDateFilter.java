@@ -45,7 +45,7 @@ public class LocalDateFilter extends RangeFilter<LocalDate> {
      *
      * @param filter a {@link LocalDateFilter} object.
      */
-    public LocalDateFilter(final LocalDateFilter filter) {
+    public LocalDateFilter(LocalDateFilter filter) {
         super(filter);
     }
 

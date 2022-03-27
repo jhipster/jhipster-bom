@@ -89,7 +89,7 @@ public final class LoggingUtils {
     }
 
     private static LoggingEventCompositeJsonEncoder compositeJsonEncoder(LoggerContext context, String customFields) {
-        final LoggingEventCompositeJsonEncoder compositeJsonEncoder = new LoggingEventCompositeJsonEncoder();
+        LoggingEventCompositeJsonEncoder compositeJsonEncoder = new LoggingEventCompositeJsonEncoder();
         compositeJsonEncoder.setContext(context);
         compositeJsonEncoder.setProviders(jsonProviders(context, customFields));
         compositeJsonEncoder.start();
@@ -97,14 +97,14 @@ public final class LoggingUtils {
     }
 
     private static LogstashEncoder logstashEncoder(String customFields) {
-        final LogstashEncoder logstashEncoder = new LogstashEncoder();
+        LogstashEncoder logstashEncoder = new LogstashEncoder();
         logstashEncoder.setThrowableConverter(throwableConverter());
         logstashEncoder.setCustomFields(customFields);
         return logstashEncoder;
     }
 
     private static LoggingEventJsonProviders jsonProviders(LoggerContext context, String customFields) {
-        final LoggingEventJsonProviders jsonProviders = new LoggingEventJsonProviders();
+        LoggingEventJsonProviders jsonProviders = new LoggingEventJsonProviders();
         jsonProviders.addArguments(new ArgumentsJsonProvider());
         jsonProviders.addContext(new ContextJsonProvider<>());
         jsonProviders.addGlobalCustomFields(customFieldsJsonProvider(customFields));
@@ -121,13 +121,13 @@ public final class LoggingUtils {
     }
 
     private static GlobalCustomFieldsJsonProvider<ILoggingEvent> customFieldsJsonProvider(String customFields) {
-        final GlobalCustomFieldsJsonProvider<ILoggingEvent> customFieldsJsonProvider = new GlobalCustomFieldsJsonProvider<>();
+        GlobalCustomFieldsJsonProvider<ILoggingEvent> customFieldsJsonProvider = new GlobalCustomFieldsJsonProvider<>();
         customFieldsJsonProvider.setCustomFields(customFields);
         return customFieldsJsonProvider;
     }
 
     private static LoggerNameJsonProvider loggerNameJsonProvider() {
-        final LoggerNameJsonProvider loggerNameJsonProvider = new LoggerNameJsonProvider();
+        LoggerNameJsonProvider loggerNameJsonProvider = new LoggerNameJsonProvider();
         loggerNameJsonProvider.setShortenedLoggerNameLength(20);
         return loggerNameJsonProvider;
     }
@@ -139,13 +139,13 @@ public final class LoggingUtils {
     }
 
     private static ShortenedThrowableConverter throwableConverter() {
-        final ShortenedThrowableConverter throwableConverter = new ShortenedThrowableConverter();
+        ShortenedThrowableConverter throwableConverter = new ShortenedThrowableConverter();
         throwableConverter.setRootCauseFirst(true);
         return throwableConverter;
     }
 
     private static LoggingEventFormattedTimestampJsonProvider timestampJsonProvider() {
-        final LoggingEventFormattedTimestampJsonProvider timestampJsonProvider = new LoggingEventFormattedTimestampJsonProvider();
+        LoggingEventFormattedTimestampJsonProvider timestampJsonProvider = new LoggingEventFormattedTimestampJsonProvider();
         timestampJsonProvider.setTimeZone("UTC");
         timestampJsonProvider.setFieldName("timestamp");
         return timestampJsonProvider;

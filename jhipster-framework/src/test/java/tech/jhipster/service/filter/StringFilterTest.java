@@ -53,7 +53,7 @@ class StringFilterTest {
 
     @Test
     void testCopy() {
-        final StringFilter copy = filter.copy();
+        StringFilter copy = filter.copy();
         assertThat(copy).isNotSameAs(filter);
         assertThat(copy.getEquals()).isNull();
         assertThat(copy.getNotEquals()).isNull();
@@ -118,7 +118,7 @@ class StringFilterTest {
 
     @Test
     void testEquals() {
-        final StringFilter filter2 = new StringFilter();
+        StringFilter filter2 = new StringFilter();
         assertThat(filter).isEqualTo(filter2);
         filter.setEquals(value);
         assertThat(filter2).isNotEqualTo(filter);
@@ -148,7 +148,7 @@ class StringFilterTest {
         assertThat(filter2).isNotEqualTo(filter);
         filter2.setDoesNotContain(value);
         assertThat(filter).isEqualTo(filter2);
-        final StringFilter filter3 = new StringFilter();
+        StringFilter filter3 = new StringFilter();
         filter3.setEquals(value);
         assertThat(filter3).isNotEqualTo(filter);
         assertThat(filter3).isNotEqualTo(filter2);
@@ -156,7 +156,7 @@ class StringFilterTest {
 
     @Test
     void testHashCode() {
-        final StringFilter filter2 = new StringFilter();
+        StringFilter filter2 = new StringFilter();
         assertThat(filter.hashCode()).isEqualTo(filter2.hashCode());
         filter.setEquals(value);
         filter2.setEquals(value);
@@ -179,7 +179,7 @@ class StringFilterTest {
         filter.setDoesNotContain(value);
         filter2.setDoesNotContain(value);
         assertThat(filter.hashCode()).isEqualTo(filter2.hashCode());
-        final StringFilter filter3 = new StringFilter();
+        StringFilter filter3 = new StringFilter();
         filter3.setEquals(value);
         assertThat(filter3.hashCode()).isNotEqualTo(filter.hashCode());
         assertThat(filter3.hashCode()).isNotEqualTo(filter2.hashCode());

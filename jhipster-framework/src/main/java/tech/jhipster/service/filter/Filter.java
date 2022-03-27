@@ -175,14 +175,14 @@ public class Filter<FIELD_TYPE> implements Serializable {
 
     /** {@inheritDoc} */
     @Override
-    public boolean equals(final Object o) {
+    public boolean equals(Object o) {
         if (this == o) {
             return true;
         }
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        final Filter<?> filter = (Filter<?>) o;
+        Filter<?> filter = (Filter<?>) o;
         return Objects.equals(equals, filter.equals) &&
                 Objects.equals(notEquals, filter.notEquals) &&
                 Objects.equals(specified, filter.specified) &&

@@ -55,7 +55,7 @@ class DoubleFilterTest {
 
     @Test
     void testCopy() {
-        final DoubleFilter copy = filter.copy();
+        DoubleFilter copy = filter.copy();
         assertThat(copy).isNotSameAs(filter);
         assertThat(copy.getEquals()).isNull();
         assertThat(copy.getNotEquals()).isNull();
@@ -136,7 +136,7 @@ class DoubleFilterTest {
 
     @Test
     void testEquals() {
-        final DoubleFilter filter2 = new DoubleFilter();
+        DoubleFilter filter2 = new DoubleFilter();
         assertThat(filter).isEqualTo(filter2);
         filter.setEquals(value);
         filter2.setEquals(value);
@@ -172,7 +172,7 @@ class DoubleFilterTest {
         assertThat(filter).isNotEqualTo(filter2);
         filter2.setLessThanOrEqual(value);
         assertThat(filter).isEqualTo(filter2);
-        final DoubleFilter filter3 = new DoubleFilter();
+        DoubleFilter filter3 = new DoubleFilter();
         filter3.setEquals(value);
         assertThat(filter3).isNotEqualTo(filter);
         assertThat(filter3).isNotEqualTo(filter2);
@@ -180,7 +180,7 @@ class DoubleFilterTest {
 
     @Test
     void testHashCode() {
-        final DoubleFilter filter2 = new DoubleFilter();
+        DoubleFilter filter2 = new DoubleFilter();
         assertThat(filter.hashCode()).isEqualTo(filter2.hashCode());
         filter.setEquals(value);
         filter2.setEquals(value);

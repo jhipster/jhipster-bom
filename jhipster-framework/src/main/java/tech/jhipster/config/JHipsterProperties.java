@@ -978,7 +978,7 @@ public class JHipsterProperties {
             return servers;
         }
 
-        public void setServers(final Server[] servers) {
+        public void setServers(Server[] servers) {
             this.servers = servers;
         }
 

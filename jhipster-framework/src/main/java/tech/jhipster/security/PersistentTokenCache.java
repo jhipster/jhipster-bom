@@ -60,8 +60,8 @@ public class PersistentTokenCache<T> {
      */
     public T get(String key) {
         purge();
-        final Value val = map.get(key);
-        final long time = System.currentTimeMillis();
+        Value val = map.get(key);
+        long time = System.currentTimeMillis();
         return val != null && time < val.expire ? val.token : null;
     }
 
@@ -77,7 +77,7 @@ public class PersistentTokenCache<T> {
         if (map.containsKey(key)) {
             map.remove(key);
         }
-        final long time = System.currentTimeMillis();
+        long time = System.currentTimeMillis();
         map.put(key, new Value(token, time + expireMillis));
         latestWriteTime = time;
     }

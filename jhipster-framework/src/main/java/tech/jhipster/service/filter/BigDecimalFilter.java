@@ -40,7 +40,7 @@ public class BigDecimalFilter extends RangeFilter<BigDecimal> {
      *
      * @param filter a {@link BigDecimalFilter} object.
      */
-    public BigDecimalFilter(final BigDecimalFilter filter) {
+    public BigDecimalFilter(BigDecimalFilter filter) {
         super(filter);
     }
 

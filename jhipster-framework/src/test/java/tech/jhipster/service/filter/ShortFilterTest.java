@@ -55,7 +55,7 @@ class ShortFilterTest {
 
     @Test
     void testCopy() {
-        final ShortFilter copy = filter.copy();
+        ShortFilter copy = filter.copy();
         assertThat(copy).isNotSameAs(filter);
         assertThat(copy.getEquals()).isNull();
         assertThat(copy.getNotEquals()).isNull();
@@ -136,7 +136,7 @@ class ShortFilterTest {
 
     @Test
     void testEquals() {
-        final ShortFilter filter2 = new ShortFilter();
+        ShortFilter filter2 = new ShortFilter();
         assertThat(filter).isEqualTo(filter2);
         filter.setEquals(value);
         filter2.setEquals(value);
@@ -172,7 +172,7 @@ class ShortFilterTest {
         assertThat(filter).isNotEqualTo(filter2);
         filter2.setLessThanOrEqual(value);
         assertThat(filter).isEqualTo(filter2);
-        final ShortFilter filter3 = new ShortFilter();
+        ShortFilter filter3 = new ShortFilter();
         filter3.setEquals(value);
         assertThat(filter3).isNotEqualTo(filter);
         assertThat(filter3).isNotEqualTo(filter2);
@@ -180,7 +180,7 @@ class ShortFilterTest {
 
     @Test
     void testHashCode() {
-        final ShortFilter filter2 = new ShortFilter();
+        ShortFilter filter2 = new ShortFilter();
         assertThat(filter.hashCode()).isEqualTo(filter2.hashCode());
         filter.setEquals(value);
         filter2.setEquals(value);
