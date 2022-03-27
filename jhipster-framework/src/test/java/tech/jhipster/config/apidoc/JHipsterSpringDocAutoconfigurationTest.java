@@ -76,8 +76,8 @@ class JHipsterSpringDocAutoconfigurationTest {
             .andExpect(jsonPath("$.info.contact.email").value("test contact email"))
             .andExpect(jsonPath("$.info.license.name").value("test license name"))
             .andExpect(jsonPath("$.info.license.url").value("test license url"))
-            .andExpect(jsonPath("$.paths./scanned/test").exists())
-            .andExpect(jsonPath("$.paths./not-scanned/test").doesNotExist())
+            .andExpect(jsonPath("$.paths['/scanned/test']").exists())
+            .andExpect(jsonPath("$.paths['/not-scanned/test']").doesNotExist())
             .andExpect(jsonPath("$.servers.[*].url").value(hasItem("http://localhost")));
     }
 
@@ -86,16 +86,16 @@ class JHipsterSpringDocAutoconfigurationTest {
         mockMvc.perform(get("/v3/api-docs"))
             .andExpect((status().isOk()))
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.paths./scanned/test.get.parameters[?(@.name == 'page')]").exists())
-            .andExpect(jsonPath("$.paths./scanned/test.get.parameters[?(@.name == 'page')].in").value("query"))
-            .andExpect(jsonPath("$.paths./scanned/test.get.parameters[?(@.name == 'page')].schema.type").value("integer"))
-            .andExpect(jsonPath("$.paths./scanned/test.get.parameters[?(@.name == 'size')]").exists())
-            .andExpect(jsonPath("$.paths./scanned/test.get.parameters[?(@.name == 'size')].in").value("query"))
-            .andExpect(jsonPath("$.paths./scanned/test.get.parameters[?(@.name == 'size')].schema.type").value("integer"))
-            .andExpect(jsonPath("$.paths./scanned/test.get.parameters[?(@.name == 'sort')]").exists())
-            .andExpect(jsonPath("$.paths./scanned/test.get.parameters[?(@.name == 'sort')].in").value("query"))
-            .andExpect(jsonPath("$.paths./scanned/test.get.parameters[?(@.name == 'sort')].schema.type").value("array"))
-            .andExpect(jsonPath("$.paths./scanned/test.get.parameters[?(@.name == 'sort')].schema.items.type").value("string"));
+            .andExpect(jsonPath("$.paths['/scanned/test'].get.parameters[?(@.name == 'page')]").exists())
+            .andExpect(jsonPath("$.paths['/scanned/test'].get.parameters[?(@.name == 'page')].in").value("query"))
+            .andExpect(jsonPath("$.paths['/scanned/test'].get.parameters[?(@.name == 'page')].schema.type").value("integer"))
+            .andExpect(jsonPath("$.paths['/scanned/test'].get.parameters[?(@.name == 'size')]").exists())
+            .andExpect(jsonPath("$.paths['/scanned/test'].get.parameters[?(@.name == 'size')].in").value("query"))
+            .andExpect(jsonPath("$.paths['/scanned/test'].get.parameters[?(@.name == 'size')].schema.type").value("integer"))
+            .andExpect(jsonPath("$.paths['/scanned/test'].get.parameters[?(@.name == 'sort')]").exists())
+            .andExpect(jsonPath("$.paths['/scanned/test'].get.parameters[?(@.name == 'sort')].in").value("query"))
+            .andExpect(jsonPath("$.paths['/scanned/test'].get.parameters[?(@.name == 'sort')].schema.type").value("array"))
+            .andExpect(jsonPath("$.paths['/scanned/test'].get.parameters[?(@.name == 'sort')].schema.items.type").value("string"));
     }
 
     @Test
@@ -112,8 +112,8 @@ class JHipsterSpringDocAutoconfigurationTest {
             .andExpect(jsonPath("$.info.contact.email").value("test contact email"))
             .andExpect(jsonPath("$.info.license.name").value("test license name"))
             .andExpect(jsonPath("$.info.license.url").value("test license url"))
-            .andExpect(jsonPath("$.paths./scanned/test").exists())
-            .andExpect(jsonPath("$.paths./not-scanned/test").doesNotExist())
+            .andExpect(jsonPath("$.paths['/scanned/test']").exists())
+            .andExpect(jsonPath("$.paths['/not-scanned/test']").doesNotExist())
             .andExpect(jsonPath("$.servers.[*].url").value(hasItem("http://localhost")));
     }
 
@@ -128,8 +128,8 @@ class JHipsterSpringDocAutoconfigurationTest {
             .andExpect(jsonPath("$.info.termsOfService").doesNotExist())
             .andExpect(jsonPath("$.info.contact").doesNotExist())
             .andExpect(jsonPath("$.info.license").doesNotExist())
-            .andExpect(jsonPath("$.paths./management/health").exists())
-            .andExpect(jsonPath("$.paths./scanned/test").doesNotExist())
+            .andExpect(jsonPath("$.paths['/management/health']").exists())
+            .andExpect(jsonPath("$.paths['/scanned/test']").doesNotExist())
             .andExpect(jsonPath("$.servers.[*].url").value(hasItem("http://localhost")));
     }
 
@@ -170,7 +170,7 @@ class JHipsterSpringDocAutoconfigurationTest {
 
         @Operation
         @GetMapping("/not-scanned/test")
-        public void notscanned(@ParameterObject Pageable pageable) {
+        public void notScanned(@ParameterObject Pageable pageable) {
         }
     }
 
