@@ -64,7 +64,7 @@ public class JHipsterOpenApiEndpoint {
     }
 
     private Map<String, String> createGroupMap(GroupConfig group) {
-        Map<String, String> map = new HashMap<String, String>();
+        Map<String, String> map = new HashMap<>();
         String groupName = group.getGroup();
         map.put("group", groupName);
         String description = appName + " (" + (DEFAULT_GROUP_NAME.equals(groupName) ? "default" : groupName) + ")";
