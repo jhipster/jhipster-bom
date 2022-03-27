@@ -256,7 +256,7 @@ public abstract class QueryService<ENTITY> {
             return equalsSpecification(functionToEntity.andThen(entityToColumn), filter.getEquals());
         } else if (filter.getSpecified() != null) {
             // Interestingly, 'functionToEntity' doesn't work, we need the longer lambda formula
-            return byFieldSpecified(root -> functionToEntity.apply(root), filter.getSpecified());
+            return byFieldSpecified(functionToEntity::apply, filter.getSpecified());
         }
         return null;
     }
@@ -328,7 +328,7 @@ public abstract class QueryService<ENTITY> {
         Specification<ENTITY> result = Specification.where(null);
         if (filter.getSpecified() != null) {
             // Interestingly, 'functionToEntity' doesn't work, we need the longer lambda formula
-            result = result.and(byFieldSpecified(root -> functionToEntity.apply(root), filter.getSpecified()));
+            result = result.and(byFieldSpecified(functionToEntity::apply, filter.getSpecified()));
         }
         if (filter.getNotEquals() != null) {
             result = result.and(notEqualsSpecification(fused, filter.getNotEquals()));
