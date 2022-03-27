@@ -23,10 +23,10 @@ import static org.springdoc.core.Constants.DEFAULT_GROUP_NAME;
 import static org.springdoc.core.Constants.SPRINGDOC_SHOW_ACTUATOR;
 import static org.springdoc.core.SpringDocUtils.getConfig;
 
+import io.swagger.v3.oas.models.info.Info;
 import java.nio.ByteBuffer;
 import java.util.List;
 import java.util.Optional;
-
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,8 +44,6 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import io.swagger.v3.oas.models.info.Info;
 import tech.jhipster.config.JHipsterProperties;
 import tech.jhipster.config.apidoc.customizer.JHipsterOpenApiCustomizer;
 
@@ -114,11 +112,8 @@ public class JHipsterSpringDocGroupsConfiguration {
         operationCustomizers.stream()
             .filter(customiser -> !(customiser instanceof ActuatorOperationCustomizer))
             .forEach(builder::addOperationCustomizer);
-        apiFirstGroupedOpenAPI.ifPresent(apiFirst -> {
-            if (apiFirst.getPackagesToScan() != null) {
-                apiFirst.getPackagesToScan().stream().forEach(builder::packagesToExclude);
-            }
-        });
+        apiFirstGroupedOpenAPI.map(GroupedOpenApi::getPackagesToScan)
+            .ifPresent(packagesToScan -> packagesToScan.forEach(builder::packagesToExclude));
         return builder.build();
     }
 
@@ -139,13 +134,11 @@ public class JHipsterSpringDocGroupsConfiguration {
         log.debug("Initializing JHipster OpenApi management group");
         return GroupedOpenApi.builder()
             .group(MANAGEMENT_GROUP_NAME)
-            .addOpenApiCustomiser(openApi -> {
-                openApi.info(new Info()
-                    .title(StringUtils.capitalize(appName) + " " + MANAGEMENT_TITLE_SUFFIX)
-                    .description(MANAGEMENT_DESCRIPTION)
-                    .version(properties.getVersion())
-                );
-            })
+            .addOpenApiCustomiser(openApi -> openApi.info(new Info()
+                .title(StringUtils.capitalize(appName) + " " + MANAGEMENT_TITLE_SUFFIX)
+                .description(MANAGEMENT_DESCRIPTION)
+                .version(properties.getVersion())
+            ))
             .addOpenApiCustomiser(actuatorOpenApiCustomiser)
             .addOperationCustomizer(actuatorCustomizer)
             .pathsToMatch(properties.getManagementIncludePattern())
