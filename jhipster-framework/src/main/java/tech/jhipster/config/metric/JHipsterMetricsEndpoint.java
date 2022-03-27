@@ -4,6 +4,7 @@ import io.micrometer.core.instrument.Timer;
 import io.micrometer.core.instrument.*;
 import io.micrometer.core.instrument.distribution.ValueAtPercentile;
 import io.micrometer.core.instrument.search.Search;
+import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.actuate.endpoint.annotation.ReadOperation;
@@ -43,9 +44,9 @@ public class JHipsterMetricsEndpoint {
      * another Map containing metrics related to this category as Value
      */
     @ReadOperation
-    public Map<String, Map> allMetrics() {
+    public Map<String, Map<?, ?>> allMetrics() {
 
-        Map<String, Map> results = new HashMap<>();
+        Map<String, Map<?, ?>> results = new HashMap<>();
         // JVM stats
         results.put("jvm", jvmMemoryMetrics());
         // HTTP requests stats
@@ -104,11 +105,11 @@ public class JHipsterMetricsEndpoint {
         counters.forEach(counter -> resultsGarbageCollector.put(counter.getId().getName(), counter.count()));
 
         gauges = Search.in(meterRegistry).name(s -> s.contains("jvm.classes.loaded")).gauges();
-        Double classesLoaded = gauges.stream().map(Gauge::value).reduce(Double::sum).orElse((double) 0);
+        Double classesLoaded = gauges.stream().mapToDouble(Gauge::value).sum();
         resultsGarbageCollector.put("classesLoaded", classesLoaded);
 
         Collection<FunctionCounter> functionCounters = Search.in(meterRegistry).name(s -> s.contains("jvm.classes.unloaded")).functionCounters();
-        Double classesUnloaded = functionCounters.stream().map(FunctionCounter::count).reduce(Double::sum).orElse((double) 0);
+        Double classesUnloaded = functionCounters.stream().mapToDouble(FunctionCounter::count).sum();
         resultsGarbageCollector.put("classesUnloaded", classesUnloaded);
 
         return resultsGarbageCollector;
@@ -143,28 +144,26 @@ public class JHipsterMetricsEndpoint {
         return resultsDatabase;
     }
 
-    private Map<String, Map> serviceMetrics() {
+    private Map<String, Map<?, ?>> serviceMetrics() {
         Collection<String> crudOperation = Arrays.asList("GET", "POST", "PUT", "DELETE");
-
-        Set<String> uris = new HashSet<>();
         Collection<Timer> timers = meterRegistry.find("http.server.requests").timers();
 
-        timers.forEach(timer -> uris.add(timer.getId().getTag("uri")));
-        Map<String, Map> resultsHttpPerUri = new HashMap<>();
+        Set<String> uris = timers.stream().map(timer -> timer.getId().getTag("uri"))
+            .collect(Collectors.toSet());
+        Map<String, Map<?, ?>> resultsHttpPerUri = new HashMap<>();
 
         uris.forEach(uri -> {
-            Map<String, Map> resultsPerUri = new HashMap<>();
+            Map<String, Map<?, ?>> resultsPerUri = new HashMap<>();
 
             crudOperation.forEach(operation -> {
                 Map<String, Number> resultsPerUriPerCrudOperation = new HashMap<>();
 
                 Collection<Timer> httpTimersStream = meterRegistry.find("http.server.requests").tags("uri", uri, "method", operation).timers();
-                long count = httpTimersStream.stream().map(Timer::count).reduce(Long::sum).orElse(0L);
+                long count = httpTimersStream.stream().mapToLong(Timer::count).sum();
 
                 if (count != 0) {
-                    double max = httpTimersStream.stream().map(x -> x.totalTime(TimeUnit.MILLISECONDS)).reduce((x, y) -> x > y ? x : y).orElse((double) 0);
-                    double totalTime = httpTimersStream.stream().map(x -> x.totalTime(TimeUnit.MILLISECONDS)).reduce(
-                        Double::sum).orElse((double) 0);
+                    double max = httpTimersStream.stream().mapToDouble(x -> x.totalTime(TimeUnit.MILLISECONDS)).max().orElse(0);
+                    double totalTime = httpTimersStream.stream().mapToDouble(x -> x.totalTime(TimeUnit.MILLISECONDS)).sum();
 
                     resultsPerUriPerCrudOperation.put("count", count);
                     resultsPerUriPerCrudOperation.put("max", max);
@@ -241,23 +240,22 @@ public class JHipsterMetricsEndpoint {
         return resultsJvm;
     }
 
-    private Map<String, Map> httpRequestsMetrics() {
+    private Map<String, Map<?, ?>> httpRequestsMetrics() {
         Set<String> statusCode = new HashSet<>();
         Collection<Timer> timers = meterRegistry.find("http.server.requests").timers();
 
         timers.forEach(timer -> statusCode.add(timer.getId().getTag("status")));
 
-        Map<String, Map> resultsHttp = new HashMap<>();
+        Map<String, Map<?, ?>> resultsHttp = new HashMap<>();
         Map<String, Map<String, Number>> resultsHttpPerCode = new HashMap<>();
 
         statusCode.forEach(code -> {
             Map<String, Number> resultsPerCode = new HashMap<>();
 
             Collection<Timer> httpTimersStream = meterRegistry.find("http.server.requests").tag("status", code).timers();
-            long count = httpTimersStream.stream().map(Timer::count).reduce(Long::sum).orElse(0L);
-            double max = httpTimersStream.stream().map(x -> x.max(TimeUnit.MILLISECONDS)).reduce((x, y) -> x > y ? x : y).orElse((double) 0);
-            double totalTime = httpTimersStream.stream().map(x -> x.totalTime(TimeUnit.MILLISECONDS)).reduce(
-                Double::sum).orElse((double) 0);
+            long count = httpTimersStream.stream().mapToLong(Timer::count).sum();
+            double max = httpTimersStream.stream().mapToDouble(x -> x.max(TimeUnit.MILLISECONDS)).max().orElse(0);
+            double totalTime = httpTimersStream.stream().mapToDouble(x -> x.totalTime(TimeUnit.MILLISECONDS)).sum();
 
             resultsPerCode.put("count", count);
             resultsPerCode.put("max", max);
@@ -269,7 +267,7 @@ public class JHipsterMetricsEndpoint {
         resultsHttp.put("percode", resultsHttpPerCode);
 
         timers = meterRegistry.find("http.server.requests").timers();
-        long countAllRequests = timers.stream().map(Timer::count).reduce(Long::sum).orElse(0L);
+        long countAllRequests = timers.stream().mapToLong(Timer::count).sum();
         Map<String, Number> resultsHTTPAll = new HashMap<>();
         resultsHTTPAll.put("count", countAllRequests);
 
