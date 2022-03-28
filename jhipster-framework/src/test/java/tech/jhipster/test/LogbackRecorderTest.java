@@ -282,9 +282,7 @@ class LogbackRecorderTest {
 
     @Test
     void testLogbackException() {
-        Throwable caught = catchThrowable(() -> {
-            LogbackRecorder.forLogger(mock(Logger.class));
-        });
+        Throwable caught = catchThrowable(() -> LogbackRecorder.forLogger(mock(Logger.class)));
         assertThat(caught).isInstanceOf(IllegalArgumentException.class);
         assertThat(caught).hasMessage(LogbackRecorder.LOGBACK_EXCEPTION_MESSAGE);
     }

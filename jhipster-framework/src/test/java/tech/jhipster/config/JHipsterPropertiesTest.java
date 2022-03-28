@@ -23,7 +23,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -47,7 +46,7 @@ class JHipsterPropertiesTest {
         Set<String> set = new LinkedHashSet<>(64, 1F);
         reflect(properties, set, "test");
         for (String name : set) {
-            assertThat(this.getClass().getDeclaredMethod(name)).isNotNull();
+            assertThat(getClass().getDeclaredMethod(name)).isNotNull();
         }
     }
 

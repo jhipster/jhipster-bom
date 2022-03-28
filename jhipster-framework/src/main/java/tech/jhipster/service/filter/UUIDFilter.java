@@ -40,7 +40,7 @@ public class UUIDFilter extends Filter<UUID> {
      *
      * @param filter a {@link UUIDFilter} object.
      */
-    public UUIDFilter(final UUIDFilter filter) {
+    public UUIDFilter(UUIDFilter filter) {
         super(filter);
     }
 

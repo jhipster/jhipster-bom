@@ -39,7 +39,7 @@ public class IntegerFilter extends RangeFilter<Integer> {
      *
      * @param filter a {@link IntegerFilter} object.
      */
-    public IntegerFilter(final IntegerFilter filter) {
+    public IntegerFilter(IntegerFilter filter) {
         super(filter);
     }
 

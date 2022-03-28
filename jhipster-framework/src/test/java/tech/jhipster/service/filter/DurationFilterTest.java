@@ -56,7 +56,7 @@ class DurationFilterTest {
 
     @Test
     void testCopy() {
-        final DurationFilter copy = filter.copy();
+        DurationFilter copy = filter.copy();
         assertThat(copy).isNotSameAs(filter);
         assertThat(copy.getEquals()).isNull();
         assertThat(copy.getNotEquals()).isNull();
@@ -137,7 +137,7 @@ class DurationFilterTest {
 
     @Test
     void testEquals() {
-        final DurationFilter filter2 = new DurationFilter();
+        DurationFilter filter2 = new DurationFilter();
         assertThat(filter).isEqualTo(filter2);
         filter.setEquals(value);
         filter2.setEquals(value);
@@ -173,7 +173,7 @@ class DurationFilterTest {
         assertThat(filter).isNotEqualTo(filter2);
         filter2.setLessThanOrEqual(value);
         assertThat(filter).isEqualTo(filter2);
-        final DurationFilter filter3 = new DurationFilter();
+        DurationFilter filter3 = new DurationFilter();
         filter3.setEquals(value);
         assertThat(filter3).isNotEqualTo(filter);
         assertThat(filter3).isNotEqualTo(filter2);
@@ -181,7 +181,7 @@ class DurationFilterTest {
 
     @Test
     void testHashCode() {
-        final DurationFilter filter2 = new DurationFilter();
+        DurationFilter filter2 = new DurationFilter();
         assertThat(filter.hashCode()).isEqualTo(filter2.hashCode());
         filter.setEquals(value);
         filter2.setEquals(value);

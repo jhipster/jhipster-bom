@@ -56,7 +56,7 @@ public class UndertowSSLConfiguration {
      * @param undertowServletWebServerFactory a {@link org.springframework.boot.web.embedded.undertow.UndertowServletWebServerFactory} object.
      */
     public UndertowSSLConfiguration(UndertowServletWebServerFactory undertowServletWebServerFactory) {
-        this.factory = undertowServletWebServerFactory;
+        factory = undertowServletWebServerFactory;
 
         configuringUserCipherSuiteOrder();
     }

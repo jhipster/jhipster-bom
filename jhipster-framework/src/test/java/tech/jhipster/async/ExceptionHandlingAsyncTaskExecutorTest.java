@@ -36,7 +36,9 @@ import java.util.concurrent.Future;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 
 class ExceptionHandlingAsyncTaskExecutorTest {
 
@@ -119,7 +121,7 @@ class ExceptionHandlingAsyncTaskExecutorTest {
     void testSubmitRunnableWithoutException() {
         Runnable runnable = spy(new MockRunnableWithoutException());
         Future<?> future = executor.submit(runnable);
-        Throwable caught = catchThrowable(() -> future.get());
+        Throwable caught = catchThrowable(future::get);
         assertThat(done).isEqualTo(true);
         verify(runnable).run();
         assertThat(caught).isNull();
@@ -133,7 +135,7 @@ class ExceptionHandlingAsyncTaskExecutorTest {
     void testSubmitRunnableWithException() {
         Runnable runnable = spy(new MockRunnableWithException());
         Future<?> future = executor.submit(runnable);
-        Throwable caught = catchThrowable(() -> future.get());
+        Throwable caught = catchThrowable(future::get);
         assertThat(done).isEqualTo(true);
         verify(runnable).run();
         assertThat(caught).isNull();
@@ -164,7 +166,7 @@ class ExceptionHandlingAsyncTaskExecutorTest {
     void testSubmitCallableWithException() {
         Callable<Integer> callable = spy(new MockCallableWithException());
         Future<Integer> future = executor.submit(callable);
-        Throwable caught = catchThrowable(() -> future.get());
+        Throwable caught = catchThrowable(future::get);
         assertThat(done).isEqualTo(true);
         assertThat(caught).isInstanceOf(ExecutionException.class);
         assertThat(caught.getCause()).isEqualTo(handled);

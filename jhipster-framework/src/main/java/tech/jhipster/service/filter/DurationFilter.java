@@ -40,7 +40,7 @@ public class DurationFilter extends RangeFilter<Duration> {
      *
      * @param filter a {@link DurationFilter} object.
      */
-    public DurationFilter(final DurationFilter filter) {
+    public DurationFilter(DurationFilter filter) {
         super(filter);
     }
 

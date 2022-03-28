@@ -34,7 +34,6 @@ public class FixedPostgreSQL82Dialect extends PostgreSQL82Dialect {
      * <p>Constructor for FixedPostgreSQL82Dialect.</p>
      */
     public FixedPostgreSQL82Dialect() {
-        super();
         registerColumnType(Types.BLOB, "bytea");
     }
 

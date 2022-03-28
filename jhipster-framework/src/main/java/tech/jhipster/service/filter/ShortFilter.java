@@ -39,7 +39,7 @@ public class ShortFilter extends RangeFilter<Short> {
      *
      * @param filter a {@link ShortFilter} object.
      */
-    public ShortFilter(final ShortFilter filter) {
+    public ShortFilter(ShortFilter filter) {
         super(filter);
     }
 

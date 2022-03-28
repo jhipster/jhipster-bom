@@ -45,7 +45,7 @@ public class InstantFilter extends RangeFilter<Instant> {
      *
      * @param filter a {@link InstantFilter} object.
      */
-    public InstantFilter(final InstantFilter filter) {
+    public InstantFilter(InstantFilter filter) {
         super(filter);
     }
 

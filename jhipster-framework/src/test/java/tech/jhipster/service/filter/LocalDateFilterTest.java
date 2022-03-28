@@ -56,7 +56,7 @@ class LocalDateFilterTest {
 
     @Test
     void testCopy() {
-        final LocalDateFilter copy = filter.copy();
+        LocalDateFilter copy = filter.copy();
         assertThat(copy).isNotSameAs(filter);
         assertThat(copy.getEquals()).isNull();
         assertThat(copy.getNotEquals()).isNull();
@@ -137,7 +137,7 @@ class LocalDateFilterTest {
 
     @Test
     void testEquals() {
-        final LocalDateFilter filter2 = new LocalDateFilter();
+        LocalDateFilter filter2 = new LocalDateFilter();
         assertThat(filter).isEqualTo(filter2);
         filter.setEquals(value);
         filter2.setEquals(value);
@@ -173,7 +173,7 @@ class LocalDateFilterTest {
         assertThat(filter).isNotEqualTo(filter2);
         filter2.setLessThanOrEqual(value);
         assertThat(filter).isEqualTo(filter2);
-        final LocalDateFilter filter3 = new LocalDateFilter();
+        LocalDateFilter filter3 = new LocalDateFilter();
         filter3.setEquals(value);
         assertThat(filter3).isNotEqualTo(filter);
         assertThat(filter3).isNotEqualTo(filter2);
@@ -181,7 +181,7 @@ class LocalDateFilterTest {
 
     @Test
     void testHashCode() {
-        final LocalDateFilter filter2 = new LocalDateFilter();
+        LocalDateFilter filter2 = new LocalDateFilter();
         assertThat(filter.hashCode()).isEqualTo(filter2.hashCode());
         filter.setEquals(value);
         filter2.setEquals(value);

@@ -51,7 +51,7 @@ class BooleanFilterTest {
 
     @Test
     void testCopy() {
-        final BooleanFilter copy = filter.copy();
+        BooleanFilter copy = filter.copy();
         assertThat(copy).isNotSameAs(filter);
         assertThat(copy.getEquals()).isNull();
         assertThat(copy.getNotEquals()).isNull();
@@ -100,7 +100,7 @@ class BooleanFilterTest {
 
     @Test
     void testEquals() {
-        final BooleanFilter filter2 = new BooleanFilter();
+        BooleanFilter filter2 = new BooleanFilter();
         assertThat(filter).isEqualTo(filter2);
         filter.setEquals(value);
         filter2.setEquals(value);
@@ -120,7 +120,7 @@ class BooleanFilterTest {
         assertThat(filter2).isNotEqualTo(filter);
         filter2.setNotIn(Arrays.asList(value, value));
         assertThat(filter).isEqualTo(filter2);
-        final BooleanFilter filter3 = new BooleanFilter();
+        BooleanFilter filter3 = new BooleanFilter();
         filter3.setEquals(value);
         assertThat(filter3).isNotEqualTo(filter);
         assertThat(filter3).isNotEqualTo(filter2);
@@ -128,7 +128,7 @@ class BooleanFilterTest {
 
     @Test
     void testHashCode() {
-        final BooleanFilter filter2 = new BooleanFilter();
+        BooleanFilter filter2 = new BooleanFilter();
         assertThat(filter.hashCode()).isEqualTo(filter2.hashCode());
         filter.setEquals(value);
         filter2.setEquals(value);

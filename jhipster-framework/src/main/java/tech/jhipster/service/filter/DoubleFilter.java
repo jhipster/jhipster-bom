@@ -38,7 +38,7 @@ public class DoubleFilter extends RangeFilter<Double> {
      *
      * @param filter a {@link DoubleFilter} object.
      */
-    public DoubleFilter(final DoubleFilter filter) {
+    public DoubleFilter(DoubleFilter filter) {
         super(filter);
     }
 

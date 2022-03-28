@@ -62,7 +62,7 @@ class CookieCsrfFilterTest {
             MockServerHttpRequest.post(TEST_URL)
         );
         exchange.getAttributes().put(CsrfToken.class.getName(), Mono.just(new DefaultCsrfToken(CSRF_COOKIE_NAME, "_csrf", token)));
-        this.filter.filter(exchange, filterChain).block();
+        filter.filter(exchange, filterChain).block();
     }
 
     @Test
@@ -81,7 +81,7 @@ class CookieCsrfFilterTest {
                 .cookie(new HttpCookie(CSRF_COOKIE_NAME, "csrf_token"))
         );
         exchange.getAttributes().put(CsrfToken.class.getName(), Mono.just(new DefaultCsrfToken(CSRF_COOKIE_NAME, "_csrf", "some token")));
-        this.filter.filter(exchange, filterChain).block();
+        filter.filter(exchange, filterChain).block();
     }
 
     @Test
@@ -97,6 +97,6 @@ class CookieCsrfFilterTest {
         MockServerWebExchange exchange = MockServerWebExchange.from(
             MockServerHttpRequest.post(TEST_URL)
         );
-        this.filter.filter(exchange, filterChain).block();
+        filter.filter(exchange, filterChain).block();
     }
 }

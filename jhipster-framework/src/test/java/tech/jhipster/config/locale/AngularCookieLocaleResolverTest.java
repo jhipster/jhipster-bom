@@ -41,8 +41,12 @@ import java.util.Locale;
 import java.util.TimeZone;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.*;
-import static org.springframework.web.servlet.i18n.CookieLocaleResolver.*;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import static org.springframework.web.servlet.i18n.CookieLocaleResolver.DEFAULT_COOKIE_NAME;
+import static org.springframework.web.servlet.i18n.CookieLocaleResolver.LOCALE_REQUEST_ATTRIBUTE_NAME;
+import static org.springframework.web.servlet.i18n.CookieLocaleResolver.TIME_ZONE_REQUEST_ATTRIBUTE_NAME;
 
 class AngularCookieLocaleResolverTest {
 

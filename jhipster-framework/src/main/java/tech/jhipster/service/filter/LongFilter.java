@@ -39,7 +39,7 @@ public class LongFilter extends RangeFilter<Long> {
      *
      * @param filter a {@link LongFilter} object.
      */
-    public LongFilter(final LongFilter filter) {
+    public LongFilter(LongFilter filter) {
         super(filter);
     }
 

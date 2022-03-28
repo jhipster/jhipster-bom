@@ -57,11 +57,11 @@ public class Filter<FIELD_TYPE> implements Serializable {
      * @param filter a {@link Filter} object.
      */
     public Filter(Filter<FIELD_TYPE> filter) {
-        this.equals = filter.equals;
-        this.notEquals = filter.notEquals;
-        this.specified = filter.specified;
-        this.in = filter.in == null ? null : new ArrayList<>(filter.in);
-        this.notIn = filter.notIn == null ? null : new ArrayList<>(filter.notIn);
+        equals = filter.equals;
+        notEquals = filter.notEquals;
+        specified = filter.specified;
+        in = filter.in == null ? null : new ArrayList<>(filter.in);
+        notIn = filter.notIn == null ? null : new ArrayList<>(filter.notIn);
     }
 
     /**
@@ -175,14 +175,14 @@ public class Filter<FIELD_TYPE> implements Serializable {
 
     /** {@inheritDoc} */
     @Override
-    public boolean equals(final Object o) {
+    public boolean equals(Object o) {
         if (this == o) {
             return true;
         }
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        final Filter<?> filter = (Filter<?>) o;
+        Filter<?> filter = (Filter<?>) o;
         return Objects.equals(equals, filter.equals) &&
                 Objects.equals(notEquals, filter.notEquals) &&
                 Objects.equals(specified, filter.specified) &&
@@ -214,6 +214,6 @@ public class Filter<FIELD_TYPE> implements Serializable {
      * @return a {@link java.lang.String} object.
      */
     protected String getFilterName() {
-        return this.getClass().getSimpleName();
+        return getClass().getSimpleName();
     }
 }

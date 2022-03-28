@@ -20,8 +20,8 @@
 package tech.jhipster.config.info;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.InstanceOfAssertFactories.list;
 
-import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.actuate.info.Info;
 import org.springframework.core.env.ConfigurableEnvironment;
@@ -41,7 +41,7 @@ class ActiveProfilesInfoContributorTest {
         contributor.contribute(builder);
         Info info = builder.build();
 
-        assertThat((List<String>) info.get("activeProfiles")).contains("prod");
+        assertThat(info.get("activeProfiles")).asInstanceOf(list(String.class)).contains("prod");
     }
 
     @Test
@@ -55,6 +55,6 @@ class ActiveProfilesInfoContributorTest {
         contributor.contribute(builder);
         Info info = builder.build();
 
-        assertThat((List<String>) info.get("activeProfiles")).contains("dev", "api-docs");
+        assertThat(info.get("activeProfiles")).asInstanceOf(list(String.class)).contains("dev", "api-docs");
     }
 }

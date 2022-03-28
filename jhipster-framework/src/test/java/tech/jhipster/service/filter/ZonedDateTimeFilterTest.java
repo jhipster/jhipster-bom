@@ -56,7 +56,7 @@ class ZonedDateTimeFilterTest {
 
     @Test
     void testCopy() {
-        final ZonedDateTimeFilter copy = filter.copy();
+        ZonedDateTimeFilter copy = filter.copy();
         assertThat(copy).isNotSameAs(filter);
         assertThat(copy.getEquals()).isNull();
         assertThat(copy.getNotEquals()).isNull();
@@ -137,7 +137,7 @@ class ZonedDateTimeFilterTest {
 
     @Test
     void testEquals() {
-        final ZonedDateTimeFilter filter2 = new ZonedDateTimeFilter();
+        ZonedDateTimeFilter filter2 = new ZonedDateTimeFilter();
         assertThat(filter).isEqualTo(filter2);
         filter.setEquals(value);
         filter2.setEquals(value);
@@ -173,7 +173,7 @@ class ZonedDateTimeFilterTest {
         assertThat(filter).isNotEqualTo(filter2);
         filter2.setLessThanOrEqual(value);
         assertThat(filter).isEqualTo(filter2);
-        final ZonedDateTimeFilter filter3 = new ZonedDateTimeFilter();
+        ZonedDateTimeFilter filter3 = new ZonedDateTimeFilter();
         filter3.setEquals(value);
         assertThat(filter3).isNotEqualTo(filter);
         assertThat(filter3).isNotEqualTo(filter2);
@@ -181,7 +181,7 @@ class ZonedDateTimeFilterTest {
 
     @Test
     void testHashCode() {
-        final ZonedDateTimeFilter filter2 = new ZonedDateTimeFilter();
+        ZonedDateTimeFilter filter2 = new ZonedDateTimeFilter();
         assertThat(filter.hashCode()).isEqualTo(filter2.hashCode());
         filter.setEquals(value);
         filter2.setEquals(value);

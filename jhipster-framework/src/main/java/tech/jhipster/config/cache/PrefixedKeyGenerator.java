@@ -38,11 +38,11 @@ public class PrefixedKeyGenerator implements KeyGenerator {
      */
     public PrefixedKeyGenerator(GitProperties gitProperties, BuildProperties buildProperties) {
 
-        this.prefix = generatePrefix(gitProperties, buildProperties);
+        prefix = generatePrefix(gitProperties, buildProperties);
     }
 
     String getPrefix() {
-        return this.prefix;
+        return prefix;
     }
 
     private String generatePrefix(GitProperties gitProperties, BuildProperties buildProperties) {

@@ -52,7 +52,7 @@ class UUIDFilterTest {
 
     @Test
     void testCopy() {
-        final UUIDFilter copy = filter.copy();
+        UUIDFilter copy = filter.copy();
         assertThat(copy).isNotSameAs(filter);
         assertThat(copy.getEquals()).isNull();
         assertThat(copy.getNotEquals()).isNull();
@@ -101,7 +101,7 @@ class UUIDFilterTest {
 
     @Test
     void testEquals() {
-        final UUIDFilter filter2 = new UUIDFilter();
+        UUIDFilter filter2 = new UUIDFilter();
         assertThat(filter).isEqualTo(filter2);
         filter.setEquals(value);
         assertThat(filter2).isNotEqualTo(filter);
@@ -123,7 +123,7 @@ class UUIDFilterTest {
         assertThat(filter2).isNotEqualTo(filter);
         filter2.setNotIn(Arrays.asList(value, value));
         assertThat(filter).isEqualTo(filter2);
-        final UUIDFilter filter3 = new UUIDFilter();
+        UUIDFilter filter3 = new UUIDFilter();
         filter3.setEquals(value);
         assertThat(filter3).isNotEqualTo(filter);
         assertThat(filter3).isNotEqualTo(filter2);
@@ -131,7 +131,7 @@ class UUIDFilterTest {
 
     @Test
     void testHashCode() {
-        final UUIDFilter filter2 = new UUIDFilter();
+        UUIDFilter filter2 = new UUIDFilter();
         assertThat(filter.hashCode()).isEqualTo(filter2.hashCode());
         filter.setEquals(value);
         filter2.setEquals(value);
@@ -148,7 +148,7 @@ class UUIDFilterTest {
         filter.setNotIn(Arrays.asList(value, value));
         filter2.setNotIn(Arrays.asList(value, value));
         assertThat(filter.hashCode()).isEqualTo(filter2.hashCode());
-        final UUIDFilter filter3 = new UUIDFilter();
+        UUIDFilter filter3 = new UUIDFilter();
         filter3.setEquals(value);
         assertThat(filter3.hashCode()).isNotEqualTo(filter.hashCode());
         assertThat(filter3.hashCode()).isNotEqualTo(filter2.hashCode());

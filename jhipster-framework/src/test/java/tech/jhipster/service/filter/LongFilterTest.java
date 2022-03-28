@@ -55,7 +55,7 @@ class LongFilterTest {
 
     @Test
     void testCopy() {
-        final LongFilter copy = filter.copy();
+        LongFilter copy = filter.copy();
         assertThat(copy).isNotSameAs(filter);
         assertThat(copy.getEquals()).isNull();
         assertThat(copy.getNotEquals()).isNull();
@@ -136,7 +136,7 @@ class LongFilterTest {
 
     @Test
     void testEquals() {
-        final LongFilter filter2 = new LongFilter();
+        LongFilter filter2 = new LongFilter();
         assertThat(filter).isEqualTo(filter2);
         filter.setEquals(value);
         filter2.setEquals(value);
@@ -172,7 +172,7 @@ class LongFilterTest {
         assertThat(filter).isNotEqualTo(filter2);
         filter2.setLessThanOrEqual(value);
         assertThat(filter).isEqualTo(filter2);
-        final LongFilter filter3 = new LongFilter();
+        LongFilter filter3 = new LongFilter();
         filter3.setEquals(value);
         assertThat(filter3).isNotEqualTo(filter);
         assertThat(filter3).isNotEqualTo(filter2);
@@ -180,7 +180,7 @@ class LongFilterTest {
 
     @Test
     void testHashCode() {
-        final LongFilter filter2 = new LongFilter();
+        LongFilter filter2 = new LongFilter();
         assertThat(filter.hashCode()).isEqualTo(filter2.hashCode());
         filter.setEquals(value);
         filter2.setEquals(value);

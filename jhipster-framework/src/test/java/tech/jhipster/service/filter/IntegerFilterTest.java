@@ -55,7 +55,7 @@ class IntegerFilterTest {
 
     @Test
     void testCopy() {
-        final IntegerFilter copy = filter.copy();
+        IntegerFilter copy = filter.copy();
         assertThat(copy).isNotSameAs(filter);
         assertThat(copy.getEquals()).isNull();
         assertThat(copy.getNotEquals()).isNull();
@@ -136,7 +136,7 @@ class IntegerFilterTest {
 
     @Test
     void testEquals() {
-        final IntegerFilter filter2 = new IntegerFilter();
+        IntegerFilter filter2 = new IntegerFilter();
         assertThat(filter).isEqualTo(filter2);
         filter.setEquals(value);
         filter2.setEquals(value);
@@ -172,7 +172,7 @@ class IntegerFilterTest {
         assertThat(filter).isNotEqualTo(filter2);
         filter2.setLessThanOrEqual(value);
         assertThat(filter).isEqualTo(filter2);
-        final IntegerFilter filter3 = new IntegerFilter();
+        IntegerFilter filter3 = new IntegerFilter();
         filter3.setEquals(value);
         assertThat(filter3).isNotEqualTo(filter);
         assertThat(filter3).isNotEqualTo(filter2);
@@ -180,7 +180,7 @@ class IntegerFilterTest {
 
     @Test
     void testHashCode() {
-        final IntegerFilter filter2 = new IntegerFilter();
+        IntegerFilter filter2 = new IntegerFilter();
         assertThat(filter.hashCode()).isEqualTo(filter2.hashCode());
         filter.setEquals(value);
         filter2.setEquals(value);

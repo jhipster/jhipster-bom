@@ -32,7 +32,6 @@ public class FixedH2Dialect extends H2Dialect {
      * <p>Constructor for FixedH2Dialect.</p>
      */
     public FixedH2Dialect() {
-        super();
         registerColumnType(Types.FLOAT, "real");
     }
 }
