@@ -1030,7 +1030,7 @@ public class JHipsterProperties {
 
             private int port = JHipsterDefaults.Logging.Logstash.port;
 
-            private int queueSize = JHipsterDefaults.Logging.Logstash.queueSize;
+            private int ringBufferSize = JHipsterDefaults.Logging.Logstash.ringBufferSize;
 
             public boolean isEnabled() {
                 return enabled;
@@ -1056,12 +1056,28 @@ public class JHipsterProperties {
                 this.port = port;
             }
 
+            /*
+                queueSize is deprecated in favour of ringBufferSize
+             */
+            @Deprecated
             public int getQueueSize() {
-                return queueSize;
+                return getRingBufferSize();
             }
 
+            /*
+                queueSize is deprecated in favour of ringBufferSize
+             */
+            @Deprecated
             public void setQueueSize(int queueSize) {
-                this.queueSize = queueSize;
+                setRingBufferSize(queueSize);
+            }
+
+            public int getRingBufferSize() {
+                return ringBufferSize;
+            }
+
+            public void setRingBufferSize(int ringBufferSize) {
+                this.ringBufferSize = ringBufferSize;
             }
         }
     }

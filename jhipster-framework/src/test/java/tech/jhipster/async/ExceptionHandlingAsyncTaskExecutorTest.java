@@ -95,7 +95,7 @@ class ExceptionHandlingAsyncTaskExecutorTest {
         Throwable caught = null;
         try {
             synchronized (executor) {
-                executor.execute(runnable, AsyncTaskExecutor.TIMEOUT_INDEFINITE);
+                executor.execute(runnable);
                 executor.wait(100);
             }
         } catch (InterruptedException x) {

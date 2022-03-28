@@ -127,7 +127,7 @@ public interface JHipsterDefaults {
 
     interface Security {
         String contentSecurityPolicy = "default-src 'self'; frame-src 'self' data:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://storage.googleapis.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:";
-        
+
         interface ClientAuthorization {
 
             String accessTokenUri = null;
@@ -180,7 +180,7 @@ public interface JHipsterDefaults {
             boolean enabled = false;
             String host = "localhost";
             int port = 5000;
-            int queueSize = 512;
+            int ringBufferSize = 512;
         }
     }
 
