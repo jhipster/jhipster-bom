@@ -1,6 +1,6 @@
 {
   "devDependencies": {
-    "prettier": "2.3.0"
+    "prettier": "2.6.1"
   },
   "scripts": {
     "prettier:check": "prettier --check .",
