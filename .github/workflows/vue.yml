@@ -49,7 +49,7 @@ jobs:
           repository: 'jhipster/generator-jhipster'
       - name: 'Build matrix'
         id: build
-        uses: ./generator-jhipster/.github/actions/build-matrix
+        uses: ./.github/actions/build-matrix
         with:
           skip-changes-detection: true
           workflow-samples-file: vue
