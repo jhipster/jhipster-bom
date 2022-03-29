@@ -43,10 +43,6 @@ jobs:
       workflow-react: ${{ steps.build.outputs.workflow-react }}
       workflow-vue: ${{ steps.build.outputs.workflow-vue }}
     steps:
-      - name: 'SETUP: Checkout jhipster-bom'
-        uses: actions/checkout@v3
-        with:
-          path: jhipster-bom
       - name: 'SETUP: Checkout generator-jhipster'
         uses: actions/checkout@v3
         with:
