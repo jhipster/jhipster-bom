@@ -59,6 +59,7 @@ jobs:
         uses: ./generator-jhipster/.github/actions/build-matrix
         with:
           skip-changes-detection: true
+          skip-changes-detection: true
           workflow-samples-file: angular
   applications:
     name: ${{ matrix.name }}
