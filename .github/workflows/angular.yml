@@ -58,7 +58,7 @@ jobs:
         id: build
         uses: ./generator-jhipster/.github/actions/build-matrix
         with:
-            workflow-samples-file: angular
+          workflow-samples-file: angular
   applications:
     name: ${{ matrix.name }}
     runs-on: ${{ matrix.os || 'ubuntu-20.04' }}
