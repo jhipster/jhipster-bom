@@ -58,7 +58,8 @@ jobs:
         id: build
         uses: ./generator-jhipster/.github/actions/build-matrix
         with:
-          workflow-samples-file: workflow-vue
+          skip-changes-detection: true
+          workflow-samples-file: vue
   applications:
     name: ${{ matrix.name }}
     runs-on: ${{ matrix.os || 'ubuntu-20.04' }}
