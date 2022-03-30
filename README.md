@@ -1,6 +1,6 @@
 ## JHipster BOM and server-side library
 
-[![Angular Build Status][github-actions-angular-image]][github-actions-url] [![React Build Status][github-actions-react-image]][github-actions-url] [![Vue Build Status][github-actions-vue-image]][github-actions-url] [![Webflux Build Status][github-actions-webflux-image]][github-actions-url] [![Maven Central][maven-image]][maven-url]
+[![Angular Build Status][github-actions-angular-image]][github-actions-url] [![React Build Status][github-actions-react-image]][github-actions-url] [![Vue Build Status][github-actions-vue-image]][github-actions-url] [![Maven Central][maven-image]][maven-url]
 
 Full documentation and information is available on our website at [https://www.jhipster.tech/][jhipster-url]
 
@@ -19,7 +19,6 @@ If the current version is SNAPSHOT then to use this SNAPSHOT version:
 [github-actions-angular-image]: https://github.com/jhipster/jhipster-bom/workflows/Angular/badge.svg
 [github-actions-react-image]: https://github.com/jhipster/jhipster-bom/workflows/React/badge.svg
 [github-actions-vue-image]: https://github.com/jhipster/jhipster-bom/workflows/Vue/badge.svg
-[github-actions-webflux-image]: https://github.com/jhipster/jhipster-bom/workflows/Webflux/badge.svg
 [github-actions-url]: https://github.com/jhipster/jhipster-bom/actions
 [jhipster-url]: https://www.jhipster.tech/
 
