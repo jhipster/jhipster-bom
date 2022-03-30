@@ -32,9 +32,31 @@ on:
     branches:
       - '*'
 jobs:
+  build-matrix:
+    runs-on: ubuntu-20.04
+    outputs:
+      matrix: ${{ steps.build.outputs.matrix }}
+      client: ${{ steps.build.outputs.client }}
+      server: ${{ steps.build.outputs.server }}
+      any: ${{ steps.build.outputs.any }}
+      workflow-angular: ${{ steps.build.outputs.workflow-angular }}
+      workflow-react: ${{ steps.build.outputs.workflow-react }}
+      workflow-vue: ${{ steps.build.outputs.workflow-vue }}
+    steps:
+      - name: 'SETUP: Checkout generator-jhipster'
+        uses: actions/checkout@v3
+        with:
+          repository: 'jhipster/generator-jhipster'
+      - name: 'Build matrix'
+        id: build
+        uses: ./.github/actions/build-matrix
+        with:
+          skip-changes-detection: true
+          workflow-samples-file: react
   applications:
-    name: ${{ matrix.app-sample }}
-    runs-on: ${{ matrix.os }}
+    name: ${{ matrix.name }}
+    runs-on: ${{ matrix.os || 'ubuntu-20.04' }}
+    needs: build-matrix
     defaults:
       run:
         working-directory: ${{ github.workspace }}/app
@@ -43,42 +65,14 @@ jobs:
       !contains(github.event.head_commit.message, '[skip ci]') &&
       !contains(github.event.pull_request.title, '[skip ci]') &&
       !contains(github.event.pull_request.title, '[ci skip]') &&
-      github.event.action != 'closed'
+      github.event.action != 'closed' &&
+      !contains(github.event.pull_request.labels.*.name, 'pr: skip-ci') &&
+      needs.build-matrix.outputs.workflow-react == 'true'
     timeout-minutes: 40
     strategy:
       fail-fast: false
-      matrix:
-        os: [ubuntu-20.04]
-        app-sample:
-          - react-default
-          - react-maven-h2mem-memcached
-          - react-gradle-mysql-es-noi18n-mapsid
-          - react-gradle-cassandra-session-redis
-        include:
-          - app-sample: react-default
-            entity: sql
-            environment: prod
-            war: 0
-            e2e: 1
-            testcontainers: 0
-          - app-sample: react-maven-h2mem-memcached
-            entity: sql
-            environment: prod
-            war: 0
-            e2e: 1
-            testcontainers: 0
-          - app-sample: react-gradle-mysql-es-noi18n-mapsid
-            entity: sqlfull
-            environment: prod
-            war: 0
-            e2e: 1
-            testcontainers: 0
-          - app-sample: react-gradle-cassandra-session-redis
-            entity: cassandra
-            environment: prod
-            war: 0
-            e2e: 1
-            testcontainers: 1
+      # Matrix available at https://github.com/jhipster/generator-jhipster/tree/main/test-integration/workflow-samples/
+      matrix: ${{fromJson(needs.build-matrix.outputs.matrix)}}
     steps:
       #----------------------------------------------------------------------
       # Install all tools and check configuration
@@ -92,18 +86,19 @@ jobs:
         with:
           repository: 'jhipster/generator-jhipster'
           path: generator-jhipster
-          # shows 5 commits at log
-          fetch-depth: 5
+          fetch-depth: 2
           ref: main
       - name: 'SETUP: environment'
         id: setup
         uses: ./generator-jhipster/.github/actions/setup
         with:
-          entities-sample: ${{ matrix.entity }}
-          application-sample: ${{ matrix.app-sample }}
-          application-environment: ${{ matrix.environment }}
+          application-sample: ${{ matrix.jhi-app-sample || matrix.app-sample || 'jdl' }}
+          entities-sample: ${{ matrix.entity || 'none' }}
+          jdl-entities-sample: ${{ matrix.jdl-entity || '' }}
+          jdl-sample: ${{ matrix.jdl-samples || '' }}
+          application-environment: ${{ matrix.environment || 'prod' }}
           application-packaging: ${{ (matrix.war == 1 && 'war') || 'jar' }}
-          enable-testcontainers: ${{ matrix.testcontainers == 1 }}
+          enable-testcontainers: ${{ matrix.testcontainers != 'false' }}
           generator-jhipster-branch: local
           jhipster-bom-branch: auto
       - uses: actions/setup-node@v3.0.0
@@ -130,6 +125,10 @@ jobs:
         run: $JHI_SCRIPTS/03-system.sh
       - name: 'TOOLS: configure git'
         run: $JHI_SCRIPTS/04-git-config.sh
+        # Update global NPM for workspaces support
+      - name: 'Install required NPM version'
+        if: matrix.workspaces == 'true'
+        run: npm install -g npm@${{ steps.setup.outputs.npm-version }} || true
       #----------------------------------------------------------------------
       # Install JHipster and generate project+entities
       #----------------------------------------------------------------------
@@ -138,35 +137,66 @@ jobs:
       - name: 'GENERATION: config'
         run: $JHI_SCRIPTS/11-generate-config.sh
       - name: 'GENERATION: project'
-        run: $JHI_SCRIPTS/12-generate-project.sh
+        run: $JHI_SCRIPTS/12-generate-project.sh --skip-jhipster-dependencies --skip-install ${{ matrix.extra-args }} ${{ matrix.new-extra-args }}
       - name: 'GENERATION: replace version in generated project'
         run: $JHI_SCRIPTS/13-replace-version-generated-project.sh
+      - name: 'GENERATION: workspace git'
+        if: matrix.workspaces == 'true'
+        run: |
+          git add .
+          git commit -m "Commit workspaces"
       - name: 'GENERATION: jhipster info'
         run: $JHI_SCRIPTS/14-jhipster-info.sh
       #----------------------------------------------------------------------
       # Launch tests
       #----------------------------------------------------------------------
+      - name: 'PREPARE: npm install'
+        if: steps.compare.outputs.equals != 'true'
+        run: ${{ (matrix.workspaces == 'true' && 'npm') || './npmw' }} install
       - name: 'TESTS: Start docker-compose containers for e2e and backend tests'
-        run: $JHI_SCRIPTS/20-docker-compose-npm.sh
+        if: steps.compare.outputs.equals != 'true' && matrix.testcontainers == 'false' && matrix.workspaces != 'true'
+        run: npm run ci:e2e:prepare
       - name: 'TESTS: backend'
         id: backend
-        run: $JHI_SCRIPTS/21-tests-backend-npm.sh
+        if: steps.compare.outputs.equals != 'true' && matrix.skip-backend-tests != 1 && needs.build-matrix.outputs.server != 'false'
+        run: npm run ci:backend:test
+        continue-on-error: ${{matrix.continue-on-backend-tests-error || false}}
       - name: 'TESTS: frontend'
-        run: $JHI_SCRIPTS/22-tests-frontend-npm.sh
+        if: steps.compare.outputs.equals != 'true' && matrix.skip-frontend-tests != 1 && needs.build-matrix.outputs.client != 'false'
+        run: npm run ci:frontend:test
       - name: 'TESTS: packaging'
-        run: $JHI_SCRIPTS/23-package-npm.sh
-      - name: 'TESTS: End-to-End'
+        if: steps.compare.outputs.equals != 'true'
+        run: npm run ci:e2e:package
+      - name: 'TESTS: Start docker-compose containers for e2e tests'
+        if: steps.compare.outputs.equals != 'true' && (matrix.testcontainers != 'false' ||  matrix.workspaces == 'true')
+        run: npm run ci:e2e:prepare
+      - name: 'E2E: Run'
         id: e2e
-        run: $JHI_SCRIPTS/24-tests-e2e-npm.sh
+        if: steps.compare.outputs.equals != 'true'
+        run: npm run ci:e2e:run --if-present
       - name: 'BACKEND: Store failure logs'
         uses: actions/upload-artifact@v2
         if: always() && steps.backend.outcome == 'failure'
         with:
-          name: log-${{ matrix.app-sample }}
-          path: ${{ steps.setup.outputs.application-path }}/*/test-results/**/*.xml
+          name: log-${{ matrix.name }}
+          path: ${{ steps.setup.outputs.application-path }}/**/test-results/**/*.xml
       - name: 'E2E: Store failure screenshots'
         uses: actions/upload-artifact@v2
         if: always() && steps.e2e.outcome == 'failure'
         with:
-          name: screenshots-${{ matrix.app-sample }}
-          path: ${{ steps.setup.outputs.application-path }}/*/cypress/screenshots
+          name: screenshots-${{ matrix.name }}
+          path: ${{ steps.setup.outputs.application-path }}/**/cypress/screenshots
+      - name: Dump docker logs
+        if: always()
+        uses: jwalton/gh-docker-logs@v2
+  check-react:
+    runs-on: ubuntu-latest
+    needs: [applications]
+    if: always()
+    steps:
+      - run: |
+          echo '${{ toJSON(needs) }}'
+          if [ 'skipped' == '${{ needs.applications.result }}' ] || [ 'success' == '${{ needs.applications.result }}' ] || [ 'closed' == '${{ github.event.action }}' ]; then
+            exit 0
+          fi
+          exit 1
