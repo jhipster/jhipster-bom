@@ -48,6 +48,7 @@
         <couchmove.version>3.2</couchmove.version>
         <cucumber-jvm.version>7.2.3</cucumber-jvm.version>
         <commons-io.version>2.11.0</commons-io.version>
+        <commons-collections.version>4.4</commons-collections.version>
         <feign-reactor-bom.version>3.2.1</feign-reactor-bom.version>
         <hazelcast.version>4.2.4</hazelcast.version>
         <hazelcast-hibernate5.version>2.2.1</hazelcast-hibernate5.version>
@@ -196,6 +197,11 @@
                         <artifactId>logback-access</artifactId>
                     </exclusion>
                 </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-collections4</artifactId>
+                <version>${commons-collections.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.lz4</groupId>
