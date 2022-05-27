@@ -1,0 +1,6 @@
+tech.jhipster.config.apidoc.JHipsterSpringDocAutoConfiguration
+tech.jhipster.config.apidoc.JHipsterOpenApiEndpointConfiguration
+tech.jhipster.config.JHipsterConfiguration
+tech.jhipster.config.info.JHipsterInfoContributorConfiguration
+tech.jhipster.config.metric.JHipsterMetricsEndpointConfiguration
+tech.jhipster.security.ssl.UndertowSSLConfiguration
