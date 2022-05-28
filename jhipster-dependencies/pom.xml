@@ -69,7 +69,7 @@
         <prometheus-simpleclient.version>0.15.0</prometheus-simpleclient.version>
         <redisson.version>3.17.2</redisson.version>
         <reflections.version>0.10.1</reflections.version>
-        <spring-cloud.version>2021.0.2</spring-cloud.version>
+        <spring-cloud.version>2021.0.3</spring-cloud.version>
         <spring-cloud-netflix.version>2.2.10.RELEASE</spring-cloud-netflix.version>
         <guava.version>31.1-jre</guava.version>
         <spring-cloud-security.version>2.2.5.RELEASE</spring-cloud-security.version>
