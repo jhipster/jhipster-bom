@@ -77,7 +77,7 @@ class CachingHttpHeadersFilterTest {
         verify(response).setHeader("Cache-Control", "max-age=" + secsToLive + ", public");
         verify(response).setHeader("Pragma", "cache");
         verify(response).setDateHeader(eq("Expires"), anyLong());
-        assertThat(response.getDateHeader("Expires")).isBetween(before + secsToLive, after + secsToLive);
+        assertThat(response.getDateHeader("Expires")).isBetween(before + TimeUnit.SECONDS.toMillis(secsToLive), after + TimeUnit.SECONDS.toMillis(secsToLive));
         assertThat(caught).isNull();
     }
 
@@ -102,7 +102,7 @@ class CachingHttpHeadersFilterTest {
         verify(response).setHeader("Cache-Control", "max-age=" + secsToLive + ", public");
         verify(response).setHeader("Pragma", "cache");
         verify(response).setDateHeader(eq("Expires"), anyLong());
-        assertThat(response.getDateHeader("Expires")).isBetween(before + secsToLive, after + secsToLive);
+        assertThat(response.getDateHeader("Expires")).isBetween(before + TimeUnit.SECONDS.toMillis(secsToLive), after + TimeUnit.SECONDS.toMillis(secsToLive));
         assertThat(caught).isNull();
     }
 }

@@ -72,7 +72,7 @@ public class CachingHttpHeadersFilter implements Filter {
         httpResponse.setHeader("Pragma", "cache");
 
         // Setting Expires header, for proxy caching
-        httpResponse.setDateHeader("Expires", cacheTimeToLive + System.currentTimeMillis());
+        httpResponse.setDateHeader("Expires", TimeUnit.SECONDS.toMillis(cacheTimeToLive) + System.currentTimeMillis());
 
         chain.doFilter(request, response);
     }
