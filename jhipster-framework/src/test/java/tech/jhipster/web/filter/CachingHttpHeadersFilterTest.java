@@ -61,8 +61,7 @@ class CachingHttpHeadersFilterTest {
 
     @Test
     void testWithoutInit() {
-        int daysToLive = CachingHttpHeadersFilter.DEFAULT_DAYS_TO_LIVE;
-        long secsToLive = TimeUnit.DAYS.toMillis(daysToLive);
+        long secsToLive = CachingHttpHeadersFilter.DEFAULT_SECONDS_TO_LIVE;
 
         long before = System.currentTimeMillis();
         before -= before % 1000L;
@@ -78,14 +77,14 @@ class CachingHttpHeadersFilterTest {
         verify(response).setHeader("Cache-Control", "max-age=" + secsToLive + ", public");
         verify(response).setHeader("Pragma", "cache");
         verify(response).setDateHeader(eq("Expires"), anyLong());
-        assertThat(response.getDateHeader("Expires")).isBetween(before + secsToLive, after + secsToLive);
+        assertThat(response.getDateHeader("Expires")).isBetween(before + TimeUnit.SECONDS.toMillis(secsToLive), after + TimeUnit.SECONDS.toMillis(secsToLive));
         assertThat(caught).isNull();
     }
 
     @Test
     void testWithInit() {
         int daysToLive = CachingHttpHeadersFilter.DEFAULT_DAYS_TO_LIVE >>> 2;
-        long secsToLive = TimeUnit.DAYS.toMillis(daysToLive);
+        long secsToLive = TimeUnit.DAYS.toSeconds(daysToLive);
         properties.getHttp().getCache().setTimeToLiveInDays(daysToLive);
 
         long before = System.currentTimeMillis();
@@ -103,7 +102,7 @@ class CachingHttpHeadersFilterTest {
         verify(response).setHeader("Cache-Control", "max-age=" + secsToLive + ", public");
         verify(response).setHeader("Pragma", "cache");
         verify(response).setDateHeader(eq("Expires"), anyLong());
-        assertThat(response.getDateHeader("Expires")).isBetween(before + secsToLive, after + secsToLive);
+        assertThat(response.getDateHeader("Expires")).isBetween(before + TimeUnit.SECONDS.toMillis(secsToLive), after + TimeUnit.SECONDS.toMillis(secsToLive));
         assertThat(caught).isNull();
     }
 }

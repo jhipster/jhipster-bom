@@ -33,8 +33,8 @@ public class CachingHttpHeadersFilter implements Filter {
 
     /** Constant <code>DEFAULT_DAYS_TO_LIVE=1461</code> */
     public static final int DEFAULT_DAYS_TO_LIVE = 1461; // 4 years
-    /** Constant <code>DEFAULT_SECONDS_TO_LIVE=TimeUnit.DAYS.toMillis(DEFAULT_DAYS_TO_LIVE)</code> */
-    public static final long DEFAULT_SECONDS_TO_LIVE = TimeUnit.DAYS.toMillis(DEFAULT_DAYS_TO_LIVE);
+    /** Constant <code>DEFAULT_SECONDS_TO_LIVE=TimeUnit.DAYS.toSeconds(DEFAULT_DAYS_TO_LIVE)</code> */
+    public static final long DEFAULT_SECONDS_TO_LIVE = TimeUnit.DAYS.toSeconds(DEFAULT_DAYS_TO_LIVE);
 
     private long cacheTimeToLive = DEFAULT_SECONDS_TO_LIVE;
 
@@ -52,7 +52,7 @@ public class CachingHttpHeadersFilter implements Filter {
     /** {@inheritDoc} */
     @Override
     public void init(FilterConfig filterConfig) {
-        cacheTimeToLive = TimeUnit.DAYS.toMillis(jHipsterProperties.getHttp().getCache().getTimeToLiveInDays());
+        cacheTimeToLive = TimeUnit.DAYS.toSeconds(jHipsterProperties.getHttp().getCache().getTimeToLiveInDays());
     }
 
     /** {@inheritDoc} */
@@ -72,7 +72,7 @@ public class CachingHttpHeadersFilter implements Filter {
         httpResponse.setHeader("Pragma", "cache");
 
         // Setting Expires header, for proxy caching
-        httpResponse.setDateHeader("Expires", cacheTimeToLive + System.currentTimeMillis());
+        httpResponse.setDateHeader("Expires", TimeUnit.SECONDS.toMillis(cacheTimeToLive) + System.currentTimeMillis());
 
         chain.doFilter(request, response);
     }
