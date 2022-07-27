@@ -55,7 +55,7 @@
         <hazelcast-hibernate5.version>2.2.1</hazelcast-hibernate5.version>
         <infinispan.version>13.0.10.Final</infinispan.version>
         <jjwt.version>0.11.5</jjwt.version>
-        <junit-platform-console.version>1.8.2</junit-platform-console.version>
+        <junit-platform-console.version>1.9.0</junit-platform-console.version>
         <logstash-logback-encoder.version>7.2</logstash-logback-encoder.version>
         <lz4-java.version>1.8.0</lz4-java.version>
         <mapstruct.version>1.5.2.Final</mapstruct.version>
