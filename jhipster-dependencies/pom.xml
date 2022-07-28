@@ -46,7 +46,7 @@
         <cassandra-unit-spring.version>4.3.1.0</cassandra-unit-spring.version>
         <couchbase-client.version>3.3.2</couchbase-client.version>
         <couchmove.version>3.3</couchmove.version>
-        <cucumber-jvm.version>7.4.1</cucumber-jvm.version>
+        <cucumber-jvm.version>7.5.0</cucumber-jvm.version>
         <commons-io.version>2.11.0</commons-io.version>
         <commons-collections.version>4.4</commons-collections.version>
         <feign-reactor-bom.version>3.2.3</feign-reactor-bom.version>
