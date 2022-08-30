@@ -125,7 +125,6 @@ jobs:
         run: |
           $JHI_SCRIPTS/11-generate-config.sh
           $JHI_SCRIPTS/12-generate-project.sh --skip-jhipster-dependencies --skip-install --workspaces --reactive
-          $JHI_SCRIPTS/13-replace-version-generated-project.sh
           npm install --force
           npm run backend:build-cache || true
           cd ..
@@ -137,7 +136,6 @@ jobs:
         run: |
           $JHI_SCRIPTS/11-generate-config.sh
           $JHI_SCRIPTS/12-generate-project.sh --skip-jhipster-dependencies --skip-install --workspaces --build gradle
-          $JHI_SCRIPTS/13-replace-version-generated-project.sh
           npm install --force
           npm run backend:build-cache || true
           cd ..

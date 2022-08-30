@@ -137,8 +137,6 @@ jobs:
         run: $JHI_SCRIPTS/11-generate-config.sh
       - name: 'GENERATION: project'
         run: $JHI_SCRIPTS/12-generate-project.sh --skip-jhipster-dependencies --skip-install ${{ matrix.extra-args }} ${{ matrix.new-extra-args }}
-      - name: 'GENERATION: replace version in generated project'
-        run: $JHI_SCRIPTS/13-replace-version-generated-project.sh
       - name: 'GENERATION: workspace git'
         if: matrix.workspaces == 'true'
         run: |
