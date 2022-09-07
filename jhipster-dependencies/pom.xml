@@ -43,7 +43,7 @@
         <azure-spring-cloud-client.version>2.4.0</azure-spring-cloud-client.version>
         <azure-applicationinsights-spring-boot-starter.version>2.6.4</azure-applicationinsights-spring-boot-starter.version>
         <bucket4j.version>8.1.1</bucket4j.version>
-        <cassandra-unit-spring.version>4.3.1.0</cassandra-unit-spring.version>
+        <cassandra-unit-spring.version>4.4.0.1</cassandra-unit-spring.version>
         <couchbase-client.version>3.4.1</couchbase-client.version>
         <couchmove.version>3.3.2</couchmove.version>
         <cucumber-jvm.version>7.10.1</cucumber-jvm.version>
@@ -96,7 +96,8 @@
                 <version>${bucket4j.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.cassandraunit</groupId>
+                <!-- official release org.cassandraunit is broken and unmaintained at 4.3.1.0 -->
+                <groupId>io.github.btjfsu</groupId>
                 <artifactId>cassandra-unit-spring</artifactId>
                 <version>${cassandra-unit-spring.version}</version>
                 <exclusions>
