@@ -49,7 +49,7 @@
         <cucumber-jvm.version>7.6.0</cucumber-jvm.version>
         <commons-io.version>2.11.0</commons-io.version>
         <commons-collections.version>4.4</commons-collections.version>
-        <feign-reactor-bom.version>3.2.5</feign-reactor-bom.version>
+        <feign-reactor-bom.version>3.2.6</feign-reactor-bom.version>
         <guava.version>31.1-jre</guava.version>
         <hazelcast.version>5.1.2</hazelcast.version>
         <hazelcast-hibernate5.version>2.2.1</hazelcast-hibernate5.version>
