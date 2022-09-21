@@ -22,7 +22,7 @@ package tech.jhipster.security;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 import static javax.servlet.http.HttpServletResponse.SC_UNAUTHORIZED;
