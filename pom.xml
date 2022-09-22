@@ -42,7 +42,7 @@
         <!-- The jhipster-framework version should be the same as the artifact version above -->
         <jhipster-framework.version>7.9.4-SNAPSHOT</jhipster-framework.version>
         <!-- The spring-boot version should be the same as the parent version above -->
-        <spring-boot.version>2.7.3</spring-boot.version>
+        <spring-boot.version>2.7.4</spring-boot.version>
 
         <!-- Build properties -->
         <java.version>11</java.version>
