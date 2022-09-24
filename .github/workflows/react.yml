@@ -87,7 +87,7 @@ jobs:
           repository: 'jhipster/generator-jhipster'
           path: generator-jhipster
           fetch-depth: 2
-          ref: main
+          ref: spring-boot-3.0-m4
       - name: 'SETUP: environment'
         id: setup
         uses: ./generator-jhipster/.github/actions/setup
