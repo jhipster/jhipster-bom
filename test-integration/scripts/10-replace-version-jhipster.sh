@@ -9,8 +9,6 @@ if [[ $JHI_VERSION == '' ]]; then
     JHI_VERSION=0.0.0-CICD
 fi
 
-JHI_JDK=17
-
 # artifact version of jhipster-parent
 sed -e '/<artifactId>jhipster-parent<\/artifactId>/{N;s/<version>.*<\/version>/<version>'$JHI_VERSION'<\/version>/1;}' pom.xml > pom.xml.sed
 mv -f pom.xml.sed pom.xml
