@@ -90,7 +90,6 @@
                 <artifactId>jhipster-framework</artifactId>
                 <version>${jhipster-framework.version}</version>
             </dependency>
-
             <dependency>
                 <groupId>com.github.vladimir-bukhtoyarov</groupId>
                 <artifactId>bucket4j-core</artifactId>
@@ -136,11 +135,6 @@
                 <groupId>io.cucumber</groupId>
                 <artifactId>cucumber-spring</artifactId>
                 <version>${cucumber-jvm.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.ehcache</groupId>
-                <artifactId>ehcache</artifactId>
-                <version>${ehcache3.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.google.code.simple-spring-memcached</groupId>
@@ -279,12 +273,7 @@
                 <version>${mysql-jdbc.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.hibernate</groupId>
-                <artifactId>hibernate-core</artifactId>
-                <version>${hibernate.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.hibernate</groupId>
+                <groupId>org.hibernate.orm</groupId>
                 <artifactId>hibernate-jcache</artifactId>
                 <version>${hibernate.version}</version>
             </dependency>
