@@ -137,6 +137,11 @@
                 <version>${cucumber-jvm.version}</version>
             </dependency>
             <dependency>
+                <groupId>org.ehcache</groupId>
+                <artifactId>ehcache</artifactId>
+                <version>${ehcache3.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>com.google.code.simple-spring-memcached</groupId>
                 <artifactId>spring-cache</artifactId>
                 <version>${xmemcached-provider.version}</version>
