@@ -54,6 +54,8 @@
         <hazelcast.version>5.1.2</hazelcast.version>
         <hazelcast-hibernate5.version>2.2.1</hazelcast-hibernate5.version>
         <infinispan.version>13.0.11.Final</infinispan.version>
+        <!-- To pull in a newer version than Spring Boot with Nonnull -->
+        <jakarta-annotation.version>2.1.1</jakarta-annotation.version>
         <jjwt.version>0.11.5</jjwt.version>
         <junit-platform-console.version>1.8.2</junit-platform-console.version>
         <logstash-logback-encoder.version>7.2</logstash-logback-encoder.version>
