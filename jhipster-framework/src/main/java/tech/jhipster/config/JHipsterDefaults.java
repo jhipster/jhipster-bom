@@ -164,8 +164,8 @@ public interface JHipsterDefaults {
         String contactEmail = null;
         String license = null;
         String licenseUrl = null;
-        String defaultIncludePattern = "/api/**";
-        String managementIncludePattern = "/management/**";
+        String[] defaultIncludePattern = {"/api/**"};
+        String[] managementIncludePattern = {"/management/**"};
         String host = null;
         String[] protocols = {};
         boolean useDefaultResponseMessages = true;

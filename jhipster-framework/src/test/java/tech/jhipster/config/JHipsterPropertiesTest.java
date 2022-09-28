@@ -19,15 +19,15 @@
 
 package tech.jhipster.config;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -632,21 +632,23 @@ class JHipsterPropertiesTest {
     @Test
     void testApiDocsDefaultIncludePattern() {
         JHipsterProperties.ApiDocs obj = properties.getApiDocs();
-        String val = JHipsterDefaults.ApiDocs.defaultIncludePattern;
+        String[] val = JHipsterDefaults.ApiDocs.defaultIncludePattern;
         assertThat(obj.getDefaultIncludePattern()).isEqualTo(val);
-        val = "1" + val;
-        obj.setDefaultIncludePattern(val);
-        assertThat(obj.getDefaultIncludePattern()).isEqualTo(val);
+        String[] newVal = Arrays.copyOf(val, val.length + 1);
+        newVal[newVal.length - 1] = "1";
+        obj.setDefaultIncludePattern(newVal);
+        assertThat(obj.getDefaultIncludePattern()).isEqualTo(newVal);
     }
 
     @Test
     void testApiDocsManagementIncludePattern() {
         JHipsterProperties.ApiDocs obj = properties.getApiDocs();
-        String val = JHipsterDefaults.ApiDocs.managementIncludePattern;
+        String[] val = JHipsterDefaults.ApiDocs.managementIncludePattern;
         assertThat(obj.getManagementIncludePattern()).isEqualTo(val);
-        val = "1" + val;
-        obj.setManagementIncludePattern(val);
-        assertThat(obj.getManagementIncludePattern()).isEqualTo(val);
+        String[] newVal = Arrays.copyOf(val, val.length + 1);
+        newVal[newVal.length - 1] = "1";
+        obj.setManagementIncludePattern(newVal);
+        assertThat(obj.getManagementIncludePattern()).isEqualTo(newVal);
     }
 
     @Test

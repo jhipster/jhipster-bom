@@ -880,9 +880,9 @@ public class JHipsterProperties {
 
         private String licenseUrl = JHipsterDefaults.ApiDocs.licenseUrl;
 
-        private String defaultIncludePattern = JHipsterDefaults.ApiDocs.defaultIncludePattern;
+        private String[] defaultIncludePattern = JHipsterDefaults.ApiDocs.defaultIncludePattern;
 
-        private String managementIncludePattern = JHipsterDefaults.ApiDocs.managementIncludePattern;
+        private String[] managementIncludePattern = JHipsterDefaults.ApiDocs.managementIncludePattern;
 
         private Server[] servers = {};
 
@@ -958,19 +958,19 @@ public class JHipsterProperties {
             this.licenseUrl = licenseUrl;
         }
 
-        public String getDefaultIncludePattern() {
+        public String[] getDefaultIncludePattern() {
             return defaultIncludePattern;
         }
 
-        public void setDefaultIncludePattern(String defaultIncludePattern) {
+        public void setDefaultIncludePattern(String[] defaultIncludePattern) {
             this.defaultIncludePattern = defaultIncludePattern;
         }
 
-        public String getManagementIncludePattern() {
+        public String[] getManagementIncludePattern() {
             return managementIncludePattern;
         }
 
-        public void setManagementIncludePattern(String managementIncludePattern) {
+        public void setManagementIncludePattern(String[] managementIncludePattern) {
             this.managementIncludePattern = managementIncludePattern;
         }
 
