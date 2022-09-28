@@ -32,7 +32,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springdoc.core.GroupedOpenApi;
 import org.springdoc.core.GroupedOpenApi.Builder;
-import org.springdoc.core.SpringDocConfigProperties;
 import org.springdoc.core.customizers.ActuatorOpenApiCustomizer;
 import org.springdoc.core.customizers.ActuatorOperationCustomizer;
 import org.springdoc.core.customizers.OpenApiCustomiser;
@@ -99,9 +98,7 @@ public class JHipsterSpringDocGroupsConfiguration {
     public GroupedOpenApi openAPIDefaultGroupedOpenAPI(
         List<OpenApiCustomiser> openApiCustomisers,
         List<OperationCustomizer> operationCustomizers,
-        @Qualifier("apiFirstGroupedOpenAPI") Optional<GroupedOpenApi> apiFirstGroupedOpenAPI,
-        SpringDocConfigProperties springDocConfigProperties
-    ) {
+        @Qualifier("apiFirstGroupedOpenAPI") Optional<GroupedOpenApi> apiFirstGroupedOpenAPI) {
         log.debug("Initializing JHipster OpenApi default group");
         Builder builder = GroupedOpenApi.builder()
             .group(DEFAULT_GROUP_NAME)
@@ -127,9 +124,7 @@ public class JHipsterSpringDocGroupsConfiguration {
     @ConditionalOnMissingBean(name = "openAPIManagementGroupedOpenAPI")
     @ConditionalOnProperty(SPRINGDOC_SHOW_ACTUATOR)
     public GroupedOpenApi openAPIManagementGroupedOpenAPI(
-        @Value("${spring.application.name:application}") String appName,
-        ActuatorOpenApiCustomizer actuatorOpenApiCustomiser,
-        ActuatorOperationCustomizer actuatorCustomizer
+        @Value("${spring.application.name:application}") String appName
     ) {
         log.debug("Initializing JHipster OpenApi management group");
         return GroupedOpenApi.builder()
@@ -139,8 +134,6 @@ public class JHipsterSpringDocGroupsConfiguration {
                 .description(MANAGEMENT_DESCRIPTION)
                 .version(properties.getVersion())
             ))
-            .addOpenApiCustomiser(actuatorOpenApiCustomiser)
-            .addOperationCustomizer(actuatorCustomizer)
             .pathsToMatch(properties.getManagementIncludePattern())
             .build();
     }

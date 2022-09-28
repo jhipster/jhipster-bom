@@ -1056,22 +1056,6 @@ public class JHipsterProperties {
                 this.port = port;
             }
 
-            /*
-                queueSize is deprecated in favour of ringBufferSize
-             */
-            @Deprecated
-            public int getQueueSize() {
-                return getRingBufferSize();
-            }
-
-            /*
-                queueSize is deprecated in favour of ringBufferSize
-             */
-            @Deprecated
-            public void setQueueSize(int queueSize) {
-                setRingBufferSize(queueSize);
-            }
-
             public int getRingBufferSize() {
                 return ringBufferSize;
             }
