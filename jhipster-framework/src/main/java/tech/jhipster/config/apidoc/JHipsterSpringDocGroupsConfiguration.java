@@ -19,23 +19,18 @@
 
 package tech.jhipster.config.apidoc;
 
-import static org.springdoc.core.Constants.DEFAULT_GROUP_NAME;
-import static org.springdoc.core.Constants.SPRINGDOC_SHOW_ACTUATOR;
-import static org.springdoc.core.SpringDocUtils.getConfig;
-
 import io.swagger.v3.oas.models.info.Info;
 import java.nio.ByteBuffer;
 import java.util.List;
 import java.util.Optional;
+
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springdoc.core.GroupedOpenApi;
-import org.springdoc.core.GroupedOpenApi.Builder;
 import org.springdoc.core.customizers.ActuatorOpenApiCustomizer;
 import org.springdoc.core.customizers.ActuatorOperationCustomizer;
-import org.springdoc.core.customizers.OpenApiCustomiser;
 import org.springdoc.core.customizers.OperationCustomizer;
+import org.springdoc.core.models.GroupedOpenApi;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -45,6 +40,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import tech.jhipster.config.JHipsterProperties;
 import tech.jhipster.config.apidoc.customizer.JHipsterOpenApiCustomizer;
+
+import static org.springdoc.core.utils.Constants.DEFAULT_GROUP_NAME;
+import static org.springdoc.core.utils.SpringDocUtils.getConfig;
 
 /**
  * OpenApi Groups configuration.
@@ -100,7 +98,7 @@ public class JHipsterSpringDocGroupsConfiguration {
         List<OperationCustomizer> operationCustomizers,
         @Qualifier("apiFirstGroupedOpenAPI") Optional<GroupedOpenApi> apiFirstGroupedOpenAPI) {
         log.debug("Initializing JHipster OpenApi default group");
-        Builder builder = GroupedOpenApi.builder()
+        GroupedOpenApi.Builder builder = GroupedOpenApi.builder()
             .group(DEFAULT_GROUP_NAME)
             .pathsToMatch(properties.getDefaultIncludePattern());
         openApiCustomisers.stream()

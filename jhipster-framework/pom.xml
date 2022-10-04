@@ -49,12 +49,12 @@
         </dependency>
         <dependency>
             <groupId>org.springdoc</groupId>
-            <artifactId>springdoc-openapi-webmvc-core</artifactId>
+            <artifactId>springdoc-openapi-starter-webmvc-api</artifactId>
             <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>org.springdoc</groupId>
-            <artifactId>springdoc-openapi-webflux-core</artifactId>
+            <artifactId>springdoc-openapi-starter-webflux-api</artifactId>
             <optional>true</optional>
         </dependency>
         <dependency>
