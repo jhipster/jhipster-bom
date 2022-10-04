@@ -39,7 +39,7 @@ import tech.jhipster.service.filter.ZonedDateTimeFilter;
 
 /**
  * Class for constructing org.springframework.data.relational.core.sql.Condition
- * from the Entitycriteria aka Filter<FIELD>
+ * from the Entitycriteria i.e. tech.jhipster.service.filter.Filter
  *
  */
 public class ConditionBuilder {
