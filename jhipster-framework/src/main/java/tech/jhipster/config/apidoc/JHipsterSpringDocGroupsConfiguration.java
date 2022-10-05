@@ -29,6 +29,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springdoc.core.customizers.ActuatorOpenApiCustomizer;
 import org.springdoc.core.customizers.ActuatorOperationCustomizer;
+import org.springdoc.core.customizers.OpenApiCustomizer;
 import org.springdoc.core.customizers.OperationCustomizer;
 import org.springdoc.core.models.GroupedOpenApi;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -42,6 +43,7 @@ import tech.jhipster.config.JHipsterProperties;
 import tech.jhipster.config.apidoc.customizer.JHipsterOpenApiCustomizer;
 
 import static org.springdoc.core.utils.Constants.DEFAULT_GROUP_NAME;
+import static org.springdoc.core.utils.Constants.SPRINGDOC_SHOW_ACTUATOR;
 import static org.springdoc.core.utils.SpringDocUtils.getConfig;
 
 /**
@@ -94,7 +96,7 @@ public class JHipsterSpringDocGroupsConfiguration {
     @Bean
     @ConditionalOnMissingBean(name = "openAPIDefaultGroupedOpenAPI")
     public GroupedOpenApi openAPIDefaultGroupedOpenAPI(
-        List<OpenApiCustomiser> openApiCustomisers,
+        List<OpenApiCustomizer> openApiCustomisers,
         List<OperationCustomizer> operationCustomizers,
         @Qualifier("apiFirstGroupedOpenAPI") Optional<GroupedOpenApi> apiFirstGroupedOpenAPI) {
         log.debug("Initializing JHipster OpenApi default group");
@@ -103,7 +105,7 @@ public class JHipsterSpringDocGroupsConfiguration {
             .pathsToMatch(properties.getDefaultIncludePattern());
         openApiCustomisers.stream()
             .filter(customiser -> !(customiser instanceof ActuatorOpenApiCustomizer))
-            .forEach(builder::addOpenApiCustomiser);
+            .forEach(builder::addOpenApiCustomizer);
         operationCustomizers.stream()
             .filter(customiser -> !(customiser instanceof ActuatorOperationCustomizer))
             .forEach(builder::addOperationCustomizer);
@@ -127,7 +129,7 @@ public class JHipsterSpringDocGroupsConfiguration {
         log.debug("Initializing JHipster OpenApi management group");
         return GroupedOpenApi.builder()
             .group(MANAGEMENT_GROUP_NAME)
-            .addOpenApiCustomiser(openApi -> openApi.info(new Info()
+            .addOpenApiCustomizer(openApi -> openApi.info(new Info()
                 .title(StringUtils.capitalize(appName) + " " + MANAGEMENT_TITLE_SUFFIX)
                 .description(MANAGEMENT_DESCRIPTION)
                 .version(properties.getVersion())
