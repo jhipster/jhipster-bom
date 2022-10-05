@@ -96,7 +96,7 @@ public class JHipsterSpringDocGroupsConfiguration {
     @Bean
     @ConditionalOnMissingBean(name = "openAPIDefaultGroupedOpenAPI")
     public GroupedOpenApi openAPIDefaultGroupedOpenAPI(
-        List<OpenApiCustomizer> openApiCustomisers,
+        List<OpenApiCustomizer> openApiCustomizers,
         List<OperationCustomizer> operationCustomizers,
         @Qualifier("apiFirstGroupedOpenAPI") Optional<GroupedOpenApi> apiFirstGroupedOpenAPI) {
         log.debug("Initializing JHipster OpenApi default group");
