@@ -22,6 +22,7 @@ package tech.jhipster.service;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import org.springframework.data.relational.core.sql.Column;
@@ -47,10 +48,6 @@ public class ConditionBuilder {
     private final List<Condition> allFilters = new ArrayList<Condition>();
 
     private final ColumnConverterReactive columnConverter;
-
-    private ConditionBuilder() {
-        this.columnConverter = null;
-    }
 
     public ConditionBuilder(ColumnConverterReactive columnConverter) {
         this.columnConverter = columnConverter;
@@ -101,41 +98,42 @@ public class ConditionBuilder {
                 }
             );
     }
+    
+    private <X> Function<X, String> columnValueConverter(Class<?> targetClass) {
+        if (targetClass != null) {
+            return (value) -> columnConverter.convert(value, targetClass).toString();
+        } else {
+            return (value) -> value.toString();
+        }
+    }
 
     private <X extends Comparable<? super X>> void buildRangeConditions(RangeFilter<X> rangeData, Column column, Class<?> targetClass) {
-        if (rangeData.getGreaterThan() != null && targetClass != null) {
+        var converterFunction = columnValueConverter(targetClass);
+        if (rangeData.getGreaterThan() != null) {
             allFilters.add(
-                Conditions.isGreater(column, SQL.literalOf(columnConverter.convert(rangeData.getGreaterThan(), targetClass).toString()))
+                Conditions.isGreater(column, SQL.literalOf(converterFunction.apply(rangeData.getGreaterThan())))
             );
-        } else if (rangeData.getGreaterThan() != null) {
-            allFilters.add(Conditions.isGreater(column, SQL.literalOf(rangeData.getGreaterThan().toString())));
         }
-        if (rangeData.getLessThan() != null && targetClass != null) {
+        if (rangeData.getLessThan() != null) {
             allFilters.add(
-                Conditions.isLess(column, SQL.literalOf(columnConverter.convert(rangeData.getLessThan(), targetClass).toString()))
+                Conditions.isLess(column, SQL.literalOf(converterFunction.apply(rangeData.getLessThan())))
             );
-        } else if (rangeData.getLessThan() != null) {
-            allFilters.add(Conditions.isLess(column, SQL.literalOf(rangeData.getLessThan().toString())));
         }
-        if (rangeData.getGreaterThanOrEqual() != null && targetClass != null) {
+        if (rangeData.getGreaterThanOrEqual() != null) {
             allFilters.add(
                 Conditions.isGreaterOrEqualTo(
                     column,
-                    SQL.literalOf(columnConverter.convert(rangeData.getGreaterThanOrEqual(), targetClass).toString())
+                    SQL.literalOf(converterFunction.apply(rangeData.getGreaterThanOrEqual()))
                 )
             );
-        } else if (rangeData.getGreaterThanOrEqual() != null) {
-            allFilters.add(Conditions.isGreaterOrEqualTo(column, SQL.literalOf(rangeData.getGreaterThanOrEqual().toString())));
         }
-        if (rangeData.getLessThanOrEqual() != null && targetClass != null) {
+        if (rangeData.getLessThanOrEqual() != null) {
             allFilters.add(
                 Conditions.isLessOrEqualTo(
                     column,
-                    SQL.literalOf(columnConverter.convert(rangeData.getLessThanOrEqual(), targetClass).toString())
+                    SQL.literalOf(converterFunction.apply(rangeData.getLessThanOrEqual()))
                 )
             );
-        } else if (rangeData.getLessThanOrEqual() != null) {
-            allFilters.add(Conditions.isLessOrEqualTo(column, SQL.literalOf(rangeData.getLessThanOrEqual().toString())));
         }
     }
 
@@ -157,7 +155,7 @@ public class ConditionBuilder {
                 Conditions.isNotEqual(column, SQL.literalOf(columnConverter.convert(generalData.getNotEquals(), Boolean.class)))
             );
         }
-        if (generalData.getIn() != null) {
+        if (generalData.getIn() != null && generalData.getIn().size() > 0) {
             allFilters.add(
                 Conditions.in(
                     column,
@@ -182,8 +180,7 @@ public class ConditionBuilder {
             );
         }
         if (generalData.getSpecified() != null && generalData.getSpecified()) {
-            // There is no IS or isNotNull method to create this equivalent
-            allFilters.add(Conditions.just("" + column + " IS NOT NULL"));
+            allFilters.add(Conditions.isNull(column).not());
         }
         if (generalData.getSpecified() != null && !generalData.getSpecified()) {
             allFilters.add(Conditions.isNull(column));
@@ -191,60 +188,43 @@ public class ConditionBuilder {
     }
 
     private <X> void buildGeneralConditions(Filter<X> generalData, Column column, Class<?> targetClass) {
-        if (generalData.getEquals() != null && targetClass != null) {
+        var converterFunction = columnValueConverter(targetClass);
+        if (generalData.getEquals() != null) {
             allFilters.add(
-                Conditions.isEqual(column, SQL.literalOf(columnConverter.convert(generalData.getEquals(), targetClass).toString()))
+                Conditions.isEqual(column, SQL.literalOf(converterFunction.apply(generalData.getEquals())))
             );
-        } else if (generalData.getEquals() != null) {
-            allFilters.add(Conditions.isEqual(column, SQL.literalOf(generalData.getEquals().toString())));
         }
-        if (generalData.getNotEquals() != null && targetClass != null) {
+        if (generalData.getNotEquals() != null) {
             allFilters.add(
-                Conditions.isNotEqual(column, SQL.literalOf(columnConverter.convert(generalData.getNotEquals(), targetClass).toString()))
+                Conditions.isNotEqual(column, SQL.literalOf(converterFunction.apply(generalData.getNotEquals())))
             );
-        } else if (generalData.getNotEquals() != null) {
-            allFilters.add(Conditions.isNotEqual(column, SQL.literalOf(generalData.getNotEquals().toString())));
         }
-        if (generalData.getIn() != null && targetClass != null) {
+        if (generalData.getIn() != null && generalData.getIn().size() > 0) {
             allFilters.add(
                 Conditions.in(
                     column,
                     generalData
                         .getIn()
                         .stream()
-                        .map(eachIn -> SQL.literalOf(columnConverter.convert(eachIn, targetClass).toString()))
+                        .map(eachIn -> SQL.literalOf(converterFunction.apply(eachIn)))
                         .collect(Collectors.toList())
                 )
             );
-        } else if (generalData.getIn() != null) {
-            allFilters.add(
-                Conditions.in(
-                    column,
-                    generalData.getIn().stream().map(eachIn -> SQL.literalOf(eachIn.toString())).collect(Collectors.toList())
-                )
-            );
         }
-        if (generalData.getNotIn() != null && generalData.getNotIn().size() > 0 && targetClass != null) {
+        if (generalData.getNotIn() != null && generalData.getNotIn().size() > 0) {
             allFilters.add(
                 Conditions.notIn(
                     column,
                     generalData
                         .getNotIn()
                         .stream()
-                        .map(eachNotIn -> SQL.literalOf(columnConverter.convert(eachNotIn, targetClass).toString()))
+                        .map(eachNotIn -> SQL.literalOf(converterFunction.apply(eachNotIn)))
                         .collect(Collectors.toList())
-                )
-            );
-        } else if (generalData.getNotIn() != null && generalData.getNotIn().size() > 0) {
-            allFilters.add(
-                Conditions.notIn(
-                    column,
-                    generalData.getNotIn().stream().map(eachNotIn -> SQL.literalOf(eachNotIn.toString())).collect(Collectors.toList())
                 )
             );
         }
         if (generalData.getSpecified() != null && generalData.getSpecified()) {
-            allFilters.add(Conditions.just("" + column + " IS NOT NULL"));
+            allFilters.add(Conditions.isNull(column).not());
         }
         if (generalData.getSpecified() != null && !generalData.getSpecified()) {
             allFilters.add(Conditions.isNull(column));
