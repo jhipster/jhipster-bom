@@ -103,11 +103,11 @@ public class JHipsterSpringDocGroupsConfiguration {
         GroupedOpenApi.Builder builder = GroupedOpenApi.builder()
             .group(DEFAULT_GROUP_NAME)
             .pathsToMatch(properties.getDefaultIncludePattern());
-        openApiCustomisers.stream()
-            .filter(customiser -> !(customiser instanceof ActuatorOpenApiCustomizer))
+        openApiCustomizers.stream()
+            .filter(customizer -> !(customizer instanceof ActuatorOpenApiCustomizer))
             .forEach(builder::addOpenApiCustomizer);
         operationCustomizers.stream()
-            .filter(customiser -> !(customiser instanceof ActuatorOperationCustomizer))
+            .filter(customizer -> !(customizer instanceof ActuatorOperationCustomizer))
             .forEach(builder::addOperationCustomizer);
         apiFirstGroupedOpenAPI.map(GroupedOpenApi::getPackagesToScan)
             .ifPresent(packagesToScan -> packagesToScan.forEach(builder::packagesToExclude));
