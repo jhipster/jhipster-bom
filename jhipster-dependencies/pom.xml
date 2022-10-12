@@ -39,7 +39,7 @@
 
     <properties>
         <!-- Dependency versions -->
-        <aws-java-sdk-bom.version>1.12.317</aws-java-sdk-bom.version>
+        <aws-java-sdk-bom.version>1.12.319</aws-java-sdk-bom.version>
         <azure-spring-cloud-client.version>2.4.0</azure-spring-cloud-client.version>
         <azure-applicationinsights-spring-boot-starter.version>2.6.4</azure-applicationinsights-spring-boot-starter.version>
         <bucket4j.version>7.6.0</bucket4j.version>
@@ -60,11 +60,11 @@
         <junit-platform-console.version>1.8.2</junit-platform-console.version>
         <logstash-logback-encoder.version>7.2</logstash-logback-encoder.version>
         <lz4-java.version>1.8.0</lz4-java.version>
-        <mapstruct.version>1.5.2.Final</mapstruct.version>
+        <mapstruct.version>1.5.3.Final</mapstruct.version>
         <mongock.version>5.1.6</mongock.version>
         <mongodb.version>4.2.3</mongodb.version>
         <mssql-jdbc.version>11.2.1.jre8</mssql-jdbc.version>
-        <neo4j-migrations.version>1.13.0</neo4j-migrations.version>
+        <neo4j-migrations.version>1.13.1</neo4j-migrations.version>
         <mysql-jdbc.version>8.0.30</mysql-jdbc.version>
         <oracle-jdbc.version>21.7.0.0</oracle-jdbc.version>
         <problem-spring.version>0.27.0</problem-spring.version>
