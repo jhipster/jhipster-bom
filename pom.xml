@@ -40,7 +40,7 @@
 
     <properties>
         <!-- The jhipster-framework version should be the same as the artifact version above -->
-        <jhipster-framework.version>7.9.4-SNAPSHOT</jhipster-framework.version>
+        <jhipster-framework.version>8.0.0-SNAPSHOT</jhipster-framework.version>
         <!-- The spring-boot version should be the same as the parent version above -->
         <spring-boot.version>3.0.0-M5</spring-boot.version>
 
