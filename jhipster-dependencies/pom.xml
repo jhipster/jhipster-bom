@@ -73,8 +73,7 @@
         <prometheus-simpleclient.version>0.15.0</prometheus-simpleclient.version>
         <redisson.version>3.17.7</redisson.version>
         <reflections.version>0.10.1</reflections.version>
-        <spring-cloud.version>2021.0.4</spring-cloud.version>
-        <spring-cloud-netflix.version>2.2.10.RELEASE</spring-cloud-netflix.version>
+        <spring-cloud.version>2022.0.0-M5</spring-cloud.version>
         <spring-cloud-security.version>2.2.5.RELEASE</spring-cloud-security.version>
         <spring-data-neo4j-rx.version>1.1.1</spring-data-neo4j-rx.version>
         <spring-security-jwt.version>1.1.1.RELEASE</spring-security-jwt.version>
@@ -664,13 +663,6 @@
                 <artifactId>testng</artifactId>
                 <version>${testng.version}</version>
                 <scope>test</scope>
-            </dependency>
-            <!-- Spring Cloud Netflix dependencies are no longer managed by Spring Cloud's BOM -->
-            <!-- https://github.com/spring-cloud/spring-cloud-release/wiki/Spring-Cloud-2020.0-Release-Notes#breaking-changes -->
-            <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
-                <version>${spring-cloud-netflix.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.google.guava</groupId>
