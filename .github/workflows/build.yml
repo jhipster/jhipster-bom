@@ -28,6 +28,7 @@ on:
     types: [opened, synchronize, reopened]
     branches:
       - main
+      - spring-boot-3.0-m4
 
 jobs:
   build-and-analyse:
