@@ -57,13 +57,13 @@ public class ReactiveWebExceptionHandler implements org.springframework.web.serv
     @Override
     public Mono<Void> handle(final ServerWebExchange exchange, final Throwable throwable) {
         if (throwable instanceof ResponseStatusException) {
-            final Mono<ResponseEntity<ProblemDetail>> entityMono = translator.handleAnyException(throwable, exchange);
+            final Mono<ResponseEntity<Object>> entityMono = translator.handleAnyException(throwable, exchange);
             return entityMono.flatMap(entity -> this.setHttpResponse(entity, exchange, mapper));
         }
         return Mono.error(throwable);
     }
 
-    private Mono<Void> setHttpResponse(final ResponseEntity<ProblemDetail> entity, final ServerWebExchange exchange,
+    private Mono<Void> setHttpResponse(final ResponseEntity<Object> entity, final ServerWebExchange exchange,
             final ObjectMapper mapper) {
         final ServerHttpResponse response = exchange.getResponse();
         response.setStatusCode(entity.getStatusCode());

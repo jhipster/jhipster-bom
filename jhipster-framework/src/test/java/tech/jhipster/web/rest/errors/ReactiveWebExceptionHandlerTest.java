@@ -80,7 +80,7 @@ public class ReactiveWebExceptionHandlerTest {
     private static class TestExceptionTranslation implements ExceptionTranslation {
 
         @Override
-        public Mono<ResponseEntity<ProblemDetail>> handleAnyException(Throwable ex, ServerWebExchange request) {
+        public Mono<ResponseEntity<Object>> handleAnyException(Throwable ex, ServerWebExchange request) {
             logger.trace("Stub ExceptionTranslation handleAnyException invoked");
             ProblemDetail problem = getProblemDetail();
             HttpHeaders header = new HttpHeaders();
