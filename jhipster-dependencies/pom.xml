@@ -51,9 +51,9 @@
         <commons-collections.version>4.4</commons-collections.version>
         <feign-reactor-bom.version>3.2.6</feign-reactor-bom.version>
         <guava.version>31.1-jre</guava.version>
-        <hazelcast.version>5.1.2</hazelcast.version>
+        <hazelcast.version>5.1.4</hazelcast.version>
         <hazelcast-hibernate5.version>2.2.1</hazelcast-hibernate5.version>
-        <infinispan.version>13.0.11.Final</infinispan.version>
+        <infinispan.version>14.0.2.Final</infinispan.version>
         <!-- To pull in a newer version than Spring Boot with Nonnull -->
         <jakarta-annotation.version>2.1.1</jakarta-annotation.version>
         <jjwt.version>0.11.5</jjwt.version>
@@ -61,7 +61,7 @@
         <logstash-logback-encoder.version>7.2</logstash-logback-encoder.version>
         <lz4-java.version>1.8.0</lz4-java.version>
         <mapstruct.version>1.5.3.Final</mapstruct.version>
-        <mongock.version>5.1.6</mongock.version>
+        <mongock.version>5.1.7</mongock.version>
         <mongodb.version>4.2.3</mongodb.version>
         <mssql-jdbc.version>11.2.1.jre8</mssql-jdbc.version>
         <neo4j-migrations.version>1.13.1</neo4j-migrations.version>
@@ -71,10 +71,9 @@
         <redisson.version>3.17.7</redisson.version>
         <reflections.version>0.10.1</reflections.version>
         <spring-cloud.version>2022.0.0-M5</spring-cloud.version>
-        <spring-cloud-security.version>2.2.5.RELEASE</spring-cloud-security.version>
         <spring-data-neo4j-rx.version>1.1.1</spring-data-neo4j-rx.version>
         <spring-security-jwt.version>1.1.1.RELEASE</spring-security-jwt.version>
-        <springdocs.version>2.0.0-M7</springdocs.version>
+        <springdocs.version>2.0.0-RC1</springdocs.version>
         <testcontainers.version>1.17.5</testcontainers.version>
         <testng.version>7.6.1</testng.version>
         <xmemcached.version>2.4.7</xmemcached.version>
@@ -254,11 +253,6 @@
                 <groupId>com.oracle.database.jdbc</groupId>
                 <artifactId>ojdbc8</artifactId>
                 <version>${oracle-jdbc.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.prometheus</groupId>
-                <artifactId>simpleclient</artifactId>
-                <version>${prometheus-simpleclient.version}</version>
             </dependency>
             <dependency>
                 <groupId>mysql</groupId>
@@ -446,23 +440,11 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-data-mongodb</artifactId>
                 <version>${spring-boot.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>org.mongodb</groupId>
-                        <artifactId>*</artifactId>
-                    </exclusion>
-                </exclusions>
             </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-data-mongodb-reactive</artifactId>
                 <version>${spring-boot.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>org.mongodb</groupId>
-                        <artifactId>*</artifactId>
-                    </exclusion>
-                </exclusions>
             </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
@@ -711,14 +693,6 @@
             </dependency>
 
             <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-security-dependencies</artifactId>
-                <version>${spring-cloud-security.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-
-            <dependency>
                 <groupId>org.testcontainers</groupId>
                 <artifactId>testcontainers-bom</artifactId>
                 <version>${testcontainers.version}</version>
@@ -728,7 +702,7 @@
 
             <dependency>
                 <groupId>io.mongock</groupId>
-                <artifactId>mongock-community-bom</artifactId>
+                <artifactId>mongock-bom</artifactId>
                 <version>${mongock.version}</version>
                 <type>pom</type>
                 <scope>import</scope>

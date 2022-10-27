@@ -224,30 +224,6 @@ class AngularCookieLocaleResolverTest {
     }
 
     @Test
-    void testCookieWithQuotes() {
-        recorder.release();
-        recorder.capture("TRACE");
-
-        String value = LOCALE_CUSTOM.toString();
-        resolver.addCookie(response, value);
-
-        verify(response).addCookie(captor.capture());
-
-        Cookie cookie = captor.getValue();
-        assertThat(cookie.getName()).isEqualTo(DEFAULT_COOKIE_NAME);
-        assertThat(cookie.getValue()).isEqualTo(resolver.quote(value));
-
-        List<Event> events = recorder.play();
-        assertThat(events).hasSize(1);
-
-        Event event = events.get(0);
-        assertThat(event.getLevel()).isEqualTo("TRACE");
-        assertThat(event.getMessage()).isEqualTo("Added cookie [" + DEFAULT_COOKIE_NAME + "=" +
-            resolver.quote(value) + "]");
-        assertThat(event.getThrown()).isNull();
-    }
-
-    @Test
     void testTraceLogLocale() {
         recorder.release();
         recorder.capture("TRACE");
