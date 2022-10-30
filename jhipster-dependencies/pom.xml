@@ -67,7 +67,6 @@
         <neo4j-migrations.version>1.13.1</neo4j-migrations.version>
         <mysql-jdbc.version>8.0.30</mysql-jdbc.version>
         <oracle-jdbc.version>21.7.0.0</oracle-jdbc.version>
-        <prometheus-simpleclient.version>0.15.0</prometheus-simpleclient.version>
         <redisson.version>3.17.7</redisson.version>
         <reflections.version>0.10.2</reflections.version>
         <spring-cloud.version>2022.0.0-M5</spring-cloud.version>
