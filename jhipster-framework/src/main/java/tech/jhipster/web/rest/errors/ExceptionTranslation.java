@@ -38,5 +38,5 @@ public interface ExceptionTranslation {
      * @param request The request that is being served
      * @return Returns the Responseentity containing the ProblemDetail
      */
-    public Mono<ResponseEntity<ProblemDetail>> handleAnyException(Throwable ex, ServerWebExchange request);
+    public Mono<ResponseEntity<Object>> handleAnyException(Throwable ex, ServerWebExchange request);
 }
