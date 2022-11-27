@@ -71,7 +71,7 @@
         <versions-maven-plugin.version>2.13.0</versions-maven-plugin.version>
     </properties>
 
-    <!-- todo: remove when Spring Boot 3.0 is released. -->
+    <!-- todo: remove when Spring Cloud 4.0 is released. -->
     <repositories>
         <repository>
             <id>spring-milestones</id>
