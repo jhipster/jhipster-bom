@@ -51,7 +51,7 @@
         <commons-collections.version>4.4</commons-collections.version>
         <feign-reactor-bom.version>3.2.6</feign-reactor-bom.version>
         <guava.version>31.1-jre</guava.version>
-        <hazelcast.version>5.1.4</hazelcast.version>
+        <hazelcast.version>5.1.5</hazelcast.version>
         <hazelcast-hibernate5.version>2.2.1</hazelcast-hibernate5.version>
         <infinispan.version>14.0.2.Final</infinispan.version>
         <!-- To pull in a newer version than Spring Boot with Nonnull -->
