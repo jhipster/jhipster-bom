@@ -71,28 +71,6 @@
         <versions-maven-plugin.version>2.13.0</versions-maven-plugin.version>
     </properties>
 
-    <!-- todo: remove when Spring Boot 3.0 is released. -->
-    <repositories>
-        <repository>
-            <id>spring-milestones</id>
-            <name>Spring Milestones</name>
-            <url>https://repo.spring.io/milestone</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
-    <pluginRepositories>
-        <pluginRepository>
-            <id>spring-milestones</id>
-            <name>Spring Milestones</name>
-            <url>https://repo.spring.io/milestone</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </pluginRepository>
-    </pluginRepositories>
-
     <scm>
         <connection>scm:git:https://github.com/jhipster/jhipster-bom/</connection>
         <url>https://github.com/jhipster/jhipster-bom/</url>
