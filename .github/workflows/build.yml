@@ -24,7 +24,6 @@ on:
   push:
     branches:
       - main
-      - spring-boot-3.0-m4
   pull_request:
     types: [opened, synchronize, reopened]
     branches:
