@@ -27,14 +27,14 @@ import io.swagger.v3.oas.models.info.Contact;
 import io.swagger.v3.oas.models.info.License;
 import io.swagger.v3.oas.models.servers.Server;
 
-import org.springdoc.core.customizers.OpenApiCustomiser;
+import org.springdoc.core.customizers.OpenApiCustomizer;
 
 import org.springframework.core.Ordered;
 
 /**
- * A OpenApi customizer to setup {@link io.swagger.v3.oas.models.OpenAPI} with JHipster settings.
+ * A OpenApi customizer to set up {@link io.swagger.v3.oas.models.OpenAPI} with JHipster settings.
  */
-public class JHipsterOpenApiCustomizer implements OpenApiCustomiser, Ordered {
+public class JHipsterOpenApiCustomizer implements OpenApiCustomizer, Ordered {
 
     /**
      * The default order for the customizer.

@@ -32,9 +32,9 @@ import org.springframework.context.i18n.TimeZoneAwareLocaleContext;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import java.time.ZoneId;
 import java.util.List;
 import java.util.Locale;
@@ -221,30 +221,6 @@ class AngularCookieLocaleResolverTest {
 
         List<Event> events = recorder.play();
         assertThat(events).isEmpty();
-    }
-
-    @Test
-    void testCookieWithQuotes() {
-        recorder.release();
-        recorder.capture("TRACE");
-
-        String value = LOCALE_CUSTOM.toString();
-        resolver.addCookie(response, value);
-
-        verify(response).addCookie(captor.capture());
-
-        Cookie cookie = captor.getValue();
-        assertThat(cookie.getName()).isEqualTo(DEFAULT_COOKIE_NAME);
-        assertThat(cookie.getValue()).isEqualTo(resolver.quote(value));
-
-        List<Event> events = recorder.play();
-        assertThat(events).hasSize(1);
-
-        Event event = events.get(0);
-        assertThat(event.getLevel()).isEqualTo("TRACE");
-        assertThat(event.getMessage()).isEqualTo("Added cookie [" + DEFAULT_COOKIE_NAME + "=" +
-            resolver.quote(value) + "]");
-        assertThat(event.getThrown()).isNull();
     }
 
     @Test

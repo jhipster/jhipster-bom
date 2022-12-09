@@ -708,17 +708,6 @@ class JHipsterPropertiesTest {
     }
 
     @Test
-    @Deprecated
-    void testLoggingLogstashQueueSize() {
-        JHipsterProperties.Logging.Logstash obj = properties.getLogging().getLogstash();
-        int val = JHipsterDefaults.Logging.Logstash.ringBufferSize;
-        assertThat(obj.getQueueSize()).isEqualTo(val);
-        val++;
-        obj.setQueueSize(val);
-        assertThat(obj.getQueueSize()).isEqualTo(val);
-    }
-
-    @Test
     void testLoggingLogstashRingBufferSize() {
         JHipsterProperties.Logging.Logstash obj = properties.getLogging().getLogstash();
         int val = JHipsterDefaults.Logging.Logstash.ringBufferSize;

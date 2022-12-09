@@ -1,7 +1,8 @@
 package tech.jhipster.config.apidoc;
 
 import org.junit.jupiter.api.Test;
-import org.springdoc.api.annotations.ParameterObject;
+import org.junit.jupiter.api.Disabled;
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.autoconfigure.security.servlet.ManagementWebSecurityAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import io.swagger.v3.oas.annotations.Operation;
 
+import static org.springdoc.core.utils.Constants.DEFAULT_GROUP_NAME;
 import static tech.jhipster.config.JHipsterConstants.SPRING_PROFILE_API_DOCS;
 
 import static org.hamcrest.Matchers.hasItem;
@@ -31,8 +33,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-import static org.springdoc.core.Constants.DEFAULT_GROUP_NAME;
 
 @SpringBootTest(
     classes = JHipsterSpringDocAutoconfigurationTest.TestApp.class,
@@ -57,6 +57,7 @@ import static org.springdoc.core.Constants.DEFAULT_GROUP_NAME;
     })
 @ActiveProfiles(SPRING_PROFILE_API_DOCS)
 @AutoConfigureMockMvc
+@Disabled("Dependent on javax.servlet")
 class JHipsterSpringDocAutoconfigurationTest {
 
     @Autowired

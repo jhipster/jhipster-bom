@@ -19,15 +19,16 @@
 
 package tech.jhipster.config.locale;
 
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.i18n.LocaleContext;
 import org.springframework.context.i18n.TimeZoneAwareLocaleContext;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.util.WebUtils;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.Locale;
 import java.util.TimeZone;
 
@@ -40,17 +41,25 @@ import java.util.TimeZone;
  */
 public class AngularCookieLocaleResolver extends CookieLocaleResolver {
 
-    /** Constant <code>QUOTE="%22"</code> */
+    private final Logger logger = LoggerFactory.getLogger(AngularCookieLocaleResolver.class);
+
+    /**
+     * Constant <code>QUOTE="%22"</code>
+     */
     public static final String QUOTE = "%22";
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Locale resolveLocale(HttpServletRequest request) {
         parseAngularCookieIfNecessary(request);
         return (Locale) request.getAttribute(LOCALE_REQUEST_ATTRIBUTE_NAME);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public LocaleContext resolveLocaleContext(HttpServletRequest request) {
         parseAngularCookieIfNecessary(request);
@@ -67,17 +76,10 @@ public class AngularCookieLocaleResolver extends CookieLocaleResolver {
         };
     }
 
-    /** {@inheritDoc} */
-    @Override
-    public void addCookie(HttpServletResponse response, String cookieValue) {
-        // Mandatory cookie modification for AngularJS to support the locale switching on the server side.
-        super.addCookie(response, quote(cookieValue));
-    }
-
     private void parseAngularCookieIfNecessary(HttpServletRequest request) {
         if (request.getAttribute(LOCALE_REQUEST_ATTRIBUTE_NAME) == null) {
             // Retrieve and parse cookie value.
-            Cookie cookie = WebUtils.getCookie(request, getCookieName());
+            Cookie cookie = WebUtils.getCookie(request, DEFAULT_COOKIE_NAME);
             Locale locale = null;
             TimeZone timeZone = null;
             if (cookie != null) {

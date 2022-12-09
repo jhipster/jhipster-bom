@@ -5,13 +5,13 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-dependencies</artifactId>
-        <version>2.7.3</version>
+        <version>3.0.0</version>
         <relativePath />
     </parent>
 
     <groupId>tech.jhipster</groupId>
     <artifactId>jhipster-parent</artifactId>
-    <version>7.9.4-SNAPSHOT</version>
+    <version>8.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>JHipster server-side parent POM</name>
     <url>https://github.com/jhipster/jhipster-bom/</url>
@@ -40,12 +40,12 @@
 
     <properties>
         <!-- The jhipster-framework version should be the same as the artifact version above -->
-        <jhipster-framework.version>7.9.4-SNAPSHOT</jhipster-framework.version>
+        <jhipster-framework.version>8.0.0-SNAPSHOT</jhipster-framework.version>
         <!-- The spring-boot version should be the same as the parent version above -->
-        <spring-boot.version>2.7.3</spring-boot.version>
+        <spring-boot.version>3.0.0</spring-boot.version>
 
         <!-- Build properties -->
-        <java.version>11</java.version>
+        <java.version>17</java.version>
         <maven.version>3.2.5</maven.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -70,6 +70,28 @@
         <sonar-maven-plugin.version>3.9.1.2184</sonar-maven-plugin.version>
         <versions-maven-plugin.version>2.13.0</versions-maven-plugin.version>
     </properties>
+
+    <!-- todo: remove when Spring Cloud 4.0 is released. -->
+    <repositories>
+        <repository>
+            <id>spring-milestones</id>
+            <name>Spring Milestones</name>
+            <url>https://repo.spring.io/milestone</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>spring-milestones</id>
+            <name>Spring Milestones</name>
+            <url>https://repo.spring.io/milestone</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
 
     <scm>
         <connection>scm:git:https://github.com/jhipster/jhipster-bom/</connection>
