@@ -200,7 +200,8 @@ public class LogbackRecorder {
         private final String thrown;
 
         Event(ILoggingEvent event) {
-            marker = event.getMarker();
+            List<Marker> markers = event.getMarkerList();
+            marker = markers == null || markers.isEmpty() ? null : markers.get(0);
             level = event.getLevel().toString();
             message = event.getMessage();
             arguments = event.getArgumentArray();
