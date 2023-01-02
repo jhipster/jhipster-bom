@@ -18,9 +18,9 @@
 
 name: Copyright Update
 on:
+    workflow_dispatch:
     schedule:
-#        - cron: '0 0 31 12 *' # Repeats December 31st every year
-        - cron: '0 0 02 01 *' # Repeats December 31st every year
+        - cron: '0 0 31 12 *' # Repeats December 31st every year
 jobs:
     pipeline:
         name: copyright update
