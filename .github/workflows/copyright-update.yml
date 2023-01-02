@@ -18,7 +18,6 @@
 
 name: Copyright Update
 on:
-  push:
   pull_request:
   schedule:
     - cron: '0 0 31 12 *' # Repeats December 31st every year
