@@ -53,7 +53,6 @@
         <guava.version>31.1-jre</guava.version>
         <hazelcast.version>5.1.5</hazelcast.version>
         <hazelcast-hibernate5.version>2.2.1</hazelcast-hibernate5.version>
-        <infinispan.version>14.0.4.Final</infinispan.version>
         <!-- To pull in a newer version than Spring Boot with Nonnull -->
         <jakarta-annotation.version>2.1.1</jakarta-annotation.version>
         <jjwt.version>0.11.5</jjwt.version>
@@ -155,11 +154,6 @@
                 <groupId>org.redisson</groupId>
                 <artifactId>redisson</artifactId>
                 <version>${redisson.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.infinispan</groupId>
-                <artifactId>infinispan-spring-boot-starter-embedded</artifactId>
-                <version>${infinispan.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.jsonwebtoken</groupId>
@@ -687,14 +681,6 @@
                 <groupId>io.mongock</groupId>
                 <artifactId>mongock-bom</artifactId>
                 <version>${mongock.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-
-            <dependency>
-                <groupId>org.infinispan</groupId>
-                <artifactId>infinispan-bom</artifactId>
-                <version>${infinispan.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
