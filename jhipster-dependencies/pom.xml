@@ -64,7 +64,7 @@
         <mssql-jdbc.version>11.2.3.jre17</mssql-jdbc.version>
         <neo4j-migrations.version>2.1.1</neo4j-migrations.version>
         <mysql-jdbc.version>8.0.32</mysql-jdbc.version>
-        <oracle-jdbc.version>21.8.0.0</oracle-jdbc.version>
+        <oracle-jdbc.version>21.9.0.0</oracle-jdbc.version>
         <redisson.version>3.19.3</redisson.version>
         <reflections.version>0.10.2</reflections.version>
         <spring-cloud.version>2022.0.1</spring-cloud.version>
