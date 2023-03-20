@@ -62,7 +62,7 @@
         <mapstruct.version>1.5.3.Final</mapstruct.version>
         <mongock.version>5.2.2</mongock.version>
         <mssql-jdbc.version>11.2.3.jre17</mssql-jdbc.version>
-        <neo4j-migrations.version>2.2.0</neo4j-migrations.version>
+        <neo4j-migrations.version>2.2.1</neo4j-migrations.version>
         <mysql-jdbc.version>8.0.32</mysql-jdbc.version>
         <oracle-jdbc.version>21.9.0.0</oracle-jdbc.version>
         <redisson.version>3.20.0</redisson.version>
