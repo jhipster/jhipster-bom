@@ -55,7 +55,6 @@
         <hazelcast-hibernate5.version>2.2.1</hazelcast-hibernate5.version>
         <!-- To pull in a newer version than Spring Boot with Nonnull -->
         <jakarta-annotation.version>2.1.1</jakarta-annotation.version>
-        <jjwt.version>0.11.5</jjwt.version>
         <junit-platform-console.version>1.9.2</junit-platform-console.version>
         <logstash-logback-encoder.version>7.2</logstash-logback-encoder.version>
         <lz4-java.version>1.8.0</lz4-java.version>
@@ -154,23 +153,6 @@
                 <groupId>org.redisson</groupId>
                 <artifactId>redisson</artifactId>
                 <version>${redisson.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.jsonwebtoken</groupId>
-                <artifactId>jjwt-api</artifactId>
-                <version>${jjwt.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.jsonwebtoken</groupId>
-                <artifactId>jjwt-impl</artifactId>
-                <version>${jjwt.version}</version>
-                <scope>runtime</scope>
-            </dependency>
-            <dependency>
-                <groupId>io.jsonwebtoken</groupId>
-                <artifactId>jjwt-jackson</artifactId>
-                <version>${jjwt.version}</version>
-                <scope>runtime</scope>
             </dependency>
             <dependency>
                 <groupId>net.logstash.logback</groupId>
