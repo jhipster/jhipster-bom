@@ -65,7 +65,7 @@
         <oracle-jdbc.version>21.9.0.0</oracle-jdbc.version>
         <redisson.version>3.20.1</redisson.version>
         <reflections.version>0.10.2</reflections.version>
-        <spring-cloud.version>2022.0.1</spring-cloud.version>
+        <spring-cloud.version>2022.0.2</spring-cloud.version>
         <springdocs.version>2.0.4</springdocs.version>
         <testcontainers.version>1.17.6</testcontainers.version>
         <testng.version>7.7.1</testng.version>
