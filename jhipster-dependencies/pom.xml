@@ -45,10 +45,8 @@
         <bucket4j.version>8.2.0</bucket4j.version>
         <couchmove.version>3.3.2</couchmove.version>
         <cucumber-jvm.version>7.11.2</cucumber-jvm.version>
-        <commons-io.version>2.11.0</commons-io.version>
         <commons-collections.version>4.4</commons-collections.version>
         <feign-reactor-bom.version>3.2.6</feign-reactor-bom.version>
-        <guava.version>31.1-jre</guava.version>
         <!-- To pull in a newer version than Spring Boot with Nonnull -->
         <jakarta-annotation.version>2.1.1</jakarta-annotation.version>
         <junit-platform-console.version>1.9.2</junit-platform-console.version>
@@ -83,11 +81,6 @@
                 <groupId>com.bucket4j</groupId>
                 <artifactId>bucket4j-jcache</artifactId>
                 <version>${bucket4j.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>commons-io</groupId>
-                <artifactId>commons-io</artifactId>
-                <version>${commons-io.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.cucumber</groupId>
@@ -532,11 +525,6 @@
                 <artifactId>testng</artifactId>
                 <version>${testng.version}</version>
                 <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>com.google.guava</groupId>
-                <artifactId>guava</artifactId>
-                <version>${guava.version}</version>
             </dependency>
             <dependency>
                 <groupId>eu.michael-simons.neo4j</groupId>
