@@ -42,7 +42,6 @@
         <aws-java-sdk-bom.version>1.12.439</aws-java-sdk-bom.version>
         <azure-spring-cloud-client.version>2.4.0</azure-spring-cloud-client.version>
         <azure-applicationinsights-spring-boot-starter.version>2.6.4</azure-applicationinsights-spring-boot-starter.version>
-        <bucket4j.version>8.2.0</bucket4j.version>
         <couchmove.version>3.3.2</couchmove.version>
         <cucumber-jvm.version>7.11.2</cucumber-jvm.version>
         <commons-collections.version>4.4</commons-collections.version>
@@ -70,16 +69,6 @@
                 <groupId>tech.jhipster</groupId>
                 <artifactId>jhipster-framework</artifactId>
                 <version>${jhipster-framework.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.bucket4j</groupId>
-                <artifactId>bucket4j-core</artifactId>
-                <version>${bucket4j.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.bucket4j</groupId>
-                <artifactId>bucket4j-jcache</artifactId>
-                <version>${bucket4j.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.cucumber</groupId>
