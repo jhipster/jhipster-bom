@@ -56,7 +56,7 @@
         <neo4j-migrations.version>2.2.2</neo4j-migrations.version>
         <redisson.version>3.20.1</redisson.version>
         <spring-cloud.version>2022.0.2</spring-cloud.version>
-        <springdocs.version>2.0.4</springdocs.version>
+        <springdocs.version>2.1.0</springdocs.version>
         <testcontainers.version>1.17.6</testcontainers.version>
         <testng.version>7.7.1</testng.version>
         <xmemcached.version>2.4.7</xmemcached.version>
