@@ -56,7 +56,6 @@
         <mongock.version>5.2.4</mongock.version>
         <neo4j-migrations.version>2.2.2</neo4j-migrations.version>
         <redisson.version>3.20.1</redisson.version>
-        <reflections.version>0.10.2</reflections.version>
         <spring-cloud.version>2022.0.2</spring-cloud.version>
         <springdocs.version>2.0.4</springdocs.version>
         <testcontainers.version>1.17.6</testcontainers.version>
@@ -177,11 +176,6 @@
                 <groupId>org.mapstruct</groupId>
                 <artifactId>mapstruct-processor</artifactId>
                 <version>${mapstruct.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.reflections</groupId>
-                <artifactId>reflections</artifactId>
-                <version>${reflections.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
