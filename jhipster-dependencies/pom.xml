@@ -57,7 +57,7 @@
         <redisson.version>3.21.3</redisson.version>
         <spring-cloud.version>2022.0.3</spring-cloud.version>
         <springdocs.version>2.1.0</springdocs.version>
-        <testcontainers.version>1.18.1</testcontainers.version>
+        <testcontainers.version>1.18.2</testcontainers.version>
         <testng.version>7.8.0</testng.version>
         <xmemcached.version>2.4.7</xmemcached.version>
         <xmemcached-provider.version>4.1.3</xmemcached-provider.version>
