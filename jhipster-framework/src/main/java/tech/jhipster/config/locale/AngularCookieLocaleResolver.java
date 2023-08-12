@@ -48,6 +48,14 @@ public class AngularCookieLocaleResolver extends CookieLocaleResolver {
      */
     public static final String QUOTE = "%22";
 
+    public AngularCookieLocaleResolver() {
+        super();
+    }
+
+    public AngularCookieLocaleResolver(String cookieName) {
+        super(cookieName);
+    }
+
     /**
      * {@inheritDoc}
      */
