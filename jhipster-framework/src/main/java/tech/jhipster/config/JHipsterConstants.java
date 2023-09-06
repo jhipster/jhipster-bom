@@ -39,12 +39,6 @@ public interface JHipsterConstants {
     /** Spring profile used when deploying to Heroku
         Constant <code>SPRING_PROFILE_HEROKU="heroku"</code> */
     String SPRING_PROFILE_HEROKU = "heroku";
-    /** Spring profile used when deploying to Amazon ECS
-        Constant <code>SPRING_PROFILE_AWS_ECS="aws-ecs"</code> */
-    String SPRING_PROFILE_AWS_ECS = "aws-ecs";
-    /** Spring profile used when deploying to Microsoft Azure
-     Constant <code>SPRING_PROFILE_AZURE="azure"</code> */
-    String SPRING_PROFILE_AZURE = "azure";
     /** Spring profile used to enable OpenAPI doc generation
         Constant <code>SPRING_PROFILE_API_DOCS="api-docs"</code> */
     String SPRING_PROFILE_API_DOCS = "api-docs";
