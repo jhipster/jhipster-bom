@@ -54,6 +54,7 @@
         <mongock.version>5.3.4</mongock.version>
         <neo4j-migrations.version>2.5.3</neo4j-migrations.version>
         <redisson.version>3.23.4</redisson.version>
+        <spotbugs-annotations.version>4.7.3</spotbugs-annotations.version>
         <spring-cloud.version>2022.0.4</spring-cloud.version>
         <springdocs.version>2.2.0</springdocs.version>
         <testcontainers.version>1.19.0</testcontainers.version>
@@ -518,6 +519,11 @@
                         <artifactId>*</artifactId>
                     </exclusion>
                 </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>com.github.spotbugs</groupId>
+                <artifactId>spotbugs-annotations</artifactId>
+                <version>${spotbugs-annotations.version}</version>
             </dependency>
 
             <!-- BOM imports last so we (could) selectively override dependencies above -->
