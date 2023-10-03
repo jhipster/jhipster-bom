@@ -57,7 +57,7 @@
         <spotbugs-annotations.version>4.7.3</spotbugs-annotations.version>
         <spring-cloud.version>2022.0.4</spring-cloud.version>
         <springdocs.version>2.2.0</springdocs.version>
-        <testcontainers.version>1.19.0</testcontainers.version>
+        <testcontainers.version>1.19.1</testcontainers.version>
         <testng.version>7.8.0</testng.version>
         <xmemcached.version>2.4.7</xmemcached.version>
         <xmemcached-provider.version>4.1.3</xmemcached-provider.version>
