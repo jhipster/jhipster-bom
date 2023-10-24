@@ -103,7 +103,7 @@ jobs:
           application-packaging: ${{ (matrix.war == 1 && 'war') || 'jar' }}
           generator-jhipster-branch: local
           jhipster-bom-branch: auto
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
           node-version: ${{ steps.setup.outputs.node-version }}
       - uses: actions/setup-java@v3
