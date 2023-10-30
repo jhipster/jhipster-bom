@@ -65,6 +65,14 @@
 
     <dependencyManagement>
         <dependencies>
+            <!-- BOM import first so it's possible to selectively override dependencies above -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-parent</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
             <dependency>
                 <groupId>tech.jhipster</groupId>
                 <artifactId>jhipster-framework</artifactId>
