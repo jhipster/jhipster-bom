@@ -65,7 +65,7 @@
 
     <dependencyManagement>
         <dependencies>
-            <!-- BOM import first so we (could) selectively override dependencies above -->
+            <!-- BOM import first so it's possible to selectively override dependencies above -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-parent</artifactId>
