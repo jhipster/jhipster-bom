@@ -5,7 +5,7 @@
     <parent>
         <groupId>tech.jhipster</groupId>
         <artifactId>jhipster-parent</artifactId>
-        <version>8.0.0-SNAPSHOT</version>
+        <version>8.0.1-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
@@ -44,7 +44,7 @@
         <couchmove.version>3.3.2</couchmove.version>
         <cucumber-jvm.version>7.14.0</cucumber-jvm.version>
         <commons-collections.version>4.4</commons-collections.version>
-        <feign-reactor-bom.version>4.0.0</feign-reactor-bom.version>
+        <feign-reactor-bom.version>4.0.2</feign-reactor-bom.version>
         <!-- To pull in a newer version than Spring Boot with Nonnull -->
         <jakarta-annotation.version>2.1.1</jakarta-annotation.version>
         <junit-platform-console.version>1.9.3</junit-platform-console.version>
@@ -52,7 +52,7 @@
         <lz4-java.version>1.8.0</lz4-java.version>
         <mapstruct.version>1.5.5.Final</mapstruct.version>
         <mongock.version>5.3.4</mongock.version>
-        <neo4j-migrations.version>2.6.0</neo4j-migrations.version>
+        <neo4j-migrations.version>2.7.0</neo4j-migrations.version>
         <redisson.version>3.24.3</redisson.version>
         <spotbugs-annotations.version>4.8.0</spotbugs-annotations.version>
         <spring-cloud.version>2022.0.4</spring-cloud.version>
