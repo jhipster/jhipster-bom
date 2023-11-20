@@ -19,8 +19,21 @@
 
 package tech.jhipster.config.locale;
 
-import tech.jhipster.test.LogbackRecorder;
-import tech.jhipster.test.LogbackRecorder.Event;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import static org.springframework.web.servlet.i18n.CookieLocaleResolver.DEFAULT_COOKIE_NAME;
+import static org.springframework.web.servlet.i18n.CookieLocaleResolver.LOCALE_REQUEST_ATTRIBUTE_NAME;
+import static org.springframework.web.servlet.i18n.CookieLocaleResolver.TIME_ZONE_REQUEST_ATTRIBUTE_NAME;
+
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import java.time.ZoneId;
+import java.util.List;
+import java.util.Locale;
+import java.util.TimeZone;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -31,22 +44,8 @@ import org.springframework.context.i18n.LocaleContext;
 import org.springframework.context.i18n.TimeZoneAwareLocaleContext;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
-
-import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import java.time.ZoneId;
-import java.util.List;
-import java.util.Locale;
-import java.util.TimeZone;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-import static org.springframework.web.servlet.i18n.CookieLocaleResolver.DEFAULT_COOKIE_NAME;
-import static org.springframework.web.servlet.i18n.CookieLocaleResolver.LOCALE_REQUEST_ATTRIBUTE_NAME;
-import static org.springframework.web.servlet.i18n.CookieLocaleResolver.TIME_ZONE_REQUEST_ATTRIBUTE_NAME;
+import tech.jhipster.test.LogbackRecorder;
+import tech.jhipster.test.LogbackRecorder.Event;
 
 class AngularCookieLocaleResolverTest {
 
@@ -84,12 +83,12 @@ class AngularCookieLocaleResolverTest {
 
     @Test
     void testDefaults() {
-        when(request.getCookies()).thenReturn(new Cookie[]{});
+        when(request.getCookies()).thenReturn(new Cookie[] {});
 
         LocaleContext context = resolver.resolveLocaleContext(request);
-
         assertThat(context).isNotNull();
         assertThat(context).isInstanceOf(TimeZoneAwareLocaleContext.class);
+
         assertThat(((TimeZoneAwareLocaleContext) context).getLocale()).isEqualTo(LOCALE_DEFAULT);
         assertThat(((TimeZoneAwareLocaleContext) context).getTimeZone()).isEqualTo(TIMEZONE_DEFAULT);
 
@@ -121,7 +120,7 @@ class AngularCookieLocaleResolverTest {
     void testLocale() {
         String value = LOCALE_CUSTOM.toString();
         Cookie cookie = new Cookie(DEFAULT_COOKIE_NAME, value);
-        when(request.getCookies()).thenReturn(new Cookie[]{cookie});
+        when(request.getCookies()).thenReturn(new Cookie[] { cookie });
 
         Locale locale = resolver.resolveLocale(request);
 
@@ -136,7 +135,7 @@ class AngularCookieLocaleResolverTest {
     void testCookieLocaleWithQuotes() {
         String value = resolver.quote(LOCALE_CUSTOM.toString());
         Cookie cookie = new Cookie(DEFAULT_COOKIE_NAME, value);
-        when(request.getCookies()).thenReturn(new Cookie[]{cookie});
+        when(request.getCookies()).thenReturn(new Cookie[] { cookie });
 
         Locale locale = resolver.resolveLocale(request);
 
@@ -151,7 +150,7 @@ class AngularCookieLocaleResolverTest {
     void testTimeZone() {
         String value = "- " + TIMEZONE_CUSTOM.getID();
         Cookie cookie = new Cookie(DEFAULT_COOKIE_NAME, value);
-        when(request.getCookies()).thenReturn(new Cookie[]{cookie});
+        when(request.getCookies()).thenReturn(new Cookie[] { cookie });
 
         LocaleContext context = resolver.resolveLocaleContext(request);
 
@@ -170,7 +169,7 @@ class AngularCookieLocaleResolverTest {
     void testTimeZoneWithQuotes() {
         String value = resolver.quote("- " + TIMEZONE_CUSTOM.getID());
         Cookie cookie = new Cookie(DEFAULT_COOKIE_NAME, value);
-        when(request.getCookies()).thenReturn(new Cookie[]{cookie});
+        when(request.getCookies()).thenReturn(new Cookie[] { cookie });
 
         LocaleContext context = resolver.resolveLocaleContext(request);
 
@@ -189,7 +188,7 @@ class AngularCookieLocaleResolverTest {
     void testLocaleAndTimeZone() {
         String value = LOCALE_CUSTOM + " " + TIMEZONE_CUSTOM.getID();
         Cookie cookie = new Cookie(DEFAULT_COOKIE_NAME, value);
-        when(request.getCookies()).thenReturn(new Cookie[]{cookie});
+        when(request.getCookies()).thenReturn(new Cookie[] { cookie });
 
         LocaleContext context = resolver.resolveLocaleContext(request);
 
@@ -208,7 +207,7 @@ class AngularCookieLocaleResolverTest {
     void testLocaleAndTimeZoneWithQuotes() {
         String value = resolver.quote(LOCALE_CUSTOM.toString() + " " + TIMEZONE_CUSTOM.getID());
         Cookie cookie = new Cookie(DEFAULT_COOKIE_NAME, value);
-        when(request.getCookies()).thenReturn(new Cookie[]{cookie});
+        when(request.getCookies()).thenReturn(new Cookie[] { cookie });
 
         LocaleContext context = resolver.resolveLocaleContext(request);
 
@@ -230,7 +229,7 @@ class AngularCookieLocaleResolverTest {
 
         String value = LOCALE_CUSTOM.toString();
         Cookie cookie = new Cookie(DEFAULT_COOKIE_NAME, value);
-        when(request.getCookies()).thenReturn(new Cookie[]{cookie});
+        when(request.getCookies()).thenReturn(new Cookie[] { cookie });
 
         Locale locale = resolver.resolveLocale(request);
 
@@ -250,7 +249,7 @@ class AngularCookieLocaleResolverTest {
 
         String value = LOCALE_CUSTOM + " " + TIMEZONE_CUSTOM.getID();
         Cookie cookie = new Cookie(DEFAULT_COOKIE_NAME, value);
-        when(request.getCookies()).thenReturn(new Cookie[]{cookie});
+        when(request.getCookies()).thenReturn(new Cookie[] { cookie });
 
         LocaleContext context = resolver.resolveLocaleContext(request);
 
@@ -263,8 +262,8 @@ class AngularCookieLocaleResolverTest {
 
         Event event = events.get(0);
         assertThat(event.getLevel()).isEqualTo("TRACE");
-        assertThat(event.getMessage()).isEqualTo("Parsed cookie value [" + value + "] into locale '" + locale + "' " +
-            "and time zone '" + zone.getID() + "'");
+        assertThat(event.getMessage())
+            .isEqualTo("Parsed cookie value [" + value + "] into locale '" + locale + "' " + "and time zone '" + zone.getID() + "'");
         assertThat(event.getThrown()).isNull();
     }
 }
