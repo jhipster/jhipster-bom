@@ -1,15 +1,14 @@
 package tech.jhipster.config.cache;
 
+import java.lang.reflect.Method;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.boot.info.BuildProperties;
 import org.springframework.boot.info.GitProperties;
 import org.springframework.cache.interceptor.KeyGenerator;
-
-import java.lang.reflect.Method;
-import java.time.Instant;
-import java.time.format.DateTimeFormatter;
-import java.util.Objects;
 
 /**
  * <p>PrefixedKeyGenerator class.</p>
@@ -29,6 +28,9 @@ import java.util.Objects;
 public class PrefixedKeyGenerator implements KeyGenerator {
 
     private final String prefix;
+    private String shortCommitId = null;
+    private Instant time = null;
+    private String version = null;
 
     /**
      * <p>Constructor for PrefixedKeyGenerator.</p>
@@ -37,7 +39,6 @@ public class PrefixedKeyGenerator implements KeyGenerator {
      * @param buildProperties a {@link org.springframework.boot.info.BuildProperties} object.
      */
     public PrefixedKeyGenerator(GitProperties gitProperties, BuildProperties buildProperties) {
-
         prefix = generatePrefix(gitProperties, buildProperties);
     }
 
@@ -46,14 +47,10 @@ public class PrefixedKeyGenerator implements KeyGenerator {
     }
 
     private String generatePrefix(GitProperties gitProperties, BuildProperties buildProperties) {
-
-        String shortCommitId = null;
         if (Objects.nonNull(gitProperties)) {
             shortCommitId = gitProperties.getShortCommitId();
         }
 
-        Instant time = null;
-        String version = null;
         if (Objects.nonNull(buildProperties)) {
             time = buildProperties.getTime();
             version = buildProperties.getVersion();
@@ -65,7 +62,6 @@ public class PrefixedKeyGenerator implements KeyGenerator {
         }
         return p.toString();
     }
-
 
     /** {@inheritDoc} */
     @Override
