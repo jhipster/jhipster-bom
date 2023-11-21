@@ -1,18 +1,18 @@
 package tech.jhipster.web.util;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpHeaders;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 class HeaderUtilTest {
 
     @Test
-    void createAlertHeader() {
+    void createAlert() {
         String message = "any.message";
         String param = "24";
 
-        HttpHeaders headers = HeaderUtil.createAlertHeader("myApp", message, param);
+        HttpHeaders headers = HeaderUtil.createAlert("myApp", message, param);
         assertThat(headers.getFirst("X-myApp-alert")).isEqualTo(message);
         assertThat(headers.getFirst("X-myApp-params")).isEqualTo(param);
     }
