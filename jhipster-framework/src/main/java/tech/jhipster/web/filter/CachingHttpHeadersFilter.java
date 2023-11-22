@@ -19,12 +19,11 @@
 
 package tech.jhipster.web.filter;
 
-import tech.jhipster.config.JHipsterProperties;
-
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
+import tech.jhipster.config.JHipsterProperties;
 
 /**
  * This filter is used in production, to put HTTP cache headers with a long (4 years) expiration time.
@@ -63,9 +62,7 @@ public class CachingHttpHeadersFilter implements Filter {
 
     /** {@inheritDoc} */
     @Override
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
-        throws IOException, ServletException {
-
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletResponse httpResponse = (HttpServletResponse) response;
 
         httpResponse.setHeader("Cache-Control", "max-age=" + cacheTimeToLive + ", public");

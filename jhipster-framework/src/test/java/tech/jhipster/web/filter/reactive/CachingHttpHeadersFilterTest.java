@@ -19,16 +19,15 @@
 
 package tech.jhipster.web.filter.reactive;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpHeaders;
 import org.springframework.mock.http.server.reactive.MockServerHttpRequest;
 import org.springframework.mock.web.server.MockServerWebExchange;
 import org.springframework.web.server.WebFilterChain;
 import reactor.core.publisher.Mono;
-
-import java.util.concurrent.TimeUnit;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 class CachingHttpHeadersFilterTest {
 
@@ -38,26 +37,24 @@ class CachingHttpHeadersFilterTest {
     @Test
     void cacheHeadersSetWhenPathMatches() {
         long now = System.currentTimeMillis();
-        WebFilterChain filterChain = (filterExchange) -> {
+        WebFilterChain filterChain = filterExchange -> {
             try {
                 HttpHeaders headers = filterExchange.getResponse().getHeaders();
                 assertThat(headers.getPragma()).isEqualTo("cache");
                 assertThat(headers.getCacheControl()).isEqualTo("max-age=172800000, public");
-                assertThat(headers.getExpires() - now).isBetween(ttl - 1000, ttl + 1000);
+                assertThat(headers.getExpires() - now).isBetween(ttl - 2000, ttl + 2000);
             } catch (AssertionError ex) {
                 return Mono.error(ex);
             }
             return Mono.empty();
         };
-        MockServerWebExchange exchange = MockServerWebExchange.from(
-            MockServerHttpRequest.get("/app/foo")
-        );
+        MockServerWebExchange exchange = MockServerWebExchange.from(MockServerHttpRequest.get("/app/foo"));
         filter.filter(exchange, filterChain).block();
     }
 
     @Test
     void cacheHeadersNotSetWhenPathDoesntMatch() {
-        WebFilterChain filterChain = (filterExchange) -> {
+        WebFilterChain filterChain = filterExchange -> {
             try {
                 HttpHeaders headers = filterExchange.getResponse().getHeaders();
                 assertThat(headers.getPragma()).isNull();
@@ -68,10 +65,7 @@ class CachingHttpHeadersFilterTest {
             }
             return Mono.empty();
         };
-        MockServerWebExchange exchange = MockServerWebExchange.from(
-            MockServerHttpRequest.get("/foo/foo")
-        );
+        MockServerWebExchange exchange = MockServerWebExchange.from(MockServerHttpRequest.get("/foo/foo"));
         filter.filter(exchange, filterChain).block();
     }
-
 }

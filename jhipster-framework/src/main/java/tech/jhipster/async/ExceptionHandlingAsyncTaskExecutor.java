@@ -19,20 +19,18 @@
 
 package tech.jhipster.async;
 
+import java.util.concurrent.Callable;
+import java.util.concurrent.Future;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.core.task.AsyncTaskExecutor;
 
-import java.util.concurrent.Callable;
-import java.util.concurrent.Future;
-
 /**
  * <p>ExceptionHandlingAsyncTaskExecutor class.</p>
  */
-public class ExceptionHandlingAsyncTaskExecutor implements AsyncTaskExecutor,
-    InitializingBean, DisposableBean {
+public class ExceptionHandlingAsyncTaskExecutor implements AsyncTaskExecutor, InitializingBean, DisposableBean {
 
     static final String EXCEPTION_MESSAGE = "Caught async exception";
 
@@ -57,7 +55,7 @@ public class ExceptionHandlingAsyncTaskExecutor implements AsyncTaskExecutor,
 
     /** {@inheritDoc} */
     @Override
-    @Deprecated
+    @Deprecated(since = "7.8.0", forRemoval = true)
     public void execute(Runnable task, long startTimeout) {
         executor.execute(createWrappedRunnable(task), startTimeout);
     }

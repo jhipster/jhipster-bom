@@ -18,6 +18,11 @@
  */
 package tech.jhipster.config.liquibase;
 
+import static tech.jhipster.config.JHipsterConstants.*;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.concurrent.Executor;
 import liquibase.exception.LiquibaseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,12 +30,6 @@ import org.springframework.boot.autoconfigure.liquibase.DataSourceClosingSpringL
 import org.springframework.core.env.Environment;
 import org.springframework.core.env.Profiles;
 import org.springframework.util.StopWatch;
-
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.util.concurrent.Executor;
-
-import static tech.jhipster.config.JHipsterConstants.*;
 
 /**
  * Specific liquibase.integration.spring.SpringLiquibase that will update the database asynchronously and close
@@ -46,15 +45,13 @@ public class AsyncSpringLiquibase extends DataSourceClosingSpringLiquibase {
     /** Constant <code>DISABLED_MESSAGE="Liquibase is disabled"</code> */
     public static final String DISABLED_MESSAGE = "Liquibase is disabled";
     /** Constant <code>STARTING_ASYNC_MESSAGE="Starting Liquibase asynchronously, your"{trunked}</code> */
-    public static final String STARTING_ASYNC_MESSAGE =
-        "Starting Liquibase asynchronously, your database might not be ready at startup!";
+    public static final String STARTING_ASYNC_MESSAGE = "Starting Liquibase asynchronously, your database might not be ready at startup!";
     /** Constant <code>STARTING_SYNC_MESSAGE="Starting Liquibase synchronously"</code> */
     public static final String STARTING_SYNC_MESSAGE = "Starting Liquibase synchronously";
     /** Constant <code>STARTED_MESSAGE="Liquibase has updated your database in "{trunked}</code> */
     public static final String STARTED_MESSAGE = "Liquibase has updated your database in {} ms";
     /** Constant <code>EXCEPTION_MESSAGE="Liquibase could not start correctly, yo"{trunked}</code> */
-    public static final String EXCEPTION_MESSAGE = "Liquibase could not start correctly, your database is NOT ready: " +
-        "{}";
+    public static final String EXCEPTION_MESSAGE = "Liquibase could not start correctly, your database is NOT ready: {}";
 
     /** Constant <code>SLOWNESS_THRESHOLD=5</code> */
     public static final long SLOWNESS_THRESHOLD = 5; // seconds
@@ -82,28 +79,41 @@ public class AsyncSpringLiquibase extends DataSourceClosingSpringLiquibase {
     /** {@inheritDoc} */
     @Override
     public void afterPropertiesSet() throws LiquibaseException {
-        if (!env.acceptsProfiles(Profiles.of(SPRING_PROFILE_NO_LIQUIBASE))) {
-            if (env.acceptsProfiles(Profiles.of(SPRING_PROFILE_DEVELOPMENT + "|" + SPRING_PROFILE_HEROKU))) {
-                // Prevent Thread Lock with spring-cloud-context GenericScope
-                // https://github.com/spring-cloud/spring-cloud-commons/commit/aaa7288bae3bb4d6fdbef1041691223238d77b7b#diff-afa0715eafc2b0154475fe672dab70e4R328
-                try (Connection connection = getDataSource().getConnection()) {
-                    executor.execute(() -> {
-                        try {
-                            logger.warn(STARTING_ASYNC_MESSAGE);
-                            initDb();
-                        } catch (LiquibaseException e) {
-                            logger.error(EXCEPTION_MESSAGE, e.getMessage(), e);
-                        }
-                    });
-                } catch (SQLException e) {
+        if (isLiquibaseDisabled()) {
+            logger.debug(DISABLED_MESSAGE);
+            return;
+        }
+
+        if (isAsyncProfileActive()) {
+            handleAsyncExecution();
+        } else {
+            logger.debug(STARTING_SYNC_MESSAGE);
+            initDb();
+        }
+    }
+
+    private boolean isLiquibaseDisabled() {
+        return env.acceptsProfiles(Profiles.of(SPRING_PROFILE_NO_LIQUIBASE));
+    }
+
+    private boolean isAsyncProfileActive() {
+        return env.acceptsProfiles(Profiles.of(SPRING_PROFILE_DEVELOPMENT + "|" + SPRING_PROFILE_HEROKU));
+    }
+
+    private void handleAsyncExecution() {
+        // Prevent Thread Lock with spring-cloud-context GenericScope
+        // https://github.com/spring-cloud/spring-cloud-commons/commit/aaa7288bae3bb4d6fdbef1041691223238d77b7b#diff-afa0715eafc2b0154475fe672dab70e4R328
+        try (Connection connection = getDataSource().getConnection()) {
+            executor.execute(() -> {
+                try {
+                    logger.warn(STARTING_ASYNC_MESSAGE);
+                    initDb();
+                } catch (LiquibaseException e) {
                     logger.error(EXCEPTION_MESSAGE, e.getMessage(), e);
                 }
-            } else {
-                logger.debug(STARTING_SYNC_MESSAGE);
-                initDb();
-            }
-        } else {
-            logger.debug(DISABLED_MESSAGE);
+            });
+        } catch (SQLException e) {
+            logger.error(EXCEPTION_MESSAGE, e.getMessage(), e);
         }
     }
 
@@ -118,7 +128,8 @@ public class AsyncSpringLiquibase extends DataSourceClosingSpringLiquibase {
         super.afterPropertiesSet();
         watch.stop();
         logger.debug(STARTED_MESSAGE, watch.getTotalTimeMillis());
-        if (watch.getTotalTimeMillis() > SLOWNESS_THRESHOLD * 1000L) {
+        boolean isExecutionTimeLong = watch.getTotalTimeMillis() > SLOWNESS_THRESHOLD * 1000L;
+        if (isExecutionTimeLong) {
             logger.warn(SLOWNESS_MESSAGE, SLOWNESS_THRESHOLD);
         }
     }
