@@ -51,7 +51,7 @@ public class AsyncSpringLiquibase extends DataSourceClosingSpringLiquibase {
     /** Constant <code>STARTED_MESSAGE="Liquibase has updated your database in "{trunked}</code> */
     public static final String STARTED_MESSAGE = "Liquibase has updated your database in {} ms";
     /** Constant <code>EXCEPTION_MESSAGE="Liquibase could not start correctly, yo"{trunked}</code> */
-    public static final String EXCEPTION_MESSAGE = "Liquibase could not start correctly, your database is NOT ready: " + "{}";
+    public static final String EXCEPTION_MESSAGE = "Liquibase could not start correctly, your database is NOT ready: {}";
 
     /** Constant <code>SLOWNESS_THRESHOLD=5</code> */
     public static final long SLOWNESS_THRESHOLD = 5; // seconds
