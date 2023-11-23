@@ -24,12 +24,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-
 import org.springframework.data.relational.core.sql.Column;
 import org.springframework.data.relational.core.sql.Condition;
 import org.springframework.data.relational.core.sql.Conditions;
 import org.springframework.data.relational.core.sql.SQL;
-
 import tech.jhipster.service.filter.BooleanFilter;
 import tech.jhipster.service.filter.DurationFilter;
 import tech.jhipster.service.filter.Filter;
@@ -45,14 +43,14 @@ import tech.jhipster.service.filter.ZonedDateTimeFilter;
  */
 public class ConditionBuilder {
 
-    private final List<Condition> allFilters = new ArrayList<Condition>();
+    private final List<Condition> allFilters = new ArrayList<>();
 
     private final ColumnConverterReactive columnConverter;
 
     public ConditionBuilder(ColumnConverterReactive columnConverter) {
         this.columnConverter = columnConverter;
     }
-    
+
     /**
      * Method that takes in a filter field and a column to construct a compounded SQL Condition.
      * The built condition can be retrieved using the buildConditions function
@@ -84,7 +82,7 @@ public class ConditionBuilder {
     }
 
     /**
-     * Method that builds and returns the compounded Condition object. This method can be called 
+     * Method that builds and returns the compounded Condition object. This method can be called
      * multiple times as the Conditions are being built.
      * @return returns the compounded Condition object
      */
@@ -98,42 +96,30 @@ public class ConditionBuilder {
                 }
             );
     }
-    
+
     private <X> Function<X, String> columnValueConverter(Class<?> targetClass) {
         if (targetClass != null) {
-            return (value) -> columnConverter.convert(value, targetClass).toString();
+            return value -> columnConverter.convert(value, targetClass).toString();
         } else {
-            return (value) -> value.toString();
+            return value -> value.toString();
         }
     }
 
     private <X extends Comparable<? super X>> void buildRangeConditions(RangeFilter<X> rangeData, Column column, Class<?> targetClass) {
         var converterFunction = columnValueConverter(targetClass);
         if (rangeData.getGreaterThan() != null) {
-            allFilters.add(
-                Conditions.isGreater(column, SQL.literalOf(converterFunction.apply(rangeData.getGreaterThan())))
-            );
+            allFilters.add(Conditions.isGreater(column, SQL.literalOf(converterFunction.apply(rangeData.getGreaterThan()))));
         }
         if (rangeData.getLessThan() != null) {
-            allFilters.add(
-                Conditions.isLess(column, SQL.literalOf(converterFunction.apply(rangeData.getLessThan())))
-            );
+            allFilters.add(Conditions.isLess(column, SQL.literalOf(converterFunction.apply(rangeData.getLessThan()))));
         }
         if (rangeData.getGreaterThanOrEqual() != null) {
             allFilters.add(
-                Conditions.isGreaterOrEqualTo(
-                    column,
-                    SQL.literalOf(converterFunction.apply(rangeData.getGreaterThanOrEqual()))
-                )
+                Conditions.isGreaterOrEqualTo(column, SQL.literalOf(converterFunction.apply(rangeData.getGreaterThanOrEqual())))
             );
         }
         if (rangeData.getLessThanOrEqual() != null) {
-            allFilters.add(
-                Conditions.isLessOrEqualTo(
-                    column,
-                    SQL.literalOf(converterFunction.apply(rangeData.getLessThanOrEqual()))
-                )
-            );
+            allFilters.add(Conditions.isLessOrEqualTo(column, SQL.literalOf(converterFunction.apply(rangeData.getLessThanOrEqual()))));
         }
     }
 
@@ -190,24 +176,16 @@ public class ConditionBuilder {
     private <X> void buildGeneralConditions(Filter<X> generalData, Column column, Class<?> targetClass) {
         var converterFunction = columnValueConverter(targetClass);
         if (generalData.getEquals() != null) {
-            allFilters.add(
-                Conditions.isEqual(column, SQL.literalOf(converterFunction.apply(generalData.getEquals())))
-            );
+            allFilters.add(Conditions.isEqual(column, SQL.literalOf(converterFunction.apply(generalData.getEquals()))));
         }
         if (generalData.getNotEquals() != null) {
-            allFilters.add(
-                Conditions.isNotEqual(column, SQL.literalOf(converterFunction.apply(generalData.getNotEquals())))
-            );
+            allFilters.add(Conditions.isNotEqual(column, SQL.literalOf(converterFunction.apply(generalData.getNotEquals()))));
         }
         if (generalData.getIn() != null && generalData.getIn().size() > 0) {
             allFilters.add(
                 Conditions.in(
                     column,
-                    generalData
-                        .getIn()
-                        .stream()
-                        .map(eachIn -> SQL.literalOf(converterFunction.apply(eachIn)))
-                        .collect(Collectors.toList())
+                    generalData.getIn().stream().map(eachIn -> SQL.literalOf(converterFunction.apply(eachIn))).collect(Collectors.toList())
                 )
             );
         }

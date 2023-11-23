@@ -21,6 +21,9 @@ package tech.jhipster.config.locale;
 
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
+import java.util.Locale;
+import java.util.TimeZone;
+import java.util.function.Function;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.i18n.LocaleContext;
@@ -28,9 +31,6 @@ import org.springframework.context.i18n.TimeZoneAwareLocaleContext;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.util.WebUtils;
-
-import java.util.Locale;
-import java.util.TimeZone;
 
 /**
  * Angular cookie saved the locale with a double quote (%22en%22). So the default
@@ -85,40 +85,61 @@ public class AngularCookieLocaleResolver extends CookieLocaleResolver {
     }
 
     private void parseAngularCookieIfNecessary(HttpServletRequest request) {
+        LocaleAndTimeZone localeAndTimeZone = null;
         if (request.getAttribute(LOCALE_REQUEST_ATTRIBUTE_NAME) == null) {
-            // Retrieve and parse cookie value.
             Cookie cookie = WebUtils.getCookie(request, DEFAULT_COOKIE_NAME);
-            Locale locale = null;
-            TimeZone timeZone = null;
             if (cookie != null) {
-                String value = cookie.getValue();
-
-                // Remove the double quote
-                value = StringUtils.replace(value, QUOTE, "");
-
-                String localePart = value;
-                String timeZonePart = null;
-                int spaceIndex = localePart.indexOf(' ');
-                if (spaceIndex != -1) {
-                    localePart = value.substring(0, spaceIndex);
-                    timeZonePart = value.substring(spaceIndex + 1);
-                }
-                locale = !"-".equals(localePart) ? StringUtils.parseLocaleString(localePart.replace('-', '_')) : null;
-                if (timeZonePart != null) {
-                    timeZone = StringUtils.parseTimeZoneString(timeZonePart);
-                }
-                if (logger.isTraceEnabled()) {
-                    logger.trace("Parsed cookie value [" + cookie.getValue() + "] into locale '" + locale +
-                        "'" + (timeZone != null ? " and time zone '" + timeZone.getID() + "'" : ""));
-                }
+                localeAndTimeZone = parseCookie(cookie);
             }
-            request.setAttribute(LOCALE_REQUEST_ATTRIBUTE_NAME,
-                locale != null ? locale : determineDefaultLocale(request));
-
-            request.setAttribute(TIME_ZONE_REQUEST_ATTRIBUTE_NAME,
-                timeZone != null ? timeZone : determineDefaultTimeZone(request));
         }
+
+        if (localeAndTimeZone == null) {
+            localeAndTimeZone = new LocaleAndTimeZone(null, null);
+        }
+
+        request.setAttribute(
+            LOCALE_REQUEST_ATTRIBUTE_NAME,
+            localeAndTimeZone.locale != null ? localeAndTimeZone.locale : this.defaultLocaleFunction.apply(request)
+        );
+        request.setAttribute(
+            TIME_ZONE_REQUEST_ATTRIBUTE_NAME,
+            localeAndTimeZone.timeZone != null ? localeAndTimeZone.timeZone : this.defaultTimeZoneFunction.apply(request)
+        );
     }
+
+    private final Function<HttpServletRequest, Locale> defaultLocaleFunction = request -> {
+        Locale defaultLocale = getDefaultLocale();
+        return (defaultLocale != null ? defaultLocale : request.getLocale());
+    };
+
+    private final Function<HttpServletRequest, TimeZone> defaultTimeZoneFunction = request -> getDefaultTimeZone();
+
+    private LocaleAndTimeZone parseCookie(Cookie cookie) {
+        String value = StringUtils.replace(cookie.getValue(), QUOTE, "");
+        String localePart = value;
+        String timeZonePart = null;
+        int spaceIndex = localePart.indexOf(' ');
+        if (spaceIndex != -1) {
+            localePart = value.substring(0, spaceIndex);
+            timeZonePart = value.substring(spaceIndex + 1);
+        }
+        Locale locale = !"-".equals(localePart) ? StringUtils.parseLocaleString(localePart.replace('-', '_')) : null;
+        TimeZone timeZone = timeZonePart != null ? StringUtils.parseTimeZoneString(timeZonePart) : null;
+
+        if (logger.isTraceEnabled()) {
+            logger.trace(
+                "Parsed cookie value [" +
+                cookie.getValue() +
+                "] into locale '" +
+                locale +
+                "'" +
+                (timeZone != null ? " and time zone '" + timeZone.getID() + "'" : "")
+            );
+        }
+        return new LocaleAndTimeZone(locale, timeZone);
+    }
+
+    private record LocaleAndTimeZone(Locale locale, TimeZone timeZone) {}
 
     String quote(String string) {
         return QUOTE + string + QUOTE;

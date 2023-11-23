@@ -34,6 +34,10 @@ import java.sql.SQLException;
  */
 public class H2ConfigurationHelper {
 
+    private H2ConfigurationHelper() {
+        throw new AssertionError("The class should not be instantiated");
+    }
+
     /**
      * <p>createServer.</p>
      *
@@ -56,17 +60,13 @@ public class H2ConfigurationHelper {
             ClassLoader loader = Thread.currentThread().getContextClassLoader();
             Class<?> serverClass = Class.forName("org.h2.tools.Server", true, loader);
             Method createServer = serverClass.getMethod("createTcpServer", String[].class);
-            return createServer.invoke(null, new Object[]{new String[]{"-tcp", "-tcpAllowOthers", "-tcpPort", port}});
-
+            return createServer.invoke(null, new Object[] { new String[] { "-tcp", "-tcpAllowOthers", "-tcpPort", port } });
         } catch (ClassNotFoundException | LinkageError e) {
             throw new RuntimeException("Failed to load and initialize org.h2.tools.Server", e);
-
         } catch (SecurityException | NoSuchMethodException e) {
             throw new RuntimeException("Failed to get method org.h2.tools.Server.createTcpServer()", e);
-
         } catch (IllegalAccessException | IllegalArgumentException e) {
             throw new RuntimeException("Failed to invoke org.h2.tools.Server.createTcpServer()", e);
-
         } catch (InvocationTargetException e) {
             Throwable t = e.getTargetException();
             if (t instanceof SQLException) {
@@ -99,10 +99,10 @@ public class H2ConfigurationHelper {
             Method createWebServer = serverClass.getMethod("createWebServer", String[].class);
             Method start = serverClass.getMethod("start");
 
-            Object server = createWebServer.invoke(null, new Object[]{new String[]{"-properties", propertiesLocation}});
+            Object server = createWebServer.invoke(null, new Object[] { new String[] { "-properties", propertiesLocation } });
             start.invoke(server);
-        } catch (Exception  e) {
-          throw new RuntimeException("Failed to start h2 webserver console", e);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to start h2 webserver console", e);
         }
     }
 
@@ -123,10 +123,8 @@ public class H2ConfigurationHelper {
             h2ConsoleServlet.addMapping("/h2-console/*");
             h2ConsoleServlet.setInitParameter("-properties", "src/main/resources/");
             h2ConsoleServlet.setLoadOnStartup(1);
-
         } catch (ClassNotFoundException | LinkageError | NoSuchMethodException | InvocationTargetException e) {
             throw new RuntimeException("Failed to load and initialize org.h2.server.web.JakartaWebServlet", e);
-
         } catch (IllegalAccessException | InstantiationException e) {
             throw new RuntimeException("Failed to instantiate org.h2.server.web.JakartaWebServlet", e);
         }
