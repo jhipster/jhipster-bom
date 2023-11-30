@@ -850,12 +850,22 @@ public class JHipsterProperties {
         public static class OAuth2 {
             private List<String> audience = new ArrayList<>();
 
+            private List<String> auth0IssuerUris = new ArrayList<>();
+
             public List<String> getAudience() {
                 return Collections.unmodifiableList(audience);
             }
 
             public void setAudience(@NotNull List<String> audience) {
                 this.audience.addAll(audience);
+            }
+
+            public List<String> getAuth0IssuerUris() {
+                return Collections.unmodifiableList(auth0IssuerUris);
+            }
+
+            public void setAuth0IssuerUris(List<String> auth0IssuerUris) {
+                this.auth0IssuerUris.addAll(auth0IssuerUris);
             }
         }
     }

@@ -540,6 +540,17 @@ class JHipsterPropertiesTest {
     }
 
     @Test
+    void testSecurityOauth2Auth0IssuerUris() {
+        JHipsterProperties.Security.OAuth2 obj = properties.getSecurity().getOauth2();
+        assertThat(obj).isNotNull();
+        assertThat(obj.getAuth0IssuerUris()).isNotNull().isEmpty();
+
+        obj.setAuth0IssuerUris(Arrays.asList("auth0.com", "my-custom-auth0.org"));
+        assertThat(obj.getAuth0IssuerUris()).isNotEmpty().size().isEqualTo(2);
+        assertThat(obj.getAuth0IssuerUris()).contains("auth0.com", "my-custom-auth0.org");
+    }
+
+    @Test
     void testApiDocsTitle() {
         JHipsterProperties.ApiDocs obj = properties.getApiDocs();
         String val = JHipsterDefaults.ApiDocs.title;
