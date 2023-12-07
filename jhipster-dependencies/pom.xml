@@ -5,7 +5,7 @@
     <parent>
         <groupId>tech.jhipster</groupId>
         <artifactId>jhipster-parent</artifactId>
-        <version>8.0.1-SNAPSHOT</version>
+        <version>8.1.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
@@ -55,8 +55,8 @@
         <neo4j-migrations.version>2.8.0</neo4j-migrations.version>
         <redisson.version>3.25.0</redisson.version>
         <spotbugs-annotations.version>4.8.2</spotbugs-annotations.version>
-        <spring-cloud.version>2022.0.4</spring-cloud.version>
-        <springdocs.version>2.2.0</springdocs.version>
+        <spring-cloud.version>2023.0.0</spring-cloud.version>
+        <springdocs.version>2.3.0</springdocs.version>
         <testcontainers.version>1.19.3</testcontainers.version>
         <testng.version>7.8.0</testng.version>
         <xmemcached.version>2.4.8</xmemcached.version>
