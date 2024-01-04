@@ -429,7 +429,27 @@
                     <artifactId>versions-maven-plugin</artifactId>
                     <version>${versions-maven-plugin.version}</version>
                 </plugin>
-            </plugins>
+              <plugin>
+                    <groupId>com.gradle</groupId>
+                    <artifactId>gradle-enterprise-maven-extension</artifactId>
+                    <configuration>
+                        <gradleEnterprise>
+                        <normalization>
+                            <runtimeClassPath>
+                            <propertiesNormalizations>
+                                <propertiesNormalization>
+                                <path>**/git.properties</path>
+                                <ignoredProperties>
+                                    <ignore>jhipster-lib.git.build.time</ignore>
+                                </ignoredProperties>
+                                </propertiesNormalization>
+                            </propertiesNormalizations>
+                            </runtimeClassPath>
+                        </normalization>
+                        </gradleEnterprise>
+                    </configuration>
+                    </plugin>
+        </plugins>
         </pluginManagement>
     </build>
 </project>
