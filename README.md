@@ -1,6 +1,6 @@
 ## JHipster BOM and server-side library
 
-[![Angular Build Status][github-actions-angular-image]][github-actions-url] [![React Build Status][github-actions-react-image]][github-actions-url] [![Vue Build Status][github-actions-vue-image]][github-actions-url] [![Maven Central][maven-image]][maven-url]
+[![Angular Build Status][github-actions-angular-image]][github-actions-url] [![React Build Status][github-actions-react-image]][github-actions-url] [![Vue Build Status][github-actions-vue-image]][github-actions-url] [![Maven Central][maven-image]][maven-url] [![Revved up by Develocity][develocity-badge]][develocity-url]
 
 Full documentation and information is available on our website at [https://www.jhipster.tech/][jhipster-url]
 
@@ -31,3 +31,6 @@ If the current version is SNAPSHOT then to use this SNAPSHOT version:
 [sonar-coverage]: https://sonarcloud.io/api/project_badges/measure?project=jhipster-framework&metric=coverage
 [sonar-bugs]: https://sonarcloud.io/api/project_badges/measure?project=jhipster-framework&metric=bugs
 [sonar-vulnerabilities]: https://sonarcloud.io/api/project_badges/measure?project=jhipster-framework&metric=vulnerabilities
+
+[develocity-badge]: https://img.shields.io/badge/Revved%20up%20by-Develocity-06A0CE?logo=Gradle&labelColor=02303A
+[develocity-url]: https://ge.jhipster.tech/scans
