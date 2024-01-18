@@ -429,26 +429,70 @@
                     <artifactId>versions-maven-plugin</artifactId>
                     <version>${versions-maven-plugin.version}</version>
                 </plugin>
-              <plugin>
+                <plugin>
                     <groupId>com.gradle</groupId>
                     <artifactId>gradle-enterprise-maven-extension</artifactId>
                     <configuration>
                         <gradleEnterprise>
-                        <normalization>
-                            <runtimeClassPath>
-                            <propertiesNormalizations>
-                                <propertiesNormalization>
-                                <path>**/git.properties</path>
-                                <ignoredProperties>
-                                    <ignore>jhipster-lib.git.build.time</ignore>
-                                </ignoredProperties>
-                                </propertiesNormalization>
-                            </propertiesNormalizations>
-                            </runtimeClassPath>
-                        </normalization>
+                            <normalization>
+                                <runtimeClassPath>
+                                <propertiesNormalizations>
+                                    <propertiesNormalization>
+                                    <path>**/git.properties</path>
+                                    <ignoredProperties>
+                                        <ignore>jhipster-lib.git.build.time</ignore>
+                                    </ignoredProperties>
+                                    </propertiesNormalization>
+                                </propertiesNormalizations>
+                                </runtimeClassPath>
+                            </normalization>
                         </gradleEnterprise>
+                        <plugins>
+                            <plugin>
+                                <groupId>org.apache.maven.plugins</groupId>
+                                <artifactId>maven-enforcer-plugin</artifactId>
+                                <executions>
+                                    <execution>
+                                        <id>enforce-versions</id>
+                                    </execution>
+                                    <execution>
+                                        <id>enforce-dependencyConvergence</id>
+                                        <inputs>
+                                            <properties>
+                                            <property>
+                                                <name>fail</name>
+                                            </property>
+                                            <property>
+                                                <name>failFast</name>
+                                            </property>
+                                            <property>
+                                                <name>failIfNoRules</name>
+                                            </property>
+                                            <property>
+                                                <name>rulesToSkip</name>
+                                            </property>
+                                            <property>
+                                                <name>rulesToExecute</name>
+                                            </property>
+                                            <property>
+                                                <name>rules</name>
+                                            </property>
+                                            <property>
+                                                <name>skip</name>
+                                            </property>
+                                            </properties>
+                                            <ignoredProperties>
+                                            <ignore>ignoreCache</ignore>
+                                            <ignore>mojoExecution</ignore>
+                                            <ignore>session</ignore>
+                                            </ignoredProperties>
+                                        </inputs>
+                                    </execution>
+                                </executions>
+                            </plugin>
+                        </plugins>
                     </configuration>
-                    </plugin>
+                </plugin>
         </plugins>
         </pluginManagement>
     </build>
