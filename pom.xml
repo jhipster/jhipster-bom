@@ -446,51 +446,28 @@
                                 </propertiesNormalizations>
                                 </runtimeClassPath>
                             </normalization>
-                        </gradleEnterprise>
-                        <plugins>
+                            <plugins>
                             <plugin>
                                 <groupId>org.apache.maven.plugins</groupId>
                                 <artifactId>maven-enforcer-plugin</artifactId>
                                 <executions>
                                     <execution>
                                         <id>enforce-versions</id>
+                                        <outputs>
+                                            <cacheableBecause>version check should be cached</cacheableBecause>
+                                        </outputs>
                                     </execution>
                                     <execution>
                                         <id>enforce-dependencyConvergence</id>
-                                        <inputs>
-                                            <properties>
-                                            <property>
-                                                <name>fail</name>
-                                            </property>
-                                            <property>
-                                                <name>failFast</name>
-                                            </property>
-                                            <property>
-                                                <name>failIfNoRules</name>
-                                            </property>
-                                            <property>
-                                                <name>rulesToSkip</name>
-                                            </property>
-                                            <property>
-                                                <name>rulesToExecute</name>
-                                            </property>
-                                            <property>
-                                                <name>rules</name>
-                                            </property>
-                                            <property>
-                                                <name>skip</name>
-                                            </property>
-                                            </properties>
-                                            <ignoredProperties>
-                                            <ignore>ignoreCache</ignore>
-                                            <ignore>mojoExecution</ignore>
-                                            <ignore>session</ignore>
-                                            </ignoredProperties>
-                                        </inputs>
+                                         <outputs>
+                                            <cacheableBecause>depencency convergenve should be cached</cacheableBecause>
+                                        </outputs>
                                     </execution>
                                 </executions>
                             </plugin>
                         </plugins>
+                        </gradleEnterprise>
+
                     </configuration>
                 </plugin>
         </plugins>
