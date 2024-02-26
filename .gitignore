@@ -126,3 +126,5 @@ Desktop.ini
 node_modules
 package-lock.json
 
+.mvn/.gradle-enterprise/gradle-enterprise-workspace-id
+

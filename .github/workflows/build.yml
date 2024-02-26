@@ -41,7 +41,9 @@ jobs:
           java-version: 17
           cache: 'maven'
       - name: Test with Maven
-        run: ./mvnw test --batch-mode
+        env:
+          GRADLE_ENTERPRISE_ACCESS_KEY: ${{ secrets.GRADLE_ENTERPRISE_ACCESS_KEY }}
+        run: ./mvnw clean test --batch-mode
       - name: Run Sonar analysis
         if: github.repository == 'jhipster/jhipster-bom' && github.event_name == 'push'
         env:
