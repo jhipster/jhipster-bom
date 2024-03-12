@@ -53,7 +53,7 @@
         <mapstruct.version>1.5.5.Final</mapstruct.version>
         <mongock.version>5.4.0</mongock.version>
         <neo4j-migrations.version>2.9.2</neo4j-migrations.version>
-        <redisson.version>3.27.1</redisson.version>
+        <redisson.version>3.27.2</redisson.version>
         <spotbugs-annotations.version>4.8.3</spotbugs-annotations.version>
         <spring-cloud.version>2023.0.0</spring-cloud.version>
         <springdocs.version>2.3.0</springdocs.version>
