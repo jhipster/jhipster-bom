@@ -36,7 +36,7 @@ public class JHipsterMetricsEndpoint {
     }
 
     /**
-     * GET /management/jhi-metrics
+     * GET /management/jhimetrics
      * <p>
      * Give metrics displayed on Metrics page
      *
