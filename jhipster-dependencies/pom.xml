@@ -52,7 +52,7 @@
         <lz4-java.version>1.8.0</lz4-java.version>
         <mapstruct.version>1.5.5.Final</mapstruct.version>
         <mongock.version>5.4.0</mongock.version>
-        <neo4j-migrations.version>2.9.2</neo4j-migrations.version>
+        <neo4j-migrations.version>2.9.3</neo4j-migrations.version>
         <redisson.version>3.27.2</redisson.version>
         <spotbugs-annotations.version>4.8.3</spotbugs-annotations.version>
         <spring-cloud.version>2023.0.0</spring-cloud.version>
