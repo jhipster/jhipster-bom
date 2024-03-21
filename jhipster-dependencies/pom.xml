@@ -47,7 +47,6 @@
         <feign-reactor-bom.version>4.0.3</feign-reactor-bom.version>
         <!-- To pull in a newer version than Spring Boot with Nonnull -->
         <jakarta-annotation.version>2.1.1</jakarta-annotation.version>
-        <junit-platform-console.version>1.10.2</junit-platform-console.version>
         <logstash-logback-encoder.version>7.4</logstash-logback-encoder.version>
         <lz4-java.version>1.8.0</lz4-java.version>
         <mongock.version>5.4.0</mongock.version>
@@ -156,12 +155,6 @@
                 <groupId>com.microsoft.azure</groupId>
                 <artifactId>applicationinsights-spring-boot-starter</artifactId>
                 <version>${azure-applicationinsights-spring-boot-starter.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.junit.platform</groupId>
-                <artifactId>junit-platform-console</artifactId>
-                <version>${junit-platform-console.version}</version>
-                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
