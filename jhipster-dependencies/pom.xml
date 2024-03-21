@@ -50,7 +50,6 @@
         <junit-platform-console.version>1.10.2</junit-platform-console.version>
         <logstash-logback-encoder.version>7.4</logstash-logback-encoder.version>
         <lz4-java.version>1.8.0</lz4-java.version>
-        <mapstruct.version>1.5.5.Final</mapstruct.version>
         <mongock.version>5.4.0</mongock.version>
         <neo4j-migrations.version>2.9.3</neo4j-migrations.version>
         <redisson.version>3.27.2</redisson.version>
@@ -163,16 +162,6 @@
                 <artifactId>junit-platform-console</artifactId>
                 <version>${junit-platform-console.version}</version>
                 <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.mapstruct</groupId>
-                <artifactId>mapstruct</artifactId>
-                <version>${mapstruct.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.mapstruct</groupId>
-                <artifactId>mapstruct-processor</artifactId>
-                <version>${mapstruct.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
