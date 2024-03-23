@@ -42,7 +42,7 @@
         <azure-spring-cloud-client.version>2.4.0</azure-spring-cloud-client.version>
         <azure-applicationinsights-spring-boot-starter.version>2.6.4</azure-applicationinsights-spring-boot-starter.version>
         <couchmove.version>3.4.1</couchmove.version>
-        <cucumber-jvm.version>7.15.0</cucumber-jvm.version>
+        <cucumber-jvm.version>7.16.0</cucumber-jvm.version>
         <commons-collections.version>4.4</commons-collections.version>
         <feign-reactor-bom.version>4.0.3</feign-reactor-bom.version>
         <!-- To pull in a newer version than Spring Boot with Nonnull -->
