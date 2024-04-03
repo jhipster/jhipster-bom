@@ -54,7 +54,7 @@
         <redisson.version>3.27.2</redisson.version>
         <spotbugs-annotations.version>4.8.3</spotbugs-annotations.version>
         <spring-cloud.version>2023.0.1</spring-cloud.version>
-        <springdocs.version>2.4.0</springdocs.version>
+        <springdocs.version>2.5.0</springdocs.version>
         <testcontainers.version>1.19.7</testcontainers.version>
         <testng.version>7.9.0</testng.version>
         <xmemcached.version>2.4.8</xmemcached.version>
