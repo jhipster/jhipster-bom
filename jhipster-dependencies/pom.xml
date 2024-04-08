@@ -49,7 +49,7 @@
         <jakarta-annotation.version>2.1.1</jakarta-annotation.version>
         <logstash-logback-encoder.version>7.4</logstash-logback-encoder.version>
         <lz4-java.version>1.8.0</lz4-java.version>
-        <mongock.version>5.4.0</mongock.version>
+        <mongock.version>5.4.1</mongock.version>
         <neo4j-migrations.version>2.10.0</neo4j-migrations.version>
         <redisson.version>3.27.2</redisson.version>
         <spotbugs-annotations.version>4.8.3</spotbugs-annotations.version>
