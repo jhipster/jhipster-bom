@@ -19,14 +19,15 @@
 
 package tech.jhipster.service.demo;
 
+import org.springframework.data.jpa.domain.Specification;
 import tech.jhipster.service.QueryService;
 import tech.jhipster.service.filter.LongFilter;
 import tech.jhipster.service.filter.StringFilter;
-import org.springframework.data.jpa.domain.Specification;
 
 public class BaseEntityQueryService extends QueryService<BaseEntity> {
 
     static class BaseEntityCriteria {
+
         LongFilter id;
         StringFilter name;
 

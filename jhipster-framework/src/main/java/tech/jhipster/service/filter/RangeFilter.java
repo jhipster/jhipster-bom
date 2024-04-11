@@ -61,8 +61,7 @@ public class RangeFilter<FIELD_TYPE extends Comparable<? super FIELD_TYPE>> exte
     /**
      * <p>Constructor for RangeFilter.</p>
      */
-    public RangeFilter() {
-    }
+    public RangeFilter() {}
 
     /**
      * <p>Constructor for RangeFilter.</p>
@@ -176,10 +175,12 @@ public class RangeFilter<FIELD_TYPE extends Comparable<? super FIELD_TYPE>> exte
             return false;
         }
         RangeFilter<?> that = (RangeFilter<?>) o;
-        return Objects.equals(greaterThan, that.greaterThan) &&
+        return (
+            Objects.equals(greaterThan, that.greaterThan) &&
             Objects.equals(lessThan, that.lessThan) &&
             Objects.equals(greaterThanOrEqual, that.greaterThanOrEqual) &&
-            Objects.equals(lessThanOrEqual, that.lessThanOrEqual);
+            Objects.equals(lessThanOrEqual, that.lessThanOrEqual)
+        );
     }
 
     /** {@inheritDoc} */
@@ -191,17 +192,19 @@ public class RangeFilter<FIELD_TYPE extends Comparable<? super FIELD_TYPE>> exte
     /** {@inheritDoc} */
     @Override
     public String toString() {
-        return getFilterName() + " ["
-            + (getEquals() != null ? "equals=" + getEquals() + ", " : "")
-            + (getNotEquals() != null ? "notEquals=" + getNotEquals() + ", " : "")
-            + (getSpecified() != null ? "specified=" + getSpecified() + ", " : "")
-            + (getIn() != null ? "in=" + getIn() + ", " : "")
-            + (getNotIn() != null ? "notIn=" + getNotIn() + ", " : "")
-            + (getGreaterThan() != null ? "greaterThan=" + getGreaterThan() + ", " : "")
-            + (getLessThan() != null ? "lessThan=" + getLessThan() + ", " : "")
-            + (getGreaterThanOrEqual() != null ? "greaterThanOrEqual=" + getGreaterThanOrEqual() + ", " : "")
-            + (getLessThanOrEqual() != null ? "lessThanOrEqual=" + getLessThanOrEqual() : "")
-            + "]";
+        return (
+            getFilterName() +
+            " [" +
+            (getEquals() != null ? "equals=" + getEquals() + ", " : "") +
+            (getNotEquals() != null ? "notEquals=" + getNotEquals() + ", " : "") +
+            (getSpecified() != null ? "specified=" + getSpecified() + ", " : "") +
+            (getIn() != null ? "in=" + getIn() + ", " : "") +
+            (getNotIn() != null ? "notIn=" + getNotIn() + ", " : "") +
+            (getGreaterThan() != null ? "greaterThan=" + getGreaterThan() + ", " : "") +
+            (getLessThan() != null ? "lessThan=" + getLessThan() + ", " : "") +
+            (getGreaterThanOrEqual() != null ? "greaterThanOrEqual=" + getGreaterThanOrEqual() + ", " : "") +
+            (getLessThanOrEqual() != null ? "lessThanOrEqual=" + getLessThanOrEqual() : "") +
+            "]"
+        );
     }
-
 }

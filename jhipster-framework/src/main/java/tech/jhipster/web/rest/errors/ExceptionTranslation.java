@@ -19,10 +19,9 @@
 
 package tech.jhipster.web.rest.errors;
 
-import org.springframework.web.server.ServerWebExchange;
-
 import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
 /**
@@ -31,7 +30,6 @@ import reactor.core.publisher.Mono;
  * see https://github.com/spring-projects/spring-framework/issues/22991
  */
 public interface ExceptionTranslation {
-    
     /**
      * Method to translate an Exception to ProblemDetail.
      * @param ex The exception that needs to be handled

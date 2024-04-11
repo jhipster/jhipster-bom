@@ -30,8 +30,7 @@ public class FloatFilter extends RangeFilter<Float> {
     /**
      * <p>Constructor for FloatFilter.</p>
      */
-    public FloatFilter() {
-    }
+    public FloatFilter() {}
 
     /**
      * <p>Constructor for FloatFilter.</p>
@@ -50,5 +49,4 @@ public class FloatFilter extends RangeFilter<Float> {
     public FloatFilter copy() {
         return new FloatFilter(this);
     }
-
 }

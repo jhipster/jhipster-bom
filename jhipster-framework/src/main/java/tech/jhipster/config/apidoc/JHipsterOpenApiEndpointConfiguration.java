@@ -44,13 +44,13 @@ public class JHipsterOpenApiEndpointConfiguration {
      * @return a {@link JHipsterOpenApiEndpoint} object.
      */
     @Bean
-    @ConditionalOnBean({SpringDocConfigProperties.class})
+    @ConditionalOnBean({ SpringDocConfigProperties.class })
     @ConditionalOnMissingBean
     @ConditionalOnAvailableEndpoint
     public JHipsterOpenApiEndpoint jHipsterOpenApiEndpoint(
-            SpringDocConfigProperties springDocConfigProperties,
-            @Value("${spring.application.name:application}") String appName
-            ) {
+        SpringDocConfigProperties springDocConfigProperties,
+        @Value("${spring.application.name:application}") String appName
+    ) {
         return new JHipsterOpenApiEndpoint(springDocConfigProperties, appName);
     }
 }

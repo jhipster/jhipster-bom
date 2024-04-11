@@ -19,9 +19,8 @@
 
 package tech.jhipster.security;
 
-import org.apache.commons.lang3.RandomStringUtils;
-
 import java.security.SecureRandom;
+import org.apache.commons.lang3.RandomStringUtils;
 
 /**
  * Utility class for generating random Strings.
@@ -37,8 +36,7 @@ public final class RandomUtil {
         SECURE_RANDOM.nextBytes(new byte[64]);
     }
 
-    private RandomUtil() {
-    }
+    private RandomUtil() {}
 
     /**
      * <p>generateRandomAlphanumericString.</p>

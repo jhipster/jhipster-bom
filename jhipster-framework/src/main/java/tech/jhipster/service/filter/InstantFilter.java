@@ -19,11 +19,10 @@
 
 package tech.jhipster.service.filter;
 
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.format.annotation.DateTimeFormat.ISO;
-
 import java.time.Instant;
 import java.util.List;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 /**
  * Filter class for {@link java.time.Instant} type attributes.
@@ -37,8 +36,7 @@ public class InstantFilter extends RangeFilter<Instant> {
     /**
      * <p>Constructor for InstantFilter.</p>
      */
-    public InstantFilter() {
-    }
+    public InstantFilter() {}
 
     /**
      * <p>Constructor for InstantFilter.</p>
@@ -118,5 +116,4 @@ public class InstantFilter extends RangeFilter<Instant> {
         super.setLessThanOrEqual(equals);
         return this;
     }
-
 }

@@ -1,18 +1,16 @@
 package tech.jhipster.config.cache;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.Properties;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.info.BuildProperties;
 import org.springframework.boot.info.GitProperties;
-
-import java.util.Properties;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 class PrefixedKeyGeneratorTest {
 
     @Test
     void generatePrefixFromShortCommitId() {
-
         Properties gitProperties = new Properties();
         gitProperties.put("commit.id.abbrev", "1234");
 
@@ -23,7 +21,6 @@ class PrefixedKeyGeneratorTest {
 
     @Test
     void generatePrefixFromCommitId() {
-
         Properties gitProperties = new Properties();
         gitProperties.put("commit.id", "1234567");
 
@@ -34,7 +31,6 @@ class PrefixedKeyGeneratorTest {
 
     @Test
     void generatePrefixFromBuildVersion() {
-
         Properties buildProperties = new Properties();
         buildProperties.put("version", "1.0.0");
 
@@ -45,7 +41,6 @@ class PrefixedKeyGeneratorTest {
 
     @Test
     void generatePrefixFromBuildTime() {
-
         Properties buildProperties = new Properties();
         buildProperties.put("time", "1583955265");
 
@@ -56,10 +51,8 @@ class PrefixedKeyGeneratorTest {
 
     @Test
     void generatesRandomPrefix() {
-
         PrefixedKeyGenerator prefixedKeyGenerator = new PrefixedKeyGenerator(null, null);
 
         assertThat(prefixedKeyGenerator.getPrefix().length()).isEqualTo(12);
     }
-
 }

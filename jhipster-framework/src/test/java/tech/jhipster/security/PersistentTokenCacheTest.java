@@ -19,10 +19,10 @@
 
 package tech.jhipster.security;
 
-import org.junit.jupiter.api.Test;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
+
+import org.junit.jupiter.api.Test;
 
 class PersistentTokenCacheTest {
 
@@ -81,5 +81,4 @@ class PersistentTokenCacheTest {
         cache.purge();
         assertThat(cache.size()).isEqualTo(0);
     }
-
 }

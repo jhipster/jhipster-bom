@@ -6,7 +6,7 @@ import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.classic.spi.LoggerContextListener;
 import ch.qos.logback.core.ConsoleAppender;
 import ch.qos.logback.core.spi.ContextAwareBase;
-import tech.jhipster.config.JHipsterProperties;
+import java.net.InetSocketAddress;
 import net.logstash.logback.appender.LogstashTcpSocketAppender;
 import net.logstash.logback.composite.ContextJsonProvider;
 import net.logstash.logback.composite.GlobalCustomFieldsJsonProvider;
@@ -16,8 +16,7 @@ import net.logstash.logback.encoder.LogstashEncoder;
 import net.logstash.logback.stacktrace.ShortenedThrowableConverter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.net.InetSocketAddress;
+import tech.jhipster.config.JHipsterProperties;
 
 /**
  * Utility methods to add appenders to a {@link ch.qos.logback.classic.LoggerContext}.
@@ -29,8 +28,7 @@ public final class LoggingUtils {
     private static final String CONSOLE_APPENDER_NAME = "CONSOLE";
     private static final String ASYNC_LOGSTASH_APPENDER_NAME = "ASYNC_LOGSTASH";
 
-    private LoggingUtils () {
-    }
+    private LoggingUtils() {}
 
     /**
      * <p>addJsonConsoleAppender.</p>
@@ -59,8 +57,11 @@ public final class LoggingUtils {
      * @param customFields a {@link java.lang.String} object.
      * @param logstashProperties a {@link JHipsterProperties.Logging.Logstash} object.
      */
-    public static void addLogstashTcpSocketAppender(LoggerContext context, String customFields,
-                                                    JHipsterProperties.Logging.Logstash logstashProperties) {
+    public static void addLogstashTcpSocketAppender(
+        LoggerContext context,
+        String customFields,
+        JHipsterProperties.Logging.Logstash logstashProperties
+    ) {
         log.info("Initializing Logstash loggingProperties");
 
         // More documentation is available at: https://github.com/logstash/logstash-logback-encoder
@@ -157,6 +158,7 @@ public final class LoggingUtils {
      * This listener ensures that the programmatic configuration is also re-applied after reset.
      */
     private static class LogbackLoggerContextListener extends ContextAwareBase implements LoggerContextListener {
+
         private final JHipsterProperties.Logging loggingProperties;
         private final String customFields;
 

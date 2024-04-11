@@ -1,5 +1,8 @@
 package tech.jhipster.web.util.reactive;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpHeaders;
@@ -7,9 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.server.ResponseStatusException;
 import reactor.core.publisher.Mono;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 class ResponseUtilTest {
 
@@ -57,5 +57,4 @@ class ResponseUtilTest {
         Mono<ResponseEntity<Integer>> response = ResponseUtil.wrapOrNotFound(monoNo, headers);
         assertThatExceptionOfType(ResponseStatusException.class).isThrownBy(response::block);
     }
-
 }

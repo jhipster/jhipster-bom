@@ -30,8 +30,7 @@ public class DoubleFilter extends RangeFilter<Double> {
     /**
      * <p>Constructor for DoubleFilter.</p>
      */
-    public DoubleFilter() {
-    }
+    public DoubleFilter() {}
 
     /**
      * <p>Constructor for DoubleFilter.</p>
@@ -50,5 +49,4 @@ public class DoubleFilter extends RangeFilter<Double> {
     public DoubleFilter copy() {
         return new DoubleFilter(this);
     }
-
 }

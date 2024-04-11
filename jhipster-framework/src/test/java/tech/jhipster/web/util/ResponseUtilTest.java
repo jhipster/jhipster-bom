@@ -19,16 +19,15 @@
 
 package tech.jhipster.web.util;
 
+import static org.assertj.core.api.Assertions.*;
+
+import java.util.Optional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.server.ResponseStatusException;
-
-import java.util.Optional;
-
-import static org.assertj.core.api.Assertions.*;
 
 class ResponseUtilTest {
 
@@ -74,5 +73,4 @@ class ResponseUtilTest {
     void testOptionalNoWithHeaders() {
         assertThatExceptionOfType(ResponseStatusException.class).isThrownBy(() -> ResponseUtil.wrapOrNotFound(optionalNo, headers));
     }
-
 }

@@ -19,23 +19,22 @@
 
 package tech.jhipster.web.filter;
 
-import tech.jhipster.config.JHipsterProperties;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.springframework.mock.web.MockFilterChain;
-import org.springframework.mock.web.MockHttpServletRequest;
-import org.springframework.mock.web.MockHttpServletResponse;
-
-import jakarta.servlet.FilterChain;
-import java.util.concurrent.TimeUnit;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
+
+import jakarta.servlet.FilterChain;
+import java.util.concurrent.TimeUnit;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.mock.web.MockFilterChain;
+import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.mock.web.MockHttpServletResponse;
+import tech.jhipster.config.JHipsterProperties;
 
 class CachingHttpHeadersFilterTest {
 
@@ -77,7 +76,10 @@ class CachingHttpHeadersFilterTest {
         verify(response).setHeader("Cache-Control", "max-age=" + secsToLive + ", public");
         verify(response).setHeader("Pragma", "cache");
         verify(response).setDateHeader(eq("Expires"), anyLong());
-        assertThat(response.getDateHeader("Expires")).isBetween(before + TimeUnit.SECONDS.toMillis(secsToLive), after + TimeUnit.SECONDS.toMillis(secsToLive));
+        assertThat(response.getDateHeader("Expires")).isBetween(
+            before + TimeUnit.SECONDS.toMillis(secsToLive),
+            after + TimeUnit.SECONDS.toMillis(secsToLive)
+        );
         assertThat(caught).isNull();
     }
 
@@ -102,7 +104,10 @@ class CachingHttpHeadersFilterTest {
         verify(response).setHeader("Cache-Control", "max-age=" + secsToLive + ", public");
         verify(response).setHeader("Pragma", "cache");
         verify(response).setDateHeader(eq("Expires"), anyLong());
-        assertThat(response.getDateHeader("Expires")).isBetween(before + TimeUnit.SECONDS.toMillis(secsToLive), after + TimeUnit.SECONDS.toMillis(secsToLive));
+        assertThat(response.getDateHeader("Expires")).isBetween(
+            before + TimeUnit.SECONDS.toMillis(secsToLive),
+            after + TimeUnit.SECONDS.toMillis(secsToLive)
+        );
         assertThat(caught).isNull();
     }
 }

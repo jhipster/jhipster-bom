@@ -1,10 +1,10 @@
 package tech.jhipster.security.ssl;
 
-import org.junit.jupiter.api.Test;
-import tech.jhipster.security.RandomUtil;
-
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.Test;
+import tech.jhipster.security.RandomUtil;
 
 class RandomUtilTest {
 
@@ -25,6 +25,4 @@ class RandomUtilTest {
         assertNotNull(password);
         assertTrue(password.length() == 20);
     }
-
-
 }

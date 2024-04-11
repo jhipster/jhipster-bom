@@ -9,9 +9,10 @@ import org.springframework.context.annotation.PropertySources;
  */
 @EnableConfigurationProperties(JHipsterProperties.class)
 // Load some properties into the environment from files to make them available for interpolation in application.yaml.
-@PropertySources({
-    @PropertySource(value = "classpath:git.properties", ignoreResourceNotFound = true),
-    @PropertySource(value = "classpath:META-INF/build-info.properties", ignoreResourceNotFound = true)
-})
-public class JHipsterConfiguration {
-}
+@PropertySources(
+    {
+        @PropertySource(value = "classpath:git.properties", ignoreResourceNotFound = true),
+        @PropertySource(value = "classpath:META-INF/build-info.properties", ignoreResourceNotFound = true),
+    }
+)
+public class JHipsterConfiguration {}

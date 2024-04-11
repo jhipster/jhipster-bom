@@ -19,18 +19,16 @@
 
 package tech.jhipster.web.util;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Utility class for creating a Page object.
  */
 public interface PageUtil {
-
     /**
      * Create a {@link org.springframework.data.domain.Page} from a {@link java.util.List} of objects
      *

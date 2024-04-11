@@ -19,17 +19,14 @@
 
 package tech.jhipster.config.apidoc.customizer;
 
-import tech.jhipster.config.JHipsterProperties;
-
 import io.swagger.v3.oas.models.OpenAPI;
-import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.Contact;
+import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
 import io.swagger.v3.oas.models.servers.Server;
-
 import org.springdoc.core.customizers.OpenApiCustomizer;
-
 import org.springframework.core.Ordered;
+import tech.jhipster.config.JHipsterProperties;
 
 /**
  * A OpenApi customizer to set up {@link io.swagger.v3.oas.models.OpenAPI} with JHipster settings.
@@ -62,13 +59,14 @@ public class JHipsterOpenApiCustomizer implements OpenApiCustomizer, Ordered {
             .url(properties.getContactUrl())
             .email(properties.getContactEmail());
 
-        openAPI.info(new Info()
-            .contact(contact)
-            .title(properties.getTitle())
-            .description(properties.getDescription())
-            .version(properties.getVersion())
-            .termsOfService(properties.getTermsOfServiceUrl())
-            .license(new License().name(properties.getLicense()).url(properties.getLicenseUrl()))
+        openAPI.info(
+            new Info()
+                .contact(contact)
+                .title(properties.getTitle())
+                .description(properties.getDescription())
+                .version(properties.getVersion())
+                .termsOfService(properties.getTermsOfServiceUrl())
+                .license(new License().name(properties.getLicense()).url(properties.getLicenseUrl()))
         );
 
         for (JHipsterProperties.ApiDocs.Server server : properties.getServers()) {

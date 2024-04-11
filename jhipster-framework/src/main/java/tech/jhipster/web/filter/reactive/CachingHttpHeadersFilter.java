@@ -54,9 +54,7 @@ public class CachingHttpHeadersFilter implements WebFilter {
                 response.getHeaders().setCacheControl("max-age=" + cacheTimeToLive + ", public");
                 response.getHeaders().setPragma("cache");
                 response.getHeaders().setExpires(cacheTimeToLive + System.currentTimeMillis());
-
             })
             .then(Mono.defer(() -> chain.filter(exchange)));
     }
 }
-

@@ -19,8 +19,16 @@
 
 package tech.jhipster.async;
 
-import tech.jhipster.test.LogbackRecorder;
-import tech.jhipster.test.LogbackRecorder.Event;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.catchThrowable;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+
+import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -28,17 +36,8 @@ import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.core.task.AsyncTaskExecutor;
 import org.springframework.core.task.SimpleAsyncTaskExecutor;
-
-import java.util.List;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.catchThrowable;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
+import tech.jhipster.test.LogbackRecorder;
+import tech.jhipster.test.LogbackRecorder.Event;
 
 class ExceptionHandlingAsyncTaskExecutorTest {
 
@@ -220,8 +219,7 @@ class ExceptionHandlingAsyncTaskExecutorTest {
         assertThat(caught).isNull();
     }
 
-    private class TestExceptionHandlingAsyncTaskExecutor
-        extends ExceptionHandlingAsyncTaskExecutor {
+    private class TestExceptionHandlingAsyncTaskExecutor extends ExceptionHandlingAsyncTaskExecutor {
 
         TestExceptionHandlingAsyncTaskExecutor(AsyncTaskExecutor executor) {
             super(executor);
@@ -280,20 +278,14 @@ class ExceptionHandlingAsyncTaskExecutorTest {
     @SuppressWarnings("serial")
     private class MockAsyncTaskExecutor extends SimpleAsyncTaskExecutor {
 
-        public void afterPropertiesSet() {
-        }
+        public void afterPropertiesSet() {}
 
-        public void destroy() {
-        }
+        public void destroy() {}
     }
 
     @SuppressWarnings("serial")
-    private class MockAsyncInitializingTaskExecutor extends MockAsyncTaskExecutor
-        implements InitializingBean {
-    }
+    private class MockAsyncInitializingTaskExecutor extends MockAsyncTaskExecutor implements InitializingBean {}
 
     @SuppressWarnings("serial")
-    private class MockAsyncDisposableTaskExecutor extends MockAsyncTaskExecutor
-        implements DisposableBean {
-    }
+    private class MockAsyncDisposableTaskExecutor extends MockAsyncTaskExecutor implements DisposableBean {}
 }

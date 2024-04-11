@@ -23,7 +23,6 @@ package tech.jhipster.config;
  * JHipster constants.
  */
 public interface JHipsterConstants {
-
     // Spring profiles for development, test and production, see https://www.jhipster.tech/profiles/
     /** Constant <code>SPRING_PROFILE_DEVELOPMENT="dev"</code> */
     String SPRING_PROFILE_DEVELOPMENT = "dev";

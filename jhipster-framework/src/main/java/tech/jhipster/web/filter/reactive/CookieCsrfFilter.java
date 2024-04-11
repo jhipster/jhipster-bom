@@ -1,5 +1,6 @@
 package tech.jhipster.web.filter.reactive;
 
+import java.util.Optional;
 import org.springframework.http.ResponseCookie;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.security.web.server.csrf.CsrfToken;
@@ -9,8 +10,6 @@ import org.springframework.web.server.WebFilter;
 import org.springframework.web.server.WebFilterChain;
 import reactor.core.publisher.Mono;
 import reactor.core.scheduler.Schedulers;
-
-import java.util.Optional;
 
 /**
  * <p>CookieCsrfFilter class.</p>
@@ -45,4 +44,3 @@ public class CookieCsrfFilter implements WebFilter {
         return StringUtils.hasLength(contextPath) ? contextPath : "/";
     }
 }
-

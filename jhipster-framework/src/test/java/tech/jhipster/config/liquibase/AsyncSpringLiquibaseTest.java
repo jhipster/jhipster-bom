@@ -19,8 +19,23 @@
 
 package tech.jhipster.config.liquibase;
 
-import tech.jhipster.test.LogbackRecorder;
-import tech.jhipster.test.LogbackRecorder.Event;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.catchThrowable;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+import static tech.jhipster.config.JHipsterConstants.SPRING_PROFILE_DEVELOPMENT;
+import static tech.jhipster.config.JHipsterConstants.SPRING_PROFILE_HEROKU;
+import static tech.jhipster.config.JHipsterConstants.SPRING_PROFILE_NO_LIQUIBASE;
+import static tech.jhipster.config.JHipsterConstants.SPRING_PROFILE_PRODUCTION;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.List;
+import javax.sql.DataSource;
 import liquibase.Liquibase;
 import liquibase.exception.LiquibaseException;
 import org.junit.jupiter.api.AfterEach;
@@ -31,24 +46,8 @@ import org.springframework.core.env.Environment;
 import org.springframework.core.task.SimpleAsyncTaskExecutor;
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.mock.env.MockEnvironment;
-
-import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.util.List;
-
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.doThrow;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.catchThrowable;
-import static tech.jhipster.config.JHipsterConstants.SPRING_PROFILE_DEVELOPMENT;
-import static tech.jhipster.config.JHipsterConstants.SPRING_PROFILE_HEROKU;
-import static tech.jhipster.config.JHipsterConstants.SPRING_PROFILE_NO_LIQUIBASE;
-import static tech.jhipster.config.JHipsterConstants.SPRING_PROFILE_PRODUCTION;
+import tech.jhipster.test.LogbackRecorder;
+import tech.jhipster.test.LogbackRecorder.Event;
 
 class AsyncSpringLiquibaseTest {
 
@@ -246,8 +245,7 @@ class AsyncSpringLiquibaseTest {
         assertThat(event1.getThrown()).isEqualTo(exception.toString());
     }
 
-    private class TestAsyncSpringLiquibase
-        extends AsyncSpringLiquibase {
+    private class TestAsyncSpringLiquibase extends AsyncSpringLiquibase {
 
         public TestAsyncSpringLiquibase(TaskExecutor executor, Environment environment) {
             super(executor, environment);
