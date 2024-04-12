@@ -262,8 +262,9 @@ class AngularCookieLocaleResolverTest {
 
         Event event = events.get(0);
         assertThat(event.getLevel()).isEqualTo("TRACE");
-        assertThat(event.getMessage())
-            .isEqualTo("Parsed cookie value [" + value + "] into locale '" + locale + "' " + "and time zone '" + zone.getID() + "'");
+        assertThat(event.getMessage()).isEqualTo(
+            "Parsed cookie value [" + value + "] into locale '" + locale + "' " + "and time zone '" + zone.getID() + "'"
+        );
         assertThat(event.getThrown()).isNull();
     }
 }

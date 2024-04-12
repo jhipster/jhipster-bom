@@ -18,17 +18,16 @@
  */
 package tech.jhipster.config.liquibase;
 
+import java.util.Optional;
+import java.util.concurrent.Executor;
+import java.util.function.Supplier;
+import javax.sql.DataSource;
 import liquibase.integration.spring.SpringLiquibase;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.autoconfigure.liquibase.DataSourceClosingSpringLiquibase;
 import org.springframework.boot.autoconfigure.liquibase.LiquibaseProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.core.env.Environment;
-
-import javax.sql.DataSource;
-import java.util.Optional;
-import java.util.concurrent.Executor;
-import java.util.function.Supplier;
 
 /**
  * Utility class for handling SpringLiquibase.
@@ -39,8 +38,7 @@ import java.util.function.Supplier;
  */
 public final class SpringLiquibaseUtil {
 
-    private SpringLiquibaseUtil() {
-    }
+    private SpringLiquibaseUtil() {}
 
     /**
      * <p>createSpringLiquibase.</p>
@@ -51,7 +49,12 @@ public final class SpringLiquibaseUtil {
      * @param dataSourceProperties a {@link org.springframework.boot.autoconfigure.jdbc.DataSourceProperties} object.
      * @return a {@link liquibase.integration.spring.SpringLiquibase} object.
      */
-    public static SpringLiquibase createSpringLiquibase(DataSource liquibaseDatasource, LiquibaseProperties liquibaseProperties, DataSource dataSource, DataSourceProperties dataSourceProperties) {
+    public static SpringLiquibase createSpringLiquibase(
+        DataSource liquibaseDatasource,
+        LiquibaseProperties liquibaseProperties,
+        DataSource dataSource,
+        DataSourceProperties dataSourceProperties
+    ) {
         SpringLiquibase liquibase;
         DataSource liquibaseDataSource = getDataSource(liquibaseDatasource, liquibaseProperties, dataSource);
         if (liquibaseDataSource != null) {
@@ -75,7 +78,14 @@ public final class SpringLiquibaseUtil {
      * @param dataSourceProperties a {@link org.springframework.boot.autoconfigure.jdbc.DataSourceProperties} object.
      * @return a {@link AsyncSpringLiquibase} object.
      */
-    public static AsyncSpringLiquibase createAsyncSpringLiquibase(Environment env, Executor executor, DataSource liquibaseDatasource, LiquibaseProperties liquibaseProperties, DataSource dataSource, DataSourceProperties dataSourceProperties) {
+    public static AsyncSpringLiquibase createAsyncSpringLiquibase(
+        Environment env,
+        Executor executor,
+        DataSource liquibaseDatasource,
+        LiquibaseProperties liquibaseProperties,
+        DataSource dataSource,
+        DataSourceProperties dataSourceProperties
+    ) {
         AsyncSpringLiquibase liquibase = new AsyncSpringLiquibase(executor, env);
         DataSource liquibaseDataSource = getDataSource(liquibaseDatasource, liquibaseProperties, dataSource);
         if (liquibaseDataSource != null) {
@@ -87,7 +97,11 @@ public final class SpringLiquibaseUtil {
         return liquibase;
     }
 
-    private static DataSource getDataSource(DataSource liquibaseDataSource, LiquibaseProperties liquibaseProperties, DataSource dataSource) {
+    private static DataSource getDataSource(
+        DataSource liquibaseDataSource,
+        LiquibaseProperties liquibaseProperties,
+        DataSource dataSource
+    ) {
         if (liquibaseDataSource != null) {
             return liquibaseDataSource;
         }
@@ -107,5 +121,4 @@ public final class SpringLiquibaseUtil {
     private static String getProperty(Supplier<String> property, Supplier<String> defaultValue) {
         return Optional.of(property).map(Supplier::get).orElseGet(defaultValue);
     }
-
 }

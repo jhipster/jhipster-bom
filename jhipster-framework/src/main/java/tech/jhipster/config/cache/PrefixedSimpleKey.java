@@ -13,7 +13,7 @@ public class PrefixedSimpleKey implements Serializable {
     private final String prefix;
     private transient Object[] params;
     private final String methodName;
-    private int hashCodeValue ;
+    private int hashCodeValue;
 
     /**
      * <p>Constructor for PrefixedSimpleKey.</p>
@@ -30,9 +30,9 @@ public class PrefixedSimpleKey implements Serializable {
         params = new Object[elements.length];
         System.arraycopy(elements, 0, params, 0, elements.length);
 
-        hashCodeValue  = prefix.hashCode();
-        hashCodeValue  = 31 * hashCodeValue  + methodName.hashCode();
-        hashCodeValue  = 31 * hashCodeValue  + Arrays.deepHashCode(params);
+        hashCodeValue = prefix.hashCode();
+        hashCodeValue = 31 * hashCodeValue + methodName.hashCode();
+        hashCodeValue = 31 * hashCodeValue + Arrays.deepHashCode(params);
     }
 
     /** {@inheritDoc} */
@@ -50,7 +50,7 @@ public class PrefixedSimpleKey implements Serializable {
     /** {@inheritDoc} */
     @Override
     public final int hashCode() {
-        return hashCodeValue ;
+        return hashCodeValue;
     }
 
     /** {@inheritDoc} */

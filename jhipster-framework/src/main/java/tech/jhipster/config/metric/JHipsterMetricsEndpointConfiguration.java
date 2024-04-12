@@ -26,7 +26,7 @@ public class JHipsterMetricsEndpointConfiguration {
      * @return a {@link JHipsterMetricsEndpoint} object.
      */
     @Bean
-    @ConditionalOnBean({MeterRegistry.class})
+    @ConditionalOnBean({ MeterRegistry.class })
     @ConditionalOnMissingBean
     @ConditionalOnAvailableEndpoint
     public JHipsterMetricsEndpoint jHipsterMetricsEndpoint(MeterRegistry meterRegistry) {

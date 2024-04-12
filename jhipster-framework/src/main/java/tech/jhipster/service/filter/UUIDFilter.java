@@ -32,8 +32,7 @@ public class UUIDFilter extends Filter<UUID> {
     /**
      * <p>Constructor for UUIDFilter.</p>
      */
-    public UUIDFilter() {
-    }
+    public UUIDFilter() {}
 
     /**
      * <p>Constructor for UUIDFilter.</p>
@@ -52,5 +51,4 @@ public class UUIDFilter extends Filter<UUID> {
     public UUIDFilter copy() {
         return new UUIDFilter(this);
     }
-
 }

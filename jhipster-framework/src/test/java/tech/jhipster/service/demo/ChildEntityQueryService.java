@@ -19,9 +19,9 @@
 
 package tech.jhipster.service.demo;
 
+import org.springframework.data.jpa.domain.Specification;
 import tech.jhipster.service.QueryService;
 import tech.jhipster.service.filter.LongFilter;
-import org.springframework.data.jpa.domain.Specification;
 
 /**
  * This class is just a compile - test.
@@ -29,6 +29,7 @@ import org.springframework.data.jpa.domain.Specification;
 public class ChildEntityQueryService extends QueryService<ChildEntity> {
 
     static class ChildEntityCriteria extends BaseEntityQueryService.BaseEntityCriteria {
+
         LongFilter parentId;
 
         public LongFilter getParentId() {
@@ -39,9 +40,10 @@ public class ChildEntityQueryService extends QueryService<ChildEntity> {
     public Specification<ChildEntity> createSpecification(ChildEntityCriteria criteria) {
         Specification<ChildEntity> specification = Specification.where(null);
         if (criteria.getParentId() != null) {
-            specification = specification.and(buildReferringEntitySpecification(criteria.getParentId(), ChildEntity_.parent, ParentEntity_.id));
+            specification = specification.and(
+                buildReferringEntitySpecification(criteria.getParentId(), ChildEntity_.parent, ParentEntity_.id)
+            );
         }
         return specification;
     }
-
 }

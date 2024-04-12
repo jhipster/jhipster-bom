@@ -89,12 +89,9 @@ public class ConditionBuilder {
     public Condition buildConditions() {
         return allFilters
             .stream()
-            .reduce(
-                null,
-                (Condition cumulated, Condition eachCondition) -> {
-                    return cumulated != null ? cumulated.and(eachCondition) : eachCondition;
-                }
-            );
+            .reduce(null, (Condition cumulated, Condition eachCondition) -> {
+                return cumulated != null ? cumulated.and(eachCondition) : eachCondition;
+            });
     }
 
     private <X> Function<X, String> columnValueConverter(Class<?> targetClass) {

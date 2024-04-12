@@ -18,6 +18,10 @@
  */
 package tech.jhipster.web.util;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.data.domain.Page;
@@ -25,11 +29,6 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.web.util.UriComponentsBuilder;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Tests based on parsing algorithm in app/components/util/pagination-util.service.js
@@ -56,10 +55,11 @@ class PaginationUtilTest {
         assertThat(strHeaders).hasSize(1);
         String headerData = strHeaders.get(0);
         assertThat(headerData.split(",")).hasSize(4);
-        String expectedData = "</api/_search/example?page=7&size=50>; rel=\"next\","
-            + "</api/_search/example?page=5&size=50>; rel=\"prev\","
-            + "</api/_search/example?page=7&size=50>; rel=\"last\","
-            + "</api/_search/example?page=0&size=50>; rel=\"first\"";
+        String expectedData =
+            "</api/_search/example?page=7&size=50>; rel=\"next\"," +
+            "</api/_search/example?page=5&size=50>; rel=\"prev\"," +
+            "</api/_search/example?page=7&size=50>; rel=\"last\"," +
+            "</api/_search/example?page=0&size=50>; rel=\"first\"";
         assertThat(headerData).isEqualTo(expectedData);
         List<String> xTotalCountHeaders = headers.get("X-Total-Count");
         assertThat(xTotalCountHeaders).hasSize(1).extracting(Long::parseLong).containsExactly(400L);
@@ -76,7 +76,8 @@ class PaginationUtilTest {
         assertThat(strHeaders).hasSize(1);
         String headerData = strHeaders.get(0);
         assertThat(headerData.split(",")).hasSize(2);
-        String expectedData = "</api/_search/example?query=Test1%2C%20test2&page=0&size=0>; rel=\"last\"," +
+        String expectedData =
+            "</api/_search/example?query=Test1%2C%20test2&page=0&size=0>; rel=\"last\"," +
             "</api/_search/example?query=Test1%2C%20test2&page=0&size=0>; rel=\"first\"";
         assertThat(headerData).isEqualTo(expectedData);
         List<String> xTotalCountHeaders = headers.get("X-Total-Count");
@@ -96,7 +97,8 @@ class PaginationUtilTest {
         assertThat(strHeaders).hasSize(1);
         String headerData = strHeaders.get(0);
         assertThat(headerData.split(",")).hasSize(3);
-        String expectedData = "</api/_search/example?query=Test1%2C%20test2&page=1&size=50>; rel=\"next\"," +
+        String expectedData =
+            "</api/_search/example?query=Test1%2C%20test2&page=1&size=50>; rel=\"next\"," +
             "</api/_search/example?query=Test1%2C%20test2&page=7&size=50>; rel=\"last\"," +
             "</api/_search/example?query=Test1%2C%20test2&page=0&size=50>; rel=\"first\"";
         assertThat(headerData).isEqualTo(expectedData);
@@ -113,9 +115,9 @@ class PaginationUtilTest {
         headerData = strHeaders.get(0);
         assertThat(headerData.split(",")).hasSize(4);
         expectedData = "</api/_search/example?query=Test1%2C%20test2&page=2&size=50>; rel=\"next\"," +
-            "</api/_search/example?query=Test1%2C%20test2&page=0&size=50>; rel=\"prev\"," +
-            "</api/_search/example?query=Test1%2C%20test2&page=7&size=50>; rel=\"last\"," +
-            "</api/_search/example?query=Test1%2C%20test2&page=0&size=50>; rel=\"first\"";
+        "</api/_search/example?query=Test1%2C%20test2&page=0&size=50>; rel=\"prev\"," +
+        "</api/_search/example?query=Test1%2C%20test2&page=7&size=50>; rel=\"last\"," +
+        "</api/_search/example?query=Test1%2C%20test2&page=0&size=50>; rel=\"first\"";
         assertThat(headerData).isEqualTo(expectedData);
         xTotalCountHeaders = headers.get("X-Total-Count");
         assertThat(xTotalCountHeaders).hasSize(1).extracting(Long::parseLong).containsExactly(400L);
@@ -130,9 +132,9 @@ class PaginationUtilTest {
         headerData = strHeaders.get(0);
         assertThat(headerData.split(",")).hasSize(4);
         expectedData = "</api/_search/example?query=Test1%2C%20test2&page=7&size=50>; rel=\"next\"," +
-            "</api/_search/example?query=Test1%2C%20test2&page=5&size=50>; rel=\"prev\"," +
-            "</api/_search/example?query=Test1%2C%20test2&page=7&size=50>; rel=\"last\"," +
-            "</api/_search/example?query=Test1%2C%20test2&page=0&size=50>; rel=\"first\"";
+        "</api/_search/example?query=Test1%2C%20test2&page=5&size=50>; rel=\"prev\"," +
+        "</api/_search/example?query=Test1%2C%20test2&page=7&size=50>; rel=\"last\"," +
+        "</api/_search/example?query=Test1%2C%20test2&page=0&size=50>; rel=\"first\"";
         assertThat(headerData).isEqualTo(expectedData);
         xTotalCountHeaders = headers.get("X-Total-Count");
         assertThat(xTotalCountHeaders).hasSize(1).extracting(Long::parseLong).containsExactly(400L);
@@ -147,8 +149,8 @@ class PaginationUtilTest {
         headerData = strHeaders.get(0);
         assertThat(headerData.split(",")).hasSize(3);
         expectedData = "</api/_search/example?query=Test1%2C%20test2&page=6&size=50>; rel=\"prev\"," +
-            "</api/_search/example?query=Test1%2C%20test2&page=7&size=50>; rel=\"last\"," +
-            "</api/_search/example?query=Test1%2C%20test2&page=0&size=50>; rel=\"first\"";
+        "</api/_search/example?query=Test1%2C%20test2&page=7&size=50>; rel=\"last\"," +
+        "</api/_search/example?query=Test1%2C%20test2&page=0&size=50>; rel=\"first\"";
         assertThat(headerData).isEqualTo(expectedData);
     }
 
@@ -166,7 +168,8 @@ class PaginationUtilTest {
         assertThat(linksData).hasSize(2);
         assertThat(linksData[0].split(">;")).hasSize(2);
         assertThat(linksData[1].split(">;")).hasSize(2);
-        String expectedData = "</api/_search/example?query=Test%3E%3Btest&page=0&size=0>; rel=\"last\"," +
+        String expectedData =
+            "</api/_search/example?query=Test%3E%3Btest&page=0&size=0>; rel=\"last\"," +
             "</api/_search/example?query=Test%3E%3Btest&page=0&size=0>; rel=\"first\"";
         assertThat(headerData).isEqualTo(expectedData);
         List<String> xTotalCountHeaders = headers.get("X-Total-Count");

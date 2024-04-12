@@ -1,15 +1,14 @@
 package tech.jhipster.web.util;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class PageUtilTest {
 
@@ -56,7 +55,8 @@ class PageUtilTest {
 
     @Test
     void generatePageFromListShouldThrowIllegalArgumentExceptionIfListNull() {
-        assertThatThrownBy(() -> PageUtil.createPageFromList(null, PageRequest.of(0, PAGE_SIZE)))
-            .isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> PageUtil.createPageFromList(null, PageRequest.of(0, PAGE_SIZE))).isInstanceOf(
+            IllegalArgumentException.class
+        );
     }
 }

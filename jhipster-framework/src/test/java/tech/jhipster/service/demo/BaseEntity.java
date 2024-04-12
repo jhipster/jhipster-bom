@@ -26,6 +26,7 @@ import jakarta.persistence.MappedSuperclass;
 
 @MappedSuperclass
 public class BaseEntity {
+
     @Id
     @GeneratedValue
     Long id;

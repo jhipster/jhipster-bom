@@ -25,14 +25,13 @@ import ch.qos.logback.classic.LoggerContext;
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.classic.spi.IThrowableProxy;
 import ch.qos.logback.core.AppenderBase;
-import org.slf4j.LoggerFactory;
-import org.slf4j.Marker;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.WeakHashMap;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Marker;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 
 /**
  * Utility, mainly for unit tests, to assert content written to logback. A classical usage would be
@@ -47,7 +46,7 @@ import java.util.WeakHashMap;
  * // perform assertions on the events
  * }
  */
-@ConditionalOnClass({LoggerContext.class})
+@ConditionalOnClass({ LoggerContext.class })
 public class LogbackRecorder {
 
     /** Constant <code>DEFAULT_MUTE=true</code> */

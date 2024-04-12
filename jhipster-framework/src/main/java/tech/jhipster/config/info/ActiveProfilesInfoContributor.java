@@ -19,12 +19,11 @@
 
 package tech.jhipster.config.info;
 
+import java.util.Arrays;
+import java.util.List;
 import org.springframework.boot.actuate.info.Info;
 import org.springframework.boot.actuate.info.InfoContributor;
 import org.springframework.core.env.ConfigurableEnvironment;
-
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * An {@link org.springframework.boot.actuate.info.InfoContributor} that exposes the list of active spring profiles.
@@ -40,8 +39,9 @@ public class ActiveProfilesInfoContributor implements InfoContributor {
      * @param environment a {@link org.springframework.core.env.ConfigurableEnvironment} object.
      */
     public ActiveProfilesInfoContributor(ConfigurableEnvironment environment) {
-        profiles = Arrays.asList(environment.getActiveProfiles().length == 0 ? environment.getDefaultProfiles()
-            : environment.getActiveProfiles());
+        profiles = Arrays.asList(
+            environment.getActiveProfiles().length == 0 ? environment.getDefaultProfiles() : environment.getActiveProfiles()
+        );
     }
 
     /** {@inheritDoc} */

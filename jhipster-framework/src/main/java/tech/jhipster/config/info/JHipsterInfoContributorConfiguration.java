@@ -44,8 +44,7 @@ public class JHipsterInfoContributorConfiguration {
      */
     @Bean
     @ConditionalOnEnabledInfoContributor("active-profiles")
-    public ActiveProfilesInfoContributor activeProfilesInfoContributor(
-        ConfigurableEnvironment environment) {
+    public ActiveProfilesInfoContributor activeProfilesInfoContributor(ConfigurableEnvironment environment) {
         return new ActiveProfilesInfoContributor(environment);
     }
 }

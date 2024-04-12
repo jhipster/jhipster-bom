@@ -19,14 +19,13 @@
 
 package tech.jhipster.service.filter;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 class DoubleFilterTest {
 
@@ -223,6 +222,20 @@ class DoubleFilterTest {
         filter.setGreaterThanOrEqual(value);
         filter.setLessThanOrEqual(value);
         String str = value.toString();
-        assertThat(filter.toString()).isEqualTo("DoubleFilter [equals=" + str + ", notEquals=" + str + ", specified=true, in=[], notIn=[], greaterThan=" + str + ", lessThan=" + str + ", greaterThanOrEqual=" + str + ", lessThanOrEqual=" + str + "]");
+        assertThat(filter.toString()).isEqualTo(
+            "DoubleFilter [equals=" +
+            str +
+            ", notEquals=" +
+            str +
+            ", specified=true, in=[], notIn=[], greaterThan=" +
+            str +
+            ", lessThan=" +
+            str +
+            ", greaterThanOrEqual=" +
+            str +
+            ", lessThanOrEqual=" +
+            str +
+            "]"
+        );
     }
 }

@@ -1,9 +1,9 @@
 package tech.jhipster.web.util;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpHeaders;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 class HeaderUtilTest {
 

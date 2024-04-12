@@ -1,7 +1,17 @@
 package tech.jhipster.config.apidoc;
 
-import org.junit.jupiter.api.Test;
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.hasItem;
+import static org.springdoc.core.utils.Constants.DEFAULT_GROUP_NAME;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static tech.jhipster.config.JHipsterConstants.SPRING_PROFILE_API_DOCS;
+
+import io.swagger.v3.oas.annotations.Operation;
 import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.autoconfigure.security.servlet.ManagementWebSecurityAutoConfiguration;
@@ -20,19 +30,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
-import io.swagger.v3.oas.annotations.Operation;
-
-import static org.springdoc.core.utils.Constants.DEFAULT_GROUP_NAME;
-import static tech.jhipster.config.JHipsterConstants.SPRING_PROFILE_API_DOCS;
-
-import static org.hamcrest.Matchers.hasItem;
-import static org.hamcrest.Matchers.containsString;
-
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest(
     classes = JHipsterSpringDocAutoconfigurationTest.TestApp.class,
@@ -53,8 +50,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
         "management.endpoints.web.base-path=/management",
         "management.endpoints.web.exposure.include=health,jhiopenapigroups",
         "spring.application.name=testApp",
-        "springdoc.show-actuator=true"
-    })
+        "springdoc.show-actuator=true",
+    }
+)
 @ActiveProfiles(SPRING_PROFILE_API_DOCS)
 @AutoConfigureMockMvc
 @Disabled("Dependent on javax.servlet")
@@ -65,7 +63,8 @@ class JHipsterSpringDocAutoconfigurationTest {
 
     @Test
     void generatesOAS() throws Exception {
-        mockMvc.perform(get("/v3/api-docs"))
+        mockMvc
+            .perform(get("/v3/api-docs"))
             .andExpect((status().isOk()))
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.info.title").value("test title"))
@@ -84,7 +83,8 @@ class JHipsterSpringDocAutoconfigurationTest {
 
     @Test
     void setsPageParameters() throws Exception {
-        mockMvc.perform(get("/v3/api-docs"))
+        mockMvc
+            .perform(get("/v3/api-docs"))
             .andExpect((status().isOk()))
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.paths['/scanned/test'].get.parameters[?(@.name == 'page')]").exists())
@@ -101,7 +101,8 @@ class JHipsterSpringDocAutoconfigurationTest {
 
     @Test
     void generatesOASAtDefaultGroupName() throws Exception {
-        mockMvc.perform(get("/v3/api-docs/" + DEFAULT_GROUP_NAME))
+        mockMvc
+            .perform(get("/v3/api-docs/" + DEFAULT_GROUP_NAME))
             .andExpect((status().isOk()))
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.info.title").value("test title"))
@@ -120,7 +121,8 @@ class JHipsterSpringDocAutoconfigurationTest {
 
     @Test
     void generatesManagementOAS() throws Exception {
-        mockMvc.perform(get("/v3/api-docs/management"))
+        mockMvc
+            .perform(get("/v3/api-docs/management"))
             .andExpect((status().isOk()))
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.info.title").value("TestApp Management API"))
@@ -136,7 +138,8 @@ class JHipsterSpringDocAutoconfigurationTest {
 
     @Test
     void generatesActuator() throws Exception {
-        mockMvc.perform(get("/management"))
+        mockMvc
+            .perform(get("/management"))
             .andExpect((status().isOk()))
             .andExpect(content().contentType("application/vnd.spring-boot.actuator.v3+json"))
             .andExpect(jsonPath("$._links.jhiopenapigroups").exists());
@@ -144,11 +147,16 @@ class JHipsterSpringDocAutoconfigurationTest {
 
     @Test
     void generatesActuatorEndpoint() throws Exception {
-        mockMvc.perform(get("/management/jhiopenapigroups"))
+        mockMvc
+            .perform(get("/management/jhiopenapigroups"))
             .andExpect((status().isOk()))
             .andExpect(content().contentType("application/vnd.spring-boot.actuator.v3+json"))
             .andExpect(jsonPath("$.[*].group").value(hasItem(JHipsterSpringDocGroupsConfiguration.MANAGEMENT_GROUP_NAME)))
-            .andExpect(jsonPath("$.[*].description").value(hasItem(containsString("(" + JHipsterSpringDocGroupsConfiguration.MANAGEMENT_GROUP_NAME + ")"))))
+            .andExpect(
+                jsonPath("$.[*].description").value(
+                    hasItem(containsString("(" + JHipsterSpringDocGroupsConfiguration.MANAGEMENT_GROUP_NAME + ")"))
+                )
+            )
             .andExpect(jsonPath("$.[*].group").value(hasItem(DEFAULT_GROUP_NAME)))
             .andExpect(jsonPath("$.[*].description").value(hasItem(containsString("(default)"))));
     }
@@ -160,21 +168,18 @@ class JHipsterSpringDocAutoconfigurationTest {
             ManagementWebSecurityAutoConfiguration.class,
             DataSourceAutoConfiguration.class,
             DataSourceTransactionManagerAutoConfiguration.class,
-            HibernateJpaAutoConfiguration.class
-        })
+            HibernateJpaAutoConfiguration.class,
+        }
+    )
     @Controller
     static class TestApp {
+
         @Operation
         @RequestMapping(value = "/scanned/test", method = RequestMethod.GET)
-        public void scanned(@ParameterObject Pageable pageable) {
-        }
+        public void scanned(@ParameterObject Pageable pageable) {}
 
         @Operation
         @GetMapping("/not-scanned/test")
-        public void notScanned(@ParameterObject Pageable pageable) {
-        }
+        public void notScanned(@ParameterObject Pageable pageable) {}
     }
-
 }
-
-

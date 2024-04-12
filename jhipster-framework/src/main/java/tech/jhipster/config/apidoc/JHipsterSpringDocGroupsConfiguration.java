@@ -19,11 +19,14 @@
 
 package tech.jhipster.config.apidoc;
 
+import static org.springdoc.core.utils.Constants.DEFAULT_GROUP_NAME;
+import static org.springdoc.core.utils.Constants.SPRINGDOC_SHOW_ACTUATOR;
+import static org.springdoc.core.utils.SpringDocUtils.getConfig;
+
 import io.swagger.v3.oas.models.info.Info;
 import java.nio.ByteBuffer;
 import java.util.List;
 import java.util.Optional;
-
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,10 +44,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import tech.jhipster.config.JHipsterProperties;
 import tech.jhipster.config.apidoc.customizer.JHipsterOpenApiCustomizer;
-
-import static org.springdoc.core.utils.Constants.DEFAULT_GROUP_NAME;
-import static org.springdoc.core.utils.Constants.SPRINGDOC_SHOW_ACTUATOR;
-import static org.springdoc.core.utils.SpringDocUtils.getConfig;
 
 /**
  * OpenApi Groups configuration.
@@ -98,18 +97,22 @@ public class JHipsterSpringDocGroupsConfiguration {
     public GroupedOpenApi openAPIDefaultGroupedOpenAPI(
         List<OpenApiCustomizer> openApiCustomizers,
         List<OperationCustomizer> operationCustomizers,
-        @Qualifier("apiFirstGroupedOpenAPI") Optional<GroupedOpenApi> apiFirstGroupedOpenAPI) {
+        @Qualifier("apiFirstGroupedOpenAPI") Optional<GroupedOpenApi> apiFirstGroupedOpenAPI
+    ) {
         log.debug("Initializing JHipster OpenApi default group");
         GroupedOpenApi.Builder builder = GroupedOpenApi.builder()
             .group(DEFAULT_GROUP_NAME)
             .pathsToMatch(properties.getDefaultIncludePattern());
-        openApiCustomizers.stream()
+        openApiCustomizers
+            .stream()
             .filter(customizer -> !(customizer instanceof ActuatorOpenApiCustomizer))
             .forEach(builder::addOpenApiCustomizer);
-        operationCustomizers.stream()
+        operationCustomizers
+            .stream()
             .filter(customizer -> !(customizer instanceof ActuatorOperationCustomizer))
             .forEach(builder::addOperationCustomizer);
-        apiFirstGroupedOpenAPI.map(GroupedOpenApi::getPackagesToScan)
+        apiFirstGroupedOpenAPI
+            .map(GroupedOpenApi::getPackagesToScan)
             .ifPresent(packagesToScan -> packagesToScan.forEach(builder::packagesToExclude));
         return builder.build();
     }
@@ -123,17 +126,19 @@ public class JHipsterSpringDocGroupsConfiguration {
     @ConditionalOnClass(name = "org.springframework.boot.actuate.autoconfigure.web.server.ManagementServerProperties")
     @ConditionalOnMissingBean(name = "openAPIManagementGroupedOpenAPI")
     @ConditionalOnProperty(SPRINGDOC_SHOW_ACTUATOR)
-    public GroupedOpenApi openAPIManagementGroupedOpenAPI(
-        @Value("${spring.application.name:application}") String appName
-    ) {
+    public GroupedOpenApi openAPIManagementGroupedOpenAPI(@Value("${spring.application.name:application}") String appName) {
         log.debug("Initializing JHipster OpenApi management group");
         return GroupedOpenApi.builder()
             .group(MANAGEMENT_GROUP_NAME)
-            .addOpenApiCustomizer(openApi -> openApi.info(new Info()
-                .title(StringUtils.capitalize(appName) + " " + MANAGEMENT_TITLE_SUFFIX)
-                .description(MANAGEMENT_DESCRIPTION)
-                .version(properties.getVersion())
-            ))
+            .addOpenApiCustomizer(
+                openApi ->
+                    openApi.info(
+                        new Info()
+                            .title(StringUtils.capitalize(appName) + " " + MANAGEMENT_TITLE_SUFFIX)
+                            .description(MANAGEMENT_DESCRIPTION)
+                            .version(properties.getVersion())
+                    )
+            )
             .pathsToMatch(properties.getManagementIncludePattern())
             .build();
     }

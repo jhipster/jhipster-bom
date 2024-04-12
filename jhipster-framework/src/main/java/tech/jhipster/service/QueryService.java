@@ -19,12 +19,6 @@
 
 package tech.jhipster.service;
 
-import tech.jhipster.service.filter.Filter;
-import tech.jhipster.service.filter.RangeFilter;
-import tech.jhipster.service.filter.StringFilter;
-import org.springframework.data.jpa.domain.Specification;
-import org.springframework.transaction.annotation.Transactional;
-
 import jakarta.persistence.criteria.CriteriaBuilder.In;
 import jakarta.persistence.criteria.Expression;
 import jakarta.persistence.criteria.Root;
@@ -34,6 +28,11 @@ import jakarta.persistence.metamodel.SingularAttribute;
 import java.util.Collection;
 import java.util.Set;
 import java.util.function.Function;
+import org.springframework.data.jpa.domain.Specification;
+import org.springframework.transaction.annotation.Transactional;
+import tech.jhipster.service.filter.Filter;
+import tech.jhipster.service.filter.RangeFilter;
+import tech.jhipster.service.filter.StringFilter;
 
 /**
  * Base service for constructing and executing complex queries.
@@ -52,8 +51,7 @@ public abstract class QueryService<ENTITY> {
      * @param <X>    The type of the attribute which is filtered.
      * @return a Specification
      */
-    protected <X> Specification<ENTITY> buildSpecification(Filter<X> filter, SingularAttribute<? super ENTITY, X>
-        field) {
+    protected <X> Specification<ENTITY> buildSpecification(Filter<X> filter, SingularAttribute<? super ENTITY, X> field) {
         return buildSpecification(filter, root -> root.get(field));
     }
 
@@ -89,8 +87,7 @@ public abstract class QueryService<ENTITY> {
      * @param field  the JPA static metamodel representing the field.
      * @return a Specification
      */
-    protected Specification<ENTITY> buildStringSpecification(StringFilter filter, SingularAttribute<? super ENTITY,
-        String> field) {
+    protected Specification<ENTITY> buildStringSpecification(StringFilter filter, SingularAttribute<? super ENTITY, String> field) {
         return buildSpecification(filter, root -> root.get(field));
     }
 
@@ -131,8 +128,10 @@ public abstract class QueryService<ENTITY> {
      * @param field  the JPA static metamodel representing the field.
      * @return a Specification
      */
-    protected <X extends Comparable<? super X>> Specification<ENTITY> buildRangeSpecification(RangeFilter<X> filter,
-                                                                                              SingularAttribute<? super ENTITY, X> field) {
+    protected <X extends Comparable<? super X>> Specification<ENTITY> buildRangeSpecification(
+        RangeFilter<X> filter,
+        SingularAttribute<? super ENTITY, X> field
+    ) {
         return buildSpecification(filter, root -> root.get(field));
     }
 
@@ -146,8 +145,10 @@ public abstract class QueryService<ENTITY> {
      * @param metaclassFunction lambda, which based on a Root&lt;ENTITY&gt; returns Expression - basicaly picks a column
      * @return a Specification
      */
-    protected <X extends Comparable<? super X>> Specification<ENTITY> buildSpecification(RangeFilter<X> filter,
-                                                                                         Function<Root<ENTITY>, Expression<X>> metaclassFunction) {
+    protected <X extends Comparable<? super X>> Specification<ENTITY> buildSpecification(
+        RangeFilter<X> filter,
+        Function<Root<ENTITY>, Expression<X>> metaclassFunction
+    ) {
         if (filter.getEquals() != null) {
             return equalsSpecification(metaclassFunction, filter.getEquals());
         } else if (filter.getIn() != null) {
@@ -197,9 +198,11 @@ public abstract class QueryService<ENTITY> {
      * @param <X>        The type of the attribute which is filtered.
      * @return a Specification
      */
-    protected <OTHER, X> Specification<ENTITY> buildReferringEntitySpecification(Filter<X> filter,
-                                                                                 SingularAttribute<? super ENTITY, OTHER> reference,
-                                                                                 SingularAttribute<? super OTHER, X> valueField) {
+    protected <OTHER, X> Specification<ENTITY> buildReferringEntitySpecification(
+        Filter<X> filter,
+        SingularAttribute<? super ENTITY, OTHER> reference,
+        SingularAttribute<? super OTHER, X> valueField
+    ) {
         return buildSpecification(filter, root -> root.get(reference).get(valueField));
     }
 
@@ -221,9 +224,11 @@ public abstract class QueryService<ENTITY> {
      * @param <X>        The type of the attribute which is filtered.
      * @return a Specification
      */
-    protected <OTHER, X> Specification<ENTITY> buildReferringEntitySpecification(Filter<X> filter,
-                                                                                 SetAttribute<ENTITY, OTHER> reference,
-                                                                                 SingularAttribute<OTHER, X> valueField) {
+    protected <OTHER, X> Specification<ENTITY> buildReferringEntitySpecification(
+        Filter<X> filter,
+        SetAttribute<ENTITY, OTHER> reference,
+        SingularAttribute<OTHER, X> valueField
+    ) {
         return buildReferringEntitySpecification(filter, root -> root.join(reference), entity -> entity.get(valueField));
     }
 
@@ -249,9 +254,11 @@ public abstract class QueryService<ENTITY> {
      * @param <X>              The type of the attribute which is filtered.
      * @return a Specification
      */
-    protected <OTHER, MISC, X> Specification<ENTITY> buildReferringEntitySpecification(Filter<X> filter,
-                                                                                       Function<Root<ENTITY>, SetJoin<MISC, OTHER>> functionToEntity,
-                                                                                       Function<SetJoin<MISC, OTHER>, Expression<X>> entityToColumn) {
+    protected <OTHER, MISC, X> Specification<ENTITY> buildReferringEntitySpecification(
+        Filter<X> filter,
+        Function<Root<ENTITY>, SetJoin<MISC, OTHER>> functionToEntity,
+        Function<SetJoin<MISC, OTHER>, Expression<X>> entityToColumn
+    ) {
         if (filter.getEquals() != null) {
             return equalsSpecification(functionToEntity.andThen(entityToColumn), filter.getEquals());
         } else if (filter.getSpecified() != null) {
@@ -283,8 +290,9 @@ public abstract class QueryService<ENTITY> {
      */
     protected <OTHER, X extends Comparable<? super X>> Specification<ENTITY> buildReferringEntitySpecification(
         RangeFilter<X> filter,
-                                                                                                               SetAttribute<ENTITY, OTHER> reference,
-                                                                                                               SingularAttribute<OTHER, X> valueField) {
+        SetAttribute<ENTITY, OTHER> reference,
+        SingularAttribute<OTHER, X> valueField
+    ) {
         return buildReferringEntitySpecification(filter, root -> root.join(reference), entity -> entity.get(valueField));
     }
 
@@ -316,9 +324,9 @@ public abstract class QueryService<ENTITY> {
      */
     protected <OTHER, MISC, X extends Comparable<? super X>> Specification<ENTITY> buildReferringEntitySpecification(
         RangeFilter<X> filter,
-                                                                                                                     Function<Root<ENTITY>, SetJoin<MISC, OTHER>> functionToEntity,
-                                                                                                                     Function<SetJoin<MISC, OTHER>, Expression<X>> entityToColumn) {
-
+        Function<Root<ENTITY>, SetJoin<MISC, OTHER>> functionToEntity,
+        Function<SetJoin<MISC, OTHER>, Expression<X>> entityToColumn
+    ) {
         Function<Root<ENTITY>, Expression<X>> fused = functionToEntity.andThen(entityToColumn);
         if (filter.getEquals() != null) {
             return equalsSpecification(fused, filter.getEquals());
@@ -382,8 +390,7 @@ public abstract class QueryService<ENTITY> {
      * @param value a {@link java.lang.String} object.
      * @return a {@link org.springframework.data.jpa.domain.Specification} object.
      */
-    protected Specification<ENTITY> likeUpperSpecification(Function<Root<ENTITY>, Expression<String>> metaclassFunction,
-                                                           String value) {
+    protected Specification<ENTITY> likeUpperSpecification(Function<Root<ENTITY>, Expression<String>> metaclassFunction, String value) {
         return (root, query, builder) -> builder.like(builder.upper(metaclassFunction.apply(root)), wrapLikeQuery(value));
     }
 
@@ -394,8 +401,10 @@ public abstract class QueryService<ENTITY> {
      * @param value a {@link java.lang.String} object.
      * @return a {@link org.springframework.data.jpa.domain.Specification} object.
      */
-    protected Specification<ENTITY> doesNotContainSpecification(Function<Root<ENTITY>, Expression<String>> metaclassFunction,
-                                                           String value) {
+    protected Specification<ENTITY> doesNotContainSpecification(
+        Function<Root<ENTITY>, Expression<String>> metaclassFunction,
+        String value
+    ) {
         return (root, query, builder) -> builder.not(builder.like(builder.upper(metaclassFunction.apply(root)), wrapLikeQuery(value)));
     }
 
@@ -407,11 +416,10 @@ public abstract class QueryService<ENTITY> {
      * @param <X> a X object.
      * @return a {@link org.springframework.data.jpa.domain.Specification} object.
      */
-    protected <X> Specification<ENTITY> byFieldSpecified(Function<Root<ENTITY>, Expression<X>> metaclassFunction,
-                                                         boolean specified) {
-        return specified ?
-            (root, query, builder) -> builder.isNotNull(metaclassFunction.apply(root)) :
-            (root, query, builder) -> builder.isNull(metaclassFunction.apply(root));
+    protected <X> Specification<ENTITY> byFieldSpecified(Function<Root<ENTITY>, Expression<X>> metaclassFunction, boolean specified) {
+        return specified
+            ? (root, query, builder) -> builder.isNotNull(metaclassFunction.apply(root))
+            : (root, query, builder) -> builder.isNull(metaclassFunction.apply(root));
     }
 
     /**
@@ -422,11 +430,10 @@ public abstract class QueryService<ENTITY> {
      * @param <X> a X object.
      * @return a {@link org.springframework.data.jpa.domain.Specification} object.
      */
-    protected <X> Specification<ENTITY> byFieldEmptiness(Function<Root<ENTITY>, Expression<Set<X>>> metaclassFunction,
-                                                         boolean specified) {
-        return specified ?
-            (root, query, builder) -> builder.isNotEmpty(metaclassFunction.apply(root)) :
-            (root, query, builder) -> builder.isEmpty(metaclassFunction.apply(root));
+    protected <X> Specification<ENTITY> byFieldEmptiness(Function<Root<ENTITY>, Expression<Set<X>>> metaclassFunction, boolean specified) {
+        return specified
+            ? (root, query, builder) -> builder.isNotEmpty(metaclassFunction.apply(root))
+            : (root, query, builder) -> builder.isEmpty(metaclassFunction.apply(root));
     }
 
     /**
@@ -437,8 +444,7 @@ public abstract class QueryService<ENTITY> {
      * @param <X> a X object.
      * @return a {@link org.springframework.data.jpa.domain.Specification} object.
      */
-    protected <X> Specification<ENTITY> valueIn(Function<Root<ENTITY>, Expression<X>> metaclassFunction,
-                                                Collection<X> values) {
+    protected <X> Specification<ENTITY> valueIn(Function<Root<ENTITY>, Expression<X>> metaclassFunction, Collection<X> values) {
         return (root, query, builder) -> {
             In<X> in = builder.in(metaclassFunction.apply(root));
             for (X value : values) {
@@ -456,8 +462,7 @@ public abstract class QueryService<ENTITY> {
      * @param <X> a X object.
      * @return a {@link org.springframework.data.jpa.domain.Specification} object.
      */
-    protected <X> Specification<ENTITY> valueNotIn(Function<Root<ENTITY>, Expression<X>> metaclassFunction,
-                                                   Collection<X> values) {
+    protected <X> Specification<ENTITY> valueNotIn(Function<Root<ENTITY>, Expression<X>> metaclassFunction, Collection<X> values) {
         return (root, query, builder) -> {
             In<X> in = builder.in(metaclassFunction.apply(root));
             for (X value : values) {
@@ -475,8 +480,10 @@ public abstract class QueryService<ENTITY> {
      * @param <X> a X object.
      * @return a {@link org.springframework.data.jpa.domain.Specification} object.
      */
-    protected <X extends Comparable<? super X>> Specification<ENTITY> greaterThanOrEqualTo(Function<Root<ENTITY>, Expression<X>> metaclassFunction,
-                                                                                           X value) {
+    protected <X extends Comparable<? super X>> Specification<ENTITY> greaterThanOrEqualTo(
+        Function<Root<ENTITY>, Expression<X>> metaclassFunction,
+        X value
+    ) {
         return (root, query, builder) -> builder.greaterThanOrEqualTo(metaclassFunction.apply(root), value);
     }
 
@@ -488,8 +495,10 @@ public abstract class QueryService<ENTITY> {
      * @param <X> a X object.
      * @return a {@link org.springframework.data.jpa.domain.Specification} object.
      */
-    protected <X extends Comparable<? super X>> Specification<ENTITY> greaterThan(Function<Root<ENTITY>, Expression<X>> metaclassFunction,
-                                                                                  X value) {
+    protected <X extends Comparable<? super X>> Specification<ENTITY> greaterThan(
+        Function<Root<ENTITY>, Expression<X>> metaclassFunction,
+        X value
+    ) {
         return (root, query, builder) -> builder.greaterThan(metaclassFunction.apply(root), value);
     }
 
@@ -501,8 +510,10 @@ public abstract class QueryService<ENTITY> {
      * @param <X> a X object.
      * @return a {@link org.springframework.data.jpa.domain.Specification} object.
      */
-    protected <X extends Comparable<? super X>> Specification<ENTITY> lessThanOrEqualTo(Function<Root<ENTITY>, Expression<X>> metaclassFunction,
-                                                                                        X value) {
+    protected <X extends Comparable<? super X>> Specification<ENTITY> lessThanOrEqualTo(
+        Function<Root<ENTITY>, Expression<X>> metaclassFunction,
+        X value
+    ) {
         return (root, query, builder) -> builder.lessThanOrEqualTo(metaclassFunction.apply(root), value);
     }
 
@@ -514,8 +525,10 @@ public abstract class QueryService<ENTITY> {
      * @param <X> a X object.
      * @return a {@link org.springframework.data.jpa.domain.Specification} object.
      */
-    protected <X extends Comparable<? super X>> Specification<ENTITY> lessThan(Function<Root<ENTITY>, Expression<X>> metaclassFunction,
-                                                                               X value) {
+    protected <X extends Comparable<? super X>> Specification<ENTITY> lessThan(
+        Function<Root<ENTITY>, Expression<X>> metaclassFunction,
+        X value
+    ) {
         return (root, query, builder) -> builder.lessThan(metaclassFunction.apply(root), value);
     }
 
@@ -541,5 +554,4 @@ public abstract class QueryService<ENTITY> {
             return null;
         };
     }
-
 }

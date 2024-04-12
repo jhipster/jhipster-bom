@@ -1,9 +1,13 @@
 package tech.jhipster.domain.util;
-import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.time.*;
 import java.util.Date;
+import org.junit.jupiter.api.Test;
+
 public class JSR310DateConvertersTest {
+
     @Test
     void testLocalDateToDateConverter() {
         LocalDate localDate = LocalDate.now();
@@ -27,5 +31,4 @@ public class JSR310DateConvertersTest {
 
         assertEquals(date.toInstant(), JSR310DateConverters.ZonedDateTimeToDateConverter.INSTANCE.convert(zonedDateTime).toInstant());
     }
-
 }

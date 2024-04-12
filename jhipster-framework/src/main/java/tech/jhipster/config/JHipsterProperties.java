@@ -19,14 +19,13 @@
 
 package tech.jhipster.config;
 
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.web.cors.CorsConfiguration;
-
 import jakarta.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.web.cors.CorsConfiguration;
 
 /**
  * Properties specific to JHipster.
@@ -449,7 +448,6 @@ public class JHipsterProperties {
                 public void setMaxEntries(long maxEntries) {
                     this.maxEntries = maxEntries;
                 }
-
             }
 
             public static class Distributed {
@@ -506,7 +504,6 @@ public class JHipsterProperties {
                 public void setMaxEntries(long maxEntries) {
                     this.maxEntries = maxEntries;
                 }
-
             }
         }
 
@@ -597,6 +594,7 @@ public class JHipsterProperties {
         }
 
         public static class Redis {
+
             private String[] server = JHipsterDefaults.Cache.Redis.server;
             private int expiration = JHipsterDefaults.Cache.Redis.expiration;
             private boolean cluster = JHipsterDefaults.Cache.Redis.cluster;
@@ -793,11 +791,10 @@ public class JHipsterProperties {
 
                 private String base64Secret = JHipsterDefaults.Security.Authentication.Jwt.base64Secret;
 
-                private long tokenValidityInSeconds = JHipsterDefaults.Security.Authentication.Jwt
-                    .tokenValidityInSeconds;
+                private long tokenValidityInSeconds = JHipsterDefaults.Security.Authentication.Jwt.tokenValidityInSeconds;
 
-                private long tokenValidityInSecondsForRememberMe = JHipsterDefaults.Security.Authentication.Jwt
-                    .tokenValidityInSecondsForRememberMe;
+                private long tokenValidityInSecondsForRememberMe =
+                    JHipsterDefaults.Security.Authentication.Jwt.tokenValidityInSecondsForRememberMe;
 
                 public String getSecret() {
                     return secret;
@@ -848,6 +845,7 @@ public class JHipsterProperties {
         }
 
         public static class OAuth2 {
+
             private List<String> audience = new ArrayList<>();
 
             public List<String> getAudience() {
@@ -983,6 +981,7 @@ public class JHipsterProperties {
         }
 
         public static class Server {
+
             private String url;
             private String description;
 
@@ -1087,8 +1086,7 @@ public class JHipsterProperties {
             return rateLimiting;
         }
 
-        private Map<String, List<String>> authorizedMicroservicesEndpoints = JHipsterDefaults.Gateway
-            .authorizedMicroservicesEndpoints;
+        private Map<String, List<String>> authorizedMicroservicesEndpoints = JHipsterDefaults.Gateway.authorizedMicroservicesEndpoints;
 
         public Map<String, List<String>> getAuthorizedMicroservicesEndpoints() {
             return authorizedMicroservicesEndpoints;
@@ -1159,6 +1157,7 @@ public class JHipsterProperties {
     }
 
     public static class AuditEvents {
+
         private int retentionPeriod = JHipsterDefaults.AuditEvents.retentionPeriod;
 
         public int getRetentionPeriod() {

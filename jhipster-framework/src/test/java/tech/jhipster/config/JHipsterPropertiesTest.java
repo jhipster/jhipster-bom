@@ -19,17 +19,16 @@
 
 package tech.jhipster.config;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 class JHipsterPropertiesTest {
 
@@ -342,7 +341,7 @@ class JHipsterPropertiesTest {
         JHipsterProperties.Cache.Redis obj = properties.getCache().getRedis();
         String[] val = JHipsterDefaults.Cache.Redis.server;
         assertThat(obj.getServer()).isEqualTo(val);
-        val = new String[]{"myserver:1337"};
+        val = new String[] { "myserver:1337" };
         obj.setServer(val);
         assertThat(obj.getServer()).isEqualTo(val);
     }
@@ -405,7 +404,6 @@ class JHipsterPropertiesTest {
         val++;
         obj.setSubscriptionConnectionPoolSize(val);
         assertThat(obj.getSubscriptionConnectionPoolSize()).isEqualTo(val);
-
     }
 
     @Test
@@ -659,7 +657,7 @@ class JHipsterPropertiesTest {
         server.setUrl("url");
         server.setDescription("description");
 
-        JHipsterProperties.ApiDocs.Server[] val = new JHipsterProperties.ApiDocs.Server[]{server};
+        JHipsterProperties.ApiDocs.Server[] val = new JHipsterProperties.ApiDocs.Server[] { server };
 
         obj.setServers(val);
         assertThat(obj.getServers().length).isEqualTo(1);

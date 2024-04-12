@@ -19,25 +19,22 @@
 
 package tech.jhipster.domain.util;
 
-import org.springframework.core.convert.converter.Converter;
-
 import java.time.*;
 import java.util.Date;
+import org.springframework.core.convert.converter.Converter;
 
 /**
  * <p>JSR310DateConverters class.</p>
  */
 public final class JSR310DateConverters {
 
-    private JSR310DateConverters() {
-    }
+    private JSR310DateConverters() {}
 
     public static class LocalDateToDateConverter implements Converter<LocalDate, Date> {
 
         public static final LocalDateToDateConverter INSTANCE = new LocalDateToDateConverter();
 
-        private LocalDateToDateConverter() {
-        }
+        private LocalDateToDateConverter() {}
 
         @Override
         public Date convert(LocalDate source) {
@@ -49,13 +46,11 @@ public final class JSR310DateConverters {
 
         public static final DateToLocalDateConverter INSTANCE = new DateToLocalDateConverter();
 
-        private DateToLocalDateConverter() {
-        }
+        private DateToLocalDateConverter() {}
 
         @Override
         public LocalDate convert(Date source) {
-            return source == null ? null : ZonedDateTime.ofInstant(source.toInstant(), ZoneId.systemDefault())
-                .toLocalDate();
+            return source == null ? null : ZonedDateTime.ofInstant(source.toInstant(), ZoneId.systemDefault()).toLocalDate();
         }
     }
 
@@ -63,8 +58,7 @@ public final class JSR310DateConverters {
 
         public static final ZonedDateTimeToDateConverter INSTANCE = new ZonedDateTimeToDateConverter();
 
-        private ZonedDateTimeToDateConverter() {
-        }
+        private ZonedDateTimeToDateConverter() {}
 
         @Override
         public Date convert(ZonedDateTime source) {
@@ -76,8 +70,7 @@ public final class JSR310DateConverters {
 
         public static final DateToZonedDateTimeConverter INSTANCE = new DateToZonedDateTimeConverter();
 
-        private DateToZonedDateTimeConverter() {
-        }
+        private DateToZonedDateTimeConverter() {}
 
         @Override
         public ZonedDateTime convert(Date source) {
@@ -89,8 +82,7 @@ public final class JSR310DateConverters {
 
         public static final LocalDateTimeToDateConverter INSTANCE = new LocalDateTimeToDateConverter();
 
-        private LocalDateTimeToDateConverter() {
-        }
+        private LocalDateTimeToDateConverter() {}
 
         @Override
         public Date convert(LocalDateTime source) {
@@ -102,8 +94,7 @@ public final class JSR310DateConverters {
 
         public static final DateToLocalDateTimeConverter INSTANCE = new DateToLocalDateTimeConverter();
 
-        private DateToLocalDateTimeConverter() {
-        }
+        private DateToLocalDateTimeConverter() {}
 
         @Override
         public LocalDateTime convert(Date source) {
@@ -115,8 +106,7 @@ public final class JSR310DateConverters {
 
         public static final DurationToLongConverter INSTANCE = new DurationToLongConverter();
 
-        private DurationToLongConverter() {
-        }
+        private DurationToLongConverter() {}
 
         @Override
         public Long convert(Duration source) {
@@ -128,8 +118,7 @@ public final class JSR310DateConverters {
 
         public static final LongToDurationConverter INSTANCE = new LongToDurationConverter();
 
-        private LongToDurationConverter() {
-        }
+        private LongToDurationConverter() {}
 
         @Override
         public Duration convert(Long source) {
