@@ -1,10 +1,15 @@
 {
+  "scripts": {
+    "preinstall-ci": "npm run replace-version",
+    "install-ci": "./mvnw -ntp clean install -DskipTests -Dmaven.javadoc.skip=true -Dgpg.skip=true --batch-mode",
+    "install-jar": "./mvnw install -Dgpg.skip=true",
+    "prettier:check": "prettier --check .",
+    "prettier:format": "prettier --write .",
+    "replace-version": "test-integration/scripts/10-replace-version-jhipster.sh",
+    "test": "npm run prettier:check"
+  },
   "devDependencies": {
     "prettier": "3.2.5",
     "prettier-plugin-java": "2.6.0"
-  },
-  "scripts": {
-    "prettier:check": "prettier --check .",
-    "prettier:format": "prettier --write ."
   }
 }
