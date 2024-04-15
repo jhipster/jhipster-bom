@@ -24,10 +24,9 @@ concurrency:
   cancel-in-progress: true
 on:
   push:
-    branches-ignore:
-      - 'dependabot/**'
-      - 'skip_ci*'
-      - 'revert-*'
+    branches:
+      - 'main'
+      - '**maintenance'
     paths-ignore:
       - 'package*.json'
   pull_request:
@@ -57,7 +56,7 @@ jobs:
           skip-changes-detection: true
           workflow-samples-file: angular
   applications:
-    name: ${{ matrix.name }}
+    name: ${{ matrix.name }} (n${{ matrix.node }}/j${{ matrix.java }})
     runs-on: ${{ matrix.os || 'ubuntu-20.04' }}
     needs: build-matrix
     defaults:
@@ -91,102 +90,45 @@ jobs:
           path: generator-jhipster
           fetch-depth: 2
           ref: main
-      - name: 'SETUP: environment'
-        id: setup
-        uses: ./generator-jhipster/.github/actions/setup
+      - uses: jhipster/actions/setup-runner@v0
         with:
-          application-sample: ${{ matrix.jhi-app-sample || matrix.app-sample || 'jdl' }}
-          entities-sample: ${{ matrix.entity || 'none' }}
-          jdl-entities-sample: ${{ matrix.jdl-entity || '' }}
-          jdl-sample: ${{ matrix.jdl-samples || '' }}
-          application-environment: ${{ matrix.environment || 'prod' }}
-          application-packaging: ${{ (matrix.war == 1 && 'war') || 'jar' }}
-          generator-jhipster-branch: local
-          jhipster-bom-branch: auto
-      - uses: actions/setup-node@v4
-        with:
-          node-version: ${{ steps.setup.outputs.node-version }}
-      - uses: actions/setup-java@v4
-        with:
-          distribution: 'temurin'
-          java-version: ${{ steps.setup.outputs.java-version }}
-      - name: 'SETUP: load npm cache'
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/.npm
-            ~/.cache/Cypress/
-          key: ${{ runner.os }}-node-${{ steps.setup.outputs.date }}-${{ matrix.npm-cache || 'angular' }}-${{ hashFiles('generator-jhipster/package-lock.json', 'generator-jhipster/**/package.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-${{ steps.setup.outputs.date }}-${{ matrix.npm-cache || 'angular' }}-
-            ${{ runner.os }}-node-${{ steps.setup.outputs.date }}-
-            ${{ runner.os }}-node-${{ steps.setup.outputs.date }}
-      - name: 'SETUP: load maven cache'
-        uses: actions/cache@v4
-        with:
-          path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-${{ steps.setup.outputs.date }}-${{ hashFiles('generator-jhipster/**/pom.xml.ejs') }}
-          restore-keys: |
-            ${{ runner.os }}-maven-${{ steps.setup.outputs.date }}-
-            ${{ runner.os }}-maven-${{ steps.setup.outputs.date }}
-      - name: 'SETUP: load gradle cache'
-        if: matrix.workspaces == 'true' || matrix.gradle == 1 || contains(matrix.name, 'gradle')
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-${{ steps.setup.outputs.date }}-${{ hashFiles('generator-jhipster/**/build.gradle.ejs') }}
-          restore-keys: |
-            ${{ runner.os }}-gradle-${{ steps.setup.outputs.date }}-
-            ${{ runner.os }}-gradle-${{ steps.setup.outputs.date }}
-      - name: 'TOOLS: configure tools installed by the system'
-        run: $JHI_SCRIPTS/03-system.sh
-      - name: 'TOOLS: configure git'
-        run: $JHI_SCRIPTS/04-git-config.sh
-      # Update global NPM for workspaces support
-      - name: 'Install required NPM version'
-        if: matrix.workspaces == 'true'
-        run: npm install -g npm@${{ steps.setup.outputs.npm-version }} || true
+          node-version: ${{ matrix.node }}
+          java-version: ${{ matrix.java }}
+          npm-version: ${{ matrix.npm-version }}
+          maven-cache: true
+          gradle-cache: ${{ matrix.gradle-cache }}
       #----------------------------------------------------------------------
       # Install JHipster and generate project+entities
       #----------------------------------------------------------------------
-      - name: 'GENERATION: install JHipster'
-        run: $JHI_SCRIPTS/10-install-jhipster.sh
-      - name: 'GENERATION: config'
-        run: $JHI_SCRIPTS/11-generate-config.sh
+      - run: npm ci --ignore-scripts
+        working-directory: ${{ github.workspace }}/generator-jhipster
+      - uses: ./generator-jhipster/.github/actions/setup-generator-jhipster-jit
+        with:
+          generator-path: generator-jhipster
       - name: 'GENERATION: project'
-        run: $JHI_SCRIPTS/12-generate-project.sh --skip-jhipster-dependencies --skip-install ${{ matrix.extra-args }} ${{ matrix.new-extra-args }}
-      - name: 'GENERATION: jhipster info'
-        run: $JHI_SCRIPTS/14-jhipster-info.sh
+        run: jh generate-sample ${{ matrix.name }} --skip-jhipster-dependencies --skip-checks --no-insight
+        env:
+          JHI_FOLDER_APP: ${{ github.workspace }}/app
+          JHIPSTER_DEPENDENCIES_VERSION: ${{ matrix.jhipster-bom-cicd-version }}
+      - run: jh info
       #----------------------------------------------------------------------
       # Launch tests
       #----------------------------------------------------------------------
-      - name: 'PREPARE: npm install'
-        if: steps.compare.outputs.equals != 'true'
-        run: ${{ (matrix.workspaces == 'true' && 'npm') || './npmw' }} install
-        timeout-minutes: 7
+      - uses: jhipster/actions/build-jhipster-bom@v0
       - name: 'TESTS: backend'
         id: backend
         if: steps.compare.outputs.equals != 'true' && matrix.skip-backend-tests != 'true' && needs.build-matrix.outputs.server != 'false'
         run: npm run ci:backend:test
         continue-on-error: ${{matrix.continue-on-backend-tests-error || false}}
         timeout-minutes: 15
-      - name: 'TESTS: frontend'
-        if: false
-        run: npm run ci:frontend:test
-        timeout-minutes: 15
       - name: 'TESTS: packaging'
-        if: steps.compare.outputs.equals != 'true'
         run: npm run ci:e2e:package
         timeout-minutes: 12
       - name: 'TESTS: Start docker compose containers for e2e tests'
-        if: steps.compare.outputs.equals != 'true'
         run: npm run ci:e2e:prepare
         timeout-minutes: 5
       - name: 'E2E: Run'
         id: e2e
-        if: steps.compare.outputs.equals != 'true'
         run: npm run ci:e2e:run --if-present
         timeout-minutes: 15
       - name: 'BACKEND: Store failure logs'
@@ -194,13 +136,13 @@ jobs:
         if: always() && steps.backend.outcome == 'failure'
         with:
           name: log-${{ matrix.name }}
-          path: ${{ steps.setup.outputs.application-path }}/**/test-results/**/*.xml
+          path: ${{ github.workspace }}/app/**/test-results/**/*.xml
       - name: 'E2E: Store failure screenshots'
         uses: actions/upload-artifact@v4
         if: always() && steps.e2e.outcome == 'failure'
         with:
           name: screenshots-${{ matrix.name }}
-          path: ${{ steps.setup.outputs.application-path }}/**/cypress/screenshots
+          path: ${{ github.workspace }}/app/**/cypress/screenshots
       - name: Dump docker logs
         if: always()
         uses: jwalton/gh-docker-logs@v2
