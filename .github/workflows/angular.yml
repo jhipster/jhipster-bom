@@ -109,7 +109,7 @@ jobs:
         run: jh generate-sample ${{ matrix.name }} --skip-jhipster-dependencies --skip-checks --no-insight
         env:
           JHI_FOLDER_APP: ${{ github.workspace }}/app
-          JHIPSTER_DEPENDENCIES_VERSION: ${{ matrix.jhipster-bom-cicd-version }}
+          JHIPSTER_DEPENDENCIES_VERSION: '0.0.0-CICD'
       - run: jh info
       #----------------------------------------------------------------------
       # Launch tests
