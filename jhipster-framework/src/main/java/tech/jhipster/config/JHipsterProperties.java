@@ -34,7 +34,7 @@ import org.springframework.web.cors.CorsConfiguration;
  * <p> This class also load properties in the Spring Environment from the git.properties and META-INF/build-info.properties
  * files if they are found in the classpath.</p>
  */
-@ConfigurationProperties(prefix = "jhipster", ignoreUnknownFields = false)
+@ConfigurationProperties(value = "jhipster", ignoreUnknownFields = false)
 public class JHipsterProperties {
 
     private final Async async = new Async();
