@@ -5,7 +5,7 @@
     "install-jar": "./mvnw install -Dgpg.skip=true",
     "prettier:check": "prettier --check .",
     "prettier:format": "prettier --write .",
-    "replace-version": "test-integration/scripts/10-replace-version-jhipster.sh",
+    "replace-version": "mvn versions:set -DnewVersion=0.0.0-CICD -DgenerateBackupPoms=false",
     "test": "npm run prettier:check"
   },
   "devDependencies": {
