@@ -127,4 +127,5 @@ node_modules
 package-lock.json
 
 .mvn/.gradle-enterprise/gradle-enterprise-workspace-id
+.mvn/.develocity/develocity-workspace-id
 

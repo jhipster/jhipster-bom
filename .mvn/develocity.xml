@@ -1,0 +1,30 @@
+<develocity
+    xmlns="https://www.gradle.com/develocity-maven"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://www.gradle.com/develocity-maven https://www.gradle.com/schema/develocity-maven.xsd"
+>
+    <server>
+        <url>https://ge.jhipster.tech</url>
+    </server>
+    <buildScan>
+        <capture>
+            <fileFingerprints>true</fileFingerprints>
+        </capture>
+        <publishing>
+            <onlyIf>true</onlyIf>
+        </publishing>
+        <backgroundBuildScanUpload>#{env['CI'] == null}</backgroundBuildScanUpload>
+        <obfuscation>
+            <ipAddresses>#{{'0.0.0.0'}}</ipAddresses>
+        </obfuscation>
+    </buildScan>
+    <buildCache>
+        <local>
+            <enabled>true</enabled>
+        </local>
+        <remote>
+            <enabled>true</enabled>
+            <storeEnabled>#{isTrue(env['GITHUB_ACTIONS']) and isTrue(env['GRADLE_ENTERPRISE_ACCESS_KEY'])}</storeEnabled>
+        </remote>
+    </buildCache>
+</develocity>

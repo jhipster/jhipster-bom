@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/maven-v4_0_0.xsd https://www.gradle.com/develocity-maven-project https://www.gradle.com/schema/develocity-maven-project.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
@@ -421,9 +422,9 @@
                 </plugin>
                 <plugin>
                     <groupId>com.gradle</groupId>
-                    <artifactId>gradle-enterprise-maven-extension</artifactId>
+                    <artifactId>develocity-maven-extension</artifactId>
                     <configuration>
-                        <gradleEnterprise>
+                        <develocity xmlns="https://www.gradle.com/develocity-maven-project">
                             <normalization>
                                 <runtimeClassPath>
                                 <propertiesNormalizations>
@@ -574,7 +575,7 @@
                                 </executions>
                             </plugin>
                         </plugins>
-                        </gradleEnterprise>
+                        </develocity>
 
                     </configuration>
                 </plugin>
