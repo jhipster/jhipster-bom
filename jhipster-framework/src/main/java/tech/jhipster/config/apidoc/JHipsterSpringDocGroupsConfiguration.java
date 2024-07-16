@@ -130,14 +130,13 @@ public class JHipsterSpringDocGroupsConfiguration {
         log.debug("Initializing JHipster OpenApi management group");
         return GroupedOpenApi.builder()
             .group(MANAGEMENT_GROUP_NAME)
-            .addOpenApiCustomizer(
-                openApi ->
-                    openApi.info(
-                        new Info()
-                            .title(StringUtils.capitalize(appName) + " " + MANAGEMENT_TITLE_SUFFIX)
-                            .description(MANAGEMENT_DESCRIPTION)
-                            .version(properties.getVersion())
-                    )
+            .addOpenApiCustomizer(openApi ->
+                openApi.info(
+                    new Info()
+                        .title(StringUtils.capitalize(appName) + " " + MANAGEMENT_TITLE_SUFFIX)
+                        .description(MANAGEMENT_DESCRIPTION)
+                        .version(properties.getVersion())
+                )
             )
             .pathsToMatch(properties.getManagementIncludePattern())
             .build();
