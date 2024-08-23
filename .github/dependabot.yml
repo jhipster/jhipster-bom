@@ -25,6 +25,10 @@ updates:
     schedule:
       interval: 'daily'
     open-pull-requests-limit: 15
+    groups:
+      spring-boot:
+        patterns:
+          - 'spring-boot*'
 
   # Dependencies for GitHub Actions
   - package-ecosystem: 'github-actions'
