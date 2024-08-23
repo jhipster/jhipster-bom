@@ -28,7 +28,7 @@ updates:
     groups:
       spring-boot:
         patterns:
-          - 'spring-boot*'
+          - 'org.springframework.boot:spring-boot*'
 
   # Dependencies for GitHub Actions
   - package-ecosystem: 'github-actions'
