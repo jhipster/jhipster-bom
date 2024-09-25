@@ -1,4 +1,4 @@
-## JHipster BOM and server-side library
+## JHipster BOM e biblioteca do lado do servidor (server-side)
 
 [![Angular Build Status][github-actions-angular-image]][github-actions-url] [![React Build Status][github-actions-react-image]][github-actions-url] [![Vue Build Status][github-actions-vue-image]][github-actions-url] [![Maven Central][maven-image]][maven-url] [![Revved up by Develocity][develocity-badge]][develocity-url]
 
