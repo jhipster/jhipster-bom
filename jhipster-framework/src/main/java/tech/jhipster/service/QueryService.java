@@ -29,6 +29,7 @@ import java.util.Collection;
 import java.util.Set;
 import java.util.function.Function;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.lang.Nullable;
 import org.springframework.transaction.annotation.Transactional;
 import tech.jhipster.service.filter.Filter;
 import tech.jhipster.service.filter.RangeFilter;
@@ -51,7 +52,7 @@ public abstract class QueryService<ENTITY> {
      * @param <X>    The type of the attribute which is filtered.
      * @return a Specification
      */
-    protected <X> Specification<ENTITY> buildSpecification(Filter<X> filter, SingularAttribute<? super ENTITY, X> field) {
+    protected <X> Specification<ENTITY> buildSpecification(@Nullable Filter<X> filter, SingularAttribute<? super ENTITY, X> field) {
         return buildSpecification(filter, root -> root.get(field));
     }
 
@@ -64,8 +65,13 @@ public abstract class QueryService<ENTITY> {
      * @param <X>               The type of the attribute which is filtered.
      * @return a Specification
      */
-    protected <X> Specification<ENTITY> buildSpecification(Filter<X> filter, Function<Root<ENTITY>, Expression<X>> metaclassFunction) {
-        if (filter.getEquals() != null) {
+    protected <X> Specification<ENTITY> buildSpecification(
+        @Nullable Filter<X> filter,
+        Function<Root<ENTITY>, Expression<X>> metaclassFunction
+    ) {
+        if (filter == null) {
+            return null;
+        } else if (filter.getEquals() != null) {
             return equalsSpecification(metaclassFunction, filter.getEquals());
         } else if (filter.getIn() != null) {
             return valueIn(metaclassFunction, filter.getIn());
@@ -87,7 +93,10 @@ public abstract class QueryService<ENTITY> {
      * @param field  the JPA static metamodel representing the field.
      * @return a Specification
      */
-    protected Specification<ENTITY> buildStringSpecification(StringFilter filter, SingularAttribute<? super ENTITY, String> field) {
+    protected Specification<ENTITY> buildStringSpecification(
+        @Nullable StringFilter filter,
+        SingularAttribute<? super ENTITY, String> field
+    ) {
         return buildSpecification(filter, root -> root.get(field));
     }
 
@@ -99,8 +108,13 @@ public abstract class QueryService<ENTITY> {
      * @param metaclassFunction lambda, which based on a Root&lt;ENTITY&gt; returns Expression - basicaly picks a column
      * @return a Specification
      */
-    protected Specification<ENTITY> buildSpecification(StringFilter filter, Function<Root<ENTITY>, Expression<String>> metaclassFunction) {
-        if (filter.getEquals() != null) {
+    protected Specification<ENTITY> buildSpecification(
+        @Nullable StringFilter filter,
+        Function<Root<ENTITY>, Expression<String>> metaclassFunction
+    ) {
+        if (filter == null) {
+            return null;
+        } else if (filter.getEquals() != null) {
             return equalsSpecification(metaclassFunction, filter.getEquals());
         } else if (filter.getIn() != null) {
             return valueIn(metaclassFunction, filter.getIn());
@@ -129,7 +143,7 @@ public abstract class QueryService<ENTITY> {
      * @return a Specification
      */
     protected <X extends Comparable<? super X>> Specification<ENTITY> buildRangeSpecification(
-        RangeFilter<X> filter,
+        @Nullable RangeFilter<X> filter,
         SingularAttribute<? super ENTITY, X> field
     ) {
         return buildSpecification(filter, root -> root.get(field));
@@ -146,10 +160,12 @@ public abstract class QueryService<ENTITY> {
      * @return a Specification
      */
     protected <X extends Comparable<? super X>> Specification<ENTITY> buildSpecification(
-        RangeFilter<X> filter,
+        @Nullable RangeFilter<X> filter,
         Function<Root<ENTITY>, Expression<X>> metaclassFunction
     ) {
-        if (filter.getEquals() != null) {
+        if (filter == null) {
+            return null;
+        } else if (filter.getEquals() != null) {
             return equalsSpecification(metaclassFunction, filter.getEquals());
         } else if (filter.getIn() != null) {
             return valueIn(metaclassFunction, filter.getIn());
@@ -199,7 +215,7 @@ public abstract class QueryService<ENTITY> {
      * @return a Specification
      */
     protected <OTHER, X> Specification<ENTITY> buildReferringEntitySpecification(
-        Filter<X> filter,
+        @Nullable Filter<X> filter,
         SingularAttribute<? super ENTITY, OTHER> reference,
         SingularAttribute<? super OTHER, X> valueField
     ) {
@@ -225,7 +241,7 @@ public abstract class QueryService<ENTITY> {
      * @return a Specification
      */
     protected <OTHER, X> Specification<ENTITY> buildReferringEntitySpecification(
-        Filter<X> filter,
+        @Nullable Filter<X> filter,
         SetAttribute<ENTITY, OTHER> reference,
         SingularAttribute<OTHER, X> valueField
     ) {
@@ -259,7 +275,9 @@ public abstract class QueryService<ENTITY> {
         Function<Root<ENTITY>, SetJoin<MISC, OTHER>> functionToEntity,
         Function<SetJoin<MISC, OTHER>, Expression<X>> entityToColumn
     ) {
-        if (filter.getEquals() != null) {
+        if (filter == null) {
+            return null;
+        } else if (filter.getEquals() != null) {
             return equalsSpecification(functionToEntity.andThen(entityToColumn), filter.getEquals());
         } else if (filter.getSpecified() != null) {
             // Interestingly, 'functionToEntity' doesn't work, we need the longer lambda formula
@@ -289,7 +307,7 @@ public abstract class QueryService<ENTITY> {
      * @return a Specification
      */
     protected <OTHER, X extends Comparable<? super X>> Specification<ENTITY> buildReferringEntitySpecification(
-        RangeFilter<X> filter,
+        @Nullable RangeFilter<X> filter,
         SetAttribute<ENTITY, OTHER> reference,
         SingularAttribute<OTHER, X> valueField
     ) {
@@ -323,10 +341,13 @@ public abstract class QueryService<ENTITY> {
      * @return a Specification
      */
     protected <OTHER, MISC, X extends Comparable<? super X>> Specification<ENTITY> buildReferringEntitySpecification(
-        RangeFilter<X> filter,
+        @Nullable RangeFilter<X> filter,
         Function<Root<ENTITY>, SetJoin<MISC, OTHER>> functionToEntity,
         Function<SetJoin<MISC, OTHER>, Expression<X>> entityToColumn
     ) {
+        if (filter == null) {
+            return null;
+        }
         Function<Root<ENTITY>, Expression<X>> fused = functionToEntity.andThen(entityToColumn);
         if (filter.getEquals() != null) {
             return equalsSpecification(fused, filter.getEquals());
