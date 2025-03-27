@@ -7,7 +7,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static tech.jhipster.config.JHipsterConstants.SPRING_PROFILE_API_DOCS;
+import static tech.jhipster.config.constants.FeatureProfiles.SPRING_PROFILE_API_DOCS;
 
 import io.swagger.v3.oas.annotations.Operation;
 import org.junit.jupiter.api.Disabled;

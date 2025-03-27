@@ -19,8 +19,6 @@
 
 package tech.jhipster.config.apidoc;
 
-import static tech.jhipster.config.JHipsterConstants.SPRING_PROFILE_API_DOCS;
-
 import io.swagger.v3.oas.models.OpenAPI;
 import org.springdoc.core.configuration.SpringDocConfiguration;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
@@ -30,6 +28,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Profile;
 import tech.jhipster.config.JHipsterProperties;
+import tech.jhipster.config.constants.FeatureProfiles;
 
 /**
  * OpenAPI configuration.
@@ -40,7 +39,7 @@ import tech.jhipster.config.JHipsterProperties;
 @Configuration
 @ConditionalOnWebApplication
 @ConditionalOnClass(OpenAPI.class)
-@Profile(SPRING_PROFILE_API_DOCS)
+@Profile(FeatureProfiles.SPRING_PROFILE_API_DOCS)
 @AutoConfigureBefore(SpringDocConfiguration.class)
 @AutoConfigureAfter(JHipsterProperties.class)
 @Import(JHipsterSpringDocGroupsConfiguration.class)

@@ -27,10 +27,9 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
-import static tech.jhipster.config.JHipsterConstants.SPRING_PROFILE_DEVELOPMENT;
-import static tech.jhipster.config.JHipsterConstants.SPRING_PROFILE_HEROKU;
-import static tech.jhipster.config.JHipsterConstants.SPRING_PROFILE_NO_LIQUIBASE;
-import static tech.jhipster.config.JHipsterConstants.SPRING_PROFILE_PRODUCTION;
+import static tech.jhipster.config.constants.CloudProfiles.*;
+import static tech.jhipster.config.constants.EnvironmentProfiles.*;
+import static tech.jhipster.config.constants.FeatureProfiles.*;
 
 import java.sql.Connection;
 import java.sql.SQLException;
