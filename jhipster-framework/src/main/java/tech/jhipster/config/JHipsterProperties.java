@@ -1100,9 +1100,9 @@ public class JHipsterProperties {
 
             private boolean enabled = JHipsterDefaults.Gateway.RateLimiting.enabled;
 
-            private long limit = JHipsterDefaults.Gateway.RateLimiting.limit;
+            private long limit = JHipsterDefaults.Gateway.RateLimiting.requestsPerHourLimit;
 
-            private int durationInSeconds = JHipsterDefaults.Gateway.RateLimiting.durationInSeconds;
+            private int durationInSeconds = JHipsterDefaults.Gateway.RateLimiting.windowInSeconds;
 
             public boolean isEnabled() {
                 return enabled;

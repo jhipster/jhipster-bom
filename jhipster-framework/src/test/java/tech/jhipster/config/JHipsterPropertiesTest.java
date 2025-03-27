@@ -748,7 +748,7 @@ class JHipsterPropertiesTest {
     @Test
     void testGatewayRateLimitingLimit() {
         JHipsterProperties.Gateway.RateLimiting obj = properties.getGateway().getRateLimiting();
-        long val = JHipsterDefaults.Gateway.RateLimiting.limit;
+        long val = JHipsterDefaults.Gateway.RateLimiting.requestsPerHourLimit;
         assertThat(obj.getLimit()).isEqualTo(val);
         val++;
         obj.setLimit(val);
@@ -758,7 +758,7 @@ class JHipsterPropertiesTest {
     @Test
     void testGatewayRateLimitingDurationInSeconds() {
         JHipsterProperties.Gateway.RateLimiting obj = properties.getGateway().getRateLimiting();
-        int val = JHipsterDefaults.Gateway.RateLimiting.durationInSeconds;
+        int val = JHipsterDefaults.Gateway.RateLimiting.windowInSeconds;
         assertThat(obj.getDurationInSeconds()).isEqualTo(val);
         val++;
         obj.setDurationInSeconds(val);
