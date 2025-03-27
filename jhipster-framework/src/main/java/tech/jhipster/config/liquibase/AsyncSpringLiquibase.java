@@ -18,6 +18,7 @@
  */
 package tech.jhipster.config.liquibase;
 
+import static tech.jhipster.config.JHipsterConstants.*;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -29,10 +30,6 @@ import org.springframework.boot.autoconfigure.liquibase.DataSourceClosingSpringL
 import org.springframework.core.env.Environment;
 import org.springframework.core.env.Profiles;
 import org.springframework.util.StopWatch;
-
-import static tech.jhipster.config.constants.CloudProfiles.SPRING_PROFILE_HEROKU;
-import static tech.jhipster.config.constants.EnvironmentProfiles.SPRING_PROFILE_DEVELOPMENT;
-import static tech.jhipster.config.constants.FeatureProfiles.SPRING_PROFILE_NO_LIQUIBASE;
 
 /**
  * Specific liquibase.integration.spring.SpringLiquibase that will update the database asynchronously and close
