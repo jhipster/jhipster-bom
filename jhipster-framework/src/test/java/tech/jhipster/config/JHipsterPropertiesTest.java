@@ -478,7 +478,7 @@ class JHipsterPropertiesTest {
 
     @Test
     void testSecurityAuthenticationJwtSecret() {
-        JHipsterProperties.Security.Authentication.Jwt obj = properties.getSecurity().getAuthentication().getJwt();
+        JwtSecurityProperties obj = properties.getSecurity().getJwt();
         String val = JHipsterDefaults.Security.Authentication.Jwt.secret;
         assertThat(obj.getSecret()).isEqualTo(val);
         val = "1" + val;
@@ -488,9 +488,9 @@ class JHipsterPropertiesTest {
 
     @Test
     void testSecurityAuthenticationJwtBase64Secret() {
-        JHipsterProperties.Security.Authentication.Jwt obj = properties.getSecurity().getAuthentication().getJwt();
+        JwtSecurityProperties obj = properties.getSecurity().getJwt();
         String val = JHipsterDefaults.Security.Authentication.Jwt.base64Secret;
-        assertThat(obj.getSecret()).isEqualTo(val);
+        assertThat(obj.getBase64Secret()).isEqualTo(val);  // Fixed: was checking getSecret() instead of getBase64Secret()
         val = "1" + val;
         obj.setBase64Secret(val);
         assertThat(obj.getBase64Secret()).isEqualTo(val);
@@ -498,7 +498,7 @@ class JHipsterPropertiesTest {
 
     @Test
     void testSecurityAuthenticationJwtTokenValidityInSeconds() {
-        JHipsterProperties.Security.Authentication.Jwt obj = properties.getSecurity().getAuthentication().getJwt();
+        JwtSecurityProperties obj = properties.getSecurity().getJwt();
         long val = JHipsterDefaults.Security.Authentication.Jwt.tokenValidityInSeconds;
         assertThat(obj.getTokenValidityInSeconds()).isEqualTo(val);
         val++;
@@ -508,7 +508,7 @@ class JHipsterPropertiesTest {
 
     @Test
     void testSecurityAuthenticationJwtTokenValidityInSecondsForRememberMe() {
-        JHipsterProperties.Security.Authentication.Jwt obj = properties.getSecurity().getAuthentication().getJwt();
+        JwtSecurityProperties obj = properties.getSecurity().getJwt();
         long val = JHipsterDefaults.Security.Authentication.Jwt.tokenValidityInSecondsForRememberMe;
         assertThat(obj.getTokenValidityInSecondsForRememberMe()).isEqualTo(val);
         val++;

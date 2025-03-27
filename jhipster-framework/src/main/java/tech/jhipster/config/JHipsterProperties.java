@@ -26,6 +26,7 @@ import java.util.List;
 import java.util.Map;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.web.cors.CorsConfiguration;
+import tech.jhipster.config.JwtSecurityProperties;
 
 /**
  * Properties specific to JHipster.
@@ -699,16 +700,12 @@ public class JHipsterProperties {
     }
 
     public static class Security {
-
         private String contentSecurityPolicy = JHipsterDefaults.Security.contentSecurityPolicy;
-
         private final ClientAuthorization clientAuthorization = new ClientAuthorization();
-
         private final Authentication authentication = new Authentication();
-
         private final RememberMe rememberMe = new RememberMe();
-
         private final OAuth2 oauth2 = new OAuth2();
+        private final JwtSecurityProperties jwt = new JwtSecurityProperties();  // Replaces nested Jwt class
 
         public ClientAuthorization getClientAuthorization() {
             return clientAuthorization;
@@ -726,6 +723,10 @@ public class JHipsterProperties {
             return oauth2;
         }
 
+        public JwtSecurityProperties getJwt() {
+            return jwt;
+        }
+
         public String getContentSecurityPolicy() {
             return contentSecurityPolicy;
         }
@@ -735,13 +736,9 @@ public class JHipsterProperties {
         }
 
         public static class ClientAuthorization {
-
             private String accessTokenUri = JHipsterDefaults.Security.ClientAuthorization.accessTokenUri;
-
             private String tokenServiceId = JHipsterDefaults.Security.ClientAuthorization.tokenServiceId;
-
             private String clientId = JHipsterDefaults.Security.ClientAuthorization.clientId;
-
             private String clientSecret = JHipsterDefaults.Security.ClientAuthorization.clientSecret;
 
             public String getAccessTokenUri() {
@@ -778,60 +775,18 @@ public class JHipsterProperties {
         }
 
         public static class Authentication {
+            private final JwtSecurityProperties jwt;  // Now uses the extracted class
 
-            private final Jwt jwt = new Jwt();
-
-            public Jwt getJwt() {
-                return jwt;
+            public Authentication() {
+                this.jwt = new JwtSecurityProperties();
             }
 
-            public static class Jwt {
-
-                private String secret = JHipsterDefaults.Security.Authentication.Jwt.secret;
-
-                private String base64Secret = JHipsterDefaults.Security.Authentication.Jwt.base64Secret;
-
-                private long tokenValidityInSeconds = JHipsterDefaults.Security.Authentication.Jwt.tokenValidityInSeconds;
-
-                private long tokenValidityInSecondsForRememberMe =
-                    JHipsterDefaults.Security.Authentication.Jwt.tokenValidityInSecondsForRememberMe;
-
-                public String getSecret() {
-                    return secret;
-                }
-
-                public void setSecret(String secret) {
-                    this.secret = secret;
-                }
-
-                public String getBase64Secret() {
-                    return base64Secret;
-                }
-
-                public void setBase64Secret(String base64Secret) {
-                    this.base64Secret = base64Secret;
-                }
-
-                public long getTokenValidityInSeconds() {
-                    return tokenValidityInSeconds;
-                }
-
-                public void setTokenValidityInSeconds(long tokenValidityInSeconds) {
-                    this.tokenValidityInSeconds = tokenValidityInSeconds;
-                }
-
-                public long getTokenValidityInSecondsForRememberMe() {
-                    return tokenValidityInSecondsForRememberMe;
-                }
-
-                public void setTokenValidityInSecondsForRememberMe(long tokenValidityInSecondsForRememberMe) {
-                    this.tokenValidityInSecondsForRememberMe = tokenValidityInSecondsForRememberMe;
-                }
+            public JwtSecurityProperties getJwt() {
+                return jwt;
             }
         }
 
         public static class RememberMe {
-
             @NotNull
             private String key = JHipsterDefaults.Security.RememberMe.key;
 
@@ -845,7 +800,6 @@ public class JHipsterProperties {
         }
 
         public static class OAuth2 {
-
             private List<String> audience = new ArrayList<>();
 
             public List<String> getAudience() {
@@ -857,7 +811,6 @@ public class JHipsterProperties {
             }
         }
     }
-
     public static class ApiDocs {
 
         private String title = JHipsterDefaults.ApiDocs.title;
