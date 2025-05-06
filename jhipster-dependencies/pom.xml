@@ -81,7 +81,7 @@
             <!-- BOM imports last so we (could) selectively override dependencies above -->
             <dependency>
                 <groupId>org.springdoc</groupId>
-                <artifactId>springdoc-openapi</artifactId>
+                <artifactId>springdoc-openapi-bom</artifactId>
                 <version>${springdocs.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
