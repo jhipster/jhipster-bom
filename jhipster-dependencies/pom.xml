@@ -41,7 +41,7 @@
         <!-- Dependency versions -->
         <logstash-logback-encoder.version>8.1</logstash-logback-encoder.version>
         <spring-cloud.version>2024.0.1</spring-cloud.version>
-        <springdocs.version>2.8.6</springdocs.version>
+        <springdocs.version>2.8.8</springdocs.version>
     </properties>
 
     <dependencyManagement>
@@ -81,7 +81,7 @@
             <!-- BOM imports last so we (could) selectively override dependencies above -->
             <dependency>
                 <groupId>org.springdoc</groupId>
-                <artifactId>springdoc-openapi</artifactId>
+                <artifactId>springdoc-openapi-bom</artifactId>
                 <version>${springdocs.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
