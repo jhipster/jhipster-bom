@@ -173,8 +173,8 @@ public interface JHipsterDefaults {
 
         interface RateLimiting {
             boolean enabled = false;
-            long limit = 100_000L;
-            int durationInSeconds = 3_600;
+            long requestsPerHourLimit = 100_000L;
+            int windowInSeconds = 3_600;
         }
     }
 

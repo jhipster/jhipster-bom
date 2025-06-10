@@ -175,21 +175,35 @@ public class Filter<FIELD_TYPE> implements Serializable {
     /** {@inheritDoc} */
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
+        if (isSameInstance(o)) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!isValidFilterComparison(o)) {
             return false;
         }
-        Filter<?> filter = (Filter<?>) o;
-        return (
-            Objects.equals(equals, filter.equals) &&
-            Objects.equals(notEquals, filter.notEquals) &&
-            Objects.equals(specified, filter.specified) &&
-            Objects.equals(in, filter.in) &&
-            Objects.equals(notIn, filter.notIn)
-        );
+        return hasEqualFieldValues((Filter<?>) o);
     }
+
+    private boolean isSameInstance(Object o) {
+        return this == o;
+    }
+
+    private boolean isValidFilterComparison(Object o) {
+        return o != null && getClass() == o.getClass();
+    }
+
+    private boolean hasEqualFieldValues(Filter<?> other) {
+        return fieldsEqual(this.equals, other.equals) &&
+            fieldsEqual(this.notEquals, other.notEquals) &&
+            fieldsEqual(this.specified, other.specified) &&
+            fieldsEqual(this.in, other.in) &&
+            fieldsEqual(this.notIn, other.notIn);
+    }
+
+    private boolean fieldsEqual(Object field1, Object field2) {
+        return Objects.equals(field1, field2);
+    }
+
 
     /** {@inheritDoc} */
     @Override

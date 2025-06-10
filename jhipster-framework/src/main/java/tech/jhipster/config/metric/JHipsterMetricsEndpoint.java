@@ -65,16 +65,29 @@ public class JHipsterMetricsEndpoint {
 
     private Map<String, Number> processMetrics() {
         Map<String, Number> resultsProcess = new HashMap<>();
-
-        Collection<Gauge> gauges = Search.in(meterRegistry)
-            .name(s -> s.contains("cpu") || s.contains("system") || s.contains("process"))
-            .gauges();
-        gauges.forEach(gauge -> resultsProcess.put(gauge.getId().getName(), gauge.value()));
-
-        Collection<TimeGauge> timeGauges = Search.in(meterRegistry).name(s -> s.contains("process")).timeGauges();
-        timeGauges.forEach(gauge -> resultsProcess.put(gauge.getId().getName(), gauge.value(TimeUnit.MILLISECONDS)));
-
+        collectGaugeMetrics(resultsProcess);
+        collectTimeGaugeMetrics(resultsProcess);
         return resultsProcess;
+    }
+
+    private void collectGaugeMetrics(Map<String, Number> results) {
+        String[] gaugePrefixes = {"cpu", "system", "process"};
+        Collection<Gauge> gauges = findGaugesByPrefixes(gaugePrefixes);
+        gauges.forEach(gauge -> results.put(gauge.getId().getName(), gauge.value()));
+    }
+
+    private void collectTimeGaugeMetrics(Map<String, Number> results) {
+        Collection<TimeGauge> timeGauges = Search.in(meterRegistry)
+            .name(s -> s.contains("process"))
+            .timeGauges();
+        timeGauges.forEach(gauge ->
+            results.put(gauge.getId().getName(), gauge.value(TimeUnit.MILLISECONDS)));
+    }
+
+    private Collection<Gauge> findGaugesByPrefixes(String... prefixes) {
+        return Search.in(meterRegistry)
+            .name(s -> Arrays.stream(prefixes).anyMatch(s::contains))
+            .gauges();
     }
 
     private Map<String, Object> garbageCollectorMetrics() {

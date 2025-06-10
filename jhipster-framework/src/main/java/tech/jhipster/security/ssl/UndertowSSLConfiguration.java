@@ -20,11 +20,9 @@
 package tech.jhipster.security.ssl;
 
 import io.undertow.UndertowOptions;
-import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.web.embedded.undertow.UndertowServletWebServerFactory;
 import org.springframework.context.annotation.Configuration;
 
@@ -43,27 +41,20 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ConditionalOnBean(UndertowServletWebServerFactory.class)
 @ConditionalOnClass(UndertowOptions.class)
-@ConditionalOnProperty({ "server.ssl.ciphers", "server.ssl.key-store" })
-public class UndertowSSLConfiguration {
+public class UndertowSSLConfiguration extends BaseSSLConfiguration {
 
     private final UndertowServletWebServerFactory factory;
 
-    private final Logger log = LoggerFactory.getLogger(UndertowSSLConfiguration.class);
-
-    /**
-     * <p>Constructor for UndertowSSLConfiguration.</p>
-     *
-     * @param undertowServletWebServerFactory a {@link org.springframework.boot.web.embedded.undertow.UndertowServletWebServerFactory} object.
-     */
     public UndertowSSLConfiguration(UndertowServletWebServerFactory undertowServletWebServerFactory) {
-        factory = undertowServletWebServerFactory;
-
-        configuringUserCipherSuiteOrder();
+        super(LoggerFactory.getLogger(UndertowSSLConfiguration.class));
+        this.factory = undertowServletWebServerFactory;
+        configureCipherSuiteOrder();
     }
 
-    private void configuringUserCipherSuiteOrder() {
-        log.info("Configuring Undertow");
-        log.info("Setting user cipher suite order to true");
-        factory.addBuilderCustomizers(builder -> builder.setSocketOption(UndertowOptions.SSL_USER_CIPHER_SUITES_ORDER, Boolean.TRUE));
+    @Override
+    protected void applyCipherSuiteConfiguration() {
+        factory.addBuilderCustomizers(builder ->
+            builder.setSocketOption(UndertowOptions.SSL_USER_CIPHER_SUITES_ORDER, Boolean.TRUE)
+        );
     }
 }
