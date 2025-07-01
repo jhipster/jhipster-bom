@@ -182,7 +182,11 @@ public class ConditionBuilder {
             allFilters.add(
                 Conditions.in(
                     column,
-                    generalData.getIn().stream().map(eachIn -> SQL.literalOf(converterFunction.apply(eachIn))).collect(Collectors.toList())
+                    generalData
+                        .getIn()
+                        .stream()
+                        .map(eachIn -> SQL.literalOf(converterFunction.apply(eachIn)))
+                        .collect(Collectors.toList())
                 )
             );
         }

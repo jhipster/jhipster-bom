@@ -71,7 +71,9 @@ public class JHipsterMetricsEndpoint {
             .gauges();
         gauges.forEach(gauge -> resultsProcess.put(gauge.getId().getName(), gauge.value()));
 
-        Collection<TimeGauge> timeGauges = Search.in(meterRegistry).name(s -> s.contains("process")).timeGauges();
+        Collection<TimeGauge> timeGauges = Search.in(meterRegistry)
+            .name(s -> s.contains("process"))
+            .timeGauges();
         timeGauges.forEach(gauge -> resultsProcess.put(gauge.getId().getName(), gauge.value(TimeUnit.MILLISECONDS)));
 
         return resultsProcess;
@@ -80,7 +82,9 @@ public class JHipsterMetricsEndpoint {
     private Map<String, Object> garbageCollectorMetrics() {
         Map<String, Object> resultsGarbageCollector = new HashMap<>();
 
-        Collection<Timer> timers = Search.in(meterRegistry).name(s -> s.contains("jvm.gc.pause")).timers();
+        Collection<Timer> timers = Search.in(meterRegistry)
+            .name(s -> s.contains("jvm.gc.pause"))
+            .timers();
         timers.forEach(timer -> {
             String key = timer.getId().getName();
 
@@ -98,13 +102,19 @@ public class JHipsterMetricsEndpoint {
             resultsGarbageCollector.putIfAbsent(key, gcPauseResults);
         });
 
-        Collection<Gauge> gauges = Search.in(meterRegistry).name(s -> s.contains("jvm.gc") && !s.contains("jvm.gc.pause")).gauges();
+        Collection<Gauge> gauges = Search.in(meterRegistry)
+            .name(s -> s.contains("jvm.gc") && !s.contains("jvm.gc.pause"))
+            .gauges();
         gauges.forEach(gauge -> resultsGarbageCollector.put(gauge.getId().getName(), gauge.value()));
 
-        Collection<Counter> counters = Search.in(meterRegistry).name(s -> s.contains("jvm.gc") && !s.contains("jvm.gc.pause")).counters();
+        Collection<Counter> counters = Search.in(meterRegistry)
+            .name(s -> s.contains("jvm.gc") && !s.contains("jvm.gc.pause"))
+            .counters();
         counters.forEach(counter -> resultsGarbageCollector.put(counter.getId().getName(), counter.count()));
 
-        gauges = Search.in(meterRegistry).name(s -> s.contains("jvm.classes.loaded")).gauges();
+        gauges = Search.in(meterRegistry)
+            .name(s -> s.contains("jvm.classes.loaded"))
+            .gauges();
         Double classesLoaded = gauges.stream().mapToDouble(Gauge::value).sum();
         resultsGarbageCollector.put("classesLoaded", classesLoaded);
 
@@ -120,7 +130,9 @@ public class JHipsterMetricsEndpoint {
     private Map<String, Map<String, Number>> databaseMetrics() {
         Map<String, Map<String, Number>> resultsDatabase = new HashMap<>();
 
-        Collection<Timer> timers = Search.in(meterRegistry).name(s -> s.contains("hikari")).timers();
+        Collection<Timer> timers = Search.in(meterRegistry)
+            .name(s -> s.contains("hikari"))
+            .timers();
         timers.forEach(timer -> {
             String key = timer.getId().getName().substring(timer.getId().getName().lastIndexOf('.') + 1);
 
@@ -136,7 +148,9 @@ public class JHipsterMetricsEndpoint {
             }
         });
 
-        Collection<Gauge> gauges = Search.in(meterRegistry).name(s -> s.contains("hikari")).gauges();
+        Collection<Gauge> gauges = Search.in(meterRegistry)
+            .name(s -> s.contains("hikari"))
+            .gauges();
         gauges.forEach(gauge -> {
             String key = gauge.getId().getName().substring(gauge.getId().getName().lastIndexOf('.') + 1);
             resultsDatabase.putIfAbsent(key, new HashMap<>());
@@ -150,7 +164,10 @@ public class JHipsterMetricsEndpoint {
         Collection<String> crudOperation = Arrays.asList("GET", "POST", "PUT", "DELETE");
         Collection<Timer> timers = meterRegistry.find("http.server.requests").timers();
 
-        Set<String> uris = timers.stream().map(timer -> timer.getId().getTag("uri")).collect(Collectors.toSet());
+        Set<String> uris = timers
+            .stream()
+            .map(timer -> timer.getId().getTag("uri"))
+            .collect(Collectors.toSet());
         Map<String, Map<?, ?>> resultsHttpPerUri = new HashMap<>();
 
         uris.forEach(uri -> {
@@ -166,8 +183,15 @@ public class JHipsterMetricsEndpoint {
                 long count = httpTimersStream.stream().mapToLong(Timer::count).sum();
 
                 if (count != 0) {
-                    double max = httpTimersStream.stream().mapToDouble(x -> x.totalTime(TimeUnit.MILLISECONDS)).max().orElse(0);
-                    double totalTime = httpTimersStream.stream().mapToDouble(x -> x.totalTime(TimeUnit.MILLISECONDS)).sum();
+                    double max = httpTimersStream
+                        .stream()
+                        .mapToDouble(x -> x.totalTime(TimeUnit.MILLISECONDS))
+                        .max()
+                        .orElse(0);
+                    double totalTime = httpTimersStream
+                        .stream()
+                        .mapToDouble(x -> x.totalTime(TimeUnit.MILLISECONDS))
+                        .sum();
 
                     resultsPerUriPerCrudOperation.put("count", count);
                     resultsPerUriPerCrudOperation.put("max", max);
@@ -203,7 +227,9 @@ public class JHipsterMetricsEndpoint {
             }
         });
 
-        Collection<Gauge> gauges = Search.in(meterRegistry).name(s -> s.contains("cache")).gauges();
+        Collection<Gauge> gauges = Search.in(meterRegistry)
+            .name(s -> s.contains("cache"))
+            .gauges();
         gauges.forEach(gauge -> {
             String key = gauge.getId().getName();
             String name = gauge.getId().getTag("name");
@@ -237,7 +263,9 @@ public class JHipsterMetricsEndpoint {
             resultsJvm.get(key).put("max", gauge.value());
         });
 
-        gauges = Search.in(meterRegistry).name(s -> s.contains("jvm.memory.committed")).gauges();
+        gauges = Search.in(meterRegistry)
+            .name(s -> s.contains("jvm.memory.committed"))
+            .gauges();
         gauges.forEach(gauge -> {
             String key = gauge.getId().getTag("id");
             resultsJvm.get(key).put("committed", gauge.value());
@@ -260,8 +288,15 @@ public class JHipsterMetricsEndpoint {
 
             Collection<Timer> httpTimersStream = meterRegistry.find("http.server.requests").tag("status", code).timers();
             long count = httpTimersStream.stream().mapToLong(Timer::count).sum();
-            double max = httpTimersStream.stream().mapToDouble(x -> x.max(TimeUnit.MILLISECONDS)).max().orElse(0);
-            double totalTime = httpTimersStream.stream().mapToDouble(x -> x.totalTime(TimeUnit.MILLISECONDS)).sum();
+            double max = httpTimersStream
+                .stream()
+                .mapToDouble(x -> x.max(TimeUnit.MILLISECONDS))
+                .max()
+                .orElse(0);
+            double totalTime = httpTimersStream
+                .stream()
+                .mapToDouble(x -> x.totalTime(TimeUnit.MILLISECONDS))
+                .sum();
 
             resultsPerCode.put("count", count);
             resultsPerCode.put("max", max);
