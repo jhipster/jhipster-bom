@@ -46,7 +46,7 @@ jobs:
       workflow-vue: ${{ steps.build.outputs.workflow-vue }}
     steps:
       - name: 'SETUP: Checkout generator-jhipster'
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           repository: 'jhipster/generator-jhipster'
       - name: 'Build matrix'
@@ -80,11 +80,11 @@ jobs:
       # Install all tools and check configuration
       #----------------------------------------------------------------------
       - name: 'SETUP: Checkout jhipster-bom'
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           path: jhipster-bom
       - name: 'SETUP: Checkout generator-jhipster'
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           repository: 'jhipster/generator-jhipster'
           path: generator-jhipster
