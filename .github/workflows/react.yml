@@ -33,6 +33,8 @@ on:
     types: [closed, opened, synchronize, reopened]
     branches:
       - '*'
+env:
+  FORCE_COLOR: 2
 jobs:
   build-matrix:
     runs-on: ubuntu-latest
@@ -49,14 +51,14 @@ jobs:
         uses: actions/checkout@v5
         with:
           repository: 'jhipster/generator-jhipster'
+          path: generator-jhipster
+      - run: npm ci --ignore-scripts
+        working-directory: ${{ github.workspace }}/generator-jhipster
       - name: 'Build matrix'
         id: build
-        uses: ./.github/actions/build-matrix
-        with:
-          skip-changes-detection: true
-          workflow-samples-file: react
+        run: generator-jhipster/bin/jhipster.cjs github-build-matrix react
   applications:
-    name: ${{ matrix.name }} (n${{ matrix.node }}/j${{ matrix.java }})
+    name: ${{ matrix.job-name }}
     runs-on: ${{ matrix.os || 'ubuntu-latest' }}
     needs: build-matrix
     defaults:
@@ -69,12 +71,12 @@ jobs:
       !contains(github.event.pull_request.title, '[ci skip]') &&
       github.event.action != 'closed' &&
       !contains(github.event.pull_request.labels.*.name, 'pr: skip-ci') &&
-      needs.build-matrix.outputs.workflow-react == 'true'
+      fromJson(needs.build-matrix.outputs.matrix).include[0] != null
     timeout-minutes: 50
     strategy:
       fail-fast: false
       # Matrix available at https://github.com/jhipster/generator-jhipster/tree/main/test-integration/workflow-samples/
-      matrix: ${{fromJson(needs.build-matrix.outputs.matrix)}}
+      matrix: ${{ fromJson(needs.build-matrix.outputs.matrix) }}
     steps:
       #----------------------------------------------------------------------
       # Install all tools and check configuration
@@ -89,35 +91,32 @@ jobs:
           repository: 'jhipster/generator-jhipster'
           path: generator-jhipster
           fetch-depth: 2
-          ref: main
       - uses: jhipster/actions/setup-runner@v0
         with:
-          node-version: ${{ matrix.node }}
-          java-version: ${{ matrix.java }}
+          node-version: ${{ matrix.node-version }}
+          java-version: ${{ matrix.java-version }}
           npm-version: ${{ matrix.npm-version }}
           maven-cache: true
           gradle-cache: ${{ matrix.gradle-cache }}
+          binary-dir: ${{ github.workspace }}/generator-jhipster/bin
       #----------------------------------------------------------------------
       # Install JHipster and generate project+entities
       #----------------------------------------------------------------------
       - run: npm ci --ignore-scripts
         working-directory: ${{ github.workspace }}/generator-jhipster
-      - uses: ./generator-jhipster/.github/actions/setup-generator-jhipster-jit
-        with:
-          generator-path: generator-jhipster
       - name: 'GENERATION: project'
-        run: jh generate-sample ${{ matrix.name }} --skip-jhipster-dependencies --skip-checks --no-insight
+        run: jhipster.cjs generate-sample ${{ matrix.sample }} --skip-jhipster-dependencies --skip-checks --no-insight
         env:
           JHI_FOLDER_APP: ${{ github.workspace }}/app
           JHIPSTER_DEPENDENCIES_VERSION: '0.0.0-CICD'
-      - run: jh info
+          JHI_JWT_SECRET_KEY: ${{ matrix.jwt-secret-key }}
+      - run: jhipster.cjs info
       #----------------------------------------------------------------------
       # Launch tests
       #----------------------------------------------------------------------
       - uses: jhipster/actions/build-jhipster-bom@v0
       - name: 'TESTS: backend'
         id: backend
-        if: steps.compare.outputs.equals != 'true' && matrix.skip-backend-tests != 'true' && needs.build-matrix.outputs.server != 'false'
         run: npm run ci:backend:test
         continue-on-error: ${{matrix.continue-on-backend-tests-error || false}}
         timeout-minutes: 15
@@ -135,13 +134,13 @@ jobs:
         uses: actions/upload-artifact@v4
         if: always() && steps.backend.outcome == 'failure'
         with:
-          name: log-${{ matrix.name }}
+          name: log-${{ matrix.sample }}
           path: ${{ github.workspace }}/app/**/test-results/**/*.xml
       - name: 'E2E: Store failure screenshots'
         uses: actions/upload-artifact@v4
         if: always() && steps.e2e.outcome == 'failure'
         with:
-          name: screenshots-${{ matrix.name }}
+          name: screenshots-${{ matrix.sample }}
           path: ${{ github.workspace }}/app/**/cypress/screenshots
       - name: Dump docker logs
         if: always()
