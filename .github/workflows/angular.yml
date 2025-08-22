@@ -51,10 +51,11 @@ jobs:
         uses: actions/checkout@v5
         with:
           repository: 'jhipster/generator-jhipster'
+          path: generator-jhipster
       - run: npm ci --ignore-scripts
       - name: 'Build matrix'
         id: build
-        run: bin/jhipster.cjs github-build-matrix angular
+        run: generator-jhipster/bin/jhipster.cjs github-build-matrix angular
   applications:
     name: ${{ matrix.job-name }}
     runs-on: ${{ matrix.os || 'ubuntu-latest' }}
