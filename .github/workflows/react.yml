@@ -91,7 +91,7 @@ jobs:
           repository: 'jhipster/generator-jhipster'
           path: generator-jhipster
           fetch-depth: 2
-      - uses: jhipster/actions/setup-runner@v0
+      - uses: jhipster/actions/setup-runner@v1
         with:
           node-version: ${{ matrix.node-version }}
           java-version: ${{ matrix.java-version }}
@@ -114,7 +114,7 @@ jobs:
       #----------------------------------------------------------------------
       # Launch tests
       #----------------------------------------------------------------------
-      - uses: jhipster/actions/build-jhipster-bom@v0
+      - uses: jhipster/actions/build-jhipster-bom@v1
       - name: 'TESTS: backend'
         id: backend
         run: npm run ci:backend:test
