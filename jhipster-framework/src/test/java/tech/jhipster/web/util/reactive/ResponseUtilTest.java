@@ -33,7 +33,7 @@ class ResponseUtilTest {
         ResponseEntity<Integer> response = ResponseUtil.wrapOrNotFound(monoYes).block();
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(response.getBody()).isEqualTo(42);
-        assertThat(response.getHeaders()).isEmpty();
+        assertThat(response.getHeaders().size()).isEqualTo(0);
     }
 
     @Test
@@ -47,7 +47,7 @@ class ResponseUtilTest {
         ResponseEntity<Integer> response = ResponseUtil.wrapOrNotFound(monoYes, headers).block();
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(response.getBody()).isEqualTo(42);
-        assertThat(response.getHeaders()).hasSize(1);
+        assertThat(response.getHeaders().size()).isEqualTo(1);
         assertThat(response.getHeaders().get(HEADER_NAME)).hasSize(1);
         assertThat(response.getHeaders().get(HEADER_NAME).get(0)).isEqualTo(HEADER_VALUE);
     }
