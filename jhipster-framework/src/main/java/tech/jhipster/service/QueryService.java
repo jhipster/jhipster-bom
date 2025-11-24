@@ -171,7 +171,7 @@ public abstract class QueryService<ENTITY> {
             return valueIn(metaclassFunction, filter.getIn());
         }
 
-        Specification<ENTITY> result = Specification.where((Specification<ENTITY>) null);
+        Specification<ENTITY> result = Specification.unrestricted();
         if (filter.getSpecified() != null) {
             result = result.and(byFieldSpecified(metaclassFunction, filter.getSpecified()));
         }
@@ -354,7 +354,7 @@ public abstract class QueryService<ENTITY> {
         } else if (filter.getIn() != null) {
             return valueIn(fused, filter.getIn());
         }
-        Specification<ENTITY> result = Specification.where((Specification<ENTITY>) null);
+        Specification<ENTITY> result = Specification.unrestricted();
         if (filter.getSpecified() != null) {
             // Interestingly, 'functionToEntity' doesn't work, we need the longer lambda formula
             result = result.and(byFieldSpecified(functionToEntity::apply, filter.getSpecified()));
