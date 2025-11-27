@@ -41,7 +41,7 @@ public class BaseEntityQueryService extends QueryService<BaseEntity> {
     }
 
     public Specification<BaseEntity> createSpecification(BaseEntityCriteria criteria) {
-        Specification<BaseEntity> specification = Specification.where(null);
+        Specification<BaseEntity> specification = Specification.unrestricted();
         if (criteria != null) {
             if (criteria.getId() != null) {
                 specification = specification.and(buildSpecification(criteria.getId(), BaseEntity_.id));

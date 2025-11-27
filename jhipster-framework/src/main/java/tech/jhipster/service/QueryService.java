@@ -70,7 +70,7 @@ public abstract class QueryService<ENTITY> {
         Function<Root<ENTITY>, Expression<X>> metaclassFunction
     ) {
         if (filter == null) {
-            return null;
+            return Specification.unrestricted();
         } else if (filter.getEquals() != null) {
             return equalsSpecification(metaclassFunction, filter.getEquals());
         } else if (filter.getIn() != null) {
@@ -82,7 +82,7 @@ public abstract class QueryService<ENTITY> {
         } else if (filter.getSpecified() != null) {
             return byFieldSpecified(metaclassFunction, filter.getSpecified());
         }
-        return null;
+        return Specification.unrestricted();
     }
 
     /**
@@ -113,7 +113,7 @@ public abstract class QueryService<ENTITY> {
         Function<Root<ENTITY>, Expression<String>> metaclassFunction
     ) {
         if (filter == null) {
-            return null;
+            return Specification.unrestricted();
         } else if (filter.getEquals() != null) {
             return equalsSpecification(metaclassFunction, filter.getEquals());
         } else if (filter.getIn() != null) {
@@ -129,7 +129,7 @@ public abstract class QueryService<ENTITY> {
         } else if (filter.getSpecified() != null) {
             return byFieldSpecified(metaclassFunction, filter.getSpecified());
         }
-        return null;
+        return Specification.unrestricted();
     }
 
     /**
@@ -164,14 +164,14 @@ public abstract class QueryService<ENTITY> {
         Function<Root<ENTITY>, Expression<X>> metaclassFunction
     ) {
         if (filter == null) {
-            return null;
+            return Specification.unrestricted();
         } else if (filter.getEquals() != null) {
             return equalsSpecification(metaclassFunction, filter.getEquals());
         } else if (filter.getIn() != null) {
             return valueIn(metaclassFunction, filter.getIn());
         }
 
-        Specification<ENTITY> result = Specification.where(null);
+        Specification<ENTITY> result = Specification.unrestricted();
         if (filter.getSpecified() != null) {
             result = result.and(byFieldSpecified(metaclassFunction, filter.getSpecified()));
         }
@@ -276,14 +276,14 @@ public abstract class QueryService<ENTITY> {
         Function<SetJoin<MISC, OTHER>, Expression<X>> entityToColumn
     ) {
         if (filter == null) {
-            return null;
+            return Specification.unrestricted();
         } else if (filter.getEquals() != null) {
             return equalsSpecification(functionToEntity.andThen(entityToColumn), filter.getEquals());
         } else if (filter.getSpecified() != null) {
             // Interestingly, 'functionToEntity' doesn't work, we need the longer lambda formula
             return byFieldSpecified(functionToEntity::apply, filter.getSpecified());
         }
-        return null;
+        return Specification.unrestricted();
     }
 
     /**
@@ -346,7 +346,7 @@ public abstract class QueryService<ENTITY> {
         Function<SetJoin<MISC, OTHER>, Expression<X>> entityToColumn
     ) {
         if (filter == null) {
-            return null;
+            return Specification.unrestricted();
         }
         Function<Root<ENTITY>, Expression<X>> fused = functionToEntity.andThen(entityToColumn);
         if (filter.getEquals() != null) {
@@ -354,7 +354,7 @@ public abstract class QueryService<ENTITY> {
         } else if (filter.getIn() != null) {
             return valueIn(fused, filter.getIn());
         }
-        Specification<ENTITY> result = Specification.where(null);
+        Specification<ENTITY> result = Specification.unrestricted();
         if (filter.getSpecified() != null) {
             // Interestingly, 'functionToEntity' doesn't work, we need the longer lambda formula
             result = result.and(byFieldSpecified(functionToEntity::apply, filter.getSpecified()));
