@@ -38,7 +38,7 @@ public class ChildEntityQueryService extends QueryService<ChildEntity> {
     }
 
     public Specification<ChildEntity> createSpecification(ChildEntityCriteria criteria) {
-        Specification<ChildEntity> specification = Specification.where(null);
+        Specification<ChildEntity> specification = Specification.unrestricted();
         if (criteria.getParentId() != null) {
             specification = specification.and(
                 buildReferringEntitySpecification(criteria.getParentId(), ChildEntity_.parent, ParentEntity_.id)
