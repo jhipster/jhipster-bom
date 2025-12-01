@@ -6,7 +6,6 @@ Full documentation and information is available on our website at [https://www.j
 
 This project is used by the JHipster generator. This is the Bill of Materials and server-side library:
 
-- jhipster-dependencies
 - jhipster-framework
 
 If the current version is SNAPSHOT then to use this SNAPSHOT version:
