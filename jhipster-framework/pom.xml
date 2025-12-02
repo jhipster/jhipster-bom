@@ -4,9 +4,9 @@
 
     <parent>
         <groupId>tech.jhipster</groupId>
-        <artifactId>jhipster-dependencies</artifactId>
+        <artifactId>jhipster-parent</artifactId>
         <version>8.11.1-SNAPSHOT</version>
-        <relativePath>../jhipster-dependencies/pom.xml</relativePath>
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
     <artifactId>jhipster-framework</artifactId>
