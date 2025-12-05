@@ -12,7 +12,7 @@
 
     <groupId>tech.jhipster</groupId>
     <artifactId>jhipster-parent</artifactId>
-    <version>8.11.1-SNAPSHOT</version>
+    <version>9.0.0-beta.0</version>
     <packaging>pom</packaging>
     <name>JHipster server-side parent POM</name>
     <url>https://github.com/jhipster/jhipster-bom/</url>
@@ -41,7 +41,7 @@
 
     <properties>
         <!-- The jhipster-framework version should be the same as the artifact version above -->
-        <jhipster-framework.version>8.11.1-SNAPSHOT</jhipster-framework.version>
+        <jhipster-framework.version>9.0.0-beta.0</jhipster-framework.version>
         <!-- The spring-boot version should be the same as the parent version above -->
         <spring-boot.version>3.5.8</spring-boot.version>
 
