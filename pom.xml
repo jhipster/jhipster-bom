@@ -55,6 +55,7 @@
         <maven.compiler.target>${java.version}</maven.compiler.target>
 
         <!-- Plugin versions -->
+        <central-publishing-maven-plugin.version>0.9.0</central-publishing-maven-plugin.version>
         <git-commit-id-maven-plugin.version>9.0.2</git-commit-id-maven-plugin.version>
         <jacoco-maven-plugin.version>0.8.14</jacoco-maven-plugin.version>
         <logstash-logback-encoder.version>9.0</logstash-logback-encoder.version>
@@ -66,7 +67,6 @@
         <maven-javadoc-plugin.version>3.12.0</maven-javadoc-plugin.version>
         <maven-source-plugin.version>3.4.0</maven-source-plugin.version>
         <maven-surefire-plugin.version>3.5.4</maven-surefire-plugin.version>
-        <nexus-staging-maven-plugin.version>1.7.0</nexus-staging-maven-plugin.version>
         <properties-maven-plugin.version>1.2.1</properties-maven-plugin.version>
         <sonar-maven-plugin.version>5.4.0.6343</sonar-maven-plugin.version>
         <springdocs.version>2.8.14</springdocs.version>
@@ -193,8 +193,8 @@
                 <artifactId>maven-enforcer-plugin</artifactId>
             </plugin>
             <plugin>
-                <groupId>org.sonatype.plugins</groupId>
-                <artifactId>nexus-staging-maven-plugin</artifactId>
+                <groupId>org.sonatype.central</groupId>
+                <artifactId>central-publishing-maven-plugin</artifactId>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -313,7 +313,7 @@
                             <id>enforce-dependencyConvergence</id>
                             <configuration>
                                 <rules>
-                                    <DependencyConvergence />
+                                    <DependencyConvergence/>
                                 </rules>
                                 <fail>false</fail>
                             </configuration>
@@ -325,11 +325,15 @@
                     <configuration>
                         <rules>
                             <requireMavenVersion>
-                                <message>You are running an older version of Maven. JHipster requires at least Maven ${maven.version}</message>
+                                <message>You are running an older version of Maven. JHipster requires at least Maven
+                                    ${maven.version}
+                                </message>
                                 <version>[${maven.version},)</version>
                             </requireMavenVersion>
                             <requireJavaVersion>
-                                <message>You are running an older version of Java. JHipster requires at least JDK ${java.version}</message>
+                                <message>You are running an older version of Java. JHipster requires at least JDK
+                                    ${java.version}
+                                </message>
                                 <version>[${java.version}.0,)</version>
                             </requireJavaVersion>
                         </rules>
@@ -414,14 +418,14 @@
                     </executions>
                 </plugin>
                 <plugin>
-                    <groupId>org.sonatype.plugins</groupId>
-                    <artifactId>nexus-staging-maven-plugin</artifactId>
-                    <version>${nexus-staging-maven-plugin.version}</version>
+                    <groupId>org.sonatype.central</groupId>
+                    <artifactId>central-publishing-maven-plugin</artifactId>
+                    <version>${central-publishing-maven-plugin.version}</version>
                     <extensions>true</extensions>
                     <configuration>
-                        <serverId>ossrh</serverId>
-                        <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-                        <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                        <publishingServerId>central</publishingServerId>
+                        <autoPublish>true</autoPublish>
+                        <waitUntil>published</waitUntil>
                     </configuration>
                 </plugin>
                 <plugin>
@@ -459,159 +463,160 @@
                         <develocity xmlns="https://www.gradle.com/develocity-maven-project">
                             <normalization>
                                 <runtimeClassPath>
-                                <propertiesNormalizations>
-                                    <propertiesNormalization>
-                                    <path>**/git.properties</path>
-                                    <ignoredProperties>
-                                        <ignore>jhipster-lib.git.build.time</ignore>
-                                    </ignoredProperties>
-                                    </propertiesNormalization>
-                                </propertiesNormalizations>
+                                    <propertiesNormalizations>
+                                        <propertiesNormalization>
+                                            <path>**/git.properties</path>
+                                            <ignoredProperties>
+                                                <ignore>jhipster-lib.git.build.time</ignore>
+                                            </ignoredProperties>
+                                        </propertiesNormalization>
+                                    </propertiesNormalizations>
                                 </runtimeClassPath>
                             </normalization>
                             <plugins>
-                            <plugin>
-                                <groupId>org.apache.maven.plugins</groupId>
-                                <artifactId>maven-enforcer-plugin</artifactId>
-                                <executions>
-                                    <execution>
-                                        <id>enforce-versions</id>
-                                        <outputs>
-                                            <cacheableBecause>version check should be cached</cacheableBecause>
-                                        </outputs>
-                                        <inputs>
-                                            <properties>
-                                                <property>
-                                                    <name>fail</name>
-                                                </property>
-                                                <property>
-                                                    <name>failFast</name>
-                                                </property>
-                                                <property>
-                                                    <name>failIfNoRules</name>
-                                                </property>
-                                                <property>
-                                                    <name>rulesToSkip</name>
-                                                </property>
-                                                <property>
-                                                    <name>rulesToExecute</name>
-                                                </property>
-                                                <property>
-                                                    <name>rules</name>
-                                                </property>
-                                                <property>
-                                                    <name>skip</name>
-                                                </property>
-                                            </properties>
+                                <plugin>
+                                    <groupId>org.apache.maven.plugins</groupId>
+                                    <artifactId>maven-enforcer-plugin</artifactId>
+                                    <executions>
+                                        <execution>
+                                            <id>enforce-versions</id>
+                                            <outputs>
+                                                <cacheableBecause>version check should be cached</cacheableBecause>
+                                            </outputs>
+                                            <inputs>
+                                                <properties>
+                                                    <property>
+                                                        <name>fail</name>
+                                                    </property>
+                                                    <property>
+                                                        <name>failFast</name>
+                                                    </property>
+                                                    <property>
+                                                        <name>failIfNoRules</name>
+                                                    </property>
+                                                    <property>
+                                                        <name>rulesToSkip</name>
+                                                    </property>
+                                                    <property>
+                                                        <name>rulesToExecute</name>
+                                                    </property>
+                                                    <property>
+                                                        <name>rules</name>
+                                                    </property>
+                                                    <property>
+                                                        <name>skip</name>
+                                                    </property>
+                                                </properties>
                                                 <ignoredProperties>
-                                                <ignore>ignoreCache</ignore>
-                                                <ignore>mojoExecution</ignore>
-                                                <ignore>session</ignore>
-                                            </ignoredProperties>
-                                        </inputs>
-                                         <nestedProperties>
-                                            <property>
-                                            <name>project</name>
-                                            <iteratedProperties>
+                                                    <ignore>ignoreCache</ignore>
+                                                    <ignore>mojoExecution</ignore>
+                                                    <ignore>session</ignore>
+                                                </ignoredProperties>
+                                            </inputs>
+                                            <nestedProperties>
                                                 <property>
-                                                <name>dependencies</name>
-                                                <inputs>
-                                                    <properties>
+                                                    <name>project</name>
+                                                    <iteratedProperties>
+                                                        <property>
+                                                            <name>dependencies</name>
+                                                            <inputs>
+                                                                <properties>
+                                                                    <property>
+                                                                        <name>groupId</name>
+                                                                    </property>
+                                                                    <property>
+                                                                        <name>artifactId</name>
+                                                                    </property>
+                                                                    <property>
+                                                                        <name>version</name>
+                                                                    </property>
+                                                                    <property>
+                                                                        <name>type</name>
+                                                                    </property>
+                                                                    <property>
+                                                                        <name>scope</name>
+                                                                    </property>
+                                                                </properties>
+                                                            </inputs>
+                                                        </property>
+                                                    </iteratedProperties>
+                                                </property>
+                                            </nestedProperties>
+                                        </execution>
+                                        <execution>
+                                            <id>enforce-dependencyConvergence</id>
+                                            <outputs>
+                                                <cacheableBecause>depencency convergenve should be cached
+                                                </cacheableBecause>
+                                            </outputs>
+                                            <inputs>
+                                                <properties>
                                                     <property>
-                                                        <name>groupId</name>
+                                                        <name>fail</name>
                                                     </property>
                                                     <property>
-                                                        <name>artifactId</name>
+                                                        <name>failFast</name>
                                                     </property>
                                                     <property>
-                                                        <name>version</name>
+                                                        <name>failIfNoRules</name>
                                                     </property>
                                                     <property>
-                                                        <name>type</name>
+                                                        <name>rulesToSkip</name>
                                                     </property>
                                                     <property>
-                                                        <name>scope</name>
+                                                        <name>rulesToExecute</name>
                                                     </property>
-                                                    </properties>
-                                                </inputs>
-                                                </property>
-                                            </iteratedProperties>
-                                            </property>
-                                        </nestedProperties>
-                                    </execution>
-                                    <execution>
-                                        <id>enforce-dependencyConvergence</id>
-                                         <outputs>
-                                            <cacheableBecause>depencency convergenve should be cached</cacheableBecause>
-                                        </outputs>
-                                         <inputs>
-                                            <properties>
-                                                <property>
-                                                    <name>fail</name>
-                                                </property>
-                                                <property>
-                                                    <name>failFast</name>
-                                                </property>
-                                                <property>
-                                                    <name>failIfNoRules</name>
-                                                </property>
-                                                <property>
-                                                    <name>rulesToSkip</name>
-                                                </property>
-                                                <property>
-                                                    <name>rulesToExecute</name>
-                                                </property>
-                                                <property>
-                                                    <name>rules</name>
-                                                </property>
-                                                <property>
-                                                    <name>skip</name>
-                                                </property>
-                                            </properties>
+                                                    <property>
+                                                        <name>rules</name>
+                                                    </property>
+                                                    <property>
+                                                        <name>skip</name>
+                                                    </property>
+                                                </properties>
                                                 <ignoredProperties>
-                                                <ignore>ignoreCache</ignore>
-                                                <ignore>mojoExecution</ignore>
-                                                <ignore>session</ignore>
-                                            </ignoredProperties>
-                                        </inputs>
-                                         <nestedProperties>
-                                            <property>
-                                            <name>project</name>
-                                            <iteratedProperties>
+                                                    <ignore>ignoreCache</ignore>
+                                                    <ignore>mojoExecution</ignore>
+                                                    <ignore>session</ignore>
+                                                </ignoredProperties>
+                                            </inputs>
+                                            <nestedProperties>
                                                 <property>
-                                                <name>dependencies</name>
-                                                <inputs>
-                                                    <properties>
-                                                    <property>
-                                                        <name>groupId</name>
-                                                    </property>
-                                                    <property>
-                                                        <name>artifactId</name>
-                                                    </property>
-                                                    <property>
-                                                        <name>version</name>
-                                                    </property>
-                                                    <property>
-                                                        <name>type</name>
-                                                    </property>
-                                                    <property>
-                                                        <name>scope</name>
-                                                    </property>
-                                                    </properties>
-                                                </inputs>
+                                                    <name>project</name>
+                                                    <iteratedProperties>
+                                                        <property>
+                                                            <name>dependencies</name>
+                                                            <inputs>
+                                                                <properties>
+                                                                    <property>
+                                                                        <name>groupId</name>
+                                                                    </property>
+                                                                    <property>
+                                                                        <name>artifactId</name>
+                                                                    </property>
+                                                                    <property>
+                                                                        <name>version</name>
+                                                                    </property>
+                                                                    <property>
+                                                                        <name>type</name>
+                                                                    </property>
+                                                                    <property>
+                                                                        <name>scope</name>
+                                                                    </property>
+                                                                </properties>
+                                                            </inputs>
+                                                        </property>
+                                                    </iteratedProperties>
                                                 </property>
-                                            </iteratedProperties>
-                                            </property>
-                                        </nestedProperties>
-                                    </execution>
-                                </executions>
-                            </plugin>
-                        </plugins>
+                                            </nestedProperties>
+                                        </execution>
+                                    </executions>
+                                </plugin>
+                            </plugins>
                         </develocity>
 
                     </configuration>
                 </plugin>
-        </plugins>
+            </plugins>
         </pluginManagement>
     </build>
 </project>
