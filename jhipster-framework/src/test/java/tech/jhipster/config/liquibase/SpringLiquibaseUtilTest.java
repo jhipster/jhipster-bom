@@ -25,10 +25,10 @@ import com.zaxxer.hikari.HikariDataSource;
 import javax.sql.DataSource;
 import liquibase.integration.spring.SpringLiquibase;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
-import org.springframework.boot.autoconfigure.liquibase.DataSourceClosingSpringLiquibase;
-import org.springframework.boot.autoconfigure.liquibase.LiquibaseProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
+import org.springframework.boot.jdbc.autoconfigure.DataSourceProperties;
+import org.springframework.boot.liquibase.autoconfigure.DataSourceClosingSpringLiquibase;
+import org.springframework.boot.liquibase.autoconfigure.LiquibaseProperties;
 
 class SpringLiquibaseUtilTest {
 
