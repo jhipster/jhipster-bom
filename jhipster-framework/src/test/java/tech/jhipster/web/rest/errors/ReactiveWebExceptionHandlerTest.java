@@ -1,10 +1,8 @@
 package tech.jhipster.web.rest.errors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.net.URI;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -21,6 +19,9 @@ import org.springframework.web.server.ServerWebExchange;
 import org.springframework.web.server.WebHandler;
 import org.springframework.web.server.adapter.WebHttpHandlerBuilder;
 import reactor.core.publisher.Mono;
+import tools.jackson.core.JacksonException;
+import tools.jackson.databind.JsonNode;
+import tools.jackson.databind.ObjectMapper;
 
 public class ReactiveWebExceptionHandlerTest {
 
@@ -37,7 +38,7 @@ public class ReactiveWebExceptionHandlerTest {
         "{\"type\":\"http://test.com/testExceptionTranslation\",\"title\":\"Test Reason\",\"status\":405,\"detail\":null,\"instance\":null,\"properties\":null}";
 
     @Test
-    void throwResponseStatusException() throws JsonMappingException, JsonProcessingException {
+    void throwResponseStatusException() throws JacksonException {
         MockServerHttpRequest request = MockServerHttpRequest.get("/").build();
         MockServerHttpResponse response = new MockServerHttpResponse();
 
@@ -51,11 +52,14 @@ public class ReactiveWebExceptionHandlerTest {
 
         assertEquals(HANDLED_RESPONSE_STATUS, response.getStatusCode());
         assertEquals(RESPONSE_TYPE, response.getHeaders().getContentType());
-        assertEquals(expectedResponse, response.getBodyAsString().block());
+        ObjectMapper mapper = new ObjectMapper();
+        JsonNode expectedTree = mapper.readTree(expectedResponse);
+        JsonNode responseTree = mapper.readTree(response.getBodyAsString().block());
+        assertEquals(expectedTree, responseTree);
     }
 
     @Test
-    void throwOtherException() throws JsonMappingException, JsonProcessingException {
+    void throwOtherException() throws JacksonException {
         MockServerHttpRequest request = MockServerHttpRequest.get("/").build();
         MockServerHttpResponse response = new MockServerHttpResponse();
 

@@ -19,16 +19,15 @@
 
 package tech.jhipster.web.rest.errors;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.core.io.buffer.DataBufferUtils;
-import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
+import tools.jackson.core.JacksonException;
+import tools.jackson.databind.ObjectMapper;
 
 /**
  * ResponseStatusException handler for springwebflux(reactive) application
@@ -68,7 +67,7 @@ public class ReactiveWebExceptionHandler implements org.springframework.web.serv
         try {
             final DataBuffer buffer = response.bufferFactory().wrap(mapper.writeValueAsBytes(entity.getBody()));
             return response.writeWith(Mono.just(buffer)).doOnError(error -> DataBufferUtils.release(buffer));
-        } catch (final JsonProcessingException ex) {
+        } catch (final JacksonException ex) {
             return Mono.error(ex);
         }
     }
