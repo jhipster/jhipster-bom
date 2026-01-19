@@ -70,7 +70,7 @@
         <properties-maven-plugin.version>1.2.1</properties-maven-plugin.version>
         <sonar-maven-plugin.version>5.5.0.6356</sonar-maven-plugin.version>
         <springdoc.version>3.0.1</springdoc.version>
-        <versions-maven-plugin.version>2.20.1</versions-maven-plugin.version>
+        <versions-maven-plugin.version>2.21.0</versions-maven-plugin.version>
     </properties>
 
     <scm>
