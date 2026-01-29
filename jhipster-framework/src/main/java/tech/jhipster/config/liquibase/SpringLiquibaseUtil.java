@@ -44,9 +44,9 @@ public final class SpringLiquibaseUtil {
      * <p>createSpringLiquibase.</p>
      *
      * @param liquibaseDatasource a {@link javax.sql.DataSource} object.
-     * @param liquibaseProperties a {@link org.springframework.boot.autoconfigure.liquibase.LiquibaseProperties} object.
+     * @param liquibaseProperties a {@link org.springframework.boot.liquibase.autoconfigure.LiquibaseProperties} object.
      * @param dataSource a {@link javax.sql.DataSource} object.
-     * @param dataSourceProperties a {@link org.springframework.boot.autoconfigure.jdbc.DataSourceProperties} object.
+     * @param dataSourceProperties a {@link org.springframework.boot.jdbc.autoconfigure.DataSourceProperties} object.
      * @return a {@link liquibase.integration.spring.SpringLiquibase} object.
      */
     public static SpringLiquibase createSpringLiquibase(
@@ -73,9 +73,9 @@ public final class SpringLiquibaseUtil {
      * @param env a {@link org.springframework.core.env.Environment} object.
      * @param executor a {@link java.util.concurrent.Executor} object.
      * @param liquibaseDatasource a {@link javax.sql.DataSource} object.
-     * @param liquibaseProperties a {@link org.springframework.boot.autoconfigure.liquibase.LiquibaseProperties} object.
+     * @param liquibaseProperties a {@link org.springframework.boot.liquibase.autoconfigure.LiquibaseProperties} object.
      * @param dataSource a {@link javax.sql.DataSource} object.
-     * @param dataSourceProperties a {@link org.springframework.boot.autoconfigure.jdbc.DataSourceProperties} object.
+     * @param dataSourceProperties a {@link org.springframework.boot.jdbc.autoconfigure.DataSourceProperties} object.
      * @return a {@link AsyncSpringLiquibase} object.
      */
     public static AsyncSpringLiquibase createAsyncSpringLiquibase(
