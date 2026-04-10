@@ -74,6 +74,11 @@ class AsyncSpringLiquibaseTest {
     }
 
     @Test
+    void testAnalyticsDisabledByDefault() {
+        assertThat(config.getAnalyticsEnabled()).isFalse();
+    }
+
+    @Test
     void testProfileNoLiquibase() {
         environment.setActiveProfiles(SPRING_PROFILE_NO_LIQUIBASE);
 
