@@ -74,6 +74,7 @@ public class AsyncSpringLiquibase extends DataSourceClosingSpringLiquibase {
     public AsyncSpringLiquibase(Executor executor, Environment env) {
         this.executor = executor;
         this.env = env;
+        setAnalyticsEnabled(false);
     }
 
     /** {@inheritDoc} */
