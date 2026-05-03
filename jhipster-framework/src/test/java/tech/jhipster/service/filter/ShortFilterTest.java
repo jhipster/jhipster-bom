@@ -224,18 +224,18 @@ class ShortFilterTest {
         String str = value.toString();
         assertThat(filter.toString()).isEqualTo(
             "ShortFilter [equals=" +
-            str +
-            ", notEquals=" +
-            str +
-            ", specified=true, in=[], notIn=[], greaterThan=" +
-            str +
-            ", lessThan=" +
-            str +
-            ", greaterThanOrEqual=" +
-            str +
-            ", lessThanOrEqual=" +
-            str +
-            "]"
+                str +
+                ", notEquals=" +
+                str +
+                ", specified=true, in=[], notIn=[], greaterThan=" +
+                str +
+                ", lessThan=" +
+                str +
+                ", greaterThanOrEqual=" +
+                str +
+                ", lessThanOrEqual=" +
+                str +
+                "]"
         );
     }
 }

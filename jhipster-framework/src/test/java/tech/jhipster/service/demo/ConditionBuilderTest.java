@@ -120,8 +120,8 @@ public class ConditionBuilderTest {
         setupBuilder(testDuration);
         assertConditionBuild(
             "c.time_to_go > '21600000' AND c.time_to_go < '21600000' AND c.time_to_go >= '21600000' " +
-            "AND c.time_to_go <= '21600000' AND c.time_to_go = '21600000' AND c.time_to_go != '21600000' A" +
-            "ND c.time_to_go IN ('21600000') AND c.time_to_go NOT IN ('21600000') AND c.time_to_go IS NOT NULL"
+                "AND c.time_to_go <= '21600000' AND c.time_to_go = '21600000' AND c.time_to_go != '21600000' A" +
+                "ND c.time_to_go IN ('21600000') AND c.time_to_go NOT IN ('21600000') AND c.time_to_go IS NOT NULL"
         );
     }
 
@@ -172,10 +172,10 @@ public class ConditionBuilderTest {
         setupBuilder(testDuration);
         assertConditionBuild(
             "c.time_to_go > '1970-01-01T00:00' AND c.time_to_go < '1970-01-01T00:00' " +
-            "AND c.time_to_go >= '1970-01-01T00:00' AND c.time_to_go <= '1970-01-01T00:00' " +
-            "AND c.time_to_go = '1970-01-01T00:00' AND c.time_to_go != '1970-01-01T00:00' " +
-            "AND c.time_to_go IN ('1970-01-01T00:00') AND c.time_to_go NOT IN ('1970-01-01T00:00') " +
-            "AND c.time_to_go IS NOT NULL"
+                "AND c.time_to_go >= '1970-01-01T00:00' AND c.time_to_go <= '1970-01-01T00:00' " +
+                "AND c.time_to_go = '1970-01-01T00:00' AND c.time_to_go != '1970-01-01T00:00' " +
+                "AND c.time_to_go IN ('1970-01-01T00:00') AND c.time_to_go NOT IN ('1970-01-01T00:00') " +
+                "AND c.time_to_go IS NOT NULL"
         );
     }
 
@@ -228,8 +228,8 @@ public class ConditionBuilderTest {
         setupBuilder(testDuration);
         assertConditionBuild(
             "c.time_to_go > '1970-01-01T00:00' AND c.time_to_go < '1970-01-01T00:00' AND c.time_to_go >= '1970-01-01T00:00' " +
-            "AND c.time_to_go <= '1970-01-01T00:00' AND c.time_to_go = '1970-01-01T00:00' AND c.time_to_go != '1970-01-01T00:00' " +
-            "AND c.time_to_go IN ('1970-01-01T00:00') AND c.time_to_go NOT IN ('1970-01-01T00:00') AND c.time_to_go IS NOT NULL"
+                "AND c.time_to_go <= '1970-01-01T00:00' AND c.time_to_go = '1970-01-01T00:00' AND c.time_to_go != '1970-01-01T00:00' " +
+                "AND c.time_to_go IN ('1970-01-01T00:00') AND c.time_to_go NOT IN ('1970-01-01T00:00') AND c.time_to_go IS NOT NULL"
         );
     }
 
@@ -282,8 +282,8 @@ public class ConditionBuilderTest {
         setupBuilder(testDuration);
         assertConditionBuild(
             "c.time_to_go LIKE 'HAPPY_FILTER' AND c.time_to_go NOT LIKE 'HAPPY_FILTER' AND " +
-            "c.time_to_go = 'HAPPY_FILTER' AND c.time_to_go != 'HAPPY_FILTER' " +
-            "AND c.time_to_go IN ('HAPPY_FILTER') AND c.time_to_go NOT IN ('HAPPY_FILTER') AND c.time_to_go IS NOT NULL"
+                "c.time_to_go = 'HAPPY_FILTER' AND c.time_to_go != 'HAPPY_FILTER' " +
+                "AND c.time_to_go IN ('HAPPY_FILTER') AND c.time_to_go NOT IN ('HAPPY_FILTER') AND c.time_to_go IS NOT NULL"
         );
     }
 
@@ -336,7 +336,7 @@ public class ConditionBuilderTest {
         setupBuilder(testDuration);
         assertConditionBuild(
             "c.time_to_go = true AND c.time_to_go != true " +
-            "AND c.time_to_go IN (true, false) AND c.time_to_go NOT IN (true, false) AND c.time_to_go IS NOT NULL"
+                "AND c.time_to_go IN (true, false) AND c.time_to_go NOT IN (true, false) AND c.time_to_go IS NOT NULL"
         );
     }
 
@@ -387,8 +387,8 @@ public class ConditionBuilderTest {
         setupBuilder(testDuration);
         assertConditionBuild(
             "c.time_to_go > '123' AND c.time_to_go < '123' AND c.time_to_go >= '123' " +
-            "AND c.time_to_go <= '123' AND c.time_to_go = '123' AND c.time_to_go != '123' " +
-            "AND c.time_to_go IN ('123') AND c.time_to_go NOT IN ('123') AND c.time_to_go IS NOT NULL"
+                "AND c.time_to_go <= '123' AND c.time_to_go = '123' AND c.time_to_go != '123' " +
+                "AND c.time_to_go IN ('123') AND c.time_to_go NOT IN ('123') AND c.time_to_go IS NOT NULL"
         );
     }
 
@@ -439,8 +439,8 @@ public class ConditionBuilderTest {
         setupBuilder(testDuration);
         assertConditionBuild(
             "c.time_to_go > '123' AND c.time_to_go < '123' AND c.time_to_go >= '123' " +
-            "AND c.time_to_go <= '123' AND c.time_to_go = '123' AND c.time_to_go != '123' " +
-            "AND c.time_to_go IN ('123') AND c.time_to_go NOT IN ('123') AND c.time_to_go IS NOT NULL"
+                "AND c.time_to_go <= '123' AND c.time_to_go = '123' AND c.time_to_go != '123' " +
+                "AND c.time_to_go IN ('123') AND c.time_to_go NOT IN ('123') AND c.time_to_go IS NOT NULL"
         );
     }
 
@@ -479,8 +479,8 @@ public class ConditionBuilderTest {
         setupBuilder(testDuration);
         assertConditionBuild(
             "c.time_to_go > '123.0' AND c.time_to_go < '123.0' AND c.time_to_go >= '123.0' " +
-            "AND c.time_to_go <= '123.0' AND c.time_to_go = '123.0' AND c.time_to_go != '123.0' " +
-            "AND c.time_to_go IN ('123.0') AND c.time_to_go NOT IN ('123.0') AND c.time_to_go IS NOT NULL"
+                "AND c.time_to_go <= '123.0' AND c.time_to_go = '123.0' AND c.time_to_go != '123.0' " +
+                "AND c.time_to_go IN ('123.0') AND c.time_to_go NOT IN ('123.0') AND c.time_to_go IS NOT NULL"
         );
     }
 
@@ -521,7 +521,7 @@ public class ConditionBuilderTest {
         setupBuilder(testDuration);
         assertConditionBuild(
             "c.time_to_go = '123.0' AND c.time_to_go != '123.0' " +
-            "AND c.time_to_go IN ('123.0') AND c.time_to_go NOT IN ('123.0') AND c.time_to_go IS NULL"
+                "AND c.time_to_go IN ('123.0') AND c.time_to_go NOT IN ('123.0') AND c.time_to_go IS NULL"
         );
     }
 
@@ -536,8 +536,8 @@ public class ConditionBuilderTest {
         setupBuilder(testDuration);
         assertConditionBuild(
             "c.time_to_go > '123.0' AND c.time_to_go < '123.0' AND c.time_to_go >= '123.0' " +
-            "AND c.time_to_go <= '123.0' AND c.time_to_go = '123.0' AND c.time_to_go != '123.0' " +
-            "AND c.time_to_go IN ('123.0', '124.0') AND c.time_to_go NOT IN ('123.0', '124.0') AND c.time_to_go IS NOT NULL"
+                "AND c.time_to_go <= '123.0' AND c.time_to_go = '123.0' AND c.time_to_go != '123.0' " +
+                "AND c.time_to_go IN ('123.0', '124.0') AND c.time_to_go NOT IN ('123.0', '124.0') AND c.time_to_go IS NOT NULL"
         );
     }
 
@@ -566,7 +566,7 @@ public class ConditionBuilderTest {
         setupBuilder(testDuration);
         assertConditionBuild(
             "c.time_to_go = '123.0' AND c.time_to_go != '123.0' " +
-            "AND c.time_to_go IN ('123.0', '124.0') AND c.time_to_go NOT IN ('123.0', '124.0') AND c.time_to_go IS NULL"
+                "AND c.time_to_go IN ('123.0', '124.0') AND c.time_to_go NOT IN ('123.0', '124.0') AND c.time_to_go IS NULL"
         );
     }
 
@@ -581,7 +581,7 @@ public class ConditionBuilderTest {
         setupBuilder(testDuration);
         assertConditionBuild(
             "c.time_to_go = '123' AND c.time_to_go != '123' " +
-            "AND c.time_to_go IN ('123', '124') AND c.time_to_go NOT IN ('123', '124') AND c.time_to_go IS NULL"
+                "AND c.time_to_go IN ('123', '124') AND c.time_to_go NOT IN ('123', '124') AND c.time_to_go IS NULL"
         );
     }
 
@@ -608,8 +608,8 @@ public class ConditionBuilderTest {
         setupBuilder(testDuration);
         assertConditionBuild(
             "c.time_to_go > '123' AND c.time_to_go < '123' " +
-            "AND c.time_to_go >= '123' AND c.time_to_go <= '123' AND c.time_to_go = '123' AND c.time_to_go != '123' " +
-            "AND c.time_to_go IN ('123', '124') AND c.time_to_go NOT IN ('123', '124') AND c.time_to_go IS NULL"
+                "AND c.time_to_go >= '123' AND c.time_to_go <= '123' AND c.time_to_go = '123' AND c.time_to_go != '123' " +
+                "AND c.time_to_go IN ('123', '124') AND c.time_to_go NOT IN ('123', '124') AND c.time_to_go IS NULL"
         );
     }
 
@@ -624,8 +624,8 @@ public class ConditionBuilderTest {
         setupBuilder(testDuration);
         assertConditionBuild(
             "c.time_to_go > '123' AND c.time_to_go < '123' " +
-            "AND c.time_to_go >= '123' AND c.time_to_go <= '123' AND c.time_to_go = '123' AND c.time_to_go != '123' " +
-            "AND c.time_to_go IN ('123', '123') AND c.time_to_go NOT IN ('123', '123') AND c.time_to_go IS NULL"
+                "AND c.time_to_go >= '123' AND c.time_to_go <= '123' AND c.time_to_go = '123' AND c.time_to_go != '123' " +
+                "AND c.time_to_go IN ('123', '123') AND c.time_to_go NOT IN ('123', '123') AND c.time_to_go IS NULL"
         );
     }
 
@@ -659,7 +659,7 @@ public class ConditionBuilderTest {
         setupBuilder(testDuration);
         assertConditionBuild(
             "c.time_to_go = 'ENUM1' AND c.time_to_go != 'ENUM1' " +
-            "AND c.time_to_go IN ('ENUM1', 'ENUM2') AND c.time_to_go NOT IN ('ENUM1', 'ENUM2') AND c.time_to_go IS NULL"
+                "AND c.time_to_go IN ('ENUM1', 'ENUM2') AND c.time_to_go NOT IN ('ENUM1', 'ENUM2') AND c.time_to_go IS NULL"
         );
     }
 

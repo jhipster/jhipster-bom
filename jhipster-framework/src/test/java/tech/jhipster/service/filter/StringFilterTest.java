@@ -196,14 +196,14 @@ class StringFilterTest {
         String str = value;
         assertThat(filter.toString()).isEqualTo(
             "StringFilter [equals=" +
-            str +
-            ", notEquals=" +
-            str +
-            ", specified=true, in=[], notIn=[], contains=" +
-            str +
-            ", doesNotContain=" +
-            str +
-            "]"
+                str +
+                ", notEquals=" +
+                str +
+                ", specified=true, in=[], notIn=[], contains=" +
+                str +
+                ", doesNotContain=" +
+                str +
+                "]"
         );
     }
 }

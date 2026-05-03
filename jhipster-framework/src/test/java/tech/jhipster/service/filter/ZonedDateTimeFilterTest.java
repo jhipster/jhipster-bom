@@ -225,18 +225,18 @@ class ZonedDateTimeFilterTest {
         String str = value.toString();
         assertThat(filter.toString()).isEqualTo(
             "ZonedDateTimeFilter [equals=" +
-            str +
-            ", notEquals=" +
-            str +
-            ", specified=true, in=[], notIn=[], greaterThan=" +
-            str +
-            ", lessThan=" +
-            str +
-            ", greaterThanOrEqual=" +
-            str +
-            ", lessThanOrEqual=" +
-            str +
-            "]"
+                str +
+                ", notEquals=" +
+                str +
+                ", specified=true, in=[], notIn=[], greaterThan=" +
+                str +
+                ", lessThan=" +
+                str +
+                ", greaterThanOrEqual=" +
+                str +
+                ", lessThanOrEqual=" +
+                str +
+                "]"
         );
     }
 }
