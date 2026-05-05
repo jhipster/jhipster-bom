@@ -25,7 +25,6 @@ import static org.springdoc.core.utils.Constants.DEFAULT_GROUP_NAME;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 import org.springdoc.core.properties.SpringDocConfigProperties;
 import org.springframework.boot.actuate.endpoint.annotation.ReadOperation;
 import org.springframework.boot.actuate.endpoint.web.annotation.WebEndpoint;
@@ -59,7 +58,7 @@ public class JHipsterOpenApiEndpoint {
      */
     @ReadOperation
     public List<Map<String, String>> allOpenApi() {
-        return springDocConfigProperties.getGroupConfigs().stream().map(this::createGroupMap).collect(Collectors.toList());
+        return springDocConfigProperties.getGroupConfigs().stream().map(this::createGroupMap).toList();
     }
 
     private Map<String, String> createGroupMap(GroupConfig group) {
