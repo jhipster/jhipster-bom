@@ -46,8 +46,8 @@ public final class LoggingUtils {
         consoleAppender.setName(CONSOLE_APPENDER_NAME);
         consoleAppender.start();
 
-        context.getLogger(ch.qos.logback.classic.Logger.ROOT_LOGGER_NAME).detachAppender(CONSOLE_APPENDER_NAME);
-        context.getLogger(ch.qos.logback.classic.Logger.ROOT_LOGGER_NAME).addAppender(consoleAppender);
+        context.getLogger(Logger.ROOT_LOGGER_NAME).detachAppender(CONSOLE_APPENDER_NAME);
+        context.getLogger(Logger.ROOT_LOGGER_NAME).addAppender(consoleAppender);
     }
 
     /**
@@ -73,7 +73,7 @@ public final class LoggingUtils {
         logstashAppender.setRingBufferSize(logstashProperties.getRingBufferSize());
         logstashAppender.start();
 
-        context.getLogger(ch.qos.logback.classic.Logger.ROOT_LOGGER_NAME).addAppender(logstashAppender);
+        context.getLogger(Logger.ROOT_LOGGER_NAME).addAppender(logstashAppender);
     }
 
     /**
