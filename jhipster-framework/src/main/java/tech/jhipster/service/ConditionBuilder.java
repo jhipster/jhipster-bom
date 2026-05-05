@@ -98,7 +98,7 @@ public class ConditionBuilder {
         if (targetClass != null) {
             return value -> columnConverter.convert(value, targetClass).toString();
         } else {
-            return value -> value.toString();
+            return Object::toString;
         }
     }
 
@@ -138,7 +138,7 @@ public class ConditionBuilder {
                 Conditions.isNotEqual(column, SQL.literalOf(columnConverter.convert(generalData.getNotEquals(), Boolean.class)))
             );
         }
-        if (generalData.getIn() != null && generalData.getIn().size() > 0) {
+        if (generalData.getIn() != null && !generalData.getIn().isEmpty()) {
             allFilters.add(
                 Conditions.in(
                     column,
@@ -178,7 +178,7 @@ public class ConditionBuilder {
         if (generalData.getNotEquals() != null) {
             allFilters.add(Conditions.isNotEqual(column, SQL.literalOf(converterFunction.apply(generalData.getNotEquals()))));
         }
-        if (generalData.getIn() != null && generalData.getIn().size() > 0) {
+        if (generalData.getIn() != null && !generalData.getIn().isEmpty()) {
             allFilters.add(
                 Conditions.in(
                     column,

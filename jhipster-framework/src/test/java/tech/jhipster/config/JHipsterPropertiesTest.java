@@ -107,7 +107,7 @@ class JHipsterPropertiesTest {
     @Test
     void testDatabaseCouchbaseBucketName() {
         JHipsterProperties.Database.Couchbase obj = properties.getDatabase().getCouchbase();
-        assertThat(obj.getBucketName()).isEqualTo(null);
+        assertThat(obj.getBucketName()).isNull();
         obj.setBucketName("bucketName");
         assertThat(obj.getBucketName()).isEqualTo("bucketName");
     }
@@ -115,7 +115,7 @@ class JHipsterPropertiesTest {
     @Test
     void testDatabaseCouchbaseScopeName() {
         JHipsterProperties.Database.Couchbase obj = properties.getDatabase().getCouchbase();
-        assertThat(obj.getScopeName()).isEqualTo(null);
+        assertThat(obj.getScopeName()).isNull();
         obj.setScopeName("scopeName");
         assertThat(obj.getScopeName()).isEqualTo("scopeName");
     }
@@ -323,7 +323,7 @@ class JHipsterPropertiesTest {
     @Test
     void testCacheMemcachedAuthenticationPassword() {
         JHipsterProperties.Cache.Memcached.Authentication obj = properties.getCache().getMemcached().getAuthentication();
-        assertThat(obj.getPassword()).isEqualTo(null);
+        assertThat(obj.getPassword()).isNull();
         obj.setPassword("MEMCACHEPASSWORD");
         assertThat(obj.getPassword()).isEqualTo("MEMCACHEPASSWORD");
     }
@@ -331,7 +331,7 @@ class JHipsterPropertiesTest {
     @Test
     void testCacheMemcachedAuthenticationUsername() {
         JHipsterProperties.Cache.Memcached.Authentication obj = properties.getCache().getMemcached().getAuthentication();
-        assertThat(obj.getUsername()).isEqualTo(null);
+        assertThat(obj.getUsername()).isNull();
         obj.setUsername("MEMCACHEUSER");
         assertThat(obj.getUsername()).isEqualTo("MEMCACHEUSER");
     }
