@@ -98,7 +98,7 @@ public class ConditionBuilder {
         if (targetClass != null) {
             return value -> columnConverter.convert(value, targetClass).toString();
         } else {
-            return value -> value.toString();
+            return Object::toString;
         }
     }
 
