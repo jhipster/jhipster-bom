@@ -19,7 +19,6 @@
 
 package tech.jhipster.web.rest.errors;
 
-import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
