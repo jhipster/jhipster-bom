@@ -6,7 +6,7 @@ import java.time.*;
 import java.util.Date;
 import org.junit.jupiter.api.Test;
 
-public class JSR310DateConvertersTest {
+class JSR310DateConvertersTest {
 
     @Test
     void testLocalDateToDateConverter() {

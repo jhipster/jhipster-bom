@@ -1,7 +1,6 @@
 package tech.jhipster.web.rest.errors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.net.URI;
 import org.apache.commons.logging.Log;
@@ -23,7 +22,7 @@ import tools.jackson.core.JacksonException;
 import tools.jackson.databind.JsonNode;
 import tools.jackson.databind.ObjectMapper;
 
-public class ReactiveWebExceptionHandlerTest {
+class ReactiveWebExceptionHandlerTest {
 
     // Constants
     private static final MediaType RESPONSE_TYPE = MediaType.APPLICATION_PROBLEM_JSON;

@@ -23,7 +23,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 import org.springframework.data.relational.core.sql.Column;
 import org.springframework.data.relational.core.sql.Condition;
 import org.springframework.data.relational.core.sql.Conditions;
@@ -146,7 +145,7 @@ public class ConditionBuilder {
                         .getIn()
                         .stream()
                         .map(eachIn -> SQL.literalOf(columnConverter.convert(eachIn, Boolean.class)))
-                        .collect(Collectors.toList())
+                        .toList()
                 )
             );
         }
@@ -158,7 +157,7 @@ public class ConditionBuilder {
                         .getNotIn()
                         .stream()
                         .map(eachNotIn -> SQL.literalOf(columnConverter.convert(eachNotIn, Boolean.class)))
-                        .collect(Collectors.toList())
+                        .toList()
                 )
             );
         }
@@ -186,7 +185,7 @@ public class ConditionBuilder {
                         .getIn()
                         .stream()
                         .map(eachIn -> SQL.literalOf(converterFunction.apply(eachIn)))
-                        .collect(Collectors.toList())
+                        .toList()
                 )
             );
         }
@@ -198,7 +197,7 @@ public class ConditionBuilder {
                         .getNotIn()
                         .stream()
                         .map(eachNotIn -> SQL.literalOf(converterFunction.apply(eachNotIn)))
-                        .collect(Collectors.toList())
+                        .toList()
                 )
             );
         }

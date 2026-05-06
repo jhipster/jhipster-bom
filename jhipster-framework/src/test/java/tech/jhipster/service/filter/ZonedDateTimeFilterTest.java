@@ -87,7 +87,7 @@ class ZonedDateTimeFilterTest {
     void testSetSpecified() {
         Filter<ZonedDateTime> chain = filter.setSpecified(true);
         assertThat(chain).isEqualTo(filter);
-        assertThat(filter.getSpecified()).isEqualTo(true);
+        assertThat(filter.getSpecified()).isTrue();
     }
 
     @Test

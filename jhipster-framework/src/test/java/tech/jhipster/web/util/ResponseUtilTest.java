@@ -51,7 +51,7 @@ class ResponseUtilTest {
         ResponseEntity<Integer> response = ResponseUtil.wrapOrNotFound(optionalYes);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(response.getBody()).isEqualTo(42);
-        assertThat(response.getHeaders().size()).isEqualTo(0);
+        assertThat(response.getHeaders().size()).isZero();
     }
 
     @Test
