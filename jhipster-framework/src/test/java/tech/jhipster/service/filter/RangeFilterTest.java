@@ -86,7 +86,7 @@ class RangeFilterTest {
     void testSetSpecified() {
         Filter<Short> chain = filter.setSpecified(true);
         assertThat(chain).isEqualTo(filter);
-        assertThat(filter.getSpecified()).isEqualTo(true);
+        assertThat(filter.getSpecified()).isTrue()
     }
 
     @Test
