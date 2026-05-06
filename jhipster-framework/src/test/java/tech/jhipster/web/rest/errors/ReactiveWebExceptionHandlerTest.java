@@ -23,7 +23,7 @@ import tools.jackson.core.JacksonException;
 import tools.jackson.databind.JsonNode;
 import tools.jackson.databind.ObjectMapper;
 
-public class ReactiveWebExceptionHandlerTest {
+class ReactiveWebExceptionHandlerTest {
 
     // Constants
     private static final MediaType RESPONSE_TYPE = MediaType.APPLICATION_PROBLEM_JSON;
