@@ -86,7 +86,7 @@ class LongFilterTest {
     void testSetSpecified() {
         Filter<Long> chain = filter.setSpecified(true);
         assertThat(chain).isEqualTo(filter);
-        assertThat(filter.getSpecified()).isTrue()
+        assertThat(filter.getSpecified()).isTrue();
     }
 
     @Test

@@ -82,7 +82,7 @@ class StringFilterTest {
     void testSetSpecified() {
         Filter<String> chain = filter.setSpecified(true);
         assertThat(chain).isEqualTo(filter);
-        assertThat(filter.getSpecified()).isTrue()
+        assertThat(filter.getSpecified()).isTrue();
     }
 
     @Test

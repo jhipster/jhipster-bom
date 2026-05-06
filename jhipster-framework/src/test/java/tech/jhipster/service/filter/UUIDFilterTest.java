@@ -79,7 +79,7 @@ class UUIDFilterTest {
     void testSetSpecified() {
         Filter<UUID> chain = filter.setSpecified(true);
         assertThat(chain).isEqualTo(filter);
-        assertThat(filter.getSpecified()).isTrue()
+        assertThat(filter.getSpecified()).isTrue();
     }
 
     @Test

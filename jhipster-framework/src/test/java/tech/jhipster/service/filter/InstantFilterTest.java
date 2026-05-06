@@ -87,7 +87,7 @@ class InstantFilterTest {
     void testSetSpecified() {
         Filter<Instant> chain = filter.setSpecified(true);
         assertThat(chain).isEqualTo(filter);
-        assertThat(filter.getSpecified()).isTrue()
+        assertThat(filter.getSpecified()).isTrue();
     }
 
     @Test
