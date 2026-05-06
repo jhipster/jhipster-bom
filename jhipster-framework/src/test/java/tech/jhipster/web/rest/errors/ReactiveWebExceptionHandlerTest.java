@@ -1,7 +1,6 @@
 package tech.jhipster.web.rest.errors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.net.URI;
 import org.apache.commons.logging.Log;
