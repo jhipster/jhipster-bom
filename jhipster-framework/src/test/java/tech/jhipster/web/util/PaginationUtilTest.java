@@ -51,8 +51,7 @@ class PaginationUtilTest {
         Page<String> page = new PageImpl<>(new ArrayList<>(), PageRequest.of(6, 50), 400L);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(uriBuilder, page);
         List<String> strHeaders = headers.get(HttpHeaders.LINK);
-        assertThat(strHeaders).isNotNull();
-        assertThat(strHeaders).hasSize(1);
+        assertThat(strHeaders).isNotNull().hasSize(1);
         String headerData = strHeaders.get(0);
         assertThat(headerData.split(",")).hasSize(4);
         String expectedData =
@@ -72,8 +71,7 @@ class PaginationUtilTest {
         Page<String> page = new PageImpl<>(content);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(uriBuilder, page);
         List<String> strHeaders = headers.get(HttpHeaders.LINK);
-        assertThat(strHeaders).isNotNull();
-        assertThat(strHeaders).hasSize(1);
+        assertThat(strHeaders).isNotNull().hasSize(1);
         String headerData = strHeaders.get(0);
         assertThat(headerData.split(",")).hasSize(2);
         String expectedData =
@@ -93,8 +91,7 @@ class PaginationUtilTest {
         Page<String> page = new PageImpl<>(content, PageRequest.of(0, 50), 400L);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(uriBuilder, page);
         List<String> strHeaders = headers.get(HttpHeaders.LINK);
-        assertThat(strHeaders).isNotNull();
-        assertThat(strHeaders).hasSize(1);
+        assertThat(strHeaders).isNotNull().hasSize(1);
         String headerData = strHeaders.get(0);
         assertThat(headerData.split(",")).hasSize(3);
         String expectedData =
@@ -110,8 +107,7 @@ class PaginationUtilTest {
         page = new PageImpl<>(content, PageRequest.of(1, 50), 400L);
         headers = PaginationUtil.generatePaginationHttpHeaders(uriBuilder, page);
         strHeaders = headers.get(HttpHeaders.LINK);
-        assertThat(strHeaders).isNotNull();
-        assertThat(strHeaders).hasSize(1);
+        assertThat(strHeaders).isNotNull().hasSize(1);
         headerData = strHeaders.get(0);
         assertThat(headerData.split(",")).hasSize(4);
         expectedData =
@@ -128,8 +124,7 @@ class PaginationUtilTest {
         page = new PageImpl<>(content, PageRequest.of(6, 50), 400L);
         headers = PaginationUtil.generatePaginationHttpHeaders(uriBuilder, page);
         strHeaders = headers.get(HttpHeaders.LINK);
-        assertThat(strHeaders).isNotNull();
-        assertThat(strHeaders).hasSize(1);
+        assertThat(strHeaders).isNotNull().hasSize(1);
         headerData = strHeaders.get(0);
         assertThat(headerData.split(",")).hasSize(4);
         expectedData =
@@ -146,8 +141,7 @@ class PaginationUtilTest {
         page = new PageImpl<>(content, PageRequest.of(7, 50), 400L);
         headers = PaginationUtil.generatePaginationHttpHeaders(uriBuilder, page);
         strHeaders = headers.get(HttpHeaders.LINK);
-        assertThat(strHeaders).isNotNull();
-        assertThat(strHeaders).hasSize(1);
+        assertThat(strHeaders).isNotNull().hasSize(1);
         headerData = strHeaders.get(0);
         assertThat(headerData.split(",")).hasSize(3);
         expectedData =
@@ -163,8 +157,7 @@ class PaginationUtilTest {
         Page<String> page = new PageImpl<>(new ArrayList<>());
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(uriBuilder, page);
         List<String> strHeaders = headers.get(HttpHeaders.LINK);
-        assertThat(strHeaders).isNotNull();
-        assertThat(strHeaders).hasSize(1);
+        assertThat(strHeaders).isNotNull().hasSize(1);
         String headerData = strHeaders.get(0);
         assertThat(headerData.split(",")).hasSize(2);
         String[] linksData = headerData.split(",");
