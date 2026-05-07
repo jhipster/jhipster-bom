@@ -79,6 +79,6 @@ class PersistentTokenCacheTest {
         }
         assertThat(cache.size()).isEqualTo(1);
         cache.purge();
-        assertThat(cache.size()).isEqualTo(0);
+        assertThat(cache.size()).isZero();
     }
 }
