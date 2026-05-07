@@ -47,7 +47,7 @@ class StringFilterTest {
         assertThat(filter.getNotIn()).isNull();
         assertThat(filter.getContains()).isNull();
         assertThat(filter.getDoesNotContain()).isNull();
-        assertThat(filter.toString()).isEqualTo("StringFilter []");
+        assertThat(filter).hasToString("StringFilter []");
     }
 
     @Test
@@ -61,7 +61,7 @@ class StringFilterTest {
         assertThat(copy.getNotIn()).isNull();
         assertThat(copy.getContains()).isNull();
         assertThat(copy.getDoesNotContain()).isNull();
-        assertThat(copy.toString()).isEqualTo("StringFilter []");
+        assertThat(copy).hasToString("StringFilter []");
     }
 
     @Test
@@ -194,7 +194,7 @@ class StringFilterTest {
         filter.setContains(value);
         filter.setDoesNotContain(value);
         String str = value;
-        assertThat(filter.toString()).isEqualTo(
+        assertThat(filter).hasToString(
             "StringFilter [equals=" +
                 str +
                 ", notEquals=" +

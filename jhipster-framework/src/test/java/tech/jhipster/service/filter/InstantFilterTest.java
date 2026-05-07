@@ -50,7 +50,7 @@ class InstantFilterTest {
         assertThat(filter.getLessThan()).isNull();
         assertThat(filter.getGreaterThanOrEqual()).isNull();
         assertThat(filter.getLessThanOrEqual()).isNull();
-        assertThat(filter.toString()).isEqualTo("InstantFilter []");
+        assertThat(filter).hasToString("InstantFilter []");
     }
 
     @Test
@@ -66,7 +66,7 @@ class InstantFilterTest {
         assertThat(copy.getLessThan()).isNull();
         assertThat(copy.getGreaterThanOrEqual()).isNull();
         assertThat(copy.getLessThanOrEqual()).isNull();
-        assertThat(copy.toString()).isEqualTo("InstantFilter []");
+        assertThat(copy).hasToString("InstantFilter []");
     }
 
     @Test
@@ -223,7 +223,7 @@ class InstantFilterTest {
         filter.setGreaterThanOrEqual(value);
         filter.setLessThanOrEqual(value);
         String str = value.toString();
-        assertThat(filter.toString()).isEqualTo(
+        assertThat(filter).hasToString(
             "InstantFilter [equals=" +
                 str +
                 ", notEquals=" +

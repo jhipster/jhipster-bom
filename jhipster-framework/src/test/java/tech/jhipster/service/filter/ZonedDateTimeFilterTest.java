@@ -50,7 +50,7 @@ class ZonedDateTimeFilterTest {
         assertThat(filter.getLessThan()).isNull();
         assertThat(filter.getGreaterThanOrEqual()).isNull();
         assertThat(filter.getLessThanOrEqual()).isNull();
-        assertThat(filter.toString()).isEqualTo("ZonedDateTimeFilter []");
+        assertThat(filter).hasToString("ZonedDateTimeFilter []");
     }
 
     @Test
@@ -66,7 +66,7 @@ class ZonedDateTimeFilterTest {
         assertThat(copy.getLessThan()).isNull();
         assertThat(copy.getGreaterThanOrEqual()).isNull();
         assertThat(copy.getLessThanOrEqual()).isNull();
-        assertThat(copy.toString()).isEqualTo("ZonedDateTimeFilter []");
+        assertThat(copy).hasToString("ZonedDateTimeFilter []");
     }
 
     @Test
@@ -223,7 +223,7 @@ class ZonedDateTimeFilterTest {
         filter.setGreaterThanOrEqual(value);
         filter.setLessThanOrEqual(value);
         String str = value.toString();
-        assertThat(filter.toString()).isEqualTo(
+        assertThat(filter).hasToString(
             "ZonedDateTimeFilter [equals=" +
                 str +
                 ", notEquals=" +

@@ -50,7 +50,7 @@ class FilterTest {
         assertThat(filter.getSpecified()).isNull();
         assertThat(filter.getIn()).isNull();
         assertThat(filter.getNotIn()).isNull();
-        assertThat(filter.toString()).isEqualTo("Filter []");
+        assertThat(filter).hasToString("Filter []");
     }
 
     @Test
@@ -62,7 +62,7 @@ class FilterTest {
         assertThat(copy.getSpecified()).isNull();
         assertThat(copy.getIn()).isNull();
         assertThat(copy.getNotIn()).isNull();
-        assertThat(copy.toString()).isEqualTo("Filter []");
+        assertThat(copy).hasToString("Filter []");
     }
 
     @Test
@@ -164,6 +164,6 @@ class FilterTest {
         filter.setSpecified(true);
         filter.setIn(new LinkedList<>());
         filter.setNotIn(new LinkedList<>());
-        assertThat(filter.toString()).isEqualTo("Filter [equals={}, notEquals={}, specified=true, in=[], notIn=[]]");
+        assertThat(filter).hasToString("Filter [equals={}, notEquals={}, specified=true, in=[], notIn=[]]");
     }
 }

@@ -50,7 +50,7 @@ class BigDecimalFilterTest {
         assertThat(filter.getLessThan()).isNull();
         assertThat(filter.getGreaterThanOrEqual()).isNull();
         assertThat(filter.getLessThanOrEqual()).isNull();
-        assertThat(filter.toString()).isEqualTo("BigDecimalFilter []");
+        assertThat(filter).hasToString("BigDecimalFilter []");
     }
 
     @Test
@@ -66,7 +66,7 @@ class BigDecimalFilterTest {
         assertThat(copy.getLessThan()).isNull();
         assertThat(copy.getGreaterThanOrEqual()).isNull();
         assertThat(copy.getLessThanOrEqual()).isNull();
-        assertThat(copy.toString()).isEqualTo("BigDecimalFilter []");
+        assertThat(copy).hasToString("BigDecimalFilter []");
     }
 
     @Test
@@ -223,7 +223,7 @@ class BigDecimalFilterTest {
         filter.setGreaterThanOrEqual(value);
         filter.setLessThanOrEqual(value);
         String str = value.toString();
-        assertThat(filter.toString()).isEqualTo(
+        assertThat(filter).hasToString(
             "BigDecimalFilter [equals=" +
                 str +
                 ", notEquals=" +

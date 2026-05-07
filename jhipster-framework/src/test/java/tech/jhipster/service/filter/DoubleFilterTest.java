@@ -49,7 +49,7 @@ class DoubleFilterTest {
         assertThat(filter.getLessThan()).isNull();
         assertThat(filter.getGreaterThanOrEqual()).isNull();
         assertThat(filter.getLessThanOrEqual()).isNull();
-        assertThat(filter.toString()).isEqualTo("DoubleFilter []");
+        assertThat(filter).hasToString("DoubleFilter []");
     }
 
     @Test
@@ -65,7 +65,7 @@ class DoubleFilterTest {
         assertThat(copy.getLessThan()).isNull();
         assertThat(copy.getGreaterThanOrEqual()).isNull();
         assertThat(copy.getLessThanOrEqual()).isNull();
-        assertThat(copy.toString()).isEqualTo("DoubleFilter []");
+        assertThat(copy).hasToString("DoubleFilter []");
     }
 
     @Test
@@ -222,7 +222,7 @@ class DoubleFilterTest {
         filter.setGreaterThanOrEqual(value);
         filter.setLessThanOrEqual(value);
         String str = value.toString();
-        assertThat(filter.toString()).isEqualTo(
+        assertThat(filter).hasToString(
             "DoubleFilter [equals=" +
                 str +
                 ", notEquals=" +

@@ -49,7 +49,7 @@ class IntegerFilterTest {
         assertThat(filter.getLessThan()).isNull();
         assertThat(filter.getGreaterThanOrEqual()).isNull();
         assertThat(filter.getLessThanOrEqual()).isNull();
-        assertThat(filter.toString()).isEqualTo("IntegerFilter []");
+        assertThat(filter).hasToString("IntegerFilter []");
     }
 
     @Test
@@ -65,7 +65,7 @@ class IntegerFilterTest {
         assertThat(copy.getLessThan()).isNull();
         assertThat(copy.getGreaterThanOrEqual()).isNull();
         assertThat(copy.getLessThanOrEqual()).isNull();
-        assertThat(copy.toString()).isEqualTo("IntegerFilter []");
+        assertThat(copy).hasToString("IntegerFilter []");
     }
 
     @Test
@@ -222,7 +222,7 @@ class IntegerFilterTest {
         filter.setGreaterThanOrEqual(value);
         filter.setLessThanOrEqual(value);
         String str = value.toString();
-        assertThat(filter.toString()).isEqualTo(
+        assertThat(filter).hasToString(
             "IntegerFilter [equals=" +
                 str +
                 ", notEquals=" +

@@ -50,7 +50,7 @@ class LocalDateFilterTest {
         assertThat(filter.getLessThan()).isNull();
         assertThat(filter.getGreaterThanOrEqual()).isNull();
         assertThat(filter.getLessThanOrEqual()).isNull();
-        assertThat(filter.toString()).isEqualTo("LocalDateFilter []");
+        assertThat(filter).hasToString("LocalDateFilter []");
     }
 
     @Test
@@ -66,7 +66,7 @@ class LocalDateFilterTest {
         assertThat(copy.getLessThan()).isNull();
         assertThat(copy.getGreaterThanOrEqual()).isNull();
         assertThat(copy.getLessThanOrEqual()).isNull();
-        assertThat(copy.toString()).isEqualTo("LocalDateFilter []");
+        assertThat(copy).hasToString("LocalDateFilter []");
     }
 
     @Test
@@ -223,7 +223,7 @@ class LocalDateFilterTest {
         filter.setGreaterThanOrEqual(value);
         filter.setLessThanOrEqual(value);
         String str = value.toString();
-        assertThat(filter.toString()).isEqualTo(
+        assertThat(filter).hasToString(
             "LocalDateFilter [equals=" +
                 str +
                 ", notEquals=" +

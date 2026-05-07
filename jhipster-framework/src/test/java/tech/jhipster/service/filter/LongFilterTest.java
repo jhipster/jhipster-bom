@@ -49,7 +49,7 @@ class LongFilterTest {
         assertThat(filter.getLessThan()).isNull();
         assertThat(filter.getGreaterThanOrEqual()).isNull();
         assertThat(filter.getLessThanOrEqual()).isNull();
-        assertThat(filter.toString()).isEqualTo("LongFilter []");
+        assertThat(filter).hasToString("LongFilter []");
     }
 
     @Test
@@ -65,7 +65,7 @@ class LongFilterTest {
         assertThat(copy.getLessThan()).isNull();
         assertThat(copy.getGreaterThanOrEqual()).isNull();
         assertThat(copy.getLessThanOrEqual()).isNull();
-        assertThat(copy.toString()).isEqualTo("LongFilter []");
+        assertThat(copy).hasToString("LongFilter []");
     }
 
     @Test
@@ -222,7 +222,7 @@ class LongFilterTest {
         filter.setGreaterThanOrEqual(value);
         filter.setLessThanOrEqual(value);
         String str = value.toString();
-        assertThat(filter.toString()).isEqualTo(
+        assertThat(filter).hasToString(
             "LongFilter [equals=" +
                 str +
                 ", notEquals=" +

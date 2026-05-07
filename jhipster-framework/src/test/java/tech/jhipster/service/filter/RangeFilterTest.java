@@ -49,7 +49,7 @@ class RangeFilterTest {
         assertThat(filter.getLessThan()).isNull();
         assertThat(filter.getGreaterThanOrEqual()).isNull();
         assertThat(filter.getLessThanOrEqual()).isNull();
-        assertThat(filter.toString()).isEqualTo("RangeFilter []");
+        assertThat(filter).hasToString("RangeFilter []");
     }
 
     @Test
@@ -65,7 +65,7 @@ class RangeFilterTest {
         assertThat(copy.getLessThan()).isNull();
         assertThat(copy.getGreaterThanOrEqual()).isNull();
         assertThat(copy.getLessThanOrEqual()).isNull();
-        assertThat(copy.toString()).isEqualTo("RangeFilter []");
+        assertThat(copy).hasToString("RangeFilter []");
     }
 
     @Test
@@ -222,7 +222,7 @@ class RangeFilterTest {
         filter.setGreaterThanOrEqual(value);
         filter.setLessThanOrEqual(value);
         String str = value.toString();
-        assertThat(filter.toString()).isEqualTo(
+        assertThat(filter).hasToString(
             "RangeFilter [equals=" +
                 str +
                 ", notEquals=" +

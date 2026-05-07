@@ -49,7 +49,7 @@ class ShortFilterTest {
         assertThat(filter.getLessThan()).isNull();
         assertThat(filter.getGreaterThanOrEqual()).isNull();
         assertThat(filter.getLessThanOrEqual()).isNull();
-        assertThat(filter.toString()).isEqualTo("ShortFilter []");
+        assertThat(filter).hasToString("ShortFilter []");
     }
 
     @Test
@@ -65,7 +65,7 @@ class ShortFilterTest {
         assertThat(copy.getLessThan()).isNull();
         assertThat(copy.getGreaterThanOrEqual()).isNull();
         assertThat(copy.getLessThanOrEqual()).isNull();
-        assertThat(copy.toString()).isEqualTo("ShortFilter []");
+        assertThat(copy).hasToString("ShortFilter []");
     }
 
     @Test
@@ -222,7 +222,7 @@ class ShortFilterTest {
         filter.setGreaterThanOrEqual(value);
         filter.setLessThanOrEqual(value);
         String str = value.toString();
-        assertThat(filter.toString()).isEqualTo(
+        assertThat(filter).hasToString(
             "ShortFilter [equals=" +
                 str +
                 ", notEquals=" +

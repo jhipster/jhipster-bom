@@ -45,7 +45,7 @@ class BooleanFilterTest {
         assertThat(filter.getSpecified()).isNull();
         assertThat(filter.getIn()).isNull();
         assertThat(filter.getNotIn()).isNull();
-        assertThat(filter.toString()).isEqualTo("BooleanFilter []");
+        assertThat(filter).hasToString("BooleanFilter []");
     }
 
     @Test
@@ -57,7 +57,7 @@ class BooleanFilterTest {
         assertThat(copy.getSpecified()).isNull();
         assertThat(copy.getIn()).isNull();
         assertThat(copy.getNotIn()).isNull();
-        assertThat(copy.toString()).isEqualTo("BooleanFilter []");
+        assertThat(copy).hasToString("BooleanFilter []");
     }
 
     @Test
@@ -154,8 +154,6 @@ class BooleanFilterTest {
         filter.setIn(new LinkedList<>());
         filter.setNotIn(new LinkedList<>());
         String str = value.toString();
-        assertThat(filter.toString()).isEqualTo(
-            "BooleanFilter [equals=" + str + ", notEquals=" + str + ", specified=true, in=[], notIn=[]]"
-        );
+        assertThat(filter).hasToString("BooleanFilter [equals=" + str + ", notEquals=" + str + ", specified=true, in=[], notIn=[]]");
     }
 }
