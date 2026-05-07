@@ -180,34 +180,34 @@ class IntegerFilterTest {
     @Test
     void testHashCode() {
         IntegerFilter filter2 = new IntegerFilter();
-        assertThat(filter.hashCode()).isEqualTo(filter2.hashCode());
+        assertThat(filter).hasSameHashCodeAs(filter2);
         filter.setEquals(value);
         filter2.setEquals(value);
-        assertThat(filter.hashCode()).isEqualTo(filter2.hashCode());
+        assertThat(filter).hasSameHashCodeAs(filter2);
         filter.setNotEquals(value);
         filter2.setNotEquals(value);
-        assertThat(filter.hashCode()).isEqualTo(filter2.hashCode());
+        assertThat(filter).hasSameHashCodeAs(filter2);
         filter.setSpecified(false);
         filter2.setSpecified(false);
-        assertThat(filter.hashCode()).isEqualTo(filter2.hashCode());
+        assertThat(filter).hasSameHashCodeAs(filter2);
         filter.setIn(Arrays.asList(value, value));
         filter2.setIn(Arrays.asList(value, value));
-        assertThat(filter.hashCode()).isEqualTo(filter2.hashCode());
+        assertThat(filter).hasSameHashCodeAs(filter2);
         filter.setNotIn(Arrays.asList(value, value));
         filter2.setNotIn(Arrays.asList(value, value));
-        assertThat(filter.hashCode()).isEqualTo(filter2.hashCode());
+        assertThat(filter).hasSameHashCodeAs(filter2);
         filter.setGreaterThan(value);
         filter2.setGreaterThan(value);
-        assertThat(filter.hashCode()).isEqualTo(filter2.hashCode());
+        assertThat(filter).hasSameHashCodeAs(filter2);
         filter.setLessThan(value);
         filter2.setLessThan(value);
-        assertThat(filter.hashCode()).isEqualTo(filter2.hashCode());
+        assertThat(filter).hasSameHashCodeAs(filter2);
         filter.setGreaterThanOrEqual(value);
         filter2.setGreaterThanOrEqual(value);
-        assertThat(filter.hashCode()).isEqualTo(filter2.hashCode());
+        assertThat(filter).hasSameHashCodeAs(filter2);
         filter.setLessThanOrEqual(value);
         filter2.setLessThanOrEqual(value);
-        assertThat(filter.hashCode()).isEqualTo(filter2.hashCode());
+        assertThat(filter).hasSameHashCodeAs(filter2);
     }
 
     @Test

@@ -156,28 +156,28 @@ class StringFilterTest {
     @Test
     void testHashCode() {
         StringFilter filter2 = new StringFilter();
-        assertThat(filter.hashCode()).isEqualTo(filter2.hashCode());
+        assertThat(filter).hasSameHashCodeAs(filter2);
         filter.setEquals(value);
         filter2.setEquals(value);
-        assertThat(filter.hashCode()).isEqualTo(filter2.hashCode());
+        assertThat(filter).hasSameHashCodeAs(filter2);
         filter.setNotEquals(value);
         filter2.setNotEquals(value);
-        assertThat(filter.hashCode()).isEqualTo(filter2.hashCode());
+        assertThat(filter).hasSameHashCodeAs(filter2);
         filter.setSpecified(false);
         filter2.setSpecified(false);
-        assertThat(filter.hashCode()).isEqualTo(filter2.hashCode());
+        assertThat(filter).hasSameHashCodeAs(filter2);
         filter.setIn(Arrays.asList(value, value));
         filter2.setIn(Arrays.asList(value, value));
-        assertThat(filter.hashCode()).isEqualTo(filter2.hashCode());
+        assertThat(filter).hasSameHashCodeAs(filter2);
         filter.setNotIn(Arrays.asList(value, value));
         filter2.setNotIn(Arrays.asList(value, value));
-        assertThat(filter.hashCode()).isEqualTo(filter2.hashCode());
+        assertThat(filter).hasSameHashCodeAs(filter2);
         filter.setContains(value);
         filter2.setContains(value);
-        assertThat(filter.hashCode()).isEqualTo(filter2.hashCode());
+        assertThat(filter).hasSameHashCodeAs(filter2);
         filter.setDoesNotContain(value);
         filter2.setDoesNotContain(value);
-        assertThat(filter.hashCode()).isEqualTo(filter2.hashCode());
+        assertThat(filter).hasSameHashCodeAs(filter2);
         StringFilter filter3 = new StringFilter();
         filter3.setEquals(value);
         assertThat(filter3.hashCode()).isNotEqualTo(filter.hashCode());
