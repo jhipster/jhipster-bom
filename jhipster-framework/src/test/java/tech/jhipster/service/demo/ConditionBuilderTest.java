@@ -50,7 +50,7 @@ import tech.jhipster.service.filter.ShortFilter;
 import tech.jhipster.service.filter.StringFilter;
 import tech.jhipster.service.filter.ZonedDateTimeFilter;
 
-public class ConditionBuilderTest {
+class ConditionBuilderTest {
 
     ConditionBuilder builder;
     private final Duration TEST_DURATION = Duration.ofHours(6);

@@ -46,7 +46,7 @@ class UUIDFilterTest {
         assertThat(filter.getSpecified()).isNull();
         assertThat(filter.getIn()).isNull();
         assertThat(filter.getNotIn()).isNull();
-        assertThat(filter.toString()).isEqualTo("UUIDFilter []");
+        assertThat(filter).hasToString("UUIDFilter []");
     }
 
     @Test
@@ -58,7 +58,7 @@ class UUIDFilterTest {
         assertThat(copy.getSpecified()).isNull();
         assertThat(copy.getIn()).isNull();
         assertThat(copy.getNotIn()).isNull();
-        assertThat(copy.toString()).isEqualTo("UUIDFilter []");
+        assertThat(copy).hasToString("UUIDFilter []");
     }
 
     @Test
@@ -131,22 +131,22 @@ class UUIDFilterTest {
     @Test
     void testHashCode() {
         UUIDFilter filter2 = new UUIDFilter();
-        assertThat(filter.hashCode()).isEqualTo(filter2.hashCode());
+        assertThat(filter).hasSameHashCodeAs(filter2);
         filter.setEquals(value);
         filter2.setEquals(value);
-        assertThat(filter.hashCode()).isEqualTo(filter2.hashCode());
+        assertThat(filter).hasSameHashCodeAs(filter2);
         filter.setNotEquals(value);
         filter2.setNotEquals(value);
-        assertThat(filter.hashCode()).isEqualTo(filter2.hashCode());
+        assertThat(filter).hasSameHashCodeAs(filter2);
         filter.setSpecified(false);
         filter2.setSpecified(false);
-        assertThat(filter.hashCode()).isEqualTo(filter2.hashCode());
+        assertThat(filter).hasSameHashCodeAs(filter2);
         filter.setIn(Arrays.asList(value, value));
         filter2.setIn(Arrays.asList(value, value));
-        assertThat(filter.hashCode()).isEqualTo(filter2.hashCode());
+        assertThat(filter).hasSameHashCodeAs(filter2);
         filter.setNotIn(Arrays.asList(value, value));
         filter2.setNotIn(Arrays.asList(value, value));
-        assertThat(filter.hashCode()).isEqualTo(filter2.hashCode());
+        assertThat(filter).hasSameHashCodeAs(filter2);
         UUIDFilter filter3 = new UUIDFilter();
         filter3.setEquals(value);
         assertThat(filter3.hashCode()).isNotEqualTo(filter.hashCode());
@@ -161,6 +161,6 @@ class UUIDFilterTest {
         filter.setIn(new LinkedList<>());
         filter.setNotIn(new LinkedList<>());
         String str = value.toString();
-        assertThat(filter.toString()).isEqualTo("UUIDFilter [equals=" + str + ", notEquals=" + str + ", specified=true, in=[], notIn=[]]");
+        assertThat(filter).hasToString("UUIDFilter [equals=" + str + ", notEquals=" + str + ", specified=true, in=[], notIn=[]]");
     }
 }

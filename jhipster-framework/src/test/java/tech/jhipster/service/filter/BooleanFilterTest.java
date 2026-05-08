@@ -45,7 +45,7 @@ class BooleanFilterTest {
         assertThat(filter.getSpecified()).isNull();
         assertThat(filter.getIn()).isNull();
         assertThat(filter.getNotIn()).isNull();
-        assertThat(filter.toString()).isEqualTo("BooleanFilter []");
+        assertThat(filter).hasToString("BooleanFilter []");
     }
 
     @Test
@@ -57,7 +57,7 @@ class BooleanFilterTest {
         assertThat(copy.getSpecified()).isNull();
         assertThat(copy.getIn()).isNull();
         assertThat(copy.getNotIn()).isNull();
-        assertThat(copy.toString()).isEqualTo("BooleanFilter []");
+        assertThat(copy).hasToString("BooleanFilter []");
     }
 
     @Test
@@ -128,22 +128,22 @@ class BooleanFilterTest {
     @Test
     void testHashCode() {
         BooleanFilter filter2 = new BooleanFilter();
-        assertThat(filter.hashCode()).isEqualTo(filter2.hashCode());
+        assertThat(filter).hasSameHashCodeAs(filter2);
         filter.setEquals(value);
         filter2.setEquals(value);
-        assertThat(filter.hashCode()).isEqualTo(filter2.hashCode());
+        assertThat(filter).hasSameHashCodeAs(filter2);
         filter.setNotEquals(value);
         filter2.setNotEquals(value);
-        assertThat(filter.hashCode()).isEqualTo(filter2.hashCode());
+        assertThat(filter).hasSameHashCodeAs(filter2);
         filter.setSpecified(false);
         filter2.setSpecified(false);
-        assertThat(filter.hashCode()).isEqualTo(filter2.hashCode());
+        assertThat(filter).hasSameHashCodeAs(filter2);
         filter.setIn(Arrays.asList(value, value));
         filter2.setIn(Arrays.asList(value, value));
-        assertThat(filter.hashCode()).isEqualTo(filter2.hashCode());
+        assertThat(filter).hasSameHashCodeAs(filter2);
         filter.setNotIn(Arrays.asList(value, value));
         filter2.setNotIn(Arrays.asList(value, value));
-        assertThat(filter.hashCode()).isEqualTo(filter2.hashCode());
+        assertThat(filter).hasSameHashCodeAs(filter2);
     }
 
     @Test
@@ -154,8 +154,6 @@ class BooleanFilterTest {
         filter.setIn(new LinkedList<>());
         filter.setNotIn(new LinkedList<>());
         String str = value.toString();
-        assertThat(filter.toString()).isEqualTo(
-            "BooleanFilter [equals=" + str + ", notEquals=" + str + ", specified=true, in=[], notIn=[]]"
-        );
+        assertThat(filter).hasToString("BooleanFilter [equals=" + str + ", notEquals=" + str + ", specified=true, in=[], notIn=[]]");
     }
 }
