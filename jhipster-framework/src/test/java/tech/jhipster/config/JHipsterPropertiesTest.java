@@ -660,7 +660,7 @@ class JHipsterPropertiesTest {
         JHipsterProperties.ApiDocs.Server[] val = new JHipsterProperties.ApiDocs.Server[] { server };
 
         obj.setServers(val);
-        assertThat(obj.getServers().length).isEqualTo(1);
+        assertThat(obj.getServers()).hasSize(1);
         assertThat(obj.getServers()[0].getUrl()).isEqualTo(server.getUrl());
         assertThat(obj.getServers()[0].getDescription()).isEqualTo(server.getDescription());
     }

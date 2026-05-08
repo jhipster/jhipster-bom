@@ -174,8 +174,7 @@ class BigDecimalFilterTest {
         assertThat(filter).isEqualTo(filter2);
         BigDecimalFilter filter3 = new BigDecimalFilter();
         filter3.setEquals(value);
-        assertThat(filter3).isNotEqualTo(filter);
-        assertThat(filter3).isNotEqualTo(filter2);
+        assertThat(filter3).isNotEqualTo(filter).isNotEqualTo(filter2);
     }
 
     @Test
