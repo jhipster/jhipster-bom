@@ -26,7 +26,7 @@ import java.util.Map;
 /**
  * <p>JHipsterDefaults interface.</p>
  */
-@SuppressWarnings({ "java:S2386", "java:S115" })
+@SuppressWarnings({ "java:S1214", "java:S2386", "java:S115" })
 public interface JHipsterDefaults {
     interface Async {
         int corePoolSize = 2;

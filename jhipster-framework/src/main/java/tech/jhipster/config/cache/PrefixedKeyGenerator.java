@@ -57,8 +57,8 @@ public class PrefixedKeyGenerator implements KeyGenerator {
         }
         Object p = ObjectUtils.firstNonNull(shortCommitId, time, version, RandomStringUtils.randomAlphanumeric(12));
 
-        if (p instanceof Instant) {
-            return DateTimeFormatter.ISO_INSTANT.format((Instant) p);
+        if (p instanceof Instant instant) {
+            return DateTimeFormatter.ISO_INSTANT.format(instant);
         }
         return p.toString();
     }

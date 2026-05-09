@@ -40,10 +40,10 @@ public class PrefixedSimpleKey implements Serializable {
     public boolean equals(Object other) {
         return (
             this == other ||
-            (other instanceof PrefixedSimpleKey &&
-                prefix.equals(((PrefixedSimpleKey) other).prefix) &&
-                methodName.equals(((PrefixedSimpleKey) other).methodName) &&
-                Arrays.deepEquals(params, ((PrefixedSimpleKey) other).params))
+            (other instanceof PrefixedSimpleKey prefixedSimpleKey &&
+                prefix.equals(prefixedSimpleKey.prefix) &&
+                methodName.equals(prefixedSimpleKey.methodName) &&
+                Arrays.deepEquals(params, prefixedSimpleKey.params))
         );
     }
 
