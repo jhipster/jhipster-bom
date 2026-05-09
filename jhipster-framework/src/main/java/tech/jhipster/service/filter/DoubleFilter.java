@@ -46,6 +46,7 @@ public class DoubleFilter extends RangeFilter<Double> {
      *
      * @return a {@link DoubleFilter} object.
      */
+    @Override
     public DoubleFilter copy() {
         return new DoubleFilter(this);
     }

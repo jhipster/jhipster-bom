@@ -29,7 +29,6 @@ import java.util.Collection;
 import java.util.Set;
 import java.util.function.Function;
 import org.springframework.data.jpa.domain.Specification;
-import org.springframework.lang.Nullable;
 import org.springframework.transaction.annotation.Transactional;
 import tech.jhipster.service.filter.Filter;
 import tech.jhipster.service.filter.RangeFilter;
@@ -41,6 +40,7 @@ import tech.jhipster.service.filter.StringFilter;
  * @param <ENTITY> the type of the entity which is queried.
  */
 @Transactional(readOnly = true)
+@SuppressWarnings("java:S119")
 public abstract class QueryService<ENTITY> {
 
     /**
@@ -52,7 +52,7 @@ public abstract class QueryService<ENTITY> {
      * @param <X>    The type of the attribute which is filtered.
      * @return a Specification
      */
-    protected <X> Specification<ENTITY> buildSpecification(@Nullable Filter<X> filter, SingularAttribute<? super ENTITY, X> field) {
+    protected <X> Specification<ENTITY> buildSpecification(Filter<X> filter, SingularAttribute<? super ENTITY, X> field) {
         return buildSpecification(filter, root -> root.get(field));
     }
 
@@ -65,10 +65,7 @@ public abstract class QueryService<ENTITY> {
      * @param <X>               The type of the attribute which is filtered.
      * @return a Specification
      */
-    protected <X> Specification<ENTITY> buildSpecification(
-        @Nullable Filter<X> filter,
-        Function<Root<ENTITY>, Expression<X>> metaclassFunction
-    ) {
+    protected <X> Specification<ENTITY> buildSpecification(Filter<X> filter, Function<Root<ENTITY>, Expression<X>> metaclassFunction) {
         if (filter == null) {
             return Specification.unrestricted();
         } else if (filter.getEquals() != null) {
@@ -93,10 +90,7 @@ public abstract class QueryService<ENTITY> {
      * @param field  the JPA static metamodel representing the field.
      * @return a Specification
      */
-    protected Specification<ENTITY> buildStringSpecification(
-        @Nullable StringFilter filter,
-        SingularAttribute<? super ENTITY, String> field
-    ) {
+    protected Specification<ENTITY> buildStringSpecification(StringFilter filter, SingularAttribute<? super ENTITY, String> field) {
         return buildSpecification(filter, root -> root.get(field));
     }
 
@@ -108,10 +102,7 @@ public abstract class QueryService<ENTITY> {
      * @param metaclassFunction lambda, which based on a Root&lt;ENTITY&gt; returns Expression - basicaly picks a column
      * @return a Specification
      */
-    protected Specification<ENTITY> buildSpecification(
-        @Nullable StringFilter filter,
-        Function<Root<ENTITY>, Expression<String>> metaclassFunction
-    ) {
+    protected Specification<ENTITY> buildSpecification(StringFilter filter, Function<Root<ENTITY>, Expression<String>> metaclassFunction) {
         if (filter == null) {
             return Specification.unrestricted();
         } else if (filter.getEquals() != null) {
@@ -143,7 +134,7 @@ public abstract class QueryService<ENTITY> {
      * @return a Specification
      */
     protected <X extends Comparable<? super X>> Specification<ENTITY> buildRangeSpecification(
-        @Nullable RangeFilter<X> filter,
+        RangeFilter<X> filter,
         SingularAttribute<? super ENTITY, X> field
     ) {
         return buildSpecification(filter, root -> root.get(field));
@@ -160,7 +151,7 @@ public abstract class QueryService<ENTITY> {
      * @return a Specification
      */
     protected <X extends Comparable<? super X>> Specification<ENTITY> buildSpecification(
-        @Nullable RangeFilter<X> filter,
+        RangeFilter<X> filter,
         Function<Root<ENTITY>, Expression<X>> metaclassFunction
     ) {
         if (filter == null) {
@@ -215,7 +206,7 @@ public abstract class QueryService<ENTITY> {
      * @return a Specification
      */
     protected <OTHER, X> Specification<ENTITY> buildReferringEntitySpecification(
-        @Nullable Filter<X> filter,
+        Filter<X> filter,
         SingularAttribute<? super ENTITY, OTHER> reference,
         SingularAttribute<? super OTHER, X> valueField
     ) {
@@ -241,7 +232,7 @@ public abstract class QueryService<ENTITY> {
      * @return a Specification
      */
     protected <OTHER, X> Specification<ENTITY> buildReferringEntitySpecification(
-        @Nullable Filter<X> filter,
+        Filter<X> filter,
         SetAttribute<ENTITY, OTHER> reference,
         SingularAttribute<OTHER, X> valueField
     ) {
@@ -307,7 +298,7 @@ public abstract class QueryService<ENTITY> {
      * @return a Specification
      */
     protected <OTHER, X extends Comparable<? super X>> Specification<ENTITY> buildReferringEntitySpecification(
-        @Nullable RangeFilter<X> filter,
+        RangeFilter<X> filter,
         SetAttribute<ENTITY, OTHER> reference,
         SingularAttribute<OTHER, X> valueField
     ) {
@@ -341,7 +332,7 @@ public abstract class QueryService<ENTITY> {
      * @return a Specification
      */
     protected <OTHER, MISC, X extends Comparable<? super X>> Specification<ENTITY> buildReferringEntitySpecification(
-        @Nullable RangeFilter<X> filter,
+        RangeFilter<X> filter,
         Function<Root<ENTITY>, SetJoin<MISC, OTHER>> functionToEntity,
         Function<SetJoin<MISC, OTHER>, Expression<X>> entityToColumn
     ) {

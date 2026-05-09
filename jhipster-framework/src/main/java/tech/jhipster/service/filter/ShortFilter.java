@@ -47,6 +47,7 @@ public class ShortFilter extends RangeFilter<Short> {
      *
      * @return a {@link ShortFilter} object.
      */
+    @Override
     public ShortFilter copy() {
         return new ShortFilter(this);
     }

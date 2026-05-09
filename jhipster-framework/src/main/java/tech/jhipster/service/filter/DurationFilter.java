@@ -48,6 +48,7 @@ public class DurationFilter extends RangeFilter<Duration> {
      *
      * @return a {@link DurationFilter} object.
      */
+    @Override
     public DurationFilter copy() {
         return new DurationFilter(this);
     }

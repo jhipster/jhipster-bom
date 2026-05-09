@@ -47,6 +47,7 @@ public class IntegerFilter extends RangeFilter<Integer> {
      *
      * @return a {@link IntegerFilter} object.
      */
+    @Override
     public IntegerFilter copy() {
         return new IntegerFilter(this);
     }

@@ -48,6 +48,7 @@ public class UUIDFilter extends Filter<UUID> {
      *
      * @return a {@link UUIDFilter} object.
      */
+    @Override
     public UUIDFilter copy() {
         return new UUIDFilter(this);
     }

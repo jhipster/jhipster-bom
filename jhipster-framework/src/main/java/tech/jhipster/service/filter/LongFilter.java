@@ -47,6 +47,7 @@ public class LongFilter extends RangeFilter<Long> {
      *
      * @return a {@link LongFilter} object.
      */
+    @Override
     public LongFilter copy() {
         return new LongFilter(this);
     }

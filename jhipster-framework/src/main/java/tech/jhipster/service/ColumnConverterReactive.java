@@ -20,7 +20,6 @@
 package tech.jhipster.service;
 
 import org.springframework.core.convert.ConversionService;
-import org.springframework.lang.Nullable;
 
 /**
  * Interface used in the (@link ConditionBuilder) to help build literal 'value expression' of the Conditions.
@@ -36,5 +35,5 @@ public interface ColumnConverterReactive {
      * @param <T> the parameter for the intended type.
      * @return the value which can be constructed from the input.
      */
-    public <T> T convert(@Nullable Object value, @Nullable Class<T> target);
+    public <T> T convert(Object value, Class<T> target);
 }
