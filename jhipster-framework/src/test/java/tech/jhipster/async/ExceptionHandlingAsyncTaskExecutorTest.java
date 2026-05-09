@@ -278,9 +278,13 @@ class ExceptionHandlingAsyncTaskExecutorTest {
     @SuppressWarnings("serial")
     private class MockAsyncTaskExecutor extends SimpleAsyncTaskExecutor {
 
-        public void afterPropertiesSet() {}
+        public void afterPropertiesSet() {
+            // empty method
+        }
 
-        public void destroy() {}
+        public void destroy() {
+            // empty method
+        }
     }
 
     @SuppressWarnings("serial")

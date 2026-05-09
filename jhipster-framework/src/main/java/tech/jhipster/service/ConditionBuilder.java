@@ -58,20 +58,20 @@ public class ConditionBuilder {
      * @param column 	The column for which the condition is constructed
      */
     public <X> void buildFilterConditionForField(Filter<X> field, Column column) {
-        if (field instanceof DurationFilter) {
-            buildRangeConditions((DurationFilter) field, column, Long.class);
+        if (field instanceof DurationFilter durationFilter) {
+            buildRangeConditions(durationFilter, column, Long.class);
             buildGeneralConditions(field, column, Long.class);
-        } else if (field instanceof ZonedDateTimeFilter) {
-            buildRangeConditions((ZonedDateTimeFilter) field, column, LocalDateTime.class);
+        } else if (field instanceof ZonedDateTimeFilter zonedDateTimeFilter) {
+            buildRangeConditions(zonedDateTimeFilter, column, LocalDateTime.class);
             buildGeneralConditions(field, column, LocalDateTime.class);
-        } else if (field instanceof InstantFilter) {
-            buildRangeConditions((InstantFilter) field, column, LocalDateTime.class);
+        } else if (field instanceof InstantFilter instantFilter) {
+            buildRangeConditions(instantFilter, column, LocalDateTime.class);
             buildGeneralConditions(field, column, LocalDateTime.class);
-        } else if (field instanceof RangeFilter) {
-            buildRangeConditions((RangeFilter) field, column, null);
+        } else if (field instanceof RangeFilter rangeFilter) {
+            buildRangeConditions(rangeFilter, column, null);
             buildGeneralConditions(field, column, null);
-        } else if (field instanceof StringFilter) {
-            buildStringConditions((StringFilter) field, column);
+        } else if (field instanceof StringFilter stringFilter) {
+            buildStringConditions(stringFilter, column);
             buildGeneralConditions(field, column, null);
         } else if (field instanceof BooleanFilter) {
             buildBooleanConditions(field, column);
@@ -88,9 +88,9 @@ public class ConditionBuilder {
     public Condition buildConditions() {
         return allFilters
             .stream()
-            .reduce(null, (Condition cumulated, Condition eachCondition) -> {
-                return cumulated != null ? cumulated.and(eachCondition) : eachCondition;
-            });
+            .reduce(null, (Condition cumulated, Condition eachCondition) ->
+                cumulated != null ? cumulated.and(eachCondition) : eachCondition
+            );
     }
 
     private <X> Function<X, String> columnValueConverter(Class<?> targetClass) {
@@ -149,7 +149,7 @@ public class ConditionBuilder {
                 )
             );
         }
-        if (generalData.getNotIn() != null && generalData.getNotIn().size() > 0) {
+        if (generalData.getNotIn() != null && !generalData.getNotIn().isEmpty()) {
             allFilters.add(
                 Conditions.notIn(
                     column,
@@ -189,7 +189,7 @@ public class ConditionBuilder {
                 )
             );
         }
-        if (generalData.getNotIn() != null && generalData.getNotIn().size() > 0) {
+        if (generalData.getNotIn() != null && !generalData.getNotIn().isEmpty()) {
             allFilters.add(
                 Conditions.notIn(
                     column,

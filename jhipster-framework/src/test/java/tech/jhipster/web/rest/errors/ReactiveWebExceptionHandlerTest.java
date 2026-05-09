@@ -33,7 +33,7 @@ class ReactiveWebExceptionHandlerTest {
     private static final ResponseStatusException EXCEPTION_TO_HANDLE = new ResponseStatusException(HANDLED_RESPONSE_STATUS, TITLE_REASON);
     private static final IllegalStateException EXCEPTION_NOT_TO_HANDLE = new IllegalStateException("Test Exception");
     private static final String PROBLEM_TYPE = "http://test.com/testExceptionTranslation";
-    private static final String expectedResponse =
+    private static final String EXPECTED_RESPONSE =
         "{\"type\":\"http://test.com/testExceptionTranslation\",\"title\":\"Test Reason\",\"status\":405,\"detail\":null,\"instance\":null,\"properties\":null}";
 
     @Test
@@ -52,7 +52,7 @@ class ReactiveWebExceptionHandlerTest {
         assertEquals(HANDLED_RESPONSE_STATUS, response.getStatusCode());
         assertEquals(RESPONSE_TYPE, response.getHeaders().getContentType());
         ObjectMapper mapper = new ObjectMapper();
-        JsonNode expectedTree = mapper.readTree(expectedResponse);
+        JsonNode expectedTree = mapper.readTree(EXPECTED_RESPONSE);
         JsonNode responseTree = mapper.readTree(response.getBodyAsString().block());
         assertEquals(expectedTree, responseTree);
     }

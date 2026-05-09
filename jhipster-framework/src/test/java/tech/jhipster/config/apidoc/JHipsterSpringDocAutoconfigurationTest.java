@@ -176,10 +176,14 @@ class JHipsterSpringDocAutoconfigurationTest {
 
         @Operation
         @RequestMapping(value = "/scanned/test", method = RequestMethod.GET)
-        public void scanned(@ParameterObject Pageable pageable) {}
+        public void scanned(@ParameterObject Pageable pageable) {
+            // empty method
+        }
 
         @Operation
         @GetMapping("/not-scanned/test")
-        public void notScanned(@ParameterObject Pageable pageable) {}
+        public void notScanned(@ParameterObject Pageable pageable) {
+            // empty method
+        }
     }
 }
