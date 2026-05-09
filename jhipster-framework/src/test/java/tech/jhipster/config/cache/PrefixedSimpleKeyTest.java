@@ -10,8 +10,7 @@ class PrefixedSimpleKeyTest {
         PrefixedSimpleKey prefixedSimpleKey = new PrefixedSimpleKey("prefix", "setX", "x", "y");
         PrefixedSimpleKey prefixedSimpleKey2 = new PrefixedSimpleKey("prefix", "setX", "x", "y");
 
-        Assertions.assertThat(prefixedSimpleKey).isEqualTo(prefixedSimpleKey2);
-        Assertions.assertThat(prefixedSimpleKey).hasSameHashCodeAs(prefixedSimpleKey2);
+        Assertions.assertThat(prefixedSimpleKey).isEqualTo(prefixedSimpleKey2).hasSameHashCodeAs(prefixedSimpleKey2);
     }
 
     @Test
@@ -19,8 +18,7 @@ class PrefixedSimpleKeyTest {
         PrefixedSimpleKey prefixedSimpleKey = new PrefixedSimpleKey("prefix", "setX", "x");
         PrefixedSimpleKey prefixedSimpleKey2 = new PrefixedSimpleKey("prefix", "setX", "x");
 
-        Assertions.assertThat(prefixedSimpleKey).isEqualTo(prefixedSimpleKey2);
-        Assertions.assertThat(prefixedSimpleKey).hasSameHashCodeAs(prefixedSimpleKey2);
+        Assertions.assertThat(prefixedSimpleKey).isEqualTo(prefixedSimpleKey2).hasSameHashCodeAs(prefixedSimpleKey2);
     }
 
     @Test

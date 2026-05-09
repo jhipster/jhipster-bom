@@ -42,7 +42,7 @@ import tech.jhipster.test.LogbackRecorder.Event;
 class ExceptionHandlingAsyncTaskExecutorTest {
 
     private static final RuntimeException exception = new RuntimeException("Eek");
-    private static final int testResult = 42;
+    private static final int TEST_RESULT = 42;
 
     private boolean done;
     private Exception handled;
@@ -262,7 +262,7 @@ class ExceptionHandlingAsyncTaskExecutorTest {
         @Override
         public Integer call() {
             done = true;
-            return testResult;
+            return TEST_RESULT;
         }
     }
 

@@ -121,8 +121,7 @@ class BooleanFilterTest {
         assertThat(filter).isEqualTo(filter2);
         BooleanFilter filter3 = new BooleanFilter();
         filter3.setEquals(value);
-        assertThat(filter3).isNotEqualTo(filter);
-        assertThat(filter3).isNotEqualTo(filter2);
+        assertThat(filter3).isNotEqualTo(filter).isNotEqualTo(filter2);
     }
 
     @Test

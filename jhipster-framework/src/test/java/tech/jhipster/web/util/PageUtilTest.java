@@ -55,8 +55,7 @@ class PageUtilTest {
 
     @Test
     void generatePageFromListShouldThrowIllegalArgumentExceptionIfListNull() {
-        assertThatThrownBy(() -> PageUtil.createPageFromList(null, PageRequest.of(0, PAGE_SIZE))).isInstanceOf(
-            IllegalArgumentException.class
-        );
+        PageRequest pageRequest = PageRequest.of(0, PAGE_SIZE);
+        assertThatThrownBy(() -> PageUtil.createPageFromList(null, pageRequest)).isInstanceOf(IllegalArgumentException.class);
     }
 }

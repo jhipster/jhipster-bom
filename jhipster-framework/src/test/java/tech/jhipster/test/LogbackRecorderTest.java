@@ -32,6 +32,7 @@ import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
 import tech.jhipster.test.LogbackRecorder.Event;
 
+@SuppressWarnings("java:S3457")
 class LogbackRecorderTest {
 
     private static final String[] TEST_MESSAGES = { "error", "warn", "info", "debug", "trace" };
@@ -282,24 +283,21 @@ class LogbackRecorderTest {
     @Test
     void testLogbackException() {
         Throwable caught = catchThrowable(() -> LogbackRecorder.forLogger(mock(Logger.class)));
-        assertThat(caught).isInstanceOf(IllegalArgumentException.class);
-        assertThat(caught).hasMessage(LogbackRecorder.LOGBACK_EXCEPTION_MESSAGE);
+        assertThat(caught).isInstanceOf(IllegalArgumentException.class).hasMessage(LogbackRecorder.LOGBACK_EXCEPTION_MESSAGE);
     }
 
     @Test
     void testCaptureException() {
         recorder.capture("ALL");
         Throwable caught = catchThrowable(() -> recorder.capture("ALL"));
-        assertThat(caught).isInstanceOf(IllegalStateException.class);
-        assertThat(caught).hasMessage(LogbackRecorder.CAPTURE_EXCEPTION_MESSAGE);
+        assertThat(caught).isInstanceOf(IllegalStateException.class).hasMessage(LogbackRecorder.CAPTURE_EXCEPTION_MESSAGE);
         recorder.release();
     }
 
     @Test
     void testReleaseException() {
         Throwable caught = catchThrowable(() -> recorder.release());
-        assertThat(caught).isInstanceOf(IllegalStateException.class);
-        assertThat(caught).hasMessage(LogbackRecorder.RELEASE_EXCEPTION_MESSAGE);
+        assertThat(caught).isInstanceOf(IllegalStateException.class).hasMessage(LogbackRecorder.RELEASE_EXCEPTION_MESSAGE);
     }
 
     @Test
