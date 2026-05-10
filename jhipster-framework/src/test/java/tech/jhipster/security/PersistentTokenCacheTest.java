@@ -24,6 +24,7 @@ import static org.assertj.core.api.Assertions.catchThrowable;
 
 import org.junit.jupiter.api.Test;
 
+@SuppressWarnings("java:S2925")
 class PersistentTokenCacheTest {
 
     @Test

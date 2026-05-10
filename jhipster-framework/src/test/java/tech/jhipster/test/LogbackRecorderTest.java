@@ -26,6 +26,8 @@ import static org.mockito.Mockito.mock;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
@@ -50,14 +52,15 @@ class LogbackRecorderTest {
         recorder.reset();
     }
 
-    @Test
-    void testTrace() {
-        recorder.capture("TRACE");
+    @ParameterizedTest
+    @CsvSource({ "TRACE, 5", "DEBUG, 4", "INFO, 3", "WARN, 2" })
+    void testLevel(String level, int expectedSize) {
+        recorder.capture(level);
 
         write();
 
         List<Event> events = recorder.play();
-        assertThat(events).hasSize(5);
+        assertThat(events).hasSize(expectedSize);
 
         for (int i = 0; i < events.size(); i++) {
             Event event = events.get(i);
@@ -71,140 +74,15 @@ class LogbackRecorderTest {
         recorder.release();
     }
 
-    @Test
-    void testTraceWithException() {
-        recorder.capture("TRACE");
+    @ParameterizedTest
+    @CsvSource({ "TRACE, 5", "DEBUG, 4", "INFO, 3", "WARN, 2" })
+    void testLevelWithException(String level, int expectedSize) {
+        recorder.capture(level);
 
         writeWithException();
 
         List<Event> events = recorder.play();
-        assertThat(events).hasSize(5);
-
-        for (int i = 0; i < events.size(); i++) {
-            Event event = events.get(i);
-            assertThat(event.getMarker()).isEqualTo(marker);
-            assertThat(event.getLevel()).isEqualTo(TEST_MESSAGES[i].toUpperCase());
-            assertThat(event.getMessage()).startsWith(TEST_MESSAGES[i]);
-            assertThat(event.getArguments()).containsExactly(TEST_ARGUMENTS[i]);
-            assertThat(event.getThrown()).isEqualTo(exception.toString());
-        }
-
-        recorder.release();
-    }
-
-    @Test
-    void testDebug() {
-        recorder.capture("DEBUG");
-
-        write();
-
-        List<Event> events = recorder.play();
-        assertThat(events).hasSize(4);
-
-        for (int i = 0; i < events.size(); i++) {
-            Event event = events.get(i);
-            assertThat(event.getMarker()).isEqualTo(marker);
-            assertThat(event.getLevel()).isEqualTo(TEST_MESSAGES[i].toUpperCase());
-            assertThat(event.getMessage()).startsWith(TEST_MESSAGES[i]);
-            assertThat(event.getArguments()).containsExactly(TEST_ARGUMENTS[i]);
-            assertThat(event.getThrown()).isNull();
-        }
-
-        recorder.release();
-    }
-
-    @Test
-    void testDebugWithException() {
-        recorder.capture("DEBUG");
-
-        writeWithException();
-
-        List<Event> events = recorder.play();
-        assertThat(events).hasSize(4);
-
-        for (int i = 0; i < events.size(); i++) {
-            Event event = events.get(i);
-            assertThat(event.getMarker()).isEqualTo(marker);
-            assertThat(event.getLevel()).isEqualTo(TEST_MESSAGES[i].toUpperCase());
-            assertThat(event.getMessage()).startsWith(TEST_MESSAGES[i]);
-            assertThat(event.getArguments()).containsExactly(TEST_ARGUMENTS[i]);
-            assertThat(event.getThrown()).isEqualTo(exception.toString());
-        }
-
-        recorder.release();
-    }
-
-    @Test
-    void testInfo() {
-        recorder.capture("INFO");
-
-        write();
-
-        List<Event> events = recorder.play();
-        assertThat(events).hasSize(3);
-
-        for (int i = 0; i < events.size(); i++) {
-            Event event = events.get(i);
-            assertThat(event.getMarker()).isEqualTo(marker);
-            assertThat(event.getLevel()).isEqualTo(TEST_MESSAGES[i].toUpperCase());
-            assertThat(event.getMessage()).startsWith(TEST_MESSAGES[i]);
-            assertThat(event.getArguments()).containsExactly(TEST_ARGUMENTS[i]);
-            assertThat(event.getThrown()).isNull();
-        }
-
-        recorder.release();
-    }
-
-    @Test
-    void testInfoWithException() {
-        recorder.capture("INFO");
-
-        writeWithException();
-
-        List<Event> events = recorder.play();
-        assertThat(events).hasSize(3);
-
-        for (int i = 0; i < events.size(); i++) {
-            Event event = events.get(i);
-            assertThat(event.getMarker()).isEqualTo(marker);
-            assertThat(event.getLevel()).isEqualTo(TEST_MESSAGES[i].toUpperCase());
-            assertThat(event.getMessage()).startsWith(TEST_MESSAGES[i]);
-            assertThat(event.getArguments()).containsExactly(TEST_ARGUMENTS[i]);
-            assertThat(event.getThrown()).isEqualTo(exception.toString());
-        }
-
-        recorder.release();
-    }
-
-    @Test
-    void testWarn() {
-        recorder.capture("WARN");
-
-        write();
-
-        List<Event> events = recorder.play();
-        assertThat(events).hasSize(2);
-
-        for (int i = 0; i < events.size(); i++) {
-            Event event = events.get(i);
-            assertThat(event.getMarker()).isEqualTo(marker);
-            assertThat(event.getLevel()).isEqualTo(TEST_MESSAGES[i].toUpperCase());
-            assertThat(event.getMessage()).startsWith(TEST_MESSAGES[i]);
-            assertThat(event.getArguments()).containsExactly(TEST_ARGUMENTS[i]);
-            assertThat(event.getThrown()).isNull();
-        }
-
-        recorder.release();
-    }
-
-    @Test
-    void testWarnWithException() {
-        recorder.capture("WARN");
-
-        writeWithException();
-
-        List<Event> events = recorder.play();
-        assertThat(events).hasSize(2);
+        assertThat(events).hasSize(expectedSize);
 
         for (int i = 0; i < events.size(); i++) {
             Event event = events.get(i);

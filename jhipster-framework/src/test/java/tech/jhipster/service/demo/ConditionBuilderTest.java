@@ -53,18 +53,18 @@ import tech.jhipster.service.filter.ZonedDateTimeFilter;
 class ConditionBuilderTest {
 
     ConditionBuilder builder;
-    private final Duration TEST_DURATION = Duration.ofHours(6);
-    private final ZonedDateTime TEST_ZONED_DATE_TIME = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
-    private final Instant TEST_INSTANT = Instant.ofEpochMilli(0L);
-    private final String TEST_STRING = "HAPPY_FILTER";
-    private final Boolean TEST_BOOLEAN_TRUE = true;
-    private final Boolean TEST_BOOLEAN_FALSE = false;
-    private final Long TEST_LONG = 123L;
-    private final BigDecimal TEST_BIG_DECIMAL = new BigDecimal(123);
-    private final Double TEST_DOUBLE = Double.valueOf(123d);
-    private final Float TEST_FLOAT = Float.valueOf(123f);
-    private final Integer TEST_INTEGER = Integer.valueOf(123);
-    private final Short TEST_SHORT = Short.valueOf((short) 123);
+    private final Duration testDuration = Duration.ofHours(6);
+    private final ZonedDateTime testZonedDateTime = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
+    private final Instant testInstant = Instant.ofEpochMilli(0L);
+    private final String testString = "HAPPY_FILTER";
+    private final Boolean testBooleanTrue = true;
+    private final Boolean testBooleanFalse = false;
+    private final Long testLong = 123L;
+    private final BigDecimal testBigDecimal = new BigDecimal(123);
+    private final Double testDouble = Double.valueOf(123d);
+    private final Float testFloat = Float.valueOf(123f);
+    private final Integer testInteger = Integer.valueOf(123);
+    private final Short testShort = Short.valueOf((short) 123);
     private final List<String> rangeFilterSetters = Arrays.asList("GreaterThan", "LessThan", "GreaterThanOrEqual", "LessThanOrEqual");
     private final List<String> stringFilterSetters = Arrays.asList("Contains", "DoesNotContain");
     private final List<String> generalFilterSetters = Arrays.asList("Equals", "NotEquals", "In", "NotIn", "Specified");
@@ -99,25 +99,25 @@ class ConditionBuilderTest {
 
     @Test
     void testUsingDurationTypeSingleFilter() throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-        DurationFilter testDuration = (DurationFilter) new ConditionTestHelper(
+        DurationFilter durationFilter = (DurationFilter) new ConditionTestHelper(
             Arrays.asList(),
             Arrays.asList(),
             Arrays.asList("NotEquals"),
             true
-        ).buildRangeConditions(new DurationFilter(), TEST_DURATION);
-        setupBuilder(testDuration);
+        ).buildRangeConditions(new DurationFilter(), testDuration);
+        setupBuilder(durationFilter);
         assertConditionBuild("c.time_to_go != '21600000'");
     }
 
     @Test
     void testUsingDurationTypeWithAllFilters() throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-        DurationFilter testDuration = (DurationFilter) new ConditionTestHelper(
+        DurationFilter durationFilter = (DurationFilter) new ConditionTestHelper(
             rangeFilterSetters,
             Arrays.asList(),
             generalFilterSetters,
             true
-        ).buildRangeConditions(new DurationFilter(), TEST_DURATION);
-        setupBuilder(testDuration);
+        ).buildRangeConditions(new DurationFilter(), testDuration);
+        setupBuilder(durationFilter);
         assertConditionBuild(
             "c.time_to_go > '21600000' AND c.time_to_go < '21600000' AND c.time_to_go >= '21600000' " +
                 "AND c.time_to_go <= '21600000' AND c.time_to_go = '21600000' AND c.time_to_go != '21600000' A" +
@@ -127,25 +127,25 @@ class ConditionBuilderTest {
 
     @Test
     void testUsingDurationTypeWithUultipleIn() throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-        DurationFilter testDuration = (DurationFilter) new ConditionTestHelper(
+        DurationFilter durationFilter = (DurationFilter) new ConditionTestHelper(
             Arrays.asList(),
             Arrays.asList(),
             Arrays.asList("Equals", "In", "Specified"),
             false
-        ).buildRangeConditions(new DurationFilter(), TEST_DURATION, TEST_DURATION.plusMillis(10));
-        setupBuilder(testDuration);
+        ).buildRangeConditions(new DurationFilter(), testDuration, testDuration.plusMillis(10));
+        setupBuilder(durationFilter);
         assertConditionBuild("c.time_to_go = '21600000' AND c.time_to_go IN ('21600000', '21600010') AND c.time_to_go IS NULL");
     }
 
     @Test
     void testUsingDurationTypeWithUultipleNotIn() throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-        DurationFilter testDuration = (DurationFilter) new ConditionTestHelper(
+        DurationFilter durationFilter = (DurationFilter) new ConditionTestHelper(
             Arrays.asList(),
             Arrays.asList(),
             Arrays.asList("NotEquals", "NotIn"),
             null
-        ).buildRangeConditions(new DurationFilter(), TEST_DURATION, TEST_DURATION.plusMillis(10));
-        setupBuilder(testDuration);
+        ).buildRangeConditions(new DurationFilter(), testDuration, testDuration.plusMillis(10));
+        setupBuilder(durationFilter);
         assertConditionBuild("c.time_to_go != '21600000' AND c.time_to_go NOT IN ('21600000', '21600010')");
     }
 
@@ -156,7 +156,7 @@ class ConditionBuilderTest {
             Arrays.asList(),
             Arrays.asList("NotEquals"),
             null
-        ).buildRangeConditions(new ZonedDateTimeFilter(), TEST_ZONED_DATE_TIME);
+        ).buildRangeConditions(new ZonedDateTimeFilter(), testZonedDateTime);
         setupBuilder(testDuration);
         assertConditionBuild("c.time_to_go != '1970-01-01T00:00'");
     }
@@ -168,7 +168,7 @@ class ConditionBuilderTest {
             Arrays.asList(),
             generalFilterSetters,
             true
-        ).buildRangeConditions(new ZonedDateTimeFilter(), TEST_ZONED_DATE_TIME);
+        ).buildRangeConditions(new ZonedDateTimeFilter(), testZonedDateTime);
         setupBuilder(testDuration);
         assertConditionBuild(
             "c.time_to_go > '1970-01-01T00:00' AND c.time_to_go < '1970-01-01T00:00' " +
@@ -186,7 +186,7 @@ class ConditionBuilderTest {
             Arrays.asList(),
             Arrays.asList("Equals", "In", "Specified"),
             false
-        ).buildRangeConditions(new ZonedDateTimeFilter(), TEST_ZONED_DATE_TIME, TEST_ZONED_DATE_TIME.plusSeconds(1));
+        ).buildRangeConditions(new ZonedDateTimeFilter(), testZonedDateTime, testZonedDateTime.plusSeconds(1));
         setupBuilder(testDuration);
         assertConditionBuild(
             "c.time_to_go = '1970-01-01T00:00' AND c.time_to_go IN ('1970-01-01T00:00', '1970-01-01T00:00:01') AND c.time_to_go IS NULL"
@@ -200,7 +200,7 @@ class ConditionBuilderTest {
             Arrays.asList(),
             Arrays.asList("NotEquals", "NotIn"),
             null
-        ).buildRangeConditions(new ZonedDateTimeFilter(), TEST_ZONED_DATE_TIME, TEST_ZONED_DATE_TIME.plusSeconds(1));
+        ).buildRangeConditions(new ZonedDateTimeFilter(), testZonedDateTime, testZonedDateTime.plusSeconds(1));
         setupBuilder(testDuration);
         assertConditionBuild("c.time_to_go != '1970-01-01T00:00' AND c.time_to_go NOT IN ('1970-01-01T00:00', '1970-01-01T00:00:01')");
     }
@@ -212,7 +212,7 @@ class ConditionBuilderTest {
             Arrays.asList(),
             Arrays.asList("NotEquals"),
             null
-        ).buildRangeConditions(new InstantFilter(), TEST_INSTANT);
+        ).buildRangeConditions(new InstantFilter(), testInstant);
         setupBuilder(testDuration);
         assertConditionBuild("c.time_to_go != '1970-01-01T00:00'");
     }
@@ -224,7 +224,7 @@ class ConditionBuilderTest {
             Arrays.asList(),
             generalFilterSetters,
             true
-        ).buildRangeConditions(new InstantFilter(), TEST_INSTANT);
+        ).buildRangeConditions(new InstantFilter(), testInstant);
         setupBuilder(testDuration);
         assertConditionBuild(
             "c.time_to_go > '1970-01-01T00:00' AND c.time_to_go < '1970-01-01T00:00' AND c.time_to_go >= '1970-01-01T00:00' " +
@@ -240,7 +240,7 @@ class ConditionBuilderTest {
             Arrays.asList(),
             Arrays.asList("Equals", "In", "Specified"),
             false
-        ).buildRangeConditions(new InstantFilter(), TEST_INSTANT, TEST_INSTANT.plusMillis(10));
+        ).buildRangeConditions(new InstantFilter(), testInstant, testInstant.plusMillis(10));
         setupBuilder(testDuration);
         assertConditionBuild(
             "c.time_to_go = '1970-01-01T00:00' AND c.time_to_go IN ('1970-01-01T00:00', '1970-01-01T00:00:00.010') AND c.time_to_go IS NULL"
@@ -254,7 +254,7 @@ class ConditionBuilderTest {
             Arrays.asList(),
             Arrays.asList("NotEquals", "NotIn"),
             null
-        ).buildRangeConditions(new InstantFilter(), TEST_INSTANT, TEST_INSTANT.plusMillis(10));
+        ).buildRangeConditions(new InstantFilter(), testInstant, testInstant.plusMillis(10));
         setupBuilder(testDuration);
         assertConditionBuild("c.time_to_go != '1970-01-01T00:00' AND c.time_to_go NOT IN ('1970-01-01T00:00', '1970-01-01T00:00:00.010')");
     }
@@ -266,7 +266,7 @@ class ConditionBuilderTest {
             Arrays.asList(),
             Arrays.asList("NotEquals"),
             null
-        ).buildStringConditions(new StringFilter(), TEST_STRING);
+        ).buildStringConditions(new StringFilter(), testString);
         setupBuilder(testDuration);
         assertConditionBuild("c.time_to_go != 'HAPPY_FILTER'");
     }
@@ -278,7 +278,7 @@ class ConditionBuilderTest {
             stringFilterSetters,
             generalFilterSetters,
             true
-        ).buildStringConditions(new StringFilter(), TEST_STRING);
+        ).buildStringConditions(new StringFilter(), testString);
         setupBuilder(testDuration);
         assertConditionBuild(
             "c.time_to_go LIKE 'HAPPY_FILTER' AND c.time_to_go NOT LIKE 'HAPPY_FILTER' AND " +
@@ -294,7 +294,7 @@ class ConditionBuilderTest {
             Arrays.asList(),
             Arrays.asList("Equals", "In", "Specified"),
             false
-        ).buildStringConditions(new StringFilter(), TEST_STRING, TEST_STRING + "!!!");
+        ).buildStringConditions(new StringFilter(), testString, testString + "!!!");
         setupBuilder(testDuration);
         assertConditionBuild(
             "c.time_to_go = 'HAPPY_FILTER' AND c.time_to_go IN ('HAPPY_FILTER', 'HAPPY_FILTER!!!') AND c.time_to_go IS NULL"
@@ -308,7 +308,7 @@ class ConditionBuilderTest {
             Arrays.asList(),
             Arrays.asList("NotEquals", "NotIn"),
             null
-        ).buildStringConditions(new StringFilter(), TEST_STRING, TEST_STRING + "!!!");
+        ).buildStringConditions(new StringFilter(), testString, testString + "!!!");
         setupBuilder(testDuration);
         assertConditionBuild("c.time_to_go != 'HAPPY_FILTER' AND c.time_to_go NOT IN ('HAPPY_FILTER', 'HAPPY_FILTER!!!')");
     }
@@ -320,7 +320,7 @@ class ConditionBuilderTest {
             Arrays.asList(),
             Arrays.asList("NotEquals"),
             null
-        ).buildGeneralConditions(new BooleanFilter(), TEST_BOOLEAN_TRUE);
+        ).buildGeneralConditions(new BooleanFilter(), testBooleanTrue);
         setupBuilder(testDuration);
         assertConditionBuild("c.time_to_go != true");
     }
@@ -332,7 +332,7 @@ class ConditionBuilderTest {
             Arrays.asList(),
             generalFilterSetters,
             true
-        ).buildGeneralConditions(new BooleanFilter(), TEST_BOOLEAN_TRUE, TEST_BOOLEAN_FALSE);
+        ).buildGeneralConditions(new BooleanFilter(), testBooleanTrue, testBooleanFalse);
         setupBuilder(testDuration);
         assertConditionBuild(
             "c.time_to_go = true AND c.time_to_go != true " +
@@ -347,7 +347,7 @@ class ConditionBuilderTest {
             Arrays.asList(),
             Arrays.asList("Equals", "In", "Specified"),
             false
-        ).buildGeneralConditions(new BooleanFilter(), TEST_BOOLEAN_TRUE, TEST_BOOLEAN_FALSE);
+        ).buildGeneralConditions(new BooleanFilter(), testBooleanTrue, testBooleanFalse);
         setupBuilder(testDuration);
         assertConditionBuild("c.time_to_go = true AND c.time_to_go IN (true, false) AND c.time_to_go IS NULL");
     }
@@ -359,7 +359,7 @@ class ConditionBuilderTest {
             Arrays.asList(),
             Arrays.asList("NotEquals", "NotIn"),
             null
-        ).buildGeneralConditions(new BooleanFilter(), TEST_BOOLEAN_TRUE, TEST_BOOLEAN_FALSE);
+        ).buildGeneralConditions(new BooleanFilter(), testBooleanTrue, testBooleanFalse);
         setupBuilder(testDuration);
         assertConditionBuild("c.time_to_go != true AND c.time_to_go NOT IN (true, false)");
     }
@@ -371,7 +371,7 @@ class ConditionBuilderTest {
             Arrays.asList(),
             Arrays.asList("NotEquals"),
             null
-        ).buildGeneralConditions(new LongFilter(), TEST_LONG);
+        ).buildGeneralConditions(new LongFilter(), testLong);
         setupBuilder(testDuration);
         assertConditionBuild("c.time_to_go != '123'");
     }
@@ -383,7 +383,7 @@ class ConditionBuilderTest {
             Arrays.asList(),
             generalFilterSetters,
             true
-        ).buildRangeConditions(new LongFilter(), TEST_LONG);
+        ).buildRangeConditions(new LongFilter(), testLong);
         setupBuilder(testDuration);
         assertConditionBuild(
             "c.time_to_go > '123' AND c.time_to_go < '123' AND c.time_to_go >= '123' " +
@@ -399,7 +399,7 @@ class ConditionBuilderTest {
             Arrays.asList(),
             Arrays.asList("Equals", "In", "Specified"),
             false
-        ).buildRangeConditions(new LongFilter(), TEST_LONG, TEST_LONG + 1);
+        ).buildRangeConditions(new LongFilter(), testLong, testLong + 1);
         setupBuilder(testDuration);
         assertConditionBuild("c.time_to_go = '123' AND c.time_to_go IN ('123', '124') AND c.time_to_go IS NULL");
     }
@@ -411,7 +411,7 @@ class ConditionBuilderTest {
             Arrays.asList(),
             Arrays.asList("NotEquals", "NotIn"),
             null
-        ).buildRangeConditions(new LongFilter(), TEST_LONG, TEST_LONG + 1);
+        ).buildRangeConditions(new LongFilter(), testLong, testLong + 1);
         setupBuilder(testDuration);
         assertConditionBuild("c.time_to_go != '123' AND c.time_to_go NOT IN ('123', '124')");
     }
@@ -423,7 +423,7 @@ class ConditionBuilderTest {
             Arrays.asList(),
             Arrays.asList("NotEquals"),
             null
-        ).buildRangeConditions(new BigDecimalFilter(), TEST_BIG_DECIMAL);
+        ).buildRangeConditions(new BigDecimalFilter(), testBigDecimal);
         setupBuilder(testDuration);
         assertConditionBuild("c.time_to_go != '123'");
     }
@@ -435,7 +435,7 @@ class ConditionBuilderTest {
             Arrays.asList(),
             generalFilterSetters,
             true
-        ).buildRangeConditions(new BigDecimalFilter(), TEST_BIG_DECIMAL);
+        ).buildRangeConditions(new BigDecimalFilter(), testBigDecimal);
         setupBuilder(testDuration);
         assertConditionBuild(
             "c.time_to_go > '123' AND c.time_to_go < '123' AND c.time_to_go >= '123' " +
@@ -451,7 +451,7 @@ class ConditionBuilderTest {
             Arrays.asList(),
             Arrays.asList("Equals", "In", "Specified"),
             false
-        ).buildRangeConditions(new BigDecimalFilter(), TEST_BIG_DECIMAL, new BigDecimal(1));
+        ).buildRangeConditions(new BigDecimalFilter(), testBigDecimal, new BigDecimal(1));
         setupBuilder(testDuration);
         assertConditionBuild("c.time_to_go = '123' AND c.time_to_go IN ('123', '1') AND c.time_to_go IS NULL");
     }
@@ -463,7 +463,7 @@ class ConditionBuilderTest {
             Arrays.asList(),
             Arrays.asList("NotEquals", "NotIn"),
             null
-        ).buildRangeConditions(new BigDecimalFilter(), TEST_BIG_DECIMAL, new BigDecimal(1));
+        ).buildRangeConditions(new BigDecimalFilter(), testBigDecimal, new BigDecimal(1));
         setupBuilder(testDuration);
         assertConditionBuild("c.time_to_go != '123' AND c.time_to_go NOT IN ('123', '1')");
     }
@@ -475,7 +475,7 @@ class ConditionBuilderTest {
             Arrays.asList(),
             generalFilterSetters,
             true
-        ).buildRangeConditions(new DoubleFilter(), TEST_DOUBLE);
+        ).buildRangeConditions(new DoubleFilter(), testDouble);
         setupBuilder(testDuration);
         assertConditionBuild(
             "c.time_to_go > '123.0' AND c.time_to_go < '123.0' AND c.time_to_go >= '123.0' " +
@@ -491,7 +491,7 @@ class ConditionBuilderTest {
             Arrays.asList(),
             Arrays.asList(),
             false
-        ).buildRangeConditions(new DoubleFilter(), TEST_DOUBLE);
+        ).buildRangeConditions(new DoubleFilter(), testDouble);
         setupBuilder(testDuration);
         assertConditionBuild(
             "c.time_to_go > '123.0' AND c.time_to_go < '123.0' AND c.time_to_go >= '123.0' " + "AND c.time_to_go <= '123.0'"
@@ -505,7 +505,7 @@ class ConditionBuilderTest {
             Arrays.asList(),
             Arrays.asList("Specified"),
             false
-        ).buildRangeConditions(new DoubleFilter(), TEST_DOUBLE);
+        ).buildRangeConditions(new DoubleFilter(), testDouble);
         setupBuilder(testDuration);
         assertConditionBuild("c.time_to_go IS NULL");
     }
@@ -517,7 +517,7 @@ class ConditionBuilderTest {
             Arrays.asList(),
             generalFilterSetters,
             false
-        ).buildRangeConditions(new DoubleFilter(), TEST_DOUBLE);
+        ).buildRangeConditions(new DoubleFilter(), testDouble);
         setupBuilder(testDuration);
         assertConditionBuild(
             "c.time_to_go = '123.0' AND c.time_to_go != '123.0' " +
@@ -532,7 +532,7 @@ class ConditionBuilderTest {
             Arrays.asList(),
             generalFilterSetters,
             true
-        ).buildRangeConditions(new FloatFilter(), TEST_FLOAT, TEST_FLOAT + 1);
+        ).buildRangeConditions(new FloatFilter(), testFloat, testFloat + 1);
         setupBuilder(testDuration);
         assertConditionBuild(
             "c.time_to_go > '123.0' AND c.time_to_go < '123.0' AND c.time_to_go >= '123.0' " +
@@ -548,7 +548,7 @@ class ConditionBuilderTest {
             Arrays.asList(),
             Arrays.asList(),
             null
-        ).buildRangeConditions(new FloatFilter(), TEST_FLOAT, TEST_FLOAT + 1);
+        ).buildRangeConditions(new FloatFilter(), testFloat, testFloat + 1);
         setupBuilder(testDuration);
         assertConditionBuild(
             "c.time_to_go > '123.0' AND c.time_to_go < '123.0' AND c.time_to_go >= '123.0' " + "AND c.time_to_go <= '123.0'"
@@ -562,7 +562,7 @@ class ConditionBuilderTest {
             Arrays.asList(),
             generalFilterSetters,
             false
-        ).buildRangeConditions(new FloatFilter(), TEST_FLOAT, TEST_FLOAT + 1);
+        ).buildRangeConditions(new FloatFilter(), testFloat, testFloat + 1);
         setupBuilder(testDuration);
         assertConditionBuild(
             "c.time_to_go = '123.0' AND c.time_to_go != '123.0' " +
@@ -577,7 +577,7 @@ class ConditionBuilderTest {
             Arrays.asList(),
             generalFilterSetters,
             false
-        ).buildRangeConditions(new IntegerFilter(), TEST_INTEGER, TEST_INTEGER + 1);
+        ).buildRangeConditions(new IntegerFilter(), testInteger, testInteger + 1);
         setupBuilder(testDuration);
         assertConditionBuild(
             "c.time_to_go = '123' AND c.time_to_go != '123' " +
@@ -592,7 +592,7 @@ class ConditionBuilderTest {
             Arrays.asList(),
             Arrays.asList(),
             null
-        ).buildRangeConditions(new IntegerFilter(), TEST_INTEGER, TEST_INTEGER + 1);
+        ).buildRangeConditions(new IntegerFilter(), testInteger, testInteger + 1);
         setupBuilder(testDuration);
         assertConditionBuild("c.time_to_go > '123' AND c.time_to_go < '123' " + "AND c.time_to_go >= '123' AND c.time_to_go <= '123'");
     }
@@ -604,7 +604,7 @@ class ConditionBuilderTest {
             Arrays.asList(),
             generalFilterSetters,
             false
-        ).buildRangeConditions(new IntegerFilter(), TEST_INTEGER, TEST_INTEGER + 1);
+        ).buildRangeConditions(new IntegerFilter(), testInteger, testInteger + 1);
         setupBuilder(testDuration);
         assertConditionBuild(
             "c.time_to_go > '123' AND c.time_to_go < '123' " +
@@ -620,7 +620,7 @@ class ConditionBuilderTest {
             Arrays.asList(),
             generalFilterSetters,
             false
-        ).buildRangeConditions(new ShortFilter(), TEST_SHORT, TEST_SHORT);
+        ).buildRangeConditions(new ShortFilter(), testShort, testShort);
         setupBuilder(testDuration);
         assertConditionBuild(
             "c.time_to_go > '123' AND c.time_to_go < '123' " +
@@ -636,7 +636,7 @@ class ConditionBuilderTest {
             Arrays.asList(),
             Arrays.asList(),
             false
-        ).buildRangeConditions(new ShortFilter(), TEST_SHORT, TEST_SHORT);
+        ).buildRangeConditions(new ShortFilter(), testShort, testShort);
         setupBuilder(testDuration);
         assertConditionBuild("c.time_to_go > '123' AND c.time_to_go < '123' " + "AND c.time_to_go >= '123' AND c.time_to_go <= '123'");
     }

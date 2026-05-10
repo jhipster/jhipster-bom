@@ -49,6 +49,7 @@ import org.springframework.mock.env.MockEnvironment;
 import tech.jhipster.test.LogbackRecorder;
 import tech.jhipster.test.LogbackRecorder.Event;
 
+@SuppressWarnings("java:S2925")
 class AsyncSpringLiquibaseTest {
 
     private LiquibaseException exception = new LiquibaseException("Eek");
