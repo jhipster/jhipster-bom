@@ -151,25 +151,25 @@ class ConditionBuilderTest {
 
     @Test
     void testUsingZonedDateTimeTypeSingleFilter() throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-        ZonedDateTimeFilter testDuration = (ZonedDateTimeFilter) new ConditionTestHelper(
+        ZonedDateTimeFilter zonedDateTimeFilter = (ZonedDateTimeFilter) new ConditionTestHelper(
             Arrays.asList(),
             Arrays.asList(),
             Arrays.asList("NotEquals"),
             null
         ).buildRangeConditions(new ZonedDateTimeFilter(), testZonedDateTime);
-        setupBuilder(testDuration);
+        setupBuilder(zonedDateTimeFilter);
         assertConditionBuild("c.time_to_go != '1970-01-01T00:00'");
     }
 
     @Test
     void testUsingZonedDateTimeTypeWithAllFilters() throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-        ZonedDateTimeFilter testDuration = (ZonedDateTimeFilter) new ConditionTestHelper(
+        ZonedDateTimeFilter zonedDateTimeFilter = (ZonedDateTimeFilter) new ConditionTestHelper(
             rangeFilterSetters,
             Arrays.asList(),
             generalFilterSetters,
             true
         ).buildRangeConditions(new ZonedDateTimeFilter(), testZonedDateTime);
-        setupBuilder(testDuration);
+        setupBuilder(zonedDateTimeFilter);
         assertConditionBuild(
             "c.time_to_go > '1970-01-01T00:00' AND c.time_to_go < '1970-01-01T00:00' " +
                 "AND c.time_to_go >= '1970-01-01T00:00' AND c.time_to_go <= '1970-01-01T00:00' " +
@@ -181,13 +181,13 @@ class ConditionBuilderTest {
 
     @Test
     void testUsingZonedDateTimeTypeWithUultipleIn() throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-        ZonedDateTimeFilter testDuration = (ZonedDateTimeFilter) new ConditionTestHelper(
+        ZonedDateTimeFilter zonedDateTimeFilter = (ZonedDateTimeFilter) new ConditionTestHelper(
             Arrays.asList(),
             Arrays.asList(),
             Arrays.asList("Equals", "In", "Specified"),
             false
         ).buildRangeConditions(new ZonedDateTimeFilter(), testZonedDateTime, testZonedDateTime.plusSeconds(1));
-        setupBuilder(testDuration);
+        setupBuilder(zonedDateTimeFilter);
         assertConditionBuild(
             "c.time_to_go = '1970-01-01T00:00' AND c.time_to_go IN ('1970-01-01T00:00', '1970-01-01T00:00:01') AND c.time_to_go IS NULL"
         );
@@ -195,37 +195,37 @@ class ConditionBuilderTest {
 
     @Test
     void testUsingZonedDateTimeTypeWithUultipleNotIn() throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-        ZonedDateTimeFilter testDuration = (ZonedDateTimeFilter) new ConditionTestHelper(
+        ZonedDateTimeFilter zonedDateTimeFilter = (ZonedDateTimeFilter) new ConditionTestHelper(
             Arrays.asList(),
             Arrays.asList(),
             Arrays.asList("NotEquals", "NotIn"),
             null
         ).buildRangeConditions(new ZonedDateTimeFilter(), testZonedDateTime, testZonedDateTime.plusSeconds(1));
-        setupBuilder(testDuration);
+        setupBuilder(zonedDateTimeFilter);
         assertConditionBuild("c.time_to_go != '1970-01-01T00:00' AND c.time_to_go NOT IN ('1970-01-01T00:00', '1970-01-01T00:00:01')");
     }
 
     @Test
     void testUsingInstantTypeSingleFilter() throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-        InstantFilter testDuration = (InstantFilter) new ConditionTestHelper(
+        InstantFilter instantFilter = (InstantFilter) new ConditionTestHelper(
             Arrays.asList(),
             Arrays.asList(),
             Arrays.asList("NotEquals"),
             null
         ).buildRangeConditions(new InstantFilter(), testInstant);
-        setupBuilder(testDuration);
+        setupBuilder(instantFilter);
         assertConditionBuild("c.time_to_go != '1970-01-01T00:00'");
     }
 
     @Test
     void testUsingInstantTypeWithAllFilters() throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-        InstantFilter testDuration = (InstantFilter) new ConditionTestHelper(
+        InstantFilter instantFilter = (InstantFilter) new ConditionTestHelper(
             rangeFilterSetters,
             Arrays.asList(),
             generalFilterSetters,
             true
         ).buildRangeConditions(new InstantFilter(), testInstant);
-        setupBuilder(testDuration);
+        setupBuilder(instantFilter);
         assertConditionBuild(
             "c.time_to_go > '1970-01-01T00:00' AND c.time_to_go < '1970-01-01T00:00' AND c.time_to_go >= '1970-01-01T00:00' " +
                 "AND c.time_to_go <= '1970-01-01T00:00' AND c.time_to_go = '1970-01-01T00:00' AND c.time_to_go != '1970-01-01T00:00' " +
@@ -235,13 +235,13 @@ class ConditionBuilderTest {
 
     @Test
     void testUsingInstantTypeWithUultipleIn() throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-        InstantFilter testDuration = (InstantFilter) new ConditionTestHelper(
+        InstantFilter instantFilter = (InstantFilter) new ConditionTestHelper(
             Arrays.asList(),
             Arrays.asList(),
             Arrays.asList("Equals", "In", "Specified"),
             false
         ).buildRangeConditions(new InstantFilter(), testInstant, testInstant.plusMillis(10));
-        setupBuilder(testDuration);
+        setupBuilder(instantFilter);
         assertConditionBuild(
             "c.time_to_go = '1970-01-01T00:00' AND c.time_to_go IN ('1970-01-01T00:00', '1970-01-01T00:00:00.010') AND c.time_to_go IS NULL"
         );
@@ -249,37 +249,37 @@ class ConditionBuilderTest {
 
     @Test
     void testUsingInstantTypeWithUultipleNotIn() throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-        InstantFilter testDuration = (InstantFilter) new ConditionTestHelper(
+        InstantFilter instantFilter = (InstantFilter) new ConditionTestHelper(
             Arrays.asList(),
             Arrays.asList(),
             Arrays.asList("NotEquals", "NotIn"),
             null
         ).buildRangeConditions(new InstantFilter(), testInstant, testInstant.plusMillis(10));
-        setupBuilder(testDuration);
+        setupBuilder(instantFilter);
         assertConditionBuild("c.time_to_go != '1970-01-01T00:00' AND c.time_to_go NOT IN ('1970-01-01T00:00', '1970-01-01T00:00:00.010')");
     }
 
     @Test
     void testUsingStringTypeSingleFilter() throws IllegalAccessException, InvocationTargetException {
-        StringFilter testDuration = (StringFilter) new ConditionTestHelper(
+        StringFilter stringFilter = (StringFilter) new ConditionTestHelper(
             Arrays.asList(),
             Arrays.asList(),
             Arrays.asList("NotEquals"),
             null
         ).buildStringConditions(new StringFilter(), testString);
-        setupBuilder(testDuration);
+        setupBuilder(stringFilter);
         assertConditionBuild("c.time_to_go != 'HAPPY_FILTER'");
     }
 
     @Test
     void testUsingStringTypeWithAllFilters() throws IllegalAccessException, InvocationTargetException {
-        StringFilter testDuration = (StringFilter) new ConditionTestHelper(
+        StringFilter stringFilter = (StringFilter) new ConditionTestHelper(
             Arrays.asList(),
             stringFilterSetters,
             generalFilterSetters,
             true
         ).buildStringConditions(new StringFilter(), testString);
-        setupBuilder(testDuration);
+        setupBuilder(stringFilter);
         assertConditionBuild(
             "c.time_to_go LIKE 'HAPPY_FILTER' AND c.time_to_go NOT LIKE 'HAPPY_FILTER' AND " +
                 "c.time_to_go = 'HAPPY_FILTER' AND c.time_to_go != 'HAPPY_FILTER' " +
@@ -289,13 +289,13 @@ class ConditionBuilderTest {
 
     @Test
     void testUsingStringTypeWithMultipleIn() throws IllegalAccessException, InvocationTargetException {
-        StringFilter testDuration = (StringFilter) new ConditionTestHelper(
+        StringFilter stringFilter = (StringFilter) new ConditionTestHelper(
             Arrays.asList(),
             Arrays.asList(),
             Arrays.asList("Equals", "In", "Specified"),
             false
         ).buildStringConditions(new StringFilter(), testString, testString + "!!!");
-        setupBuilder(testDuration);
+        setupBuilder(stringFilter);
         assertConditionBuild(
             "c.time_to_go = 'HAPPY_FILTER' AND c.time_to_go IN ('HAPPY_FILTER', 'HAPPY_FILTER!!!') AND c.time_to_go IS NULL"
         );
@@ -303,37 +303,37 @@ class ConditionBuilderTest {
 
     @Test
     void testUsingStringTypeWithMultipleNotIn() throws IllegalAccessException, InvocationTargetException {
-        StringFilter testDuration = (StringFilter) new ConditionTestHelper(
+        StringFilter stringFilter = (StringFilter) new ConditionTestHelper(
             Arrays.asList(),
             Arrays.asList(),
             Arrays.asList("NotEquals", "NotIn"),
             null
         ).buildStringConditions(new StringFilter(), testString, testString + "!!!");
-        setupBuilder(testDuration);
+        setupBuilder(stringFilter);
         assertConditionBuild("c.time_to_go != 'HAPPY_FILTER' AND c.time_to_go NOT IN ('HAPPY_FILTER', 'HAPPY_FILTER!!!')");
     }
 
     @Test
     void testUsingBooleanTypeSingleFilter() throws IllegalAccessException, InvocationTargetException {
-        BooleanFilter testDuration = (BooleanFilter) new ConditionTestHelper(
+        BooleanFilter booleanFilter = (BooleanFilter) new ConditionTestHelper(
             Arrays.asList(),
             Arrays.asList(),
             Arrays.asList("NotEquals"),
             null
         ).buildGeneralConditions(new BooleanFilter(), testBooleanTrue);
-        setupBuilder(testDuration);
+        setupBuilder(booleanFilter);
         assertConditionBuild("c.time_to_go != true");
     }
 
     @Test
     void testUsingBooleanTypeWithAllFilters() throws IllegalAccessException, InvocationTargetException {
-        BooleanFilter testDuration = (BooleanFilter) new ConditionTestHelper(
+        BooleanFilter booleanFilter = (BooleanFilter) new ConditionTestHelper(
             Arrays.asList(),
             Arrays.asList(),
             generalFilterSetters,
             true
         ).buildGeneralConditions(new BooleanFilter(), testBooleanTrue, testBooleanFalse);
-        setupBuilder(testDuration);
+        setupBuilder(booleanFilter);
         assertConditionBuild(
             "c.time_to_go = true AND c.time_to_go != true " +
                 "AND c.time_to_go IN (true, false) AND c.time_to_go NOT IN (true, false) AND c.time_to_go IS NOT NULL"
@@ -342,49 +342,49 @@ class ConditionBuilderTest {
 
     @Test
     void testUsingBooleanTypeWithMultipleIn() throws IllegalAccessException, InvocationTargetException {
-        BooleanFilter testDuration = (BooleanFilter) new ConditionTestHelper(
+        BooleanFilter booleanFilter = (BooleanFilter) new ConditionTestHelper(
             Arrays.asList(),
             Arrays.asList(),
             Arrays.asList("Equals", "In", "Specified"),
             false
         ).buildGeneralConditions(new BooleanFilter(), testBooleanTrue, testBooleanFalse);
-        setupBuilder(testDuration);
+        setupBuilder(booleanFilter);
         assertConditionBuild("c.time_to_go = true AND c.time_to_go IN (true, false) AND c.time_to_go IS NULL");
     }
 
     @Test
     void testUsingDBooleanTypeWithMultipleNotIn() throws IllegalAccessException, InvocationTargetException {
-        BooleanFilter testDuration = (BooleanFilter) new ConditionTestHelper(
+        BooleanFilter booleanFilter = (BooleanFilter) new ConditionTestHelper(
             Arrays.asList(),
             Arrays.asList(),
             Arrays.asList("NotEquals", "NotIn"),
             null
         ).buildGeneralConditions(new BooleanFilter(), testBooleanTrue, testBooleanFalse);
-        setupBuilder(testDuration);
+        setupBuilder(booleanFilter);
         assertConditionBuild("c.time_to_go != true AND c.time_to_go NOT IN (true, false)");
     }
 
     @Test
     void testUsingLongTypeSingleFilter() throws IllegalAccessException, InvocationTargetException {
-        LongFilter testDuration = (LongFilter) new ConditionTestHelper(
+        LongFilter longFilter = (LongFilter) new ConditionTestHelper(
             Arrays.asList(),
             Arrays.asList(),
             Arrays.asList("NotEquals"),
             null
         ).buildGeneralConditions(new LongFilter(), testLong);
-        setupBuilder(testDuration);
+        setupBuilder(longFilter);
         assertConditionBuild("c.time_to_go != '123'");
     }
 
     @Test
     void testUsingLongTypeWithAllFilters() throws IllegalAccessException, InvocationTargetException {
-        LongFilter testDuration = (LongFilter) new ConditionTestHelper(
+        LongFilter longFilter = (LongFilter) new ConditionTestHelper(
             rangeFilterSetters,
             Arrays.asList(),
             generalFilterSetters,
             true
         ).buildRangeConditions(new LongFilter(), testLong);
-        setupBuilder(testDuration);
+        setupBuilder(longFilter);
         assertConditionBuild(
             "c.time_to_go > '123' AND c.time_to_go < '123' AND c.time_to_go >= '123' " +
                 "AND c.time_to_go <= '123' AND c.time_to_go = '123' AND c.time_to_go != '123' " +
@@ -394,49 +394,49 @@ class ConditionBuilderTest {
 
     @Test
     void testUsingLongTypeWithUultipleIn() throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-        LongFilter testDuration = (LongFilter) new ConditionTestHelper(
+        LongFilter longFilter = (LongFilter) new ConditionTestHelper(
             Arrays.asList(),
             Arrays.asList(),
             Arrays.asList("Equals", "In", "Specified"),
             false
         ).buildRangeConditions(new LongFilter(), testLong, testLong + 1);
-        setupBuilder(testDuration);
+        setupBuilder(longFilter);
         assertConditionBuild("c.time_to_go = '123' AND c.time_to_go IN ('123', '124') AND c.time_to_go IS NULL");
     }
 
     @Test
     void testUsingLongTypeWithUultipleNotIn() throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-        LongFilter testDuration = (LongFilter) new ConditionTestHelper(
+        LongFilter longFilter = (LongFilter) new ConditionTestHelper(
             Arrays.asList(),
             Arrays.asList(),
             Arrays.asList("NotEquals", "NotIn"),
             null
         ).buildRangeConditions(new LongFilter(), testLong, testLong + 1);
-        setupBuilder(testDuration);
+        setupBuilder(longFilter);
         assertConditionBuild("c.time_to_go != '123' AND c.time_to_go NOT IN ('123', '124')");
     }
 
     @Test
     void testUsingBigDecimalTypeSingleFilter() throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-        BigDecimalFilter testDuration = (BigDecimalFilter) new ConditionTestHelper(
+        BigDecimalFilter bigDecimalFilter = (BigDecimalFilter) new ConditionTestHelper(
             Arrays.asList(),
             Arrays.asList(),
             Arrays.asList("NotEquals"),
             null
         ).buildRangeConditions(new BigDecimalFilter(), testBigDecimal);
-        setupBuilder(testDuration);
+        setupBuilder(bigDecimalFilter);
         assertConditionBuild("c.time_to_go != '123'");
     }
 
     @Test
     void testUsingBigDecimalTypeWithAllFilters() throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-        BigDecimalFilter testDuration = (BigDecimalFilter) new ConditionTestHelper(
+        BigDecimalFilter bigDecimalFilter = (BigDecimalFilter) new ConditionTestHelper(
             rangeFilterSetters,
             Arrays.asList(),
             generalFilterSetters,
             true
         ).buildRangeConditions(new BigDecimalFilter(), testBigDecimal);
-        setupBuilder(testDuration);
+        setupBuilder(bigDecimalFilter);
         assertConditionBuild(
             "c.time_to_go > '123' AND c.time_to_go < '123' AND c.time_to_go >= '123' " +
                 "AND c.time_to_go <= '123' AND c.time_to_go = '123' AND c.time_to_go != '123' " +
@@ -446,37 +446,37 @@ class ConditionBuilderTest {
 
     @Test
     void testUsingBigDecimalTypeWithUultipleIn() throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-        BigDecimalFilter testDuration = (BigDecimalFilter) new ConditionTestHelper(
+        BigDecimalFilter bigDecimalFilter = (BigDecimalFilter) new ConditionTestHelper(
             Arrays.asList(),
             Arrays.asList(),
             Arrays.asList("Equals", "In", "Specified"),
             false
         ).buildRangeConditions(new BigDecimalFilter(), testBigDecimal, new BigDecimal(1));
-        setupBuilder(testDuration);
+        setupBuilder(bigDecimalFilter);
         assertConditionBuild("c.time_to_go = '123' AND c.time_to_go IN ('123', '1') AND c.time_to_go IS NULL");
     }
 
     @Test
     void testUsingBigDecimalTypeWithUultipleNotIn() throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-        BigDecimalFilter testDuration = (BigDecimalFilter) new ConditionTestHelper(
+        BigDecimalFilter bigDecimalFilter = (BigDecimalFilter) new ConditionTestHelper(
             Arrays.asList(),
             Arrays.asList(),
             Arrays.asList("NotEquals", "NotIn"),
             null
         ).buildRangeConditions(new BigDecimalFilter(), testBigDecimal, new BigDecimal(1));
-        setupBuilder(testDuration);
+        setupBuilder(bigDecimalFilter);
         assertConditionBuild("c.time_to_go != '123' AND c.time_to_go NOT IN ('123', '1')");
     }
 
     @Test
     void testUsingDoubleTypeWithAllFilters() throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-        DoubleFilter testDuration = (DoubleFilter) new ConditionTestHelper(
+        DoubleFilter doubleFilter = (DoubleFilter) new ConditionTestHelper(
             rangeFilterSetters,
             Arrays.asList(),
             generalFilterSetters,
             true
         ).buildRangeConditions(new DoubleFilter(), testDouble);
-        setupBuilder(testDuration);
+        setupBuilder(doubleFilter);
         assertConditionBuild(
             "c.time_to_go > '123.0' AND c.time_to_go < '123.0' AND c.time_to_go >= '123.0' " +
                 "AND c.time_to_go <= '123.0' AND c.time_to_go = '123.0' AND c.time_to_go != '123.0' " +
@@ -486,13 +486,13 @@ class ConditionBuilderTest {
 
     @Test
     void testUsingDoubleTypeWithRangeFilters() throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-        DoubleFilter testDuration = (DoubleFilter) new ConditionTestHelper(
+        DoubleFilter doubleFilter = (DoubleFilter) new ConditionTestHelper(
             rangeFilterSetters,
             Arrays.asList(),
             Arrays.asList(),
             false
         ).buildRangeConditions(new DoubleFilter(), testDouble);
-        setupBuilder(testDuration);
+        setupBuilder(doubleFilter);
         assertConditionBuild(
             "c.time_to_go > '123.0' AND c.time_to_go < '123.0' AND c.time_to_go >= '123.0' " + "AND c.time_to_go <= '123.0'"
         );
@@ -500,25 +500,25 @@ class ConditionBuilderTest {
 
     @Test
     void testUsingDoubleTypeOnlySpecified() throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-        DoubleFilter testDuration = (DoubleFilter) new ConditionTestHelper(
+        DoubleFilter doubleFilter = (DoubleFilter) new ConditionTestHelper(
             Arrays.asList(),
             Arrays.asList(),
             Arrays.asList("Specified"),
             false
         ).buildRangeConditions(new DoubleFilter(), testDouble);
-        setupBuilder(testDuration);
+        setupBuilder(doubleFilter);
         assertConditionBuild("c.time_to_go IS NULL");
     }
 
     @Test
     void testUsingDoubleTypeGeneralFilter() throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-        DoubleFilter testDuration = (DoubleFilter) new ConditionTestHelper(
+        DoubleFilter doubleFilter = (DoubleFilter) new ConditionTestHelper(
             Arrays.asList(),
             Arrays.asList(),
             generalFilterSetters,
             false
         ).buildRangeConditions(new DoubleFilter(), testDouble);
-        setupBuilder(testDuration);
+        setupBuilder(doubleFilter);
         assertConditionBuild(
             "c.time_to_go = '123.0' AND c.time_to_go != '123.0' " +
                 "AND c.time_to_go IN ('123.0') AND c.time_to_go NOT IN ('123.0') AND c.time_to_go IS NULL"
@@ -527,13 +527,13 @@ class ConditionBuilderTest {
 
     @Test
     void testUsingFloatTypeWithAllFilters() throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-        FloatFilter testDuration = (FloatFilter) new ConditionTestHelper(
+        FloatFilter floatFilter = (FloatFilter) new ConditionTestHelper(
             rangeFilterSetters,
             Arrays.asList(),
             generalFilterSetters,
             true
         ).buildRangeConditions(new FloatFilter(), testFloat, testFloat + 1);
-        setupBuilder(testDuration);
+        setupBuilder(floatFilter);
         assertConditionBuild(
             "c.time_to_go > '123.0' AND c.time_to_go < '123.0' AND c.time_to_go >= '123.0' " +
                 "AND c.time_to_go <= '123.0' AND c.time_to_go = '123.0' AND c.time_to_go != '123.0' " +
@@ -543,13 +543,13 @@ class ConditionBuilderTest {
 
     @Test
     void testUsingFloatTypeWithOnlyRange() throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-        FloatFilter testDuration = (FloatFilter) new ConditionTestHelper(
+        FloatFilter floatFilter = (FloatFilter) new ConditionTestHelper(
             rangeFilterSetters,
             Arrays.asList(),
             Arrays.asList(),
             null
         ).buildRangeConditions(new FloatFilter(), testFloat, testFloat + 1);
-        setupBuilder(testDuration);
+        setupBuilder(floatFilter);
         assertConditionBuild(
             "c.time_to_go > '123.0' AND c.time_to_go < '123.0' AND c.time_to_go >= '123.0' " + "AND c.time_to_go <= '123.0'"
         );
@@ -557,13 +557,13 @@ class ConditionBuilderTest {
 
     @Test
     void testUsingFloatTypeWithOnlyGeneral() throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-        FloatFilter testDuration = (FloatFilter) new ConditionTestHelper(
+        FloatFilter floatFilter = (FloatFilter) new ConditionTestHelper(
             Arrays.asList(),
             Arrays.asList(),
             generalFilterSetters,
             false
         ).buildRangeConditions(new FloatFilter(), testFloat, testFloat + 1);
-        setupBuilder(testDuration);
+        setupBuilder(floatFilter);
         assertConditionBuild(
             "c.time_to_go = '123.0' AND c.time_to_go != '123.0' " +
                 "AND c.time_to_go IN ('123.0', '124.0') AND c.time_to_go NOT IN ('123.0', '124.0') AND c.time_to_go IS NULL"
@@ -572,13 +572,13 @@ class ConditionBuilderTest {
 
     @Test
     void testUsingIntegerTypeWithOnlyGeneral() throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-        IntegerFilter testDuration = (IntegerFilter) new ConditionTestHelper(
+        IntegerFilter integerFilter = (IntegerFilter) new ConditionTestHelper(
             Arrays.asList(),
             Arrays.asList(),
             generalFilterSetters,
             false
         ).buildRangeConditions(new IntegerFilter(), testInteger, testInteger + 1);
-        setupBuilder(testDuration);
+        setupBuilder(integerFilter);
         assertConditionBuild(
             "c.time_to_go = '123' AND c.time_to_go != '123' " +
                 "AND c.time_to_go IN ('123', '124') AND c.time_to_go NOT IN ('123', '124') AND c.time_to_go IS NULL"
@@ -587,25 +587,25 @@ class ConditionBuilderTest {
 
     @Test
     void testUsingIntegerTypeWithOnlyRange() throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-        IntegerFilter testDuration = (IntegerFilter) new ConditionTestHelper(
+        IntegerFilter integerFilter = (IntegerFilter) new ConditionTestHelper(
             rangeFilterSetters,
             Arrays.asList(),
             Arrays.asList(),
             null
         ).buildRangeConditions(new IntegerFilter(), testInteger, testInteger + 1);
-        setupBuilder(testDuration);
+        setupBuilder(integerFilter);
         assertConditionBuild("c.time_to_go > '123' AND c.time_to_go < '123' " + "AND c.time_to_go >= '123' AND c.time_to_go <= '123'");
     }
 
     @Test
     void testUsingIntegerTypeWithAllFilters() throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-        IntegerFilter testDuration = (IntegerFilter) new ConditionTestHelper(
+        IntegerFilter integerFilter = (IntegerFilter) new ConditionTestHelper(
             rangeFilterSetters,
             Arrays.asList(),
             generalFilterSetters,
             false
         ).buildRangeConditions(new IntegerFilter(), testInteger, testInteger + 1);
-        setupBuilder(testDuration);
+        setupBuilder(integerFilter);
         assertConditionBuild(
             "c.time_to_go > '123' AND c.time_to_go < '123' " +
                 "AND c.time_to_go >= '123' AND c.time_to_go <= '123' AND c.time_to_go = '123' AND c.time_to_go != '123' " +
@@ -615,13 +615,13 @@ class ConditionBuilderTest {
 
     @Test
     void testUsingShortTypeWithAllFilters() throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-        ShortFilter testDuration = (ShortFilter) new ConditionTestHelper(
+        ShortFilter shortFilter = (ShortFilter) new ConditionTestHelper(
             rangeFilterSetters,
             Arrays.asList(),
             generalFilterSetters,
             false
         ).buildRangeConditions(new ShortFilter(), testShort, testShort);
-        setupBuilder(testDuration);
+        setupBuilder(shortFilter);
         assertConditionBuild(
             "c.time_to_go > '123' AND c.time_to_go < '123' " +
                 "AND c.time_to_go >= '123' AND c.time_to_go <= '123' AND c.time_to_go = '123' AND c.time_to_go != '123' " +
@@ -631,13 +631,13 @@ class ConditionBuilderTest {
 
     @Test
     void testUsingShortTypeWithRangeFilters() throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-        ShortFilter testDuration = (ShortFilter) new ConditionTestHelper(
+        ShortFilter shortFilter = (ShortFilter) new ConditionTestHelper(
             rangeFilterSetters,
             Arrays.asList(),
             Arrays.asList(),
             false
         ).buildRangeConditions(new ShortFilter(), testShort, testShort);
-        setupBuilder(testDuration);
+        setupBuilder(shortFilter);
         assertConditionBuild("c.time_to_go > '123' AND c.time_to_go < '123' " + "AND c.time_to_go >= '123' AND c.time_to_go <= '123'");
     }
 
@@ -650,13 +650,13 @@ class ConditionBuilderTest {
 
     @Test
     void testUsingEnumTypeWithGeneralFilters() throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-        TestEnumFilter testDuration = (TestEnumFilter) new ConditionTestHelper(
+        TestEnumFilter testEnumFilter = (TestEnumFilter) new ConditionTestHelper(
             Arrays.asList(),
             Arrays.asList(),
             generalFilterSetters,
             false
         ).buildGeneralConditions(new TestEnumFilter(), TestEnum.ENUM1, TestEnum.ENUM2);
-        setupBuilder(testDuration);
+        setupBuilder(testEnumFilter);
         assertConditionBuild(
             "c.time_to_go = 'ENUM1' AND c.time_to_go != 'ENUM1' " +
                 "AND c.time_to_go IN ('ENUM1', 'ENUM2') AND c.time_to_go NOT IN ('ENUM1', 'ENUM2') AND c.time_to_go IS NULL"
