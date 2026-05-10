@@ -67,7 +67,7 @@ public class ConditionBuilder {
         } else if (field instanceof InstantFilter instantFilter) {
             buildRangeConditions(instantFilter, column, LocalDateTime.class);
             buildGeneralConditions(field, column, LocalDateTime.class);
-        } else if (field instanceof RangeFilter rangeFilter) {
+        } else if (field instanceof RangeFilter<?> rangeFilter) {
             buildRangeConditions(rangeFilter, column, null);
             buildGeneralConditions(field, column, null);
         } else if (field instanceof StringFilter stringFilter) {

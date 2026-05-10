@@ -46,6 +46,7 @@ public class FloatFilter extends RangeFilter<Float> {
      *
      * @return a {@link FloatFilter} object.
      */
+    @Override
     public FloatFilter copy() {
         return new FloatFilter(this);
     }

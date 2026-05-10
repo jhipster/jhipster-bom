@@ -26,6 +26,7 @@ import org.springframework.core.convert.converter.Converter;
 /**
  * <p>JSR310DateConverters class.</p>
  */
+@SuppressWarnings({ "java:S6548" })
 public final class JSR310DateConverters {
 
     private JSR310DateConverters() {}

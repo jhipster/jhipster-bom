@@ -22,6 +22,7 @@ package tech.jhipster.web.rest.errors;
 import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import org.springframework.http.ProblemDetail;
 
 /*
@@ -46,6 +47,22 @@ public class ProblemDetailWithCause extends ProblemDetail {
 
     public void setCause(ProblemDetailWithCause cause) {
         this.cause = cause;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof ProblemDetailWithCause that) || !super.equals(o)) {
+            return false;
+        }
+        return Objects.equals(cause, that.cause);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), cause);
     }
 
     // The missing builder from Spring
@@ -106,14 +123,14 @@ public class ProblemDetailWithCause extends ProblemDetail {
         }
 
         public ProblemDetailWithCause build() {
-            ProblemDetailWithCause cause = new ProblemDetailWithCause(this.status);
-            cause.setType(this.type);
-            cause.setTitle(this.title);
-            cause.setDetail(this.detail);
-            cause.setInstance(this.instance);
-            this.properties.forEach(cause::setProperty);
-            cause.setCause(this.cause);
-            return cause;
+            ProblemDetailWithCause problemDetail = new ProblemDetailWithCause(this.status);
+            problemDetail.setType(this.type);
+            problemDetail.setTitle(this.title);
+            problemDetail.setDetail(this.detail);
+            problemDetail.setInstance(this.instance);
+            this.properties.forEach(problemDetail::setProperty);
+            problemDetail.setCause(this.cause);
+            return problemDetail;
         }
     }
 }

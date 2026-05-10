@@ -53,6 +53,6 @@ class PrefixedKeyGeneratorTest {
     void generatesRandomPrefix() {
         PrefixedKeyGenerator prefixedKeyGenerator = new PrefixedKeyGenerator(null, null);
 
-        assertThat(prefixedKeyGenerator.getPrefix().length()).isEqualTo(12);
+        assertThat(prefixedKeyGenerator.getPrefix()).hasSize(12);
     }
 }

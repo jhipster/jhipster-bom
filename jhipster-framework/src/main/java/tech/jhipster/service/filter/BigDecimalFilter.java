@@ -48,6 +48,7 @@ public class BigDecimalFilter extends RangeFilter<BigDecimal> {
      *
      * @return a {@link BigDecimalFilter} object.
      */
+    @Override
     public BigDecimalFilter copy() {
         return new BigDecimalFilter(this);
     }

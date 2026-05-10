@@ -49,7 +49,7 @@ import java.util.Objects;
  * @see ShortFilter
  * @see ZonedDateTimeFilter
  */
-@SuppressWarnings("java:S1948")
+@SuppressWarnings({ "java:S1948", "java:S119" })
 public class RangeFilter<FIELD_TYPE extends Comparable<? super FIELD_TYPE>> extends Filter<FIELD_TYPE> {
 
     private static final long serialVersionUID = 1L;

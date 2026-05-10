@@ -94,6 +94,7 @@ public class JHipsterSpringDocGroupsConfiguration {
      */
     @Bean
     @ConditionalOnMissingBean(name = "openAPIDefaultGroupedOpenAPI")
+    @SuppressWarnings("deprecation")
     public GroupedOpenApi openAPIDefaultGroupedOpenAPI(
         List<OpenApiCustomizer> openApiCustomizers,
         List<OperationCustomizer> operationCustomizers,

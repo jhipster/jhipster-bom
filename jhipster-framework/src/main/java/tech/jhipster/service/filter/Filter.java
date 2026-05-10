@@ -36,7 +36,7 @@ import java.util.Objects;
  *      fieldName.notIn='something','other'
  * </pre>
  */
-@SuppressWarnings("java:S1948")
+@SuppressWarnings({ "java:S1948", "java:S119" })
 public class Filter<FIELD_TYPE> implements Serializable {
 
     private static final long serialVersionUID = 1L;
