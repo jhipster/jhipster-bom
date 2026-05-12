@@ -20,6 +20,7 @@ public class CookieCsrfFilter implements WebFilter {
 
     /** {@inheritDoc} */
     @Override
+    @SuppressWarnings("java:S3330")
     public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain chain) {
         if (exchange.getRequest().getCookies().get(CSRF_COOKIE_NAME) != null) {
             return chain.filter(exchange);
