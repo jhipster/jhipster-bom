@@ -65,7 +65,7 @@ class JHipsterSpringDocAutoconfigurationTest {
     void generatesOAS() throws Exception {
         mockMvc
             .perform(get("/v3/api-docs"))
-            .andExpect((status().isOk()))
+            .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.info.title").value("test title"))
             .andExpect(jsonPath("$.info.description").value("test description"))
@@ -85,7 +85,7 @@ class JHipsterSpringDocAutoconfigurationTest {
     void setsPageParameters() throws Exception {
         mockMvc
             .perform(get("/v3/api-docs"))
-            .andExpect((status().isOk()))
+            .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.paths['/scanned/test'].get.parameters[?(@.name == 'page')]").exists())
             .andExpect(jsonPath("$.paths['/scanned/test'].get.parameters[?(@.name == 'page')].in").value("query"))
@@ -103,7 +103,7 @@ class JHipsterSpringDocAutoconfigurationTest {
     void generatesOASAtDefaultGroupName() throws Exception {
         mockMvc
             .perform(get("/v3/api-docs/" + DEFAULT_GROUP_NAME))
-            .andExpect((status().isOk()))
+            .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.info.title").value("test title"))
             .andExpect(jsonPath("$.info.description").value("test description"))
@@ -123,7 +123,7 @@ class JHipsterSpringDocAutoconfigurationTest {
     void generatesManagementOAS() throws Exception {
         mockMvc
             .perform(get("/v3/api-docs/management"))
-            .andExpect((status().isOk()))
+            .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.info.title").value("TestApp Management API"))
             .andExpect(jsonPath("$.info.description").value("Management endpoints documentation"))
@@ -140,7 +140,7 @@ class JHipsterSpringDocAutoconfigurationTest {
     void generatesActuator() throws Exception {
         mockMvc
             .perform(get("/management"))
-            .andExpect((status().isOk()))
+            .andExpect(status().isOk())
             .andExpect(content().contentType("application/vnd.spring-boot.actuator.v3+json"))
             .andExpect(jsonPath("$._links.jhiopenapigroups").exists());
     }
@@ -149,7 +149,7 @@ class JHipsterSpringDocAutoconfigurationTest {
     void generatesActuatorEndpoint() throws Exception {
         mockMvc
             .perform(get("/management/jhiopenapigroups"))
-            .andExpect((status().isOk()))
+            .andExpect(status().isOk())
             .andExpect(content().contentType("application/vnd.spring-boot.actuator.v3+json"))
             .andExpect(jsonPath("$.[*].group").value(hasItem(JHipsterSpringDocGroupsConfiguration.MANAGEMENT_GROUP_NAME)))
             .andExpect(

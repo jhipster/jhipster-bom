@@ -56,7 +56,9 @@ class ExceptionHandlingAsyncTaskExecutorTest {
         handled = null;
         task = spy(new MockAsyncTaskExecutor());
         executor = new TestExceptionHandlingAsyncTaskExecutor(task);
-        recorder = LogbackRecorder.forClass(ExceptionHandlingAsyncTaskExecutor.class).reset().capture("ALL");
+        recorder = LogbackRecorder.forClass(ExceptionHandlingAsyncTaskExecutor.class)
+            .reset()
+            .capture("ALL");
     }
 
     @AfterEach
