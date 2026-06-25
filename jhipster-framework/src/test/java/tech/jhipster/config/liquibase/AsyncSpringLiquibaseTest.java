@@ -62,11 +62,15 @@ class AsyncSpringLiquibaseTest {
     @BeforeEach
     void setup() {
         executor = new SimpleAsyncTaskExecutor();
-        recorder = LogbackRecorder.forClass(MockEnvironment.class).reset().capture("ALL");
+        recorder = LogbackRecorder.forClass(MockEnvironment.class)
+            .reset()
+            .capture("ALL");
         environment = new MockEnvironment();
         recorder.release();
         config = spy(new TestAsyncSpringLiquibase(executor, environment));
-        recorder = LogbackRecorder.forClass(AsyncSpringLiquibase.class).reset().capture("ALL");
+        recorder = LogbackRecorder.forClass(AsyncSpringLiquibase.class)
+            .reset()
+            .capture("ALL");
     }
 
     @AfterEach
@@ -191,7 +195,9 @@ class AsyncSpringLiquibaseTest {
     @Test
     void testSlow() {
         environment.setActiveProfiles(SPRING_PROFILE_DEVELOPMENT, SPRING_PROFILE_HEROKU);
-        doReturn(AsyncSpringLiquibase.SLOWNESS_THRESHOLD * 1000L + 100L).when(config).getSleep();
+        doReturn(AsyncSpringLiquibase.SLOWNESS_THRESHOLD * 1000L + 100L)
+            .when(config)
+            .getSleep();
         Throwable caught;
 
         synchronized (executor) {
@@ -269,7 +275,9 @@ class AsyncSpringLiquibaseTest {
         public DataSource getDataSource() {
             DataSource source = mock(DataSource.class);
             try {
-                doReturn(mock(Connection.class)).when(source).getConnection();
+                doReturn(mock(Connection.class))
+                    .when(source)
+                    .getConnection();
             } catch (SQLException x) {
                 // This should never happen
                 throw new Error(x);

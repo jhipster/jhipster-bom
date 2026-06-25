@@ -83,10 +83,10 @@ class ConditionBuilderTest {
                         return (T) ((ZonedDateTime) source).toLocalDateTime();
                     }
                     if (source instanceof Duration) {
-                        return (T) Long.valueOf((((Duration) source).toMillis()));
+                        return (T) Long.valueOf(((Duration) source).toMillis());
                     }
                     if (source instanceof Boolean) {
-                        return (T) ((Boolean) source);
+                        return (T) (Boolean) source;
                     }
                     if (Enum.class.isAssignableFrom(target)) {
                         return (T) Enum.valueOf((Class<Enum>) target, source.toString());

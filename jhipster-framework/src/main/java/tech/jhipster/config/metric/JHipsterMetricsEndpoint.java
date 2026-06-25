@@ -142,7 +142,10 @@ public class JHipsterMetricsEndpoint {
             .name(s -> s.contains("hikari"))
             .timers();
         timers.forEach(timer -> {
-            String key = timer.getId().getName().substring(timer.getId().getName().lastIndexOf('.') + 1);
+            String key = timer
+                .getId()
+                .getName()
+                .substring(timer.getId().getName().lastIndexOf('.') + 1);
 
             resultsDatabase.putIfAbsent(key, new HashMap<>());
             resultsDatabase.get(key).put(COUNT_KEY, timer.count());
@@ -160,7 +163,10 @@ public class JHipsterMetricsEndpoint {
             .name(s -> s.contains("hikari"))
             .gauges();
         gauges.forEach(gauge -> {
-            String key = gauge.getId().getName().substring(gauge.getId().getName().lastIndexOf('.') + 1);
+            String key = gauge
+                .getId()
+                .getName()
+                .substring(gauge.getId().getName().lastIndexOf('.') + 1);
             resultsDatabase.putIfAbsent(key, new HashMap<>());
             resultsDatabase.get(key).put("value", gauge.value());
         });
