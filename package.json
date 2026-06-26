@@ -9,7 +9,7 @@
     "test": "npm run prettier:check"
   },
   "devDependencies": {
-    "prettier": "3.8.4",
+    "prettier": "3.8.5",
     "prettier-plugin-java": "2.10.1"
   }
 }
