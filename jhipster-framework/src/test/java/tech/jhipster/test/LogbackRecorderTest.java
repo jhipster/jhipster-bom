@@ -161,27 +161,21 @@ class LogbackRecorderTest {
     @Test
     void testLogbackException() {
         Throwable caught = catchThrowable(() -> LogbackRecorder.forLogger(mock(Logger.class)));
-        assertThat(caught)
-            .isInstanceOf(IllegalArgumentException.class)
-            .hasMessage(LogbackRecorder.LOGBACK_EXCEPTION_MESSAGE);
+        assertThat(caught).isInstanceOf(IllegalArgumentException.class).hasMessage(LogbackRecorder.LOGBACK_EXCEPTION_MESSAGE);
     }
 
     @Test
     void testCaptureException() {
         recorder.capture("ALL");
         Throwable caught = catchThrowable(() -> recorder.capture("ALL"));
-        assertThat(caught)
-            .isInstanceOf(IllegalStateException.class)
-            .hasMessage(LogbackRecorder.CAPTURE_EXCEPTION_MESSAGE);
+        assertThat(caught).isInstanceOf(IllegalStateException.class).hasMessage(LogbackRecorder.CAPTURE_EXCEPTION_MESSAGE);
         recorder.release();
     }
 
     @Test
     void testReleaseException() {
         Throwable caught = catchThrowable(() -> recorder.release());
-        assertThat(caught)
-            .isInstanceOf(IllegalStateException.class)
-            .hasMessage(LogbackRecorder.RELEASE_EXCEPTION_MESSAGE);
+        assertThat(caught).isInstanceOf(IllegalStateException.class).hasMessage(LogbackRecorder.RELEASE_EXCEPTION_MESSAGE);
     }
 
     @Test
