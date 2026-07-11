@@ -41,9 +41,7 @@ class ActiveProfilesInfoContributorTest {
         contributor.contribute(builder);
         Info info = builder.build();
 
-        assertThat(info.get("activeProfiles"))
-            .asInstanceOf(list(String.class))
-            .contains("prod");
+        assertThat(info.get("activeProfiles")).asInstanceOf(list(String.class)).contains("prod");
     }
 
     @Test
@@ -57,8 +55,6 @@ class ActiveProfilesInfoContributorTest {
         contributor.contribute(builder);
         Info info = builder.build();
 
-        assertThat(info.get("activeProfiles"))
-            .asInstanceOf(list(String.class))
-            .contains("dev", "api-docs");
+        assertThat(info.get("activeProfiles")).asInstanceOf(list(String.class)).contains("dev", "api-docs");
     }
 }
