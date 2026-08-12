@@ -134,10 +134,12 @@ jobs:
         run: npm run ci:e2e:package
         timeout-minutes: 12
       - name: 'TESTS: Start docker compose containers for e2e tests'
+        if: runner.os == 'Linux'
         run: npm run ci:e2e:prepare
         timeout-minutes: 5
       - name: 'E2E: Run'
         id: e2e
+        if: runner.os == 'Linux'
         run: npm run ci:e2e:run --if-present
         timeout-minutes: 15
       - name: 'BACKEND: Store failure logs'
