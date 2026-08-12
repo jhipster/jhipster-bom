@@ -33,6 +33,8 @@ on:
     types: [closed, opened, synchronize, reopened]
     branches:
       - '*'
+permissions:
+  contents: read
 env:
   FORCE_COLOR: 2
 jobs:
@@ -57,7 +59,7 @@ jobs:
       - uses: actions/setup-node@v7
         with:
           node-version: ${{ steps.node-version.outputs.node-version }}
-      - run: npm ci --ignore-scripts
+      - run: npm ci --production --engine-strict --ignore-scripts
         working-directory: ${{ github.workspace }}/generator-jhipster
       - name: 'Build matrix'
         id: build
@@ -68,6 +70,7 @@ jobs:
     needs: build-matrix
     defaults:
       run:
+        shell: bash
         working-directory: ${{ github.workspace }}/app
     if: >-
       !contains(github.event.head_commit.message, '[ci skip]') &&
@@ -107,7 +110,7 @@ jobs:
       #----------------------------------------------------------------------
       # Install JHipster and generate project+entities
       #----------------------------------------------------------------------
-      - run: npm ci --ignore-scripts
+      - run: npm ci --production --engine-strict --ignore-scripts
         working-directory: ${{ github.workspace }}/generator-jhipster
       - name: 'GENERATION: project'
         run: jhipster.cjs generate-sample ${{ matrix.sample }} --skip-jhipster-dependencies --skip-checks --no-insight
@@ -116,6 +119,8 @@ jobs:
           JHIPSTER_DEPENDENCIES_VERSION: '0.0.0-CICD'
           JHI_JWT_SECRET_KEY: ${{ matrix.jwt-secret-key }}
       - run: jhipster.cjs info
+      # Make sure that the script-shell is set to bash, otherwise npm scripts will fail on Windows runners
+      - run: npm config -L project set script-shell=bash
       #----------------------------------------------------------------------
       # Launch tests
       #----------------------------------------------------------------------
@@ -141,14 +146,16 @@ jobs:
         with:
           name: log-${{ matrix.sample }}
           path: ${{ github.workspace }}/app/**/test-results/**/*.xml
-      - name: 'E2E: Store failure screenshots'
+      - name: 'E2E: Store failure cypress assets'
         uses: actions/upload-artifact@v7
         if: always() && steps.e2e.outcome == 'failure'
         with:
-          name: screenshots-${{ matrix.sample }}
-          path: ${{ github.workspace }}/app/**/cypress/screenshots
+          name: cypress-${{ matrix.sample }}
+          path: |
+            ${{ github.workspace }}/app/**/cypress/screenshots
+            ${{ github.workspace }}/app/**/cypress/videos
       - name: Dump docker logs
-        if: always()
+        if: always() && runner.os == 'Linux'
         uses: jwalton/gh-docker-logs@v2
   check-angular:
     permissions:
