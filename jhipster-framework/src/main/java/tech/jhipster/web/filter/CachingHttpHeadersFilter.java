@@ -27,7 +27,11 @@ import tech.jhipster.config.JHipsterProperties;
 
 /**
  * This filter is used in production, to put HTTP cache headers with a long (4 years) expiration time.
+ *
+ * @deprecated since 9.4.0, not used by generated applications (only the reactive
+ * {@link tech.jhipster.web.filter.reactive.CachingHttpHeadersFilter} is used), scheduled for removal.
  */
+@Deprecated(since = "9.4.0", forRemoval = true)
 public class CachingHttpHeadersFilter implements Filter {
 
     /** Constant <code>DEFAULT_DAYS_TO_LIVE=1461</code> */
