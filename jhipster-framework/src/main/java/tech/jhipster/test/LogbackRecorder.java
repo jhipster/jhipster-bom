@@ -45,7 +45,10 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
  * List<LogbackRecorder.Event> events = recorder.release().play();
  * // perform assertions on the events
  * }
+ *
+ * @deprecated since 9.4.0, not used by generated applications, scheduled for removal.
  */
+@Deprecated(since = "9.4.0", forRemoval = true)
 @ConditionalOnClass({ LoggerContext.class })
 public class LogbackRecorder {
 

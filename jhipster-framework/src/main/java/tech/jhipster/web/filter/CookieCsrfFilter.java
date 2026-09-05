@@ -13,7 +13,11 @@ import org.springframework.web.filter.OncePerRequestFilter;
  * This solution is
  * <a href="https://github.com/spring-projects/spring-security/issues/12141#issuecomment-1321345077">
  *     recommended by Spring Security.</a>
+ *
+ * @deprecated since 9.4.0, not used by generated applications (only the reactive
+ * {@link tech.jhipster.web.filter.reactive.CookieCsrfFilter} is used), scheduled for removal.
  */
+@Deprecated(since = "9.4.0", forRemoval = true)
 public class CookieCsrfFilter extends OncePerRequestFilter {
 
     /** {@inheritDoc} */

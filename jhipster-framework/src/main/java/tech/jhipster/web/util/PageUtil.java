@@ -27,7 +27,10 @@ import org.springframework.data.domain.Pageable;
 
 /**
  * Utility class for creating a Page object.
+ *
+ * @deprecated since 9.4.0, not used by generated applications, scheduled for removal.
  */
+@Deprecated(since = "9.4.0", forRemoval = true)
 public interface PageUtil {
     /**
      * Create a {@link org.springframework.data.domain.Page} from a {@link java.util.List} of objects
