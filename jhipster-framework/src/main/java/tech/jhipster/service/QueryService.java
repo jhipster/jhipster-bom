@@ -57,6 +57,38 @@ public abstract class QueryService<ENTITY> {
     }
 
     /**
+     * Helper function to return a specification for filtering on a {@link String} field, where equality, containment,
+     * and null/non-null conditions are supported.
+     *
+     * @param filter the individual attribute filter coming from the frontend.
+     * @param field  the JPA static metamodel representing the field.
+     * @return a Specification
+     */
+    protected Specification<ENTITY> buildSpecification(
+        @Nullable StringFilter filter,
+        SingularAttribute<? super ENTITY, String> field
+    ) {
+        return buildSpecification(filter, root -> root.get(field));
+    }
+
+    /**
+     * Helper function to return a specification for filtering on a single {@link Comparable}, where equality, less
+     * than, greater than and less-than-or-equal-to and greater-than-or-equal-to and null/non-null conditions are
+     * supported.
+     *
+     * @param <X>    The type of the attribute which is filtered.
+     * @param filter the individual attribute filter coming from the frontend.
+     * @param field  the JPA static metamodel representing the field.
+     * @return a Specification
+     */
+    protected <X extends Comparable<? super X>> Specification<ENTITY> buildSpecification(
+        @Nullable RangeFilter<X> filter,
+        SingularAttribute<? super ENTITY, X> field
+    ) {
+        return buildSpecification(filter, root -> root.get(field));
+    }
+
+    /**
      * Helper function to return a specification for filtering on a single field, where equality, and null/non-null
      * conditions are supported.
      *
